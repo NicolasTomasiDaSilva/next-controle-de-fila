@@ -1,28 +1,34 @@
+import { NextURL } from "next/dist/server/web/next-url";
 import { MiddlewareConfig, NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
 const publicRoutes = [
-  { path: "/login", method: "redirect" },
-  { path: "/register", method: "redirect" },
-];
+  { path: "/login", whenAuthenticated: "redirect" },
+  { path: "/register", whenAuthenticated: "redirect" },
+] as const;
 const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/login";
 
 export function middleware(req: NextRequest): NextResponse {
   const { pathname } = req.nextUrl;
-  const publicRoute = publicRoutes.find((route) => route.path === pathname);
 
+  const publicRoute = publicRoutes.find((route) => route.path === pathname);
   const accessToken = req.cookies.get("access_token");
 
-  if (!authToken && !publicRoute) {
-    return NextResponse.redirect(
-      new URL(REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE, req.url)
-    );
+  if (!accessToken && !publicRoute) {
+    const redirectUrl: NextURL = req.nextUrl.clone();
+    redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
+
+    return NextResponse.redirect(redirectUrl);
   }
 
-  if (!accessToken) {
-    return NextResponse.redirect(
-      new URL(REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE, req.url)
-    );
+  if (
+    accessToken &&
+    publicRoute &&
+    publicRoute?.whenAuthenticated === "redirect"
+  ) {
+    const redirectUrl: NextURL = req.nextUrl.clone();
+    redirectUrl.pathname = "/";
+    return NextResponse.redirect(redirectUrl);
   }
 
   return NextResponse.next();
