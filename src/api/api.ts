@@ -1,10 +1,11 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+import { cookies } from "next/headers";
 
-export function axiosInstance(
+export async function axiosInstance(
   headers: Record<string, string> = {}
-): Axios.AxiosInstance {
-  const token = Cookies.get("access_token");
+): Promise<Axios.AxiosInstance> {
+  const cookiesList = await cookies();
+  const accessToken = cookiesList.get("access_token")?.value;
 
   const instance = axios.create({
     baseURL: process.env.API_BASE_URL || "http://localhost:3000/api",
@@ -18,13 +19,45 @@ export function axiosInstance(
   instance.interceptors.request.use(
     (config) => {
       if (config && config.headers) {
-        if (token) {
-          config.headers["Authorization"] = `Bearer ${token}`;
+        if (accessToken) {
+          config.headers["Authorization"] = `Bearer ${accessToken}`;
         }
       }
       return config;
     },
     (error) => {
+      return Promise.reject(error);
+    }
+  );
+
+  // Interceptador de requisição
+  instance.interceptors.request.use((config) => {
+    console.log("📤 Enviando requisição:");
+    console.log("URL:", config.baseURL + config.url);
+    console.log("Headers:", config.headers);
+    console.log("Método:", config.method);
+    console.log("Body:", config.data);
+    return config;
+  });
+
+  // Interceptador de resposta
+  instance.interceptors.response.use(
+    (response) => {
+      console.log("✅ Resposta recebida:");
+      console.log("Status:", response.status);
+      console.log("Headers:", response.headers);
+      console.log("Data:", response.data);
+      return response;
+    },
+    (error) => {
+      if (error.response) {
+        console.log("❌ Erro na resposta:");
+        console.log("Status:", error.response.status);
+        console.log("Headers:", error.response.headers);
+        console.log("Data:", error.response.data);
+      } else {
+        console.log("❌ Erro sem resposta:", error.message);
+      }
       return Promise.reject(error);
     }
   );

@@ -8,9 +8,7 @@ export default async function FilaPage({ params }: FilaPageProps) {
   const { filaId } = params;
 
   try {
-    console.log("filaId do params", filaId);
     const fila = await filaService.obterFilaPorId(filaId);
-    console.log("fila", fila);
   } catch (error) {
     console.error("Erro ao carregar fila:", error);
     // Opcional: você pode retornar uma mensagem de erro ou redirecionar
