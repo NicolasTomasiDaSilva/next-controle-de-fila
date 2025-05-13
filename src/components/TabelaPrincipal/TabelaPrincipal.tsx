@@ -3,6 +3,7 @@ import { Cliente } from "@/models/cliente";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "../ui/data-table";
 import HeaderTabelaPrincipal from "./HeaderTabelaPrincipal";
+import { StatusEnum, StatusLabel } from "@/enums/status-enum";
 
 const columns: ColumnDef<Cliente>[] = [
   {
@@ -18,8 +19,13 @@ const columns: ColumnDef<Cliente>[] = [
     header: "Status",
     cell: ({ row }) => {
       const { status } = row.original;
-      return <div>{status}</div>;
+      return <div>{StatusLabel[status as StatusEnum]}</div>;
     },
+  },
+  {
+    id: "actions", // Usar id para colunas sem accessorKey
+    header: "Ações",
+    cell: () => null, // Renderização padrão vazia, pois usaremos renderRow
   },
 ];
 
@@ -36,8 +42,8 @@ export default function TabelaPrincipal({ clientes }: TabelaPrincipalProps) {
         data={clientes}
         searchFields={["nome"]}
         searchPlaceholder={"Buscar por nome..."}
-        showHeaders={false}
-        showSearch={false}
+        showHeaders={true}
+        showSearch={true}
         renderHeader={({
           globalFilter,
           setGlobalFilter,

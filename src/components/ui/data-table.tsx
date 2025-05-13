@@ -8,6 +8,7 @@ import {
   ColumnFiltersState,
   getFilteredRowModel,
   FilterFnOption,
+  Column,
 } from "@tanstack/react-table";
 
 import { Input } from "@/components/ui/input";
@@ -21,6 +22,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
+import React from "react";
 
 export function normalizeString(str: string): string {
   return str
@@ -147,7 +149,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  Sem resultados.
+                  No results.
                 </TableCell>
               </TableRow>
             )}

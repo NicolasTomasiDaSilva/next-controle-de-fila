@@ -20,7 +20,7 @@ export default function HeaderTabelaPrincipal({
 }: HeaderTabelaPrincipalProps) {
   return (
     <TableHeader>
-      <TableRow className="bg-blue-50 ">
+      <TableRow className="bg-blue-50 w-full">
         <TableHead colSpan={colSpan}>
           <div className="flex items-center py-2 gap-2">
             <Users className="size-4 shrink-0  text-blue-600" />
