@@ -8,7 +8,6 @@ export default function PrivateLayout({
   return (
     <div>
       <Header />
-      <h1>Private Layout</h1>
       {children}
     </div>
   );

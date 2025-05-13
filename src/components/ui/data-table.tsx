@@ -1,0 +1,159 @@
+"use client";
+
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+  ColumnFiltersState,
+  getFilteredRowModel,
+  FilterFnOption,
+} from "@tanstack/react-table";
+
+import { Input } from "@/components/ui/input";
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { useState } from "react";
+
+export function normalizeString(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/ç/g, "c")
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .toLowerCase();
+}
+
+interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+  searchFields: string[];
+  searchPlaceholder?: string;
+  showHeaders?: boolean;
+  showSearch?: boolean;
+  renderHeader?: (params: {
+    globalFilter: string;
+    setGlobalFilter: (value: string) => void;
+    placeholder: string;
+    colSpan: number;
+  }) => React.ReactNode;
+}
+
+export function DataTable<TData, TValue>({
+  columns,
+  data,
+  searchFields,
+  searchPlaceholder = "Digite para buscar...",
+  showHeaders = true,
+  showSearch = true,
+  renderHeader,
+}: DataTableProps<TData, TValue>) {
+  const [globalFilter, setGlobalFilter] = useState("");
+
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    filterFns: {
+      fuzzy: (row, id, value) => {
+        const data = row.original;
+        const search = normalizeString(value);
+        return searchFields.some((field) =>
+          normalizeString(data[field].toString()).includes(search)
+        );
+      },
+    },
+    globalFilterFn: "fuzzy" as FilterFnOption<TData>,
+    state: {
+      globalFilter,
+    },
+  });
+
+  return (
+    <div>
+      <div className="rounded-md border">
+        <Table>
+          {renderHeader ? (
+            renderHeader({
+              globalFilter,
+              setGlobalFilter,
+              placeholder: searchPlaceholder,
+              colSpan: columns.length,
+            })
+          ) : (
+            <TableHeader>
+              {showSearch && (
+                <TableRow className="bg-muted/50">
+                  <TableHead colSpan={columns.length}>
+                    <div className="flex items-center py-2">
+                      <Input
+                        placeholder={searchPlaceholder}
+                        value={globalFilter ?? ""}
+                        onChange={(event) =>
+                          setGlobalFilter(event.target.value)
+                        }
+                        className="max-w-sm"
+                      />
+                    </div>
+                  </TableHead>
+                </TableRow>
+              )}
+              {showHeaders &&
+                table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    ))}
+                  </TableRow>
+                ))}
+            </TableHeader>
+          )}
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  Sem resultados.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
+  );
+}
