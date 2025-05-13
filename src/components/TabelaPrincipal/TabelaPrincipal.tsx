@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "../ui/data-table";
 import HeaderTabelaPrincipal from "./HeaderTabelaPrincipal";
 import { StatusEnum, StatusLabel } from "@/enums/status-enum";
+import ClienteRowTable from "../shared/ClienteRowTabela";
 
 const columns: ColumnDef<Cliente>[] = [
   {
@@ -23,9 +24,9 @@ const columns: ColumnDef<Cliente>[] = [
     },
   },
   {
-    id: "actions", // Usar id para colunas sem accessorKey
+    id: "actions",
     header: "Ações",
-    cell: () => null, // Renderização padrão vazia, pois usaremos renderRow
+    cell: () => null,
   },
 ];
 
@@ -61,6 +62,7 @@ export default function TabelaPrincipal({ clientes }: TabelaPrincipalProps) {
             }
           />
         )}
+        renderRow={(row) => <ClienteRowTable row={row} />}
       />
     </div>
   );
