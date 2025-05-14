@@ -35,7 +35,7 @@ export default function ClienteRowTable({ row }: RowClientePersonalizadaProps) {
         <div>
           <p className="text-lg font-bold">{cliente.nome}</p>
 
-          {cliente.telefone ?? (
+          {cliente.telefone && (
             <p className="text-sm text-muted-foreground">{cliente.telefone}</p>
           )}
         </div>
@@ -73,16 +73,16 @@ export default function ClienteRowTable({ row }: RowClientePersonalizadaProps) {
           </div>
         </div>
         <div className="min-w-max w-[max-content] grid grid-cols-2 md:grid-cols-4 gap-2 md:ml-10">
-          <button className="text-black-600 hover:text-black-700 transition md:order-2">
+          <button className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer">
             <CircleArrowUp className="w-7 h-7" />
           </button>
-          <button className="text-black-600 hover:text-black-700 transition md:order-3">
+          <button className="text-black-600 hover:text-black-700 transition md:order-3 cursor-pointer">
             <CircleArrowDown className="w-7 h-7" />
           </button>
-          <button className="text-green-600 hover:text-green-700 transition md:order-1">
+          <button className="text-green-600 hover:text-green-700 transition md:order-1 cursor-pointer">
             <Phone className="w-7 h-7" />
           </button>
-          <button className="text-red-600 hover:text-red-700 transition md:order-4">
+          <button className="text-red-600 hover:text-red-700 transition md:order-4 cursor-pointer">
             <Trash className="w-7 h-7" />
           </button>
         </div>

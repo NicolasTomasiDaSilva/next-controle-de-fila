@@ -12,20 +12,7 @@ import ClienteRowTable from "../shared/ClienteRowTabela";
 import ColunasTabelaPrincipal from "./ColunasTabelaPrincipal";
 import React from "react";
 import { Button } from "../ui/button";
-
-function useMediaQuery(query: string) {
-  const [matches, setMatches] = React.useState(false);
-
-  React.useEffect(() => {
-    const media = window.matchMedia(query);
-    setMatches(media.matches);
-    const listener = () => setMatches(media.matches);
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, [query]);
-
-  return matches;
-}
+import { AdicionarClienteDialog } from "./AdicionarClienteDialog";
 
 interface TabelaPrincipalProps {
   clientes: Cliente[];
@@ -33,16 +20,8 @@ interface TabelaPrincipalProps {
 }
 
 export default function TabelaPrincipal({ clientes }: TabelaPrincipalProps) {
-  const isMobile = useMediaQuery("(max-width: 640px)");
-
   return (
     <>
-      <Button
-        className="bg-white mb-4 border border-gray-400 text-black shadow hover:bg-blue-500 hover:text-white cursor-pointer px-2 py-2 rounded-md w-full sm:w-auto text-sm sm:text-base sm:w-[30%] sm:ml-auto"
-        onClick={() => {}}
-      >
-        + Adicionar à fila
-      </Button>
       <div className="border border-blue-300 shadow-sm rounded-md   ">
         <DataTable
           columns={ColunasTabelaPrincipal}

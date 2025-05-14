@@ -3,6 +3,7 @@ import { Section } from "@/components/Section";
 import { SectionTitle } from "@/components/SectionTittle";
 import filaData from "@/data/fila-data";
 import { filaService } from "@/services/fila-service";
+import { AdicionarClienteDialog } from "@/components/TabelaPrincipal/AdicionarClienteDialog";
 
 type FilaPageProps = {
   params: { filaId: string };
@@ -21,6 +22,7 @@ export default async function FilaPage({ params }: FilaPageProps) {
 
   return (
     <Section title="Fila de Atendimento">
+      <AdicionarClienteDialog filaId={filaId}></AdicionarClienteDialog>
       <TabelaPrincipal clientes={clientes}></TabelaPrincipal>
     </Section>
   );
