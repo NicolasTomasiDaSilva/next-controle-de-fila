@@ -5,30 +5,7 @@ import { DataTable } from "../ui/data-table";
 import HeaderTabelaPrincipal from "./HeaderTabelaPrincipal";
 import { StatusEnum, StatusLabel } from "@/enums/status-enum";
 import ClienteRowTable from "../shared/ClienteRowTabela";
-
-const columns: ColumnDef<Cliente>[] = [
-  {
-    accessorKey: "nome",
-    header: "Nome",
-    cell: ({ row }) => {
-      const { nome } = row.original;
-      return <div>{nome}</div>;
-    },
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => {
-      const { status } = row.original;
-      return <div>{StatusLabel[status as StatusEnum]}</div>;
-    },
-  },
-  {
-    id: "actions",
-    header: "Ações",
-    cell: () => null,
-  },
-];
+import ColunasTabelaPrincipal from "./ColunasTabelaPrincipal";
 
 interface TabelaPrincipalProps {
   clientes: Cliente[];
@@ -39,12 +16,10 @@ export default function TabelaPrincipal({ clientes }: TabelaPrincipalProps) {
   return (
     <div className="border border-blue-300 shadow-sm rounded-md ">
       <DataTable
-        columns={columns}
+        columns={ColunasTabelaPrincipal}
         data={clientes}
         searchFields={["nome"]}
         searchPlaceholder={"Buscar por nome..."}
-        showHeaders={true}
-        showSearch={true}
         renderHeader={({
           globalFilter,
           setGlobalFilter,
@@ -62,7 +37,7 @@ export default function TabelaPrincipal({ clientes }: TabelaPrincipalProps) {
             }
           />
         )}
-        renderRow={(row) => <ClienteRowTable row={row} />}
+        renderRow={(row) => <ClienteRowTable key={row.id} row={row} />}
       />
     </div>
   );

@@ -12,12 +12,12 @@ export default async function FilaPage({ params }: FilaPageProps) {
   const { filaId } = params;
   const clientes = filaData.clientes;
 
-  try {
-    const fila = await filaService.obterFilaPorId(filaId);
-  } catch (error) {
-    console.error("Erro ao carregar fila:", error);
-    // Opcional: você pode retornar uma mensagem de erro ou redirecionar
-  }
+  // try {
+  //   const fila = await filaService.obterFilaPorId(filaId);
+  // } catch (error) {
+  //   console.error("Erro ao carregar fila:", error);
+  //   // Opcional: você pode retornar uma mensagem de erro ou redirecionar
+  // }
 
   return (
     <Section title="Fila de Atendimento">
