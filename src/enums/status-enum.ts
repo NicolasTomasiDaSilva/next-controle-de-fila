@@ -21,10 +21,16 @@ export const StatusMap: Record<
   StatusEnum,
   { label: string; className: string }
 > = {
-  [StatusEnum.Aguardando]: { label: "Aguardando", className: "bg-yellow-200" },
-  [StatusEnum.Chamado]: { label: "Chamado", className: "bg-blue-200" },
-  [StatusEnum.Atendido]: { label: "Atendido", className: "bg-green-200" },
-  [StatusEnum.Desistente]: { label: "Desistente", className: "bg-red-200" },
-  [StatusEnum.Removido]: { label: "Removido", className: "bg-gray-200" },
-  [StatusEnum.Ausente]: { label: "Não Compareceu", className: "bg-orange-200" },
+  [StatusEnum.Aguardando]: {
+    label: "Aguardando",
+    className: "text-blue-600",
+  },
+  [StatusEnum.Chamado]: { label: "Chamado", className: "text-blue-200" },
+  [StatusEnum.Atendido]: { label: "Atendido", className: "text-green-200" },
+  [StatusEnum.Desistente]: { label: "Desistente", className: "text-red-200" },
+  [StatusEnum.Removido]: { label: "Removido", className: "text-gray-200" },
+  [StatusEnum.Ausente]: {
+    label: "Não Compareceu",
+    className: "text-orange-200",
+  },
 };

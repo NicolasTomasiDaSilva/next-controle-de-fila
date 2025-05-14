@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 export function normalizeString(str: string): string {
   return str
@@ -35,6 +36,7 @@ export function normalizeString(str: string): string {
 }
 
 interface DataTableProps<TData, TValue> {
+  className?: string;
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   searchFields: string[];
@@ -59,6 +61,7 @@ export function DataTable<TData, TValue>({
   showSearch = true,
   renderHeader,
   renderRow,
+  className,
 }: DataTableProps<TData, TValue>) {
   const [globalFilter, setGlobalFilter] = useState("");
 
@@ -84,85 +87,78 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="rounded-md border">
-        <Table>
-          {renderHeader ? (
-            renderHeader({
-              globalFilter,
-              setGlobalFilter,
-              placeholder: searchPlaceholder,
-              colSpan: columns.length,
-            })
-          ) : (
-            <TableHeader>
-              {showSearch && (
-                <TableRow className="bg-muted/50">
-                  <TableHead colSpan={columns.length}>
-                    <div className="flex items-center py-2">
-                      <Input
-                        placeholder={searchPlaceholder}
-                        value={globalFilter ?? ""}
-                        onChange={(event) =>
-                          setGlobalFilter(event.target.value)
-                        }
-                        className="max-w-sm"
-                      />
-                    </div>
-                  </TableHead>
-                </TableRow>
-              )}
-              {showHeaders &&
-                table.getHeaderGroups().map((headerGroup) => (
-                  <TableRow key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => (
-                      <TableHead key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                      </TableHead>
-                    ))}
-                  </TableRow>
-                ))}
-            </TableHeader>
-          )}
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) =>
-                renderRow ? (
-                  renderRow(row)
-                ) : (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                )
-              )
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
+    <div className="rounded-md border">
+      <Table className="responsive-table">
+        {renderHeader ? (
+          renderHeader({
+            globalFilter,
+            setGlobalFilter,
+            placeholder: searchPlaceholder,
+            colSpan: columns.length,
+          })
+        ) : (
+          <TableHeader>
+            {showSearch && (
+              <TableRow className="bg-muted/50">
+                <TableHead colSpan={columns.length}>
+                  <div className="flex items-center py-2">
+                    <Input
+                      placeholder={searchPlaceholder}
+                      value={globalFilter ?? ""}
+                      onChange={(event) => setGlobalFilter(event.target.value)}
+                      className="max-w-sm"
+                    />
+                  </div>
+                </TableHead>
               </TableRow>
             )}
-          </TableBody>
-        </Table>
-      </div>
+            {showHeaders &&
+              table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableHead key={header.id} className="text-center">
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  ))}
+                </TableRow>
+              ))}
+          </TableHeader>
+        )}
+        <TableBody>
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) =>
+              renderRow ? (
+                renderRow(row)
+              ) : (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              )
+            )
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length} className="h-24 text-center">
+                No results.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 }
