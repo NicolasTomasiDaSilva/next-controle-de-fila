@@ -6,6 +6,7 @@ import { filaService } from "@/services/fila-service-server";
 import { AdicionarClienteDialog } from "@/components/TabelaPrincipal/AdicionarClienteDialog";
 import { FilaProvider } from "@/contexts/fila-context";
 import { Fila } from "@/models/fila";
+import TabelaRecentes from "@/components/TabelaRecentes/TabelaRecentes";
 
 type FilaPageProps = {
   params: { filaId: string };
@@ -21,6 +22,8 @@ export default async function FilaPage({ params }: FilaPageProps) {
       <FilaProvider filaInicial={fila}>
         <AdicionarClienteDialog></AdicionarClienteDialog>
         <TabelaPrincipal></TabelaPrincipal>
+        <div className="h-5"></div>
+        <TabelaRecentes></TabelaRecentes>
       </FilaProvider>
     </Section>
   );

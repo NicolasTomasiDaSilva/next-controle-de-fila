@@ -16,11 +16,40 @@ export const filaService = {
     return mapFila(response.data);
   },
 
+  async AtenderCliente(id: string): Promise<Fila> {
+    const api = await axiosInstanceClient();
+    const paylod = {
+      ids: [id],
+      acao: AcoesAdminEnum.AtenderClientes,
+    };
+    const response = await api.post(`/clientes/atualizar-status`, paylod);
+    return mapFila(response.data);
+  },
+
   async RemoverCliente(id: string): Promise<Fila> {
     const api = await axiosInstanceClient();
     const paylod = {
       ids: [id],
       acao: AcoesAdminEnum.RemoverClientes,
+    };
+    const response = await api.post(`/clientes/atualizar-status`, paylod);
+    return mapFila(response.data);
+  },
+  async AusentarCliente(id: string): Promise<Fila> {
+    const api = await axiosInstanceClient();
+    const paylod = {
+      ids: [id],
+      acao: AcoesAdminEnum.AusentarClientes,
+    };
+    const response = await api.post(`/clientes/atualizar-status`, paylod);
+    return mapFila(response.data);
+  },
+
+  async VoltarCliente(id: string): Promise<Fila> {
+    const api = await axiosInstanceClient();
+    const paylod = {
+      ids: [id],
+      acao: AcoesAdminEnum.VoltarParaFilaClientes,
     };
     const response = await api.post(`/clientes/atualizar-status`, paylod);
     return mapFila(response.data);
