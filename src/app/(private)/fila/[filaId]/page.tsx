@@ -11,7 +11,10 @@ type FilaPageProps = {
 
 export default async function FilaPage({ params }: FilaPageProps) {
   const { filaId } = params;
+  throw new Error("Erro simulado para teste do error.tsx");
   const clientes = filaData.clientes;
+
+  await new Promise((resolve) => setTimeout(resolve, 500));
 
   // try {
   //   const fila = await filaService.obterFilaPorId(filaId);
