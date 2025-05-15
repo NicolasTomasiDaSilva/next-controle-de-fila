@@ -3,7 +3,7 @@ import { Label } from "@/components/ui/label";
 
 interface ObservacaoInputProps {
   observacao: string | null;
-  setObservacao: React.Dispatch<React.SetStateAction<string | null>>;
+  setObservacao: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function ObservacaoInput({

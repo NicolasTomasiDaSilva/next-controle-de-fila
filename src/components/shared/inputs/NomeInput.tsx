@@ -3,7 +3,7 @@ import { Label } from "@/components/ui/label";
 
 interface TelefoneInputProps {
   nome: string;
-  setNome: (valor: string) => void;
+  setNome: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function NomeInput({ nome, setNome }: TelefoneInputProps) {

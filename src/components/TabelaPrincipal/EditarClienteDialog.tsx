@@ -1,7 +1,7 @@
 "use client";
 import { IMaskInput } from "react-imask";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -29,11 +29,19 @@ interface EditarClienteDialogProps {
 export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState<string>(cliente.nome);
-  const [observacao, setObservacao] = useState<string | null>(
-    cliente.observacao
+  const [observacao, setObservacao] = useState<string>(
+    cliente.observacao ?? ""
   );
-  const [telefone, setTelefone] = useState<string | null>(cliente.telefone);
+  const [telefone, setTelefone] = useState<string>(cliente.telefone ?? "");
   const { fila, setFila } = useFila();
+
+  useEffect(() => {
+    if (cliente) {
+      setNome(cliente.nome);
+      setObservacao(cliente.observacao ?? "");
+      setTelefone(cliente.telefone ?? "");
+    }
+  }, [cliente]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,6 +63,7 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
 
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
+    console.log(cliente.nome);
   };
 
   return (

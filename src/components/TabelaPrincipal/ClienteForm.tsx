@@ -10,9 +10,9 @@ interface ClienteFormProps {
   nome: string;
   setNome: Dispatch<SetStateAction<string>>;
   observacao: string | null;
-  setObservacao: Dispatch<SetStateAction<string | null>>;
+  setObservacao: Dispatch<SetStateAction<string>>;
   telefone: string | null;
-  setTelefone: Dispatch<SetStateAction<string | null>>;
+  setTelefone: Dispatch<SetStateAction<string>>;
 }
 
 export default function ClienteForm({

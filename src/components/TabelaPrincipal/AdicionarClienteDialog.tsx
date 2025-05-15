@@ -23,8 +23,8 @@ import ClienteForm from "./ClienteForm";
 export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState("");
-  const [observacao, setObservacao] = useState<string | null>("");
-  const [telefone, setTelefone] = useState<string | null>("");
+  const [observacao, setObservacao] = useState<string>("");
+  const [telefone, setTelefone] = useState<string>("");
   const { fila, setFila } = useFila();
 
   const handleSubmit = async (e: React.FormEvent) => {

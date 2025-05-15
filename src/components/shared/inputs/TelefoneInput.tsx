@@ -3,7 +3,7 @@ import { IMaskInput } from "react-imask";
 
 interface TelefoneInputProps {
   telefone: string | null;
-  setTelefone: React.Dispatch<React.SetStateAction<string | null>>;
+  setTelefone: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function TelefoneInput({
