@@ -18,6 +18,7 @@ import { Button } from "../ui/button";
 import { filaService } from "@/services/fila-service-client";
 import { Fila } from "@/models/fila";
 import { useFila } from "@/hooks/use-fila";
+import { EditarClienteDialog } from "../TabelaPrincipal/EditarClienteDialog";
 
 interface RowClientePersonalizadaProps {
   row: Row<Cliente>;
@@ -86,14 +87,7 @@ export default function ClienteRowTable({ row }: RowClientePersonalizadaProps) {
               </p>
             )}
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="size-5 text-gray-500 hover:text-blue-600 cursor-pointer ml-auto md:ml-2"
-            onClick={() => {}}
-          >
-            <PencilLine className="size-4" />
-          </Button>
+          <EditarClienteDialog />
         </div>
         <div className="col-span-1 flex items-center justify-between md:ml-auto gap-2">
           <div className="flex flex-col items-start md:gap-4 md:flex-row md:items-center ">
