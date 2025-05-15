@@ -10,7 +10,8 @@ const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/login";
 
 export function middleware(req: NextRequest): NextResponse {
   const { pathname } = req.nextUrl;
-
+  // Simulate setting a cookie for demonstration purposes
+  req.cookies.set("access_token", "1234567890");
   const publicRoute = publicRoutes.find((route) => route.path === pathname);
   const accessToken = req.cookies.get("access_token");
 

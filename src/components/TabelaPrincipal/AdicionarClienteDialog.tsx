@@ -1,4 +1,5 @@
 "use client";
+import { IMaskInput } from "react-imask";
 
 import { useState } from "react";
 import {
@@ -11,6 +12,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import TelefoneInput from "../shared/inputs/TelefoneInput";
+import NomeInput from "../shared/inputs/NomeInput";
+import ObservacaoInput from "../shared/inputs/ObservacaoInput";
 
 interface AdicionarClienteDialogProps {
   filaId: string;
@@ -27,6 +31,7 @@ export function AdicionarClienteDialog({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log({ nome, observacao, telefone, filaId });
+
     setOpen(false);
   };
 
@@ -53,37 +58,19 @@ export function AdicionarClienteDialog({
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div className="space-y-2">
-            <Label htmlFor="nome">Nome</Label>
-            <Input
-              id="nome"
-              value={nome}
-              type="text"
-              onChange={(e) => setNome(e.target.value)}
-              required
-              placeholder="Digite o nome do cliente"
-            />
+            <NomeInput nome={nome} setNome={setNome}></NomeInput>
           </div>
 
+          <div className="space-y-2"></div>
+          <ObservacaoInput
+            observacao={observacao}
+            setObservacao={setObservacao}
+          ></ObservacaoInput>
           <div className="space-y-2">
-            <Label htmlFor="observacao">Observação</Label>
-            <Input
-              type="text"
-              id="observacao"
-              value={observacao}
-              onChange={(e) => setObservacao(e.target.value)}
-              placeholder="Digite uma observação"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="telefone">Telefone</Label>
-            <Input
-              type="phone"
-              id="telefone"
-              value={telefone}
-              onChange={(e) => setTelefone(e.target.value)}
-              placeholder="(xx) xxxxx-xxxx"
-            />
+            <TelefoneInput
+              telefone={telefone}
+              setTelefone={setTelefone}
+            ></TelefoneInput>
           </div>
           <div className="flex flex-col sm:flex-row">
             <Button

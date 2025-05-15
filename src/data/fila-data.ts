@@ -7,7 +7,7 @@ const filaData: Fila = {
   clientes: [
     {
       status: 1,
-      nome: "Nicolas Tomasi",
+      nome: "Nicolas Tomasi da silva pericle",
       telefone: "5198546475",
       posicao: 1,
       observacao: "2 pessoas 1 crianca",
