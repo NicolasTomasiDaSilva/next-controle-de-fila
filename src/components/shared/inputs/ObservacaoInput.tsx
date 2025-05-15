@@ -2,8 +2,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 interface ObservacaoInputProps {
-  observacao: string;
-  setObservacao: (valor: string) => void;
+  observacao: string | null;
+  setObservacao: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 export default function ObservacaoInput({
@@ -16,7 +16,7 @@ export default function ObservacaoInput({
       <Input
         type="text"
         id="observacao"
-        value={observacao}
+        value={observacao ?? ""}
         onChange={(e) => setObservacao(e.target.value)}
         placeholder="Digite uma observação"
       />

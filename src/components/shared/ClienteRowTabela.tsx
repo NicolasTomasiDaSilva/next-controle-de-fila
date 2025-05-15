@@ -70,7 +70,7 @@ export default function ClienteRowTable({ row }: RowClientePersonalizadaProps) {
 
   return (
     <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-      <TableCell className="px-5 py-5 grid grid-cols-1 md:flex md:flex-row md:space-between md:grid-cols-2 md:gap-2">
+      <TableCell className=" px-5 py-5 grid grid-cols-1 md:flex md:flex-row md:space-between md:grid-cols-2 md:gap-2">
         <div className="flex flex-row items-center gap-2 col-span-1">
           {cliente.posicao && (
             <span className="text-lg font-extrabold text-blue-500 mr-2 md:mr-6 ">
@@ -87,7 +87,7 @@ export default function ClienteRowTable({ row }: RowClientePersonalizadaProps) {
               </p>
             )}
           </div>
-          <EditarClienteDialog />
+          <EditarClienteDialog cliente={cliente} />
         </div>
         <div className="col-span-1 flex items-center justify-between md:ml-auto gap-2">
           <div className="flex flex-col items-start md:gap-4 md:flex-row md:items-center ">

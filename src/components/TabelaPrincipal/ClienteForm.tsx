@@ -9,10 +9,10 @@ interface ClienteFormProps {
   handleSubmit: (e: React.FormEvent) => Promise<void>;
   nome: string;
   setNome: Dispatch<SetStateAction<string>>;
-  observacao: string;
-  setObservacao: Dispatch<SetStateAction<string>>;
-  telefone: string;
-  setTelefone: Dispatch<SetStateAction<string>>;
+  observacao: string | null;
+  setObservacao: Dispatch<SetStateAction<string | null>>;
+  telefone: string | null;
+  setTelefone: Dispatch<SetStateAction<string | null>>;
 }
 
 export default function ClienteForm({

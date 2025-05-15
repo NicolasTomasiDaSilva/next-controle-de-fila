@@ -100,7 +100,7 @@ export function DataTable<TData, TValue>({
           <TableHeader>
             {showSearch && (
               <TableRow className="bg-muted/50">
-                <TableHead colSpan={columns.length}>
+                <TableHead colSpan={columns.length} className="ticky top-0">
                   <div className="flex items-center py-2">
                     <Input
                       placeholder={searchPlaceholder}
@@ -129,7 +129,8 @@ export function DataTable<TData, TValue>({
               ))}
           </TableHeader>
         )}
-        <TableBody>
+
+        <TableBody className="">
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) =>
               renderRow ? (

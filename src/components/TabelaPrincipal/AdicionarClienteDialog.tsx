@@ -23,16 +23,16 @@ import ClienteForm from "./ClienteForm";
 export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState("");
-  const [observacao, setObservacao] = useState("");
-  const [telefone, setTelefone] = useState("");
+  const [observacao, setObservacao] = useState<string | null>("");
+  const [telefone, setTelefone] = useState<string | null>("");
   const { fila, setFila } = useFila();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const filaAtualizada: Fila = await filaService.AdicionarCliente({
       nome,
-      observacao,
-      telefone,
+      observacao: observacao == "" ? null : observacao,
+      telefone: telefone == "" ? null : telefone,
       filaId: fila.id,
     });
     setNome("");

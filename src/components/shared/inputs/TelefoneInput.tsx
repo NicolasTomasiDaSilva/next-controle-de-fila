@@ -2,8 +2,8 @@ import { Label } from "@/components/ui/label";
 import { IMaskInput } from "react-imask";
 
 interface TelefoneInputProps {
-  telefone: string;
-  setTelefone: (valor: string) => void;
+  telefone: string | null;
+  setTelefone: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 export default function TelefoneInput({
@@ -15,7 +15,7 @@ export default function TelefoneInput({
       <Label htmlFor="telefone">Telefone</Label>
       <IMaskInput
         id="telefone"
-        value={telefone}
+        value={telefone ?? ""}
         unmask={true}
         onAccept={(value: string) => setTelefone(value)}
         placeholder="(xx) xxxxx-xxxx"

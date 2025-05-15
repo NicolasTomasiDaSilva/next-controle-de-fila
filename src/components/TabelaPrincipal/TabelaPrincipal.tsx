@@ -28,7 +28,6 @@ export default function TabelaPrincipal() {
     <>
       <div className="border border-blue-300 shadow-sm rounded-md">
         <DataTable
-          className="h-[10px]"
           columns={ColunasTabelaPrincipal}
           data={clientesAguardando}
           searchFields={["nome"]}
