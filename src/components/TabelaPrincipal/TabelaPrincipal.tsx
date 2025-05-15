@@ -6,10 +6,9 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { DataTable } from "../ui/data-table";
-import HeaderTabelaPrincipal from "./HeaderTabelaPrincipal";
+
 import { StatusEnum, StatusLabel } from "@/enums/status-enum";
 import ClienteRowTable from "../shared/ClienteRowTabela";
-import ColunasTabelaPrincipal from "./ColunasTabelaPrincipal";
 import React, { useMemo, useState } from "react";
 import { useFila } from "@/hooks/use-fila";
 import { normalizeString } from "@/utils/normalize-string";
@@ -33,6 +32,11 @@ export default function TabelaPrincipal() {
       });
   }, [fila.clientes, searchTerm]);
 
+  const totalAguardando = useMemo(() => {
+    return fila.clientes.filter((c) => c.status === StatusEnum.Aguardando)
+      .length;
+  }, [fila.clientes]);
+
   return (
     <div className="border border-blue-300 shadow-sm rounded-md overflow-hidden ">
       <table className="w-full table-auto bg-blue-50 ">
@@ -41,7 +45,7 @@ export default function TabelaPrincipal() {
             <th className="flex items-center py-2 gap-2 px-4 py-2 text-left border-b ">
               <Users className="size-4 shrink-0 text-blue-600" />
               <span className="text-sm font-bold text-blue-600">
-                Na Fila: {clientesFiltrados.length}
+                Na Fila: {totalAguardando}
               </span>
               <Input
                 placeholder="Pesquisar cliente..."

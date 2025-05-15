@@ -13,6 +13,10 @@ export default function TabelaRecentes() {
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const lastScrollTop = useRef(0);
+  const totalAguardando = useMemo(() => {
+    return fila.clientes.filter((c) => c.status === StatusEnum.Aguardando)
+      .length;
+  }, [fila.clientes]);
 
   useLayoutEffect(() => {
     const scrollEl = scrollContainerRef.current;

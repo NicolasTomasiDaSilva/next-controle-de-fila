@@ -114,7 +114,7 @@ export default function ClienteRowTable({
             {cliente.status != StatusEnum.Aguardando && (
               <div className="md:order-1">
                 <p
-                  className={`text-base whitespace-nowrap ${
+                  className={`text-base whitespace-nowrap font-bold ${
                     StatusMap[cliente.status as StatusEnum]?.className
                   }`}
                 >
