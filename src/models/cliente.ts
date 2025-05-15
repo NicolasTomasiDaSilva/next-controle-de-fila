@@ -12,3 +12,25 @@ export interface Cliente extends Entidade {
   dataHoraOrdenacao: Date;
   dataHoraChamada: Date | null;
 }
+
+export function mapCliente(data: any): Cliente {
+  return {
+    id: data.id,
+    filaId: data.filaId,
+    nome: data.nome,
+    telefone: data.telefone,
+    observacao: data.observacao,
+    hash: data.hash,
+    posicao: data.posicao,
+    status: data.status,
+    dataHoraOrdenacao: new Date(data.dataHoraOrdenacao),
+    dataHoraChamada: data.dataHoraChamada
+      ? new Date(data.dataHoraChamada)
+      : null,
+    dataHoraCriado: new Date(data.dataHoraCriado),
+    dataHoraAlterado: new Date(data.dataHoraAlterado),
+    dataHoraDeletado: data.dataHoraDeletado
+      ? new Date(data.dataHoraDeletado)
+      : null,
+  };
+}

@@ -1,14 +1,15 @@
 import axios from "axios";
 import { cookies } from "next/headers";
 
-export async function axiosInstance(
+export async function axiosInstanceServer(
   headers: Record<string, string> = {}
 ): Promise<Axios.AxiosInstance> {
   const cookiesList = await cookies();
   const accessToken = cookiesList.get("access_token")?.value;
 
   const instance = axios.create({
-    baseURL: process.env.API_BASE_URL || "http://localhost:3000/api",
+    baseURL:
+      process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api",
     timeout: 5000,
     headers: {
       "Content-Type": "application/json",

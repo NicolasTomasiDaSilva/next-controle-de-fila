@@ -11,21 +11,26 @@ import { StatusEnum, StatusLabel } from "@/enums/status-enum";
 import ClienteRowTable from "../shared/ClienteRowTabela";
 import ColunasTabelaPrincipal from "./ColunasTabelaPrincipal";
 import React from "react";
-import { Button } from "../ui/button";
-import { AdicionarClienteDialog } from "./AdicionarClienteDialog";
+import { useFila } from "@/hooks/use-fila";
 
-interface TabelaPrincipalProps {
-  clientes: Cliente[];
-  searchFields?: string[];
-}
+export default function TabelaPrincipal() {
+  const { fila, setFila } = useFila();
+  const clientesAguardando: Cliente[] = fila.clientes
+    .filter((cliente) => cliente.status === StatusEnum.Aguardando)
+    .sort((a, b) => {
+      if (a.posicao === null && b.posicao === null) return 0;
+      if (a.posicao === null) return 1; // nulls vão para o final
+      if (b.posicao === null) return -1;
+      return a.posicao - b.posicao; // ordenação normal
+    });
 
-export default function TabelaPrincipal({ clientes }: TabelaPrincipalProps) {
   return (
     <>
-      <div className="border border-blue-300 shadow-sm rounded-md   ">
+      <div className="border border-blue-300 shadow-sm rounded-md">
         <DataTable
+          className="h-[10px]"
           columns={ColunasTabelaPrincipal}
-          data={clientes}
+          data={clientesAguardando}
           searchFields={["nome"]}
           searchPlaceholder={"Buscar por nome..."}
           showSearch={true}
@@ -41,9 +46,7 @@ export default function TabelaPrincipal({ clientes }: TabelaPrincipalProps) {
               setGlobalFilter={setGlobalFilter}
               placeholder={placeholder}
               colSpan={colSpan}
-              clientesAguardandoCount={
-                clientes.filter((cliente) => cliente.status === 1).length
-              }
+              clientesAguardandoCount={clientesAguardando.length}
             />
           )}
           renderRow={(row) => <ClienteRowTable key={row.id} row={row} />}

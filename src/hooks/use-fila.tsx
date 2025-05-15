@@ -1,17 +1,10 @@
-"use client";
-import { filaService } from "@/services/fila-service";
-import { useEffect } from "react";
+import { FilaContext } from "@/contexts/fila-context";
+import { useContext } from "react";
 
-export function useFila(filaId: string) {
-  async function carregarFila() {
-    return filaService.obterFilaPorId(filaId);
+export const useFila = () => {
+  const context = useContext(FilaContext);
+  if (context === undefined) {
+    throw new Error("useUser must be used within a UserProvider");
   }
-
-  useEffect(() => {
-    if (filaId) {
-      carregarFila();
-    }
-  }, [filaId]);
-
-  return {};
-}
+  return context;
+};

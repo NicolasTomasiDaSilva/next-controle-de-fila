@@ -11,7 +11,7 @@ export default function ObservacaoInput({
   setObservacao,
 }: ObservacaoInputProps) {
   return (
-    <>
+    <div className="space-y-2">
       <Label htmlFor="observacao">Observação</Label>
       <Input
         type="text"
@@ -20,6 +20,6 @@ export default function ObservacaoInput({
         onChange={(e) => setObservacao(e.target.value)}
         placeholder="Digite uma observação"
       />
-    </>
+    </div>
   );
 }

@@ -8,7 +8,7 @@ interface TelefoneInputProps {
 
 export default function NomeInput({ nome, setNome }: TelefoneInputProps) {
   return (
-    <>
+    <div className="space-y-2">
       <Label htmlFor="nome">Nome</Label>
       <Input
         id="nome"
@@ -18,6 +18,6 @@ export default function NomeInput({ nome, setNome }: TelefoneInputProps) {
         required
         placeholder="Digite o nome do cliente"
       />
-    </>
+    </div>
   );
 }

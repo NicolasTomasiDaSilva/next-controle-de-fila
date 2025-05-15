@@ -11,7 +11,7 @@ export default function TelefoneInput({
   setTelefone,
 }: TelefoneInputProps) {
   return (
-    <>
+    <div className="space-y-2">
       <Label htmlFor="telefone">Telefone</Label>
       <IMaskInput
         id="telefone"
@@ -32,6 +32,6 @@ export default function TelefoneInput({
                    disabled:cursor-not-allowed disabled:opacity-50"
         type="tel"
       />
-    </>
+    </div>
   );
 }

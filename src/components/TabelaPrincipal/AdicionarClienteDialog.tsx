@@ -15,23 +15,30 @@ import { Label } from "@/components/ui/label";
 import TelefoneInput from "../shared/inputs/TelefoneInput";
 import NomeInput from "../shared/inputs/NomeInput";
 import ObservacaoInput from "../shared/inputs/ObservacaoInput";
+import { useFila } from "@/hooks/use-fila";
+import { filaService } from "@/services/fila-service-client";
+import { Fila } from "@/models/fila";
+import ClienteForm from "./ClienteForm";
 
-interface AdicionarClienteDialogProps {
-  filaId: string;
-}
-
-export function AdicionarClienteDialog({
-  filaId,
-}: AdicionarClienteDialogProps) {
+export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState("");
   const [observacao, setObservacao] = useState("");
   const [telefone, setTelefone] = useState("");
+  const { fila, setFila } = useFila();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ nome, observacao, telefone, filaId });
-
+    const filaAtualizada: Fila = await filaService.AdicionarCliente({
+      nome,
+      observacao,
+      telefone,
+      filaId: fila.id,
+    });
+    setNome("");
+    setObservacao("");
+    setTelefone("");
+    setFila(filaAtualizada);
     setOpen(false);
   };
 
@@ -55,32 +62,16 @@ export function AdicionarClienteDialog({
         <DialogHeader>
           <DialogTitle>Adicionar Cliente à Fila</DialogTitle>
         </DialogHeader>
-
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div className="space-y-2">
-            <NomeInput nome={nome} setNome={setNome}></NomeInput>
-          </div>
-
-          <div className="space-y-2"></div>
-          <ObservacaoInput
-            observacao={observacao}
-            setObservacao={setObservacao}
-          ></ObservacaoInput>
-          <div className="space-y-2">
-            <TelefoneInput
-              telefone={telefone}
-              setTelefone={setTelefone}
-            ></TelefoneInput>
-          </div>
-          <div className="flex flex-col sm:flex-row">
-            <Button
-              type="submit"
-              className="w-full sm:w-30 sm:ml-auto bg-blue-400 hover:bg-blue-700 cursor-pointer"
-            >
-              Salvar
-            </Button>
-          </div>
-        </form>
+        <ClienteForm
+          buttonTittle="Adicionar"
+          handleSubmit={handleSubmit}
+          nome={nome}
+          setNome={setNome}
+          observacao={observacao}
+          setObservacao={setObservacao}
+          telefone={telefone}
+          setTelefone={setTelefone}
+        ></ClienteForm>
       </DialogContent>
     </Dialog>
   );
