@@ -7,16 +7,29 @@ import React, { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useFila } from "@/hooks/use-fila";
 import { normalizeString } from "@/utils/normalize-string";
 import { Input } from "../ui/input";
+import { ArrowUp, CircleArrowUp, MoveVertical } from "lucide-react";
 
 export default function TabelaRecentes() {
   const { fila, setFila } = useFila();
-
+  const [tabelaExpandida, setTabelaExpandida] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const lastScrollTop = useRef(0);
   const totalAguardando = useMemo(() => {
     return fila.clientes.filter((c) => c.status === StatusEnum.Aguardando)
       .length;
   }, [fila.clientes]);
+
+  function goToTop() {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }
+  function expandirTabela() {
+    setTabelaExpandida((prev) => !prev);
+  }
 
   useLayoutEffect(() => {
     const scrollEl = scrollContainerRef.current;
@@ -45,11 +58,33 @@ export default function TabelaRecentes() {
       <table className="w-full table-auto">
         <thead>
           <tr>
-            <th className="px-4 py-2 text-left">Recentes</th>
+            <th className="px-4 py-2 text-left flex items-center justify-between">
+              <div>Recentes</div>
+              <div className="flex items-center">
+                <button
+                  onClick={goToTop}
+                  className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer"
+                >
+                  <ArrowUp className="w-7 h-7" />
+                </button>
+                <button
+                  onClick={expandirTabela}
+                  className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer"
+                >
+                  <MoveVertical className="w-7 h-7" />
+                </button>
+              </div>
+            </th>
           </tr>
         </thead>
       </table>
-      <div className="max-h-50 overflow-y-auto" ref={scrollContainerRef}>
+
+      <div
+        className={`overflow-y-auto transition-all duration-300 ${
+          tabelaExpandida ? "max-h-none" : "max-h-50"
+        }`}
+        ref={scrollContainerRef}
+      >
         <table className="w-full table-auto">
           <tbody>
             {clientesFiltrados.length > 0 ? (

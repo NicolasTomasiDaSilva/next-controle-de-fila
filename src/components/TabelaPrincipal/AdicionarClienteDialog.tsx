@@ -10,11 +10,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import TelefoneInput from "../shared/inputs/TelefoneInput";
-import NomeInput from "../shared/inputs/NomeInput";
-import ObservacaoInput from "../shared/inputs/ObservacaoInput";
 import { useFila } from "@/hooks/use-fila";
 import { filaService } from "@/services/fila-service-client";
 import { Fila } from "@/models/fila";

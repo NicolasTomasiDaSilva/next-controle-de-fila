@@ -9,15 +9,30 @@ import { DataTable } from "../ui/data-table";
 
 import { StatusEnum, StatusLabel } from "@/enums/status-enum";
 import ClienteRowTable from "../shared/ClienteRowTabela";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useFila } from "@/hooks/use-fila";
 import { normalizeString } from "@/utils/normalize-string";
 import { Input } from "../ui/input";
-import { Users } from "lucide-react";
+import { ArrowUp, MoveVertical, Users } from "lucide-react";
 
 export default function TabelaPrincipal() {
+  const [tabelaExpandida, setTabelaExpandida] = useState(false);
   const { fila, setFila } = useFila();
   const [searchTerm, setSearchTerm] = useState("");
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  function goToTop() {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }
+  function expandirTabela() {
+    setTabelaExpandida((prev) => !prev);
+  }
+
   const clientesFiltrados = useMemo(() => {
     return fila.clientes
       .filter((cliente) => cliente.status === StatusEnum.Aguardando)
@@ -42,22 +57,44 @@ export default function TabelaPrincipal() {
       <table className="w-full table-auto bg-blue-50 ">
         <thead>
           <tr>
-            <th className="flex items-center py-2 gap-2 px-4 py-2 text-left border-b ">
-              <Users className="size-4 shrink-0 text-blue-600" />
-              <span className="text-sm font-bold text-blue-600">
-                Na Fila: {totalAguardando}
-              </span>
-              <Input
-                placeholder="Pesquisar cliente..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="max-w-sm bg-white focus-visible:ring-[1px]"
-              />
+            <th className="flex flex-row items-center py-2 px-4 py-2 shadow-sm justify-between">
+              <div className="flex flex-row items-center gap-2 text-left">
+                <Users className="size-4 shrink-0 text-blue-600" />
+                <span className="text-sm font-bold text-blue-600 whitespace-nowrap">
+                  <span className="hidden md:inline">Na Fila: </span>
+                  {totalAguardando}
+                </span>
+                <Input
+                  placeholder="Pesquisar cliente..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="max-w-sm bg-white focus-visible:ring-[1px]"
+                />
+              </div>
+              <div className="flex items-center">
+                <button
+                  onClick={goToTop}
+                  className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer"
+                >
+                  <ArrowUp className="w-7 h-7" />
+                </button>
+                <button
+                  onClick={expandirTabela}
+                  className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer"
+                >
+                  <MoveVertical className="w-7 h-7" />
+                </button>
+              </div>
             </th>
           </tr>
         </thead>
       </table>
-      <div className="max-h-90 overflow-y-auto">
+      <div
+        className={`overflow-y-auto transition-all duration-300 ${
+          tabelaExpandida ? "max-h-none" : "max-h-96"
+        }`}
+        ref={scrollContainerRef}
+      >
         <table className="w-full table-auto">
           <tbody>
             {clientesFiltrados.length > 0 ? (
