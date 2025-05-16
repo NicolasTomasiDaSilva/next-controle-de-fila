@@ -11,11 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useFila } from "@/hooks/use-fila";
-import { filaService } from "@/services/fila-service-client";
-import { Fila } from "@/models/fila";
 import ClienteForm from "./ClienteForm";
 import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
-import { clienteSchema } from "@/models/cliente";
 
 export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);

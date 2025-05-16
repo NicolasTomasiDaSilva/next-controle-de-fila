@@ -1,5 +1,5 @@
 "use client";
-import { StatusEnum, StatusLabel } from "@/enums/status-enum";
+import { StatusEnum } from "@/enums/status-enum";
 import ClienteRowTable from "../shared/ClienteRowTabela";
 import React, { useMemo, useRef, useState } from "react";
 import { useFila } from "@/hooks/use-fila";
