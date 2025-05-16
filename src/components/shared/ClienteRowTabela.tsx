@@ -19,6 +19,7 @@ import {
 import { StatusEnum, StatusMap } from "@/enums/status-enum";
 import { useFila } from "@/hooks/use-fila";
 import { EditarClienteDialog } from "../TabelaPrincipal/EditarClienteDialog";
+import { TempoDecorrido } from "./TempoDecorrido";
 
 interface RowClientePersonalizadaProps {
   cliente: Cliente;
@@ -83,17 +84,15 @@ export default function ClienteRowTable({
               <div className="flex items-center gap-1 md:col-span-1">
                 <Clock className="w-3 h-3" />
                 <span className="text-sm text-muted-foreground whitespace-nowrap">
-                  {formatDistanceToNowStrict(
-                    new Date(
-                      cliente.status === StatusEnum.Aguardando
-                        ? cliente.dataHoraCriado
-                        : cliente.dataHoraAlterado
-                    ),
-                    {
-                      unit: "minute",
-                      locale: ptBR,
+                  <TempoDecorrido
+                    data={
+                      new Date(
+                        cliente.status === StatusEnum.Aguardando
+                          ? cliente.dataHoraCriado
+                          : cliente.dataHoraAlterado
+                      )
                     }
-                  )}
+                  />
                 </span>
               </div>
             </div>

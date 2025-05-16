@@ -1,12 +1,4 @@
 "use client";
-import { Cliente } from "@/models/cliente";
-import {
-  ColumnDef,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { DataTable } from "../ui/data-table";
-
 import { StatusEnum, StatusLabel } from "@/enums/status-enum";
 import ClienteRowTable from "../shared/ClienteRowTabela";
 import React, { useMemo, useRef, useState } from "react";
