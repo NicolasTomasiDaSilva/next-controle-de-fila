@@ -105,7 +105,7 @@ export default function TabelaPrincipal() {
               ))
             ) : (
               <tr>
-                <td className="text-center text-gray-500 py-6">
+                <td className="flex items-center justify-center h-[200px] text-gray-500">
                   Nenhum cliente encontrado.
                 </td>
               </tr>
