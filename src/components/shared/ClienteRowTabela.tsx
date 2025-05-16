@@ -39,7 +39,7 @@ export default function ClienteRowTable({
 
   return (
     <td>
-      <div className="w-full px-5 py-5 grid grid-cols-1 md:flex md:flex-row md:space-between md:gap-2">
+      <div className="w-full px-5 py-5 grid grid-cols-1 md:grid-cols-2 md:space-between md:gap-2">
         <div className="flex flex-row items-center gap-2 col-span-1">
           {cliente.posicao && (
             <span className="text-lg font-extrabold text-blue-500 mr-2 md:mr-6 ">
@@ -60,10 +60,10 @@ export default function ClienteRowTable({
             <EditarClienteDialog cliente={cliente} />
           )}
         </div>
-        <div className="col-span-1 flex items-center justify-between md:ml-auto gap-2">
-          <div className="flex flex-col items-start md:gap-4 md:flex-row md:items-center ">
+        <div className="col-span-1 flex items-center justify-between gap-2">
+          <div className="flex flex-col items-start md:gap-4 md:flex-row md:items-center md:justify-between ">
             {cliente.status != StatusEnum.Aguardando && (
-              <div className="md:order-1">
+              <div className="md:order-1 col-span-1">
                 <p
                   className={`text-base whitespace-nowrap font-bold ${
                     StatusMap[cliente.status as StatusEnum]?.className
@@ -73,28 +73,29 @@ export default function ClienteRowTable({
                 </p>
               </div>
             )}
+            <div>
+              {cliente.status === StatusEnum.Aguardando && (
+                <p className="md:text-right whitespace-normal md:col-span-1 ">
+                  {cliente.observacao}
+                </p>
+              )}
 
-            {cliente.status === StatusEnum.Aguardando && (
-              <p className="md:text-right whitespace-normal">
-                {cliente.observacao ?? "-"}
-              </p>
-            )}
-
-            <div className="flex items-center gap-1">
-              <Clock className="w-3 h-3" />
-              <span className="text-sm text-muted-foreground whitespace-nowrap">
-                {formatDistanceToNowStrict(
-                  new Date(
-                    cliente.status === StatusEnum.Aguardando
-                      ? cliente.dataHoraCriado
-                      : cliente.dataHoraAlterado
-                  ),
-                  {
-                    unit: "minute",
-                    locale: ptBR,
-                  }
-                )}
-              </span>
+              <div className="flex items-center gap-1 md:col-span-1">
+                <Clock className="w-3 h-3" />
+                <span className="text-sm text-muted-foreground whitespace-nowrap">
+                  {formatDistanceToNowStrict(
+                    new Date(
+                      cliente.status === StatusEnum.Aguardando
+                        ? cliente.dataHoraCriado
+                        : cliente.dataHoraAlterado
+                    ),
+                    {
+                      unit: "minute",
+                      locale: ptBR,
+                    }
+                  )}
+                </span>
+              </div>
             </div>
           </div>
 
