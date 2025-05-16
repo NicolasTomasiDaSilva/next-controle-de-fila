@@ -29,22 +29,7 @@ interface EditarClienteDialogProps {
 
 export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
   const [open, setOpen] = useState(false);
-  const [nome, setNome] = useState<string>(cliente.nome);
-  const [observacao, setObservacao] = useState<string | null>(
-    cliente.observacao ?? ""
-  );
-  const [telefone, setTelefone] = useState<string | null>(
-    cliente.telefone ?? ""
-  );
   const { handleAtualizar } = useFila();
-
-  useEffect(() => {
-    if (cliente) {
-      setNome(cliente.nome);
-      setObservacao(cliente.observacao ?? "");
-      setTelefone(cliente.telefone ?? "");
-    }
-  }, [cliente]);
 
   const handleSubmit = async (clienteForm: ClienteFormDTO) => {
     const clienteAtualizado: Cliente = {
@@ -53,9 +38,6 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
     };
 
     await handleAtualizar(clienteAtualizado);
-    setNome("");
-    setObservacao("");
-    setTelefone("");
     setOpen(false);
   };
 
@@ -82,12 +64,7 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
         <ClienteForm
           buttonTittle="Salvar"
           onSubmit={handleSubmit}
-          nome={nome}
-          setNome={setNome}
-          observacao={observacao}
-          setObservacao={setObservacao}
-          telefone={telefone}
-          setTelefone={setTelefone}
+          cliente={cliente}
         ></ClienteForm>
       </DialogContent>
     </Dialog>

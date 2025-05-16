@@ -19,9 +19,6 @@ import { clienteSchema } from "@/models/cliente";
 
 export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);
-  const [nome, setNome] = useState("");
-  const [observacao, setObservacao] = useState<string | null>("");
-  const [telefone, setTelefone] = useState<string | null>("");
   const { handleAdicionar, fila } = useFila();
 
   const handleSubmit = async (clienteForm: ClienteFormDTO) => {
@@ -31,17 +28,11 @@ export function AdicionarClienteDialog() {
     };
 
     await handleAdicionar(dadosNovoClienteFormatados);
-
     setOpen(false);
   };
 
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
-    if (!isOpen) {
-      setNome("");
-      setObservacao("");
-      setTelefone("");
-    }
   };
 
   return (
@@ -58,12 +49,6 @@ export function AdicionarClienteDialog() {
         <ClienteForm
           buttonTittle="Adicionar"
           onSubmit={handleSubmit}
-          nome={nome}
-          setNome={setNome}
-          observacao={observacao}
-          setObservacao={setObservacao}
-          telefone={telefone}
-          setTelefone={setTelefone}
         ></ClienteForm>
       </DialogContent>
     </Dialog>

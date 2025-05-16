@@ -13,23 +13,13 @@ import {
 interface ClienteFormProps {
   buttonTittle: string;
   onSubmit: (clienteForm: ClienteFormDTO) => Promise<void>;
-  nome: string;
-  setNome: Dispatch<SetStateAction<string>>;
-  observacao: string | null;
-  setObservacao: Dispatch<SetStateAction<string | null>>;
-  telefone: string | null;
-  setTelefone: Dispatch<SetStateAction<string | null>>;
+  cliente?: Cliente | null;
 }
 
 export default function ClienteForm({
   buttonTittle,
   onSubmit,
-  nome,
-  setNome,
-  observacao,
-  setObservacao,
-  telefone,
-  setTelefone,
+  cliente,
 }: ClienteFormProps) {
   const [errors, setErrors] = useState<{
     nome?: string;
@@ -37,16 +27,22 @@ export default function ClienteForm({
     telefone?: string;
   }>({});
 
+  const [nome, setNome] = useState<string>(cliente?.nome ?? "");
+  const [observacao, setObservacao] = useState<string | null>(
+    cliente?.observacao ?? ""
+  );
+  const [telefone, setTelefone] = useState<string | null>(
+    cliente?.telefone ?? ""
+  );
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    const dadosSubmetidos = {
+    const result = clienteFormDtoSchema.safeParse({
       nome,
       observacao,
       telefone,
-    };
-
-    const result = clienteFormDtoSchema.safeParse(dadosSubmetidos);
+    });
 
     if (!result.success) {
       const fieldErrors = result.error.flatten().fieldErrors;
