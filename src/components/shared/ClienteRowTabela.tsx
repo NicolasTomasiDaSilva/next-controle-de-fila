@@ -1,10 +1,7 @@
 "use client";
 
 import { Cliente } from "@/models/cliente";
-import { TableCell, TableRow } from "../ui/table";
-import { flexRender, Row } from "@tanstack/react-table";
-import { formatDistanceToNowStrict } from "date-fns";
-import { ptBR } from "date-fns/locale";
+
 import {
   Phone,
   Trash,
@@ -29,13 +26,13 @@ export default function ClienteRowTable({
   cliente,
 }: RowClientePersonalizadaProps) {
   const {
-    onChamar,
-    onRemover,
-    onAusentar,
-    onMoverCima,
-    onMoverBaixo,
-    onAtender,
-    onVoltar,
+    handleChamar,
+    handleRemover,
+    handleAusentar,
+    handleMoverCima,
+    handleMoverBaixo,
+    handleAtender,
+    handleVoltar,
   } = useFila();
 
   return (
@@ -64,7 +61,7 @@ export default function ClienteRowTable({
         <div className="col-span-1 flex items-center justify-between gap-2">
           <div className="flex flex-col items-start md:gap-4 md:flex-row md:items-center md:justify-between ">
             {cliente.status != StatusEnum.Aguardando && (
-              <div className="md:order-1 col-span-1">
+              <div className="md:order-1 col-span-1 text-left">
                 <p
                   className={`text-base whitespace-nowrap font-bold ${
                     StatusMap[cliente.status as StatusEnum]?.className
@@ -76,7 +73,7 @@ export default function ClienteRowTable({
             )}
             <div>
               {cliente.status === StatusEnum.Aguardando && (
-                <p className="md:text-right whitespace-normal md:col-span-1 ">
+                <p className="whitespace-normal md:col-span-1 ">
                   {cliente.observacao}
                 </p>
               )}
@@ -102,7 +99,7 @@ export default function ClienteRowTable({
             <div className=" min-w-max w-[max-content] grid grid-cols-2 md:grid-cols-4 gap-2 ">
               <button
                 onClick={async () => {
-                  onMoverCima(cliente);
+                  handleMoverCima(cliente);
                 }}
                 className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer"
               >
@@ -110,7 +107,7 @@ export default function ClienteRowTable({
               </button>
               <button
                 onClick={async () => {
-                  onMoverBaixo(cliente);
+                  handleMoverBaixo(cliente);
                 }}
                 className="text-black-600 hover:text-black-700 transition md:order-3 cursor-pointer"
               >
@@ -118,7 +115,7 @@ export default function ClienteRowTable({
               </button>
               <button
                 onClick={async () => {
-                  onChamar(cliente);
+                  handleChamar(cliente);
                 }}
                 className="text-green-600 hover:text-green-700 transition md:order-1 cursor-pointer"
               >
@@ -126,7 +123,7 @@ export default function ClienteRowTable({
               </button>
               <button
                 onClick={async () => {
-                  onRemover(cliente);
+                  handleRemover(cliente);
                 }}
                 className="text-red-600 hover:text-red-700 transition md:order-4 cursor-pointer"
               >
@@ -138,7 +135,7 @@ export default function ClienteRowTable({
             <div className=" min-w-max w-[max-content] grid grid-cols-3 gap-2 ">
               <button
                 onClick={async () => {
-                  onAtender(cliente);
+                  handleAtender(cliente);
                 }}
                 className="text-green-500 transition md:order-1 cursor-pointer"
               >
@@ -147,7 +144,7 @@ export default function ClienteRowTable({
 
               <button
                 onClick={async () => {
-                  onVoltar(cliente);
+                  handleVoltar(cliente);
                 }}
                 className="text-blue-500  transition md:order-4 cursor-pointer"
               >
@@ -155,7 +152,7 @@ export default function ClienteRowTable({
               </button>
               <button
                 onClick={async () => {
-                  onAusentar(cliente);
+                  handleAusentar(cliente);
                 }}
                 className="text-red-500 transition md:order-1 cursor-pointer"
               >

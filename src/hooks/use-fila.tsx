@@ -1,4 +1,5 @@
 import { FilaContext } from "@/contexts/fila-context";
+import { AdicionarClienteDTO } from "@/dtos/cliente";
 import { StatusEnum } from "@/enums/status-enum";
 import { Cliente } from "@/models/cliente";
 import { Fila } from "@/models/fila";
@@ -12,19 +13,28 @@ export const useFila = () => {
   }
   const { fila, setFila } = context;
 
-  async function onChamar(cliente: Cliente) {
+  async function handleAdicionar(cliente: AdicionarClienteDTO) {
+    const filaAtualizada: Fila = await filaService.AdicionarCliente(cliente);
+    setFila(filaAtualizada);
+  }
+  async function handleAtualizar(cliente: Cliente) {
+    const filaAtualizada: Fila = await filaService.AtualizarCliente(cliente);
+    setFila(filaAtualizada);
+  }
+
+  async function handleChamar(cliente: Cliente) {
     const filaAtualizada: Fila = await filaService.ChamarCliente(cliente.id);
     setFila(filaAtualizada);
   }
-  async function onRemover(cliente: Cliente) {
+  async function handleRemover(cliente: Cliente) {
     const filaAtualizada: Fila = await filaService.RemoverCliente(cliente.id);
     setFila(filaAtualizada);
   }
-  async function onAusentar(cliente: Cliente) {
+  async function handleAusentar(cliente: Cliente) {
     const filaAtualizada: Fila = await filaService.AusentarCliente(cliente.id);
     setFila(filaAtualizada);
   }
-  async function onMoverCima(cliente: Cliente) {
+  async function handleMoverCima(cliente: Cliente) {
     const novaPosicao: number = (cliente.posicao as number) - 1;
     if (!isPosicaoValida(novaPosicao)) {
       return;
@@ -35,7 +45,7 @@ export const useFila = () => {
     );
     setFila(filaAtualizada);
   }
-  async function onMoverBaixo(cliente: Cliente) {
+  async function handleMoverBaixo(cliente: Cliente) {
     const novaPosicao: number = (cliente.posicao as number) + 1;
     if (!isPosicaoValida(novaPosicao)) {
       return;
@@ -47,12 +57,12 @@ export const useFila = () => {
     setFila(filaAtualizada);
   }
 
-  async function onAtender(cliente: Cliente) {
+  async function handleAtender(cliente: Cliente) {
     const filaAtualizada: Fila = await filaService.AtenderCliente(cliente.id);
     setFila(filaAtualizada);
   }
 
-  async function onVoltar(cliente: Cliente) {
+  async function handleVoltar(cliente: Cliente) {
     const filaAtualizada: Fila = await filaService.VoltarCliente(cliente.id);
     setFila(filaAtualizada);
   }
@@ -69,12 +79,14 @@ export const useFila = () => {
   return {
     fila,
     setFila,
-    onChamar,
-    onRemover,
-    onAusentar,
-    onMoverCima,
-    onMoverBaixo,
-    onAtender,
-    onVoltar,
+    handleAdicionar,
+    handleAtualizar,
+    handleChamar,
+    handleRemover,
+    handleAusentar,
+    handleMoverCima,
+    handleMoverBaixo,
+    handleAtender,
+    handleVoltar,
   };
 };

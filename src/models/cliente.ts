@@ -1,36 +1,35 @@
 import { StatusEnum } from "../enums/status-enum";
-import { Entidade } from "./entidade";
+import { Entidade, entidadeSchema } from "./entidade";
+import { z } from "zod";
 
-export interface Cliente extends Entidade {
-  filaId: string;
-  nome: string;
-  telefone: string | null;
-  observacao: string | null;
-  hash: string;
-  posicao: number | null;
-  status: StatusEnum;
-  dataHoraOrdenacao: Date;
-  dataHoraChamada: Date | null;
-}
+export const statusEnumSchema = z.nativeEnum(StatusEnum);
 
-export function mapCliente(data: any): Cliente {
-  return {
-    id: data.id,
-    filaId: data.filaId,
-    nome: data.nome,
-    telefone: data.telefone,
-    observacao: data.observacao,
-    hash: data.hash,
-    posicao: data.posicao,
-    status: data.status,
-    dataHoraOrdenacao: new Date(data.dataHoraOrdenacao),
-    dataHoraChamada: data.dataHoraChamada
-      ? new Date(data.dataHoraChamada)
-      : null,
-    dataHoraCriado: new Date(data.dataHoraCriado),
-    dataHoraAlterado: new Date(data.dataHoraAlterado),
-    dataHoraDeletado: data.dataHoraDeletado
-      ? new Date(data.dataHoraDeletado)
-      : null,
-  };
-}
+export const clienteSchema = entidadeSchema.extend({
+  filaId: z.string().uuid("ID da fila inválido"),
+  nome: z
+    .string()
+    .trim()
+    .min(1, "Nome é obrigatório")
+    .max(20, "Nome deve ter no máximo 20 caracteres"),
+  observacao: z
+    .string()
+    .trim()
+    .max(20, "Observação deve ter no máximo 20 caracteres")
+    .transform((val) => (val === "" ? null : val))
+    .nullable(),
+  telefone: z
+    .string()
+    .trim()
+    .transform((val) => (val === "" ? null : val))
+    .refine((val) => val === null || (val.length >= 10 && val.length <= 11), {
+      message: "Telefone deve ter entre 10 e 11 caracteres",
+    })
+    .nullable(),
+  hash: z.string().min(1),
+  posicao: z.number().nullable(),
+  status: statusEnumSchema,
+  dataHoraOrdenacao: z.coerce.date(),
+  dataHoraChamada: z.coerce.date().nullable(),
+});
+
+export type Cliente = z.infer<typeof clienteSchema>;

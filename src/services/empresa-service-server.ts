@@ -1,11 +1,11 @@
 import { axiosInstanceServer } from "@/api/axios-server";
-import { Fila, filaSchema } from "@/models/fila";
+import { Empresa, empresaSchema } from "@/models/empresa";
 
-export const filaService = {
-  async obterFilaPorId(id: string): Promise<Fila> {
+export const empresaService = {
+  async obterEmpresa(): Promise<Empresa> {
     const api = await axiosInstanceServer();
-    const response = await api.get(`/filas/${id}`);
-    const resultado = filaSchema.safeParse(response.data);
+    const response = await api.get(`/empresas`);
+    const resultado = empresaSchema.safeParse(response.data);
     if (!resultado.success) {
       console.error(resultado.error);
       throw new Error("Dados inválidos");

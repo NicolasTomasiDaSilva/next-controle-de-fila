@@ -10,14 +10,10 @@ import { Input } from "../ui/input";
 import { ArrowUp, CircleArrowUp, MoveVertical } from "lucide-react";
 
 export default function TabelaRecentes() {
-  const { fila, setFila } = useFila();
+  const { fila } = useFila();
   const [tabelaExpandida, setTabelaExpandida] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const lastScrollTop = useRef(0);
-  const totalAguardando = useMemo(() => {
-    return fila.clientes.filter((c) => c.status === StatusEnum.Aguardando)
-      .length;
-  }, [fila.clientes]);
 
   function goToTop() {
     if (scrollContainerRef.current) {

@@ -14,26 +14,24 @@ import { useFila } from "@/hooks/use-fila";
 import { filaService } from "@/services/fila-service-client";
 import { Fila } from "@/models/fila";
 import ClienteForm from "./ClienteForm";
+import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
+import { clienteSchema } from "@/models/cliente";
 
 export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState("");
-  const [observacao, setObservacao] = useState<string>("");
-  const [telefone, setTelefone] = useState<string>("");
-  const { fila, setFila } = useFila();
+  const [observacao, setObservacao] = useState<string | null>("");
+  const [telefone, setTelefone] = useState<string | null>("");
+  const { handleAdicionar, fila } = useFila();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const filaAtualizada: Fila = await filaService.AdicionarCliente({
-      nome,
-      observacao: observacao == "" ? null : observacao,
-      telefone: telefone == "" ? null : telefone,
+  const handleSubmit = async (clienteForm: ClienteFormDTO) => {
+    const dadosNovoClienteFormatados: AdicionarClienteDTO = {
+      ...clienteForm,
       filaId: fila.id,
-    });
-    setNome("");
-    setObservacao("");
-    setTelefone("");
-    setFila(filaAtualizada);
+    };
+
+    await handleAdicionar(dadosNovoClienteFormatados);
+
     setOpen(false);
   };
 
@@ -59,7 +57,7 @@ export function AdicionarClienteDialog() {
         </DialogHeader>
         <ClienteForm
           buttonTittle="Adicionar"
-          handleSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           nome={nome}
           setNome={setNome}
           observacao={observacao}

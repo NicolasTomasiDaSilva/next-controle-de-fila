@@ -1,9 +1,25 @@
-import { Configuracao } from "./configuracao";
-import { Entidade } from "./entidade";
+import { z } from "zod";
+import { Configuracao, configuracaoSchema } from "./configuracao";
+import { Entidade, entidadeSchema } from "./entidade";
+import { Fila, filaSchema } from "./fila";
+import { Vinculacao, vinculacaoSchema } from "./vinculacao";
 
-export interface Empresa extends Entidade {
-  nome: string;
-  cpfCnpj: string;
-  email: string;
-  configuracao: Configuracao;
-}
+export const empresaSchema = entidadeSchema.extend({
+  nome: z
+    .string()
+    .trim()
+    .min(1, "Nome obrigatório")
+    .max(30, "Nome deve ter no máximo 30 caracteres"),
+  cpfCnpj: z
+    .string()
+    .trim()
+    .refine((val) => val.length === 11 || val.length === 14, {
+      message: "Deve conter exatamente 11 (CPF) ou 14 (CNPJ) caracteres",
+    }),
+  email: z.string().trim().email("Email inválido").toLowerCase(),
+  filas: z.array(filaSchema),
+  vinculacoes: z.array(vinculacaoSchema),
+  configuracao: configuracaoSchema,
+});
+
+export type Empresa = z.infer<typeof empresaSchema>;

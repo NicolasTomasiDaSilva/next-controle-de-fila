@@ -9,7 +9,7 @@ import { ArrowUp, MoveVertical, Users } from "lucide-react";
 
 export default function TabelaPrincipal() {
   const [tabelaExpandida, setTabelaExpandida] = useState(false);
-  const { fila, setFila } = useFila();
+  const { fila } = useFila();
   const [searchTerm, setSearchTerm] = useState("");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 

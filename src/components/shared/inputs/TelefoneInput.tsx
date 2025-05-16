@@ -3,12 +3,14 @@ import { IMaskInput } from "react-imask";
 
 interface TelefoneInputProps {
   telefone: string | null;
-  setTelefone: React.Dispatch<React.SetStateAction<string>>;
+  setTelefone: React.Dispatch<React.SetStateAction<string | null>>;
+  error?: string;
 }
 
 export default function TelefoneInput({
   telefone,
   setTelefone,
+  error,
 }: TelefoneInputProps) {
   return (
     <div className="space-y-2">
@@ -32,6 +34,7 @@ export default function TelefoneInput({
                    disabled:cursor-not-allowed disabled:opacity-50"
         type="tel"
       />
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>
   );
 }

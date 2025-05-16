@@ -20,7 +20,8 @@ import { filaService } from "@/services/fila-service-client";
 import { Fila } from "@/models/fila";
 import ClienteForm from "./ClienteForm";
 import { PencilLine } from "lucide-react";
-import { Cliente } from "@/models/cliente";
+import { Cliente, clienteSchema } from "@/models/cliente";
+import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
 
 interface EditarClienteDialogProps {
   cliente: Cliente;
@@ -29,11 +30,13 @@ interface EditarClienteDialogProps {
 export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
   const [open, setOpen] = useState(false);
   const [nome, setNome] = useState<string>(cliente.nome);
-  const [observacao, setObservacao] = useState<string>(
+  const [observacao, setObservacao] = useState<string | null>(
     cliente.observacao ?? ""
   );
-  const [telefone, setTelefone] = useState<string>(cliente.telefone ?? "");
-  const { fila, setFila } = useFila();
+  const [telefone, setTelefone] = useState<string | null>(
+    cliente.telefone ?? ""
+  );
+  const { handleAtualizar } = useFila();
 
   useEffect(() => {
     if (cliente) {
@@ -43,21 +46,16 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
     }
   }, [cliente]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = async (clienteForm: ClienteFormDTO) => {
     const clienteAtualizado: Cliente = {
       ...cliente,
-      nome,
-      observacao: observacao == "" ? null : observacao,
-      telefone: telefone == "" ? null : telefone,
+      ...clienteForm,
     };
 
-    const filaAtualizada: Fila = await filaService.AtualizarCliente(
-      clienteAtualizado
-    );
-
-    setFila(filaAtualizada);
+    await handleAtualizar(clienteAtualizado);
+    setNome("");
+    setObservacao("");
+    setTelefone("");
     setOpen(false);
   };
 
@@ -83,7 +81,7 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
         </DialogHeader>
         <ClienteForm
           buttonTittle="Salvar"
-          handleSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           nome={nome}
           setNome={setNome}
           observacao={observacao}

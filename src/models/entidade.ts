@@ -1,6 +1,10 @@
-export interface Entidade {
-  id: string;
-  dataHoraCriado: Date;
-  dataHoraAlterado: Date;
-  dataHoraDeletado: Date | null;
-}
+import { z } from "zod";
+
+export const entidadeSchema = z.object({
+  id: z.string().uuid("ID inválido"),
+  dataHoraCriado: z.coerce.date(),
+  dataHoraAlterado: z.coerce.date(),
+  dataHoraDeletado: z.coerce.date().nullable(),
+});
+
+export type Entidade = z.infer<typeof entidadeSchema>;

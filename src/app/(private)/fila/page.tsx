@@ -1,0 +1,31 @@
+import TabelaPrincipal from "@/components/TabelaPrincipal/TabelaPrincipal";
+import { Section } from "@/components/Section";
+
+import filaData from "@/data/fila-data";
+import { filaService } from "@/services/fila-service-server";
+import { AdicionarClienteDialog } from "@/components/TabelaPrincipal/AdicionarClienteDialog";
+import { FilaProvider } from "@/contexts/fila-context";
+import { Fila } from "@/models/fila";
+import TabelaRecentes from "@/components/TabelaRecentes/TabelaRecentes";
+import { empresaService } from "@/services/empresa-service-server";
+import { Empresa } from "@/models/empresa";
+import { EmpresaProvider } from "@/contexts/empresa-context";
+
+export default async function FilaPage() {
+  const empresa: Empresa = await empresaService.obterEmpresa();
+  const filaId = empresa.filas[0].id;
+  const fila: Fila = await filaService.obterFilaPorId(filaId);
+
+  return (
+    <EmpresaProvider empresaInicial={empresa}>
+      <FilaProvider filaInicial={fila}>
+        <Section title="Fila de Atendimento">
+          <AdicionarClienteDialog></AdicionarClienteDialog>
+          <TabelaPrincipal></TabelaPrincipal>
+          <div className="h-5"></div>
+          <TabelaRecentes></TabelaRecentes>
+        </Section>
+      </FilaProvider>
+    </EmpresaProvider>
+  );
+}

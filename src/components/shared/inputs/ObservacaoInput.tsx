@@ -3,12 +3,14 @@ import { Label } from "@/components/ui/label";
 
 interface ObservacaoInputProps {
   observacao: string | null;
-  setObservacao: React.Dispatch<React.SetStateAction<string>>;
+  setObservacao: React.Dispatch<React.SetStateAction<string | null>>;
+  error?: string;
 }
 
 export default function ObservacaoInput({
   observacao,
   setObservacao,
+  error,
 }: ObservacaoInputProps) {
   return (
     <div className="space-y-2">
@@ -20,6 +22,7 @@ export default function ObservacaoInput({
         onChange={(e) => setObservacao(e.target.value)}
         placeholder="Digite uma observação"
       />
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>
   );
 }

@@ -1,27 +1,12 @@
-import { Cliente, mapCliente } from "./cliente";
-import { Entidade } from "./entidade";
+import { z } from "zod";
+import { Cliente, clienteSchema } from "./cliente";
+import { Entidade, entidadeSchema } from "./entidade";
 
-export interface Fila extends Entidade {
-  empresaId: string;
-  setor: string | null;
-  tempoMedioEspera: string;
-  clientes: Cliente[];
-}
+export const filaSchema = entidadeSchema.extend({
+  empresaId: z.string().uuid("ID da empresa inválido"),
+  setor: z.string().trim().nullable(),
+  tempoMedioEspera: z.string().nullable(),
+  clientes: z.array(clienteSchema),
+});
 
-export function mapFila(data: any): Fila {
-  return {
-    id: data.id,
-    empresaId: data.empresaId,
-    setor: data.setor,
-    tempoMedioEspera: data.tempoMedioEspera,
-    clientes:
-      data.clientes?.map((cliente: Cliente) => {
-        return mapCliente(cliente);
-      }) ?? [],
-    dataHoraCriado: new Date(data.dataHoraCriado),
-    dataHoraAlterado: new Date(data.dataHoraAlterado),
-    dataHoraDeletado: data.dataHoraDeletado
-      ? new Date(data.dataHoraDeletado)
-      : null,
-  };
-}
+export type Fila = z.infer<typeof filaSchema>;
