@@ -53,7 +53,7 @@ export function ClienteForm({
               <FormControl>
                 <Input
                   {...field}
-                  placeholder="Digite"
+                  placeholder="Digite o nome do cliente"
                   value={field.value ?? ""}
                 />
               </FormControl>
@@ -70,7 +70,7 @@ export function ClienteForm({
               <FormControl>
                 <Input
                   {...field}
-                  placeholder="Digite"
+                  placeholder="Adicione uma observação (opcional)"
                   value={field.value ?? ""}
                 />
               </FormControl>
