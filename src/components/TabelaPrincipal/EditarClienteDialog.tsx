@@ -10,18 +10,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import TelefoneInput from "../shared/inputs/TelefoneInput";
-import NomeInput from "../shared/inputs/NomeInput";
-import ObservacaoInput from "../shared/inputs/ObservacaoInput";
+
 import { useFila } from "@/hooks/use-fila";
-import { filaService } from "@/services/fila-service-client";
-import { Fila } from "@/models/fila";
-import ClienteForm from "./ClienteForm";
+
 import { PencilLine } from "lucide-react";
 import { Cliente, clienteSchema } from "@/models/cliente";
 import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
+import { ClienteForm } from "./ClienteForm";
 
 interface EditarClienteDialogProps {
   cliente: Cliente;
@@ -31,7 +26,7 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
   const [open, setOpen] = useState(false);
   const { handleAtualizar } = useFila();
 
-  const handleSubmit = async (clienteForm: ClienteFormDTO) => {
+  async function handleEdtiarCliente(clienteForm: ClienteFormDTO) {
     const clienteAtualizado: Cliente = {
       ...cliente,
       ...clienteForm,
@@ -39,7 +34,7 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
 
     await handleAtualizar(clienteAtualizado);
     setOpen(false);
-  };
+  }
 
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
@@ -62,9 +57,9 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
           <DialogTitle>Editar Cliente</DialogTitle>
         </DialogHeader>
         <ClienteForm
-          buttonTittle="Salvar"
-          onSubmit={handleSubmit}
+          textoBotao="Salvar"
           cliente={cliente}
+          onSubmit={handleEdtiarCliente}
         ></ClienteForm>
       </DialogContent>
     </Dialog>

@@ -1,87 +1,102 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import NomeInput from "../shared/inputs/NomeInput";
-import ObservacaoInput from "../shared/inputs/ObservacaoInput";
-import TelefoneInput from "../shared/inputs/TelefoneInput";
-import { Button } from "../ui/button";
-import { Cliente, clienteSchema } from "@/models/cliente";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+import { Button } from "@/components/ui/button";
+
+import { ClienteFormDTO, clienteFormSchema } from "@/dtos/cliente";
 import {
-  AdicionarClienteDTO,
-  ClienteFormDTO,
-  clienteFormDtoSchema,
-} from "@/dtos/cliente";
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import { TelefoneInput } from "../shared/inputs/TelefoneInput";
+import { Input } from "../ui/input";
+import { Cliente } from "@/models/cliente";
 
 interface ClienteFormProps {
-  buttonTittle: string;
-  onSubmit: (clienteForm: ClienteFormDTO) => Promise<void>;
+  textoBotao: string;
   cliente?: Cliente | null;
+  onSubmit: (data: ClienteFormDTO) => void;
 }
 
-export default function ClienteForm({
-  buttonTittle,
-  onSubmit,
+export function ClienteForm({
   cliente,
+  textoBotao,
+  onSubmit,
 }: ClienteFormProps) {
-  const [errors, setErrors] = useState<{
-    nome?: string;
-    observacao?: string;
-    telefone?: string;
-  }>({});
+  const form = useForm<ClienteFormDTO>({
+    resolver: zodResolver(clienteFormSchema),
+    defaultValues: {
+      nome: cliente?.nome ?? "",
+      telefone: cliente?.telefone ?? "",
+      observacao: cliente?.observacao ?? "",
+    },
+  });
 
-  const [nome, setNome] = useState<string>(cliente?.nome ?? "");
-  const [observacao, setObservacao] = useState<string | null>(
-    cliente?.observacao ?? ""
-  );
-  const [telefone, setTelefone] = useState<string | null>(
-    cliente?.telefone ?? ""
-  );
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    const result = clienteFormDtoSchema.safeParse({
-      nome,
-      observacao,
-      telefone,
-    });
-
-    if (!result.success) {
-      const fieldErrors = result.error.flatten().fieldErrors;
-      setErrors({
-        nome: fieldErrors.nome?.[0],
-        telefone: fieldErrors.telefone?.[0],
-        observacao: fieldErrors.observacao?.[0],
-      });
-      return;
-    }
-
-    setErrors({});
-    onSubmit(result.data);
-    setNome("");
-    setObservacao("");
-    setTelefone("");
+  function handleSubmit(values: ClienteFormDTO) {
+    onSubmit(values);
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-      <NomeInput nome={nome} setNome={setNome} error={errors.nome}></NomeInput>
-      <ObservacaoInput
-        observacao={observacao}
-        setObservacao={setObservacao}
-        error={errors.observacao}
-      ></ObservacaoInput>
-      <TelefoneInput
-        telefone={telefone}
-        setTelefone={setTelefone}
-        error={errors.telefone}
-      ></TelefoneInput>
-      <div className="flex flex-col sm:flex-row">
-        <Button
-          type="submit"
-          className="w-full sm:w-30 sm:ml-auto bg-blue-400 hover:bg-blue-700 cursor-pointer"
-        >
-          {buttonTittle}
-        </Button>
-      </div>
-    </form>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="nome"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nome</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  placeholder="Digite"
+                  value={field.value ?? ""}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="observacao"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Observação</FormLabel>
+              <FormControl>
+                <Input
+                  {...field}
+                  placeholder="Digite"
+                  value={field.value ?? ""}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="telefone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Telefone</FormLabel>
+              <FormControl>
+                <TelefoneInput {...field} value={field.value ?? ""} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex justify-end">
+          <Button className="cursor-pointer w-full sm:w-40" type="submit">
+            {textoBotao}
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }

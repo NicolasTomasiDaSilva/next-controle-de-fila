@@ -10,10 +10,10 @@ export const adicionarClienteDTOSchema = clienteSchema.pick({
 
 export type AdicionarClienteDTO = z.infer<typeof adicionarClienteDTOSchema>;
 
-export const clienteFormDtoSchema = clienteSchema.pick({
+export const clienteFormSchema = clienteSchema.pick({
   nome: true,
   telefone: true,
   observacao: true,
 });
 
-export type ClienteFormDTO = z.infer<typeof clienteFormDtoSchema>;
+export type ClienteFormDTO = z.infer<typeof clienteFormSchema>;

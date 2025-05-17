@@ -11,14 +11,15 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useFila } from "@/hooks/use-fila";
-import ClienteForm from "./ClienteForm";
+
 import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
+import { ClienteForm } from "./ClienteForm";
 
 export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);
   const { handleAdicionar, fila } = useFila();
 
-  const handleSubmit = async (clienteForm: ClienteFormDTO) => {
+  async function handleAdicionarCliente(clienteForm: ClienteFormDTO) {
     const dadosNovoClienteFormatados: AdicionarClienteDTO = {
       ...clienteForm,
       filaId: fila.id,
@@ -26,7 +27,7 @@ export function AdicionarClienteDialog() {
 
     await handleAdicionar(dadosNovoClienteFormatados);
     setOpen(false);
-  };
+  }
 
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
@@ -44,8 +45,8 @@ export function AdicionarClienteDialog() {
           <DialogTitle>Adicionar Cliente à Fila</DialogTitle>
         </DialogHeader>
         <ClienteForm
-          buttonTittle="Adicionar"
-          onSubmit={handleSubmit}
+          onSubmit={handleAdicionarCliente}
+          textoBotao="Adicionar"
         ></ClienteForm>
       </DialogContent>
     </Dialog>

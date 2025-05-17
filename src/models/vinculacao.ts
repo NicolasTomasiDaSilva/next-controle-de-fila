@@ -1,4 +1,3 @@
-import { Entidade } from "./entidade";
 import { entidadeSchema } from "./entidade";
 import { z } from "zod";
 

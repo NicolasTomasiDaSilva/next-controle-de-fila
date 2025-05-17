@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { Cliente, clienteSchema } from "./cliente";
-import { Entidade, entidadeSchema } from "./entidade";
+import { clienteSchema } from "./cliente";
+import { entidadeSchema } from "./entidade";
 
 export const filaSchema = entidadeSchema.extend({
   empresaId: z.string().uuid("ID da empresa inválido"),
