@@ -7,65 +7,85 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { ChevronRight, Palette } from "lucide-react";
+import Link from "next/link";
+import { JSX } from "react";
 
 const cores = {
   blue: {
     border: "border-blue-500",
-    bg: "bg-blue-300",
+    bg: "bg-blue-200",
+    icon: "text-red-500",
   },
   red: {
     border: "border-red-500",
-    bg: "bg-red-300",
+    bg: "bg-red-200",
+    icon: "text-red-500",
   },
   green: {
     border: "border-green-500",
-    bg: "bg-green-300",
+    bg: "bg-green-200",
+    icon: "text-green-500",
+  },
+  purple: {
+    border: "border-purple-500",
+    bg: "bg-purple-200",
+    icon: "text-purple-500",
+  },
+  cyan: {
+    border: "border-cyan-500",
+    bg: "bg-cyan-200",
+    icon: "text-cyan-500",
   },
 };
 
 interface ConfiguracaoCardProps {
-  icone: () => React.ReactNode;
+  icone: (cor: string) => JSX.Element;
   titulo: string;
+  texto: string;
   cor: keyof typeof cores;
   className?: string;
+  link: string;
 }
 
 export function ConfiguracaoCard({
   icone,
   titulo,
+  texto,
   cor,
+  link,
   className,
 }: ConfiguracaoCardProps) {
   const estilos = cores[cor];
 
   return (
     <Card
+      asChild
       className={cn(
         "cursor-pointer transition-transform duration-300 hover:scale-101",
         estilos.border,
         className
       )}
     >
-      <CardHeader>
-        <div className="flex flex-row items-center gap-2">
-          <div
-            className={cn(
-              "h-9 w-9 rounded-md flex flex-row items-center justify-center",
-              estilos.bg
-            )}
-          >
-            {icone()}
+      <Link href={link}>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div className="flex flex-row items-center gap-2">
+            <div
+              className={cn(
+                "h-9 w-9 rounded-md flex flex-row items-center justify-center flex-shrink-0",
+                estilos.bg
+              )}
+            >
+              {icone(estilos.icon)}
+            </div>
+            <CardTitle>{titulo}</CardTitle>
           </div>
-          <CardTitle>{titulo}</CardTitle>
-        </div>
-        <CardDescription>Card Description</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>Card Content</p>
-      </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter>
+          <ChevronRight className="w-5 h-5 text-gray-400 transition-colors group-hover:text-blue-800 flex-shrink-0" />
+        </CardHeader>
+        <CardContent>
+          <p>{texto}</p>
+        </CardContent>
+      </Link>
     </Card>
   );
 }

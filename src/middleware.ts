@@ -7,11 +7,10 @@ const publicRoutes = [
   { path: "/register", whenAuthenticated: "redirect" },
 ] as const;
 const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/login";
+const REDIRECT_WHEN_AUTHENTICATED_ROUTE = "/fila";
 
 export function middleware(req: NextRequest): NextResponse {
   const { pathname } = req.nextUrl;
-  // Simulate setting a cookie for demonstration purposes
-  req.cookies.set("access_token", "1234567890");
   const publicRoute = publicRoutes.find((route) => route.path === pathname);
   const accessToken = req.cookies.get("access_token");
 
@@ -28,7 +27,7 @@ export function middleware(req: NextRequest): NextResponse {
     publicRoute?.whenAuthenticated === "redirect"
   ) {
     const redirectUrl: NextURL = req.nextUrl.clone();
-    redirectUrl.pathname = "/";
+    redirectUrl.pathname = REDIRECT_WHEN_AUTHENTICATED_ROUTE;
     return NextResponse.redirect(redirectUrl);
   }
 
