@@ -5,7 +5,7 @@ export async function axiosInstanceServer(
   headers: Record<string, string> = {}
 ): Promise<Axios.AxiosInstance> {
   const cookiesList = await cookies();
-  const accessToken = cookiesList.get("access_token")?.value;
+  const accessToken = cookiesList.get("accessToken")?.value;
 
   const instance = axios.create({
     baseURL:

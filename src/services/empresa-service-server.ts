@@ -12,4 +12,14 @@ export const empresaService = {
     }
     return resultado.data;
   },
+  async enviarCodigoAcesso(email: string): Promise<void> {
+    const payload = {
+      email,
+    };
+    const api = await axiosInstanceServer();
+    const response = await api.post(`/api/autenticacao/codigo-acesso`, payload);
+    if (response.status != 200) {
+      throw new Error("Erro ao gerar código de acesso.");
+    }
+  },
 };

@@ -12,7 +12,7 @@ const REDIRECT_WHEN_AUTHENTICATED_ROUTE = "/fila";
 export function middleware(req: NextRequest): NextResponse {
   const { pathname } = req.nextUrl;
   const publicRoute = publicRoutes.find((route) => route.path === pathname);
-  const accessToken = req.cookies.get("access_token");
+  const accessToken = req.cookies.get("accessToken");
 
   if (!accessToken && !publicRoute) {
     const redirectUrl: NextURL = req.nextUrl.clone();

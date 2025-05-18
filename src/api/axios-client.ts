@@ -9,7 +9,7 @@ function getCookie(name: string): string | null {
 export async function axiosInstanceClient(
   headers: Record<string, string> = {}
 ): Promise<Axios.AxiosInstance> {
-  const accessToken = getCookie("access_token");
+  const accessToken = getCookie("accessToken");
 
   const instance = axios.create({
     baseURL:
