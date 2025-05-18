@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +21,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { empresaService } from "@/services/empresa-service-client";
 import { empresaSchema } from "@/models/empresa";
 import { useAuth } from "@/hooks/use-auth";
+import Link from "next/link";
+import { useCooldown } from "@/hooks/use-cooldown";
+import { toast } from "sonner";
 
 export const emailSchema = empresaSchema.pick({
   email: true,
@@ -31,6 +34,7 @@ const codeSchema = z.object({
 });
 
 export default function LoginForm() {
+  const { cooldown, startCooldown } = useCooldown(30);
   const { login } = useAuth();
   const [step, setStep] = useState<1 | 2>(1);
   const [loading, setLoading] = useState(false);
@@ -47,10 +51,11 @@ export default function LoginForm() {
   });
 
   const handleEnviarCodigo = async (data: z.infer<typeof emailSchema>) => {
-    setLoading(true);
     try {
+      setLoading(true);
       await empresaService.enviarCodigoAcesso(data.email);
       setEmail(data.email);
+      startCooldown();
       setStep(2);
     } catch (error: any) {
       if (error?.message === "E-mail não encontrado") {
@@ -59,16 +64,29 @@ export default function LoginForm() {
           message: error.message,
         });
       } else {
-        throw new Error("Erro ao gerar código de acesso");
+        toast.error("Erro ao enviar código de acesso");
       }
     } finally {
       setLoading(false);
     }
   };
 
-  const handleVerificarCodigo = async (data: z.infer<typeof codeSchema>) => {
-    setLoading(true);
+  const handleReenviarCodigo = async () => {
     try {
+      if (cooldown > 0) return;
+      setLoading(true);
+      await empresaService.enviarCodigoAcesso(email);
+      startCooldown();
+    } catch (error: any) {
+      toast.error("Erro ao enviar código de acesso");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerificarCodigo = async (data: z.infer<typeof codeSchema>) => {
+    try {
+      setLoading(true);
       const response = await empresaService.verificarCodigoAcesso(
         email,
         data.code
@@ -81,7 +99,7 @@ export default function LoginForm() {
           message: error.message,
         });
       } else {
-        throw new Error("Erro ao verificar código de acesso");
+        toast.error("Erro ao verificar código de acesso");
       }
     } finally {
       setLoading(false);
@@ -131,6 +149,12 @@ export default function LoginForm() {
               {loading ? "Enviando..." : "Enviar código"}
             </Button>
           </form>
+          <p className="text-sm text-center px-10 mt-3">
+            Não tem conta?{" "}
+            <Link href="/register" className="underline underline-offset-2">
+              Inscreva-se
+            </Link>
+          </p>
         </Form>
       )}
 
@@ -147,7 +171,17 @@ export default function LoginForm() {
                 <FormItem>
                   <FormLabel>Código</FormLabel>
                   <FormControl>
-                    <Input placeholder="Digite o código" {...field} />
+                    <Input
+                      placeholder="Digite o código"
+                      type="numeric"
+                      {...field}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        if (/^\d{0,6}$/.test(value)) {
+                          field.onChange(e);
+                        }
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -158,6 +192,21 @@ export default function LoginForm() {
               {loading ? "Verificando..." : "Verificar código"}
             </Button>
           </form>
+          <p className="text-sm text-left mt-3">
+            Não recebeu?{" "}
+            <button
+              type="button"
+              onClick={handleReenviarCodigo}
+              disabled={loading || cooldown > 0}
+              className={`underline underline-offset-2 ${
+                cooldown > 0
+                  ? "cursor-not-allowed opacity-50"
+                  : "cursor-pointer"
+              }`}
+            >
+              {cooldown > 0 ? `Reenviar em ${cooldown}s` : "Reenviar"}
+            </button>
+          </p>
         </Form>
       )}
     </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,21 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Toaster
+          visibleToasts={2}
+          position="bottom-right"
+          duration={1000}
+          richColors // cores automáticas para success/error/etc
+          expand={true} // abre toasts com descrição mais largos
+          closeButton // adiciona botão de fechar
+          toastOptions={{
+            classNames: {
+              toast: "rounded-xl shadow-lg border",
+              title: "text-base font-semibold",
+              description: "text-sm opacity-90",
+            },
+          }}
+        />
       </body>
     </html>
   );

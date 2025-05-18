@@ -34,7 +34,6 @@ export const empresaService = {
       const response = await api.post(`/autenticacao/login`, payload);
       const resultado = authTokensSchema.safeParse(response.data);
       if (!resultado.success) {
-        console.error(resultado.error);
         throw new Error("Dados inválidos");
       }
       return resultado.data;
