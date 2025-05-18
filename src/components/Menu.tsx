@@ -16,12 +16,11 @@ export default function Menu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className="flex items-center gap-2 rounded-md p-2 transition 
-                     focus:outline-none focus-visible:ring-0 hover:bg-blue-50 
-                     sm:gap-3 sm:p-3"
+          className="flex items-center gap-2 rounded-md p-2 
+                     focus:outline-none focus-visible:ring-0 cursor-pointer"
         >
-          <Avatar className="w-8 h-8 sm:w-10 sm:h-10">
-            <AvatarImage alt="User Avatar" />
+          <Avatar className="w-10 h-10">
+            <AvatarImage />
             <AvatarFallback>AP</AvatarFallback>
           </Avatar>
           <div className="text-left hidden sm:block">
@@ -37,21 +36,15 @@ export default function Menu() {
         className="w-48 sm:w-56 shadow-md rounded-md"
       >
         <Link href="/configuracoes" passHref>
-          <DropdownMenuItem
-            className="cursor-pointer flex items-center gap-2 px-3 py-2 
-                     data-[highlighted]:bg-blue-100 data-[highlighted]:text-blue-600 transition"
-          >
-            <Settings className="w-4 h-4 text-blue-600" />
+          <DropdownMenuItem className="cursor-pointer">
+            <Settings className="w-4 h-4" />
             <span>Configurações</span>
           </DropdownMenuItem>
         </Link>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          className="cursor-pointer flex items-center gap-2 px-3 py-2 text-red-600 
-                     data-[highlighted]:bg-red-100 transition"
-        >
-          <LogOut className="w-4 h-4 text-red-600" />
+        <DropdownMenuItem className="cursor-pointer">
+          <LogOut className="w-4 h-4" />
           <span>Sair</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

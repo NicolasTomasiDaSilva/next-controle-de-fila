@@ -92,7 +92,7 @@ export function ClienteForm({
           )}
         />
         <div className="flex justify-end">
-          <Button className="cursor-pointer w-full sm:w-40" type="submit">
+          <Button className="w-full sm:w-40" type="submit">
             {textoBotao}
           </Button>
         </div>

@@ -38,7 +38,6 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
 
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
-    console.log(cliente.nome);
   };
 
   return (

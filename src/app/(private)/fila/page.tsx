@@ -21,8 +21,9 @@ export default async function FilaPage() {
       <FilaProvider filaInicial={fila}>
         <Section title="Fila de Atendimento">
           <AdicionarClienteDialog></AdicionarClienteDialog>
+          <div className="h-2"></div>
           <TabelaPrincipal></TabelaPrincipal>
-          <div className="h-5"></div>
+          <div className="h-2"></div>
           <TabelaRecentes></TabelaRecentes>
         </Section>
       </FilaProvider>
