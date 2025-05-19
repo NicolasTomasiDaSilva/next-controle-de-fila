@@ -120,7 +120,7 @@ export default function LoginForm() {
       )}
       {step === 2 && (
         <p className="text-center font-bold px-10">
-          Digite o código de verificação enviado no seu e-mail
+          Código de acesso enviado no seu e-mail
         </p>
       )}
       <div className="h-5"></div>
