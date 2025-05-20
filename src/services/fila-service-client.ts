@@ -1,4 +1,4 @@
-import { axiosInstanceClient } from "@/api/axios-client";
+import { axiosInstance } from "@/api/api";
 import { AdicionarClienteDTO } from "@/dtos/cliente";
 import { AcoesAdminEnum } from "@/enums/acoes-admin-enum";
 import { Cliente } from "@/models/cliente";
@@ -7,7 +7,7 @@ import { Fila, filaSchema } from "@/models/fila";
 export const filaService = {
   async AdicionarCliente(dto: AdicionarClienteDTO): Promise<Fila> {
     try {
-      const api = await axiosInstanceClient();
+      const api = await axiosInstance();
       const response = await api.post(`/clientes`, dto);
       const resultado = filaSchema.safeParse(response.data);
       if (!resultado.success) {
@@ -20,7 +20,7 @@ export const filaService = {
   },
   async AtualizarCliente(cliente: Cliente): Promise<Fila> {
     try {
-      const api = await axiosInstanceClient();
+      const api = await axiosInstance();
       const response = await api.put(`/clientes`, cliente);
       const resultado = filaSchema.safeParse(response.data);
       if (!resultado.success) {
@@ -35,7 +35,7 @@ export const filaService = {
 
   async AtenderCliente(id: string): Promise<Fila> {
     try {
-      const api = await axiosInstanceClient();
+      const api = await axiosInstance();
       const paylod = {
         ids: [id],
         acao: AcoesAdminEnum.AtenderClientes,
@@ -53,7 +53,7 @@ export const filaService = {
 
   async RemoverCliente(id: string): Promise<Fila> {
     try {
-      const api = await axiosInstanceClient();
+      const api = await axiosInstance();
       const paylod = {
         ids: [id],
         acao: AcoesAdminEnum.RemoverClientes,
@@ -70,7 +70,7 @@ export const filaService = {
   },
   async AusentarCliente(id: string): Promise<Fila> {
     try {
-      const api = await axiosInstanceClient();
+      const api = await axiosInstance();
       const paylod = {
         ids: [id],
         acao: AcoesAdminEnum.AusentarClientes,
@@ -88,7 +88,7 @@ export const filaService = {
 
   async VoltarCliente(id: string): Promise<Fila> {
     try {
-      const api = await axiosInstanceClient();
+      const api = await axiosInstance();
       const paylod = {
         ids: [id],
         acao: AcoesAdminEnum.VoltarParaFilaClientes,
@@ -106,7 +106,7 @@ export const filaService = {
   },
   async ChamarCliente(id: string): Promise<Fila> {
     try {
-      const api = await axiosInstanceClient();
+      const api = await axiosInstance();
       const paylod = {
         ids: [id],
         acao: AcoesAdminEnum.ChamarClientes,
@@ -124,7 +124,7 @@ export const filaService = {
 
   async MoverCliente(id: string, novaPosicao: number): Promise<Fila> {
     try {
-      const api = await axiosInstanceClient();
+      const api = await axiosInstance();
       const paylod = {
         id: id,
         novaPosicao: novaPosicao,

@@ -1,4 +1,4 @@
-import { axiosInstanceClient } from "@/api/axios-client";
+import { axiosInstance } from "@/api/api";
 import { AuthTokens, authTokensSchema } from "@/models/auth-tokens";
 
 export const empresaService = {
@@ -7,7 +7,7 @@ export const empresaService = {
       const payload = {
         email,
       };
-      const api = await axiosInstanceClient();
+      const api = await axiosInstance();
       await api.post(`/autenticacao/codigo-acesso`, payload);
     } catch (error: any) {
       if (
@@ -30,7 +30,7 @@ export const empresaService = {
         email,
         codigo,
       };
-      const api = await axiosInstanceClient();
+      const api = await axiosInstance();
       const response = await api.post(`/autenticacao/login`, payload);
       const resultado = authTokensSchema.safeParse(response.data);
       if (!resultado.success) {
