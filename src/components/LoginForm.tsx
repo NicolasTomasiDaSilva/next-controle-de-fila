@@ -87,11 +87,7 @@ export default function LoginForm() {
   const handleVerificarCodigo = async (data: z.infer<typeof codeSchema>) => {
     try {
       setLoading(true);
-      const response = await empresaService.verificarCodigoAcesso(
-        email,
-        data.code
-      );
-      login(response);
+      login({ email, codigo: data.code });
     } catch (error: any) {
       if (error?.message === "Código não encontrado") {
         codeForm.setError("code", {

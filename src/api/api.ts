@@ -1,12 +1,8 @@
 import getTokensAction from "@/actions/cookies/get-tokens-action";
-import isServer from "../../src/utils/is-server";
-
+import isServer from "@/utils/is-server";
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
 import axiosRetry from "axios-retry";
-import { AuthTokens, authTokensSchema } from "@/models/auth-tokens";
-import { tokensCookiesParams } from "@/utils/tokens-cookies-params";
-import saveTokensAction from "@/actions/cookies/save-tokens-action";
 
 const MAX_RETRIES: number = 3;
 
@@ -23,24 +19,6 @@ export async function axiosInstance(
       "Content-Type": "application/json",
       ...headers,
     },
-  });
-
-  if (withoutRetry) {
-    return instance;
-  }
-
-  const { accessToken: accessTokenStored } = await getTokens();
-
-  instance.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${accessTokenStored}`;
-
-  axiosRetry(instance, {
-    retries: MAX_RETRIES,
-    retryCondition: (error: any) => {
-      return error.response?.status === 401;
-    },
-    onRetry: onRetry,
   });
 
   instance.interceptors.request.use((config) => {
@@ -75,24 +53,51 @@ export async function axiosInstance(
       return Promise.reject(error);
     }
   );
+
+  if (withoutRetry) {
+    return instance;
+  }
+
+  const { accessToken: accessTokenStored, refreshToken: refreshTokenStored } =
+    await getTokens();
+
+  instance.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${accessTokenStored}`;
+
+  axiosRetry(instance, {
+    retries: MAX_RETRIES,
+    retryCondition: (error: any) => {
+      return error.response?.status === 401;
+    },
+    onRetry: onRetry,
+  });
+
   async function onRetry(
     retryCount: number,
     error: AxiosError,
     requestConfig: AxiosRequestConfig
   ) {
     try {
-      const { refreshToken: refreshTokenStored } = await getTokens();
+      const response = await axios.post(
+        "http://localhost:3000/api/autenticacao/refresh-token",
+        {
+          refreshToken: refreshTokenStored,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
 
-      if (!refreshTokenStored) {
-        throw error;
-      }
+      const { accessToken: newAccessToken } = response.data;
 
-      const newTokens = await refreshToken(refreshTokenStored);
       requestConfig.headers = {
         ...requestConfig.headers,
-        Authorization: `Bearer ${newTokens.accessToken}`,
+        Authorization: `Bearer ${newAccessToken}`,
       };
-      await saveTokens(newTokens);
     } catch (err) {
       throw err;
     }
@@ -115,38 +120,5 @@ async function getTokens(): Promise<{
     };
   } else {
     return await getTokensAction();
-  }
-}
-
-async function saveTokens({
-  accessToken,
-  refreshToken,
-}: AuthTokens): Promise<void> {
-  if (isServer()) {
-    const { cookies } = await import("next/headers");
-    const cookiesStore = await cookies();
-
-    cookiesStore.set("accessToken", accessToken, tokensCookiesParams);
-    cookiesStore.set("refreshToken", refreshToken, tokensCookiesParams);
-  } else {
-    return await saveTokensAction({ accessToken, refreshToken });
-  }
-}
-
-async function refreshToken(refreshToken: string): Promise<AuthTokens> {
-  try {
-    const api = await axiosInstance(true);
-    const response = await api.post("/autenticacao/refresh-token", {
-      refreshToken,
-    });
-
-    const resultado = authTokensSchema.safeParse(response.data);
-    if (!resultado.success) {
-      throw new Error("Dados inválidos");
-    }
-    console.log("DEU CERTO NOVOS TOKENS");
-    return resultado.data;
-  } catch (error) {
-    throw error;
   }
 }

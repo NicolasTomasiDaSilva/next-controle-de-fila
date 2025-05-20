@@ -1,19 +1,16 @@
 import { AuthTokens } from "@/models/auth-tokens";
+import { empresaService } from "@/services/empresa-service-client";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 export const useAuth = () => {
   const router = useRouter();
-  function login({ accessToken, refreshToken }: AuthTokens): void {
-    Cookies.set("accessToken", accessToken);
-    Cookies.set("refreshToken", refreshToken);
+  async function login({ email, codigo }: { email: string; codigo: string }) {
+    await empresaService.verificarCodigoAcesso(email, codigo);
     router.push("/fila");
   }
-  function logout(): void {
-    Cookies.remove("accessToken");
-    Cookies.remove("refreshToken");
-    router.push("/login");
-  }
+
+  function logout(): void {}
 
   return { login, logout };
 };
