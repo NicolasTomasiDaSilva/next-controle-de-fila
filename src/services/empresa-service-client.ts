@@ -8,6 +8,7 @@ export const empresaService = {
         email,
       };
       const api = await axiosInstance();
+
       await api.post(`/autenticacao/codigo-acesso`, payload);
     } catch (error: any) {
       if (

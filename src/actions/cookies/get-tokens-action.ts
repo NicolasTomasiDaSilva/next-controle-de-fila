@@ -9,7 +9,7 @@ export default async function getTokensAction(): Promise<{
   const cookiesStore = await cookies();
 
   return {
-    accessToken: cookiesStore.get("access-token")?.value,
-    refreshToken: cookiesStore.get("refresh-token")?.value,
+    accessToken: cookiesStore.get("accessToken")?.value,
+    refreshToken: cookiesStore.get("refreshToken")?.value,
   };
 }
