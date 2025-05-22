@@ -22,13 +22,13 @@ export async function POST(request: Request) {
   }
   const { accessToken, refreshToken } = resultado.data;
 
-  const cookiesList = await cookies();
-  cookiesList.set(
+  const cookieStore = await cookies();
+  cookieStore.set(
     "accessToken",
     accessToken,
     tokensCookiesParams as Partial<ResponseCookie>
   );
-  cookiesList.set(
+  cookieStore.set(
     "refreshToken",
     refreshToken,
     tokensCookiesParams as Partial<ResponseCookie>

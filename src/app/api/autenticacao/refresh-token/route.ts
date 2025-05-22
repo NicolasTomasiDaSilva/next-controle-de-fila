@@ -2,48 +2,47 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { tokensCookiesParams } from "@/utils/tokens-cookies-params";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import axios from "axios";
+import { axiosInstance } from "@/api/api";
+import { authTokensSchema } from "@/models/auth-tokens";
 
 export async function POST(request: Request) {
   const body = await request.json();
   const refreshToken = body.refreshToken;
 
-  if (!refreshToken) {
-    return NextResponse.json(
-      { error: "Refresh token ausente" },
-      { status: 401 }
-    );
-  }
-
-  // Solicita novos tokens à API externa
-  const apiRes = await fetch(
-    "http://localhost:5135/api/autenticacao/refresh-token",
+  const api = await axiosInstance(true);
+  const apiRes = await api.post(
+    `/autenticacao/refresh-token`,
     {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ refreshToken }),
+      refreshToken,
+    },
+    {
+      validateStatus: () => true,
     }
   );
-  const data = await apiRes.json();
 
-  if (!data.accessToken) {
-    // Refresh falhou (login expirado)
-    return NextResponse.json({ error: "Falha no refresh" }, { status: 401 });
+  if (apiRes.status != 200) {
+    return NextResponse.json(apiRes.data, { status: apiRes.status });
   }
 
-  // Define novos cookies HTTP-only
+  const resultado = authTokensSchema.safeParse(apiRes.data);
+  if (!resultado.success) {
+    throw new Error("Dados inválidos");
+  }
+
   const response = NextResponse.json({
-    accessToken: data.accessToken,
+    accessToken: resultado.data.accessToken,
   });
+
   response.cookies.set(
     "accessToken",
-    data.accessToken,
+    resultado.data.accessToken,
     tokensCookiesParams as Partial<ResponseCookie>
   );
   response.cookies.set(
     "refreshToken",
-    data.refreshToken,
+    resultado.data.refreshToken,
     tokensCookiesParams as Partial<ResponseCookie>
   );
-  console.log("deu certo");
   return response;
 }

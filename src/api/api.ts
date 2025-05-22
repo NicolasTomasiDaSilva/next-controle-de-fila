@@ -1,4 +1,6 @@
+import deleteTokensAction from "@/actions/cookies/delete-tokens-action";
 import getTokensAction from "@/actions/cookies/get-tokens-action";
+import { UnauthenticatedError } from "@/errors/errors";
 import isServer from "@/utils/is-server";
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
@@ -20,39 +22,6 @@ export async function axiosInstance(
       ...headers,
     },
   });
-
-  instance.interceptors.request.use((config) => {
-    console.log("📤 [Request]");
-    console.log("➡️ URL:", config.url);
-    console.log("➡️ Method:", config.method);
-    console.log("➡️ Headers:", config.headers);
-    console.log("➡️ Data:", config.data);
-    return config;
-  });
-
-  instance.interceptors.response.use(
-    (response) => {
-      console.log("✅ [Response]");
-      console.log("⬅️ URL:", response.config.url);
-      console.log("⬅️ Status:", response.status);
-      console.log("⬅️ Data:", response.data);
-      console.log("⬅️ Headers:", response.headers);
-      return response;
-    },
-    (error) => {
-      if (error.response) {
-        console.log("❌ [Response Error]");
-        console.log("⬅️ URL:", error.config?.url);
-        console.log("⬅️ Status:", error.response.status);
-        console.log("⬅️ Data:", error.response.data);
-        console.log("⬅️ Headers:", error.response.headers);
-      } else {
-        console.log("❌ [Network Error]");
-        console.log(error.message);
-      }
-      return Promise.reject(error);
-    }
-  );
 
   if (withoutRetry) {
     return instance;
@@ -88,18 +57,24 @@ export async function axiosInstance(
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials: true,
         }
       );
 
       const { accessToken: newAccessToken } = response.data;
+
+      if (!newAccessToken) {
+        throw new UnauthenticatedError();
+      }
 
       requestConfig.headers = {
         ...requestConfig.headers,
         Authorization: `Bearer ${newAccessToken}`,
       };
     } catch (err) {
-      throw err;
+      if (retryCount >= MAX_RETRIES) {
+        await deleteTokens();
+        throw new UnauthenticatedError();
+      }
     }
   }
 
@@ -112,13 +87,40 @@ async function getTokens(): Promise<{
 }> {
   if (isServer()) {
     const { cookies } = await import("next/headers");
-    const cookiesStore = await cookies();
+    const cookieStore = await cookies();
 
     return {
-      accessToken: cookiesStore.get("accessToken")?.value,
-      refreshToken: cookiesStore.get("refreshToken")?.value,
+      accessToken: cookieStore.get("accessToken")?.value,
+      refreshToken: cookieStore.get("refreshToken")?.value,
     };
   } else {
     return await getTokensAction();
+  }
+}
+
+async function deleteTokens(): Promise<void> {
+  if (isServer()) {
+    const { cookies } = await import("next/headers");
+    const cookieStore = await cookies();
+
+    cookieStore.delete("accessToken");
+    cookieStore.delete("refreshToken");
+  } else {
+    return await deleteTokensAction();
+  }
+}
+
+async function refreshToken(
+  refreshToken: string
+): Promise<{ accessToken: string; refreshToken: string }> {
+  try {
+    const response = await axiosInstance({ withoutRetry: true }).post<{
+      accessToken: string;
+      refreshToken: string;
+    }>("autenticacao/refresh-token", { token: refreshToken });
+
+    return response.data;
+  } catch {
+    throw new UnauthenticatedError();
   }
 }

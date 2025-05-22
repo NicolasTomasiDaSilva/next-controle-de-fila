@@ -31,7 +31,7 @@ export default function RootLayout({
         {children}
         <Toaster
           visibleToasts={2}
-          position="bottom-right"
+          position="top-right"
           duration={1000}
           richColors // cores automáticas para success/error/etc
           expand={true} // abre toasts com descrição mais largos
