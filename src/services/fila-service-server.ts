@@ -4,7 +4,7 @@ import { Fila, filaSchema } from "@/models/fila";
 export const filaService = {
   async obterFilaPorId(id: string): Promise<Fila> {
     try {
-      const api = await axiosInstance();
+      const api = await axiosInstance({});
       const response = await api.get(`/filas/${id}`);
       const resultado = filaSchema.safeParse(response.data);
       if (!resultado.success) {

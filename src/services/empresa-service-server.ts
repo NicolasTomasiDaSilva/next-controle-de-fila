@@ -4,7 +4,7 @@ import { Empresa, empresaSchema } from "@/models/empresa";
 export const empresaService = {
   async obterEmpresa(): Promise<Empresa> {
     try {
-      const api = await axiosInstance();
+      const api = await axiosInstance({});
       const response = await api.get(`/empresas`);
       const resultado = empresaSchema.safeParse(response.data);
       if (!resultado.success) {

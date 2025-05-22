@@ -1,17 +1,23 @@
 import deleteTokensAction from "@/actions/cookies/delete-tokens-action";
 import getTokensAction from "@/actions/cookies/get-tokens-action";
+import saveTokensAction from "@/actions/cookies/save-tokens-action";
 import { UnauthenticatedError } from "@/errors/errors";
+import { AuthTokens, authTokensSchema } from "@/models/auth-tokens";
 import isServer from "@/utils/is-server";
+import { tokensCookiesParams } from "@/utils/tokens-cookies-params";
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
 import axiosRetry from "axios-retry";
 
 const MAX_RETRIES: number = 3;
 
-export async function axiosInstance(
-  withoutRetry: boolean = false,
-  headers: Record<string, string> = {}
-): Promise<AxiosInstance> {
+export async function axiosInstance({
+  withoutRetry = false,
+  headers = {},
+}: {
+  withoutRetry?: boolean;
+  headers?: Record<string, string>;
+}): Promise<AxiosInstance> {
   const instance = axios.create({
     baseURL:
       process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000/api",
@@ -48,29 +54,15 @@ export async function axiosInstance(
     requestConfig: AxiosRequestConfig
   ) {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/autenticacao/refresh-token",
-        {
-          refreshToken: refreshTokenStored,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const newTokens = await refreshToken(refreshTokenStored!);
 
-      const { accessToken: newAccessToken } = response.data;
-
-      if (!newAccessToken) {
-        throw new UnauthenticatedError();
-      }
+      await saveTokens(newTokens);
 
       requestConfig.headers = {
         ...requestConfig.headers,
-        Authorization: `Bearer ${newAccessToken}`,
+        Authorization: `Bearer ${newTokens.accessToken}`,
       };
-    } catch (err) {
+    } catch (error: any) {
       if (retryCount >= MAX_RETRIES) {
         await deleteTokens();
         throw new UnauthenticatedError();
@@ -110,16 +102,31 @@ async function deleteTokens(): Promise<void> {
   }
 }
 
-async function refreshToken(
-  refreshToken: string
-): Promise<{ accessToken: string; refreshToken: string }> {
+async function saveTokens({ accessToken, refreshToken }: AuthTokens) {
+  if (isServer()) {
+    const { cookies } = await import("next/headers");
+    const cookieStore = await cookies();
+
+    cookieStore.set("accessToken", accessToken, tokensCookiesParams);
+    cookieStore.set("refreshToken", refreshToken, tokensCookiesParams);
+  } else {
+    return await saveTokensAction({ accessToken, refreshToken });
+  }
+}
+
+async function refreshToken(refreshToken: string): Promise<AuthTokens> {
   try {
-    const response = await axiosInstance({ withoutRetry: true }).post<{
+    const api = await axiosInstance({ withoutRetry: true });
+    const response = await api.post<{
       accessToken: string;
       refreshToken: string;
-    }>("autenticacao/refresh-token", { token: refreshToken });
+    }>("autenticacao/refresh-token", { refreshToken: refreshToken });
 
-    return response.data;
+    const resultado = authTokensSchema.safeParse(response.data);
+    if (!resultado.success) {
+      throw new Error("Dados inválidos");
+    }
+    return resultado.data;
   } catch {
     throw new UnauthenticatedError();
   }
