@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/api/api";
+import { Api, axiosInstance } from "@/api/api";
 import { AuthTokens, authTokensSchema } from "@/models/auth-tokens";
 import axios from "axios";
 
@@ -8,8 +8,8 @@ export const empresaService = {
       const payload = {
         email,
       };
-      const api = await axiosInstance({});
-      await api.post(`/autenticacao/codigo-acesso`, payload);
+
+      await Api.post(`/autenticacao/codigo-acesso`, payload);
     } catch (error: any) {
       console.log(error);
       if (
