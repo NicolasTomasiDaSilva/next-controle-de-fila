@@ -6,6 +6,7 @@ import { useFila } from "@/hooks/use-fila";
 import { normalizeString } from "@/utils/normalize-string";
 import { Input } from "../../../ui/input";
 import { ArrowUp, MoveVertical, Users } from "lucide-react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export default function TabelaPrincipal() {
   const [tabelaExpandida, setTabelaExpandida] = useState(false);

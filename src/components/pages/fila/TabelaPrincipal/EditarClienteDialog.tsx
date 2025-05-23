@@ -46,7 +46,7 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="size-5 text-gray-500 hover:text-blue-600 cursor-pointer ml-auto md:ml-2"
+          className="size-5 text-gray-500 hover:text-gray-700 cursor-pointer ml-auto md:ml-2"
         >
           <PencilLine className="size-4" />
         </Button>
