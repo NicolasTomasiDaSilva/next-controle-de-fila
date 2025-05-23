@@ -2,7 +2,7 @@ import { Section } from "@/components/Section";
 import { ConfiguracaoCard } from "@/components/pages/configuracoes/ConfiguracaoCard";
 import { MessageCircle, MessageSquare, Monitor, Palette } from "lucide-react";
 
-export default async function FilaPage() {
+export default async function ConfiguracaoPage() {
   return (
     <Section title="Configurações">
       <div className="grid grid-cols-2 gap-3">
