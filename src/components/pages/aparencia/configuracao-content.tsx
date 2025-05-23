@@ -76,10 +76,7 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
         <Card className="w-full">
           <ConfiguracaoDados form={form}></ConfiguracaoDados>
           <ConfiguracaoVisual form={form}></ConfiguracaoVisual>
-          <PreVisualizacaoAparencia
-            form={form}
-            empresa={empresa}
-          ></PreVisualizacaoAparencia>
+          <PreVisualizacaoAparencia form={form}></PreVisualizacaoAparencia>
         </Card>
         <Button
           type="submit"
