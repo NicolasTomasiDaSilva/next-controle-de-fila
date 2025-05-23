@@ -31,6 +31,7 @@ import {
 import z from "zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { ConfiguracaoVisual } from "./configuracao-visual";
 
 interface ConfiguracaoContentProps {
   empresa: Empresa;
@@ -56,6 +57,7 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
         <ConfiguracaoDados form={form}></ConfiguracaoDados>
+        <ConfiguracaoVisual form={form}></ConfiguracaoVisual>
       </form>
 
       <Button
