@@ -43,10 +43,10 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
     resolver: zodResolver(configuracaoFormSchema),
     defaultValues: {
       logoUrl: empresa.configuracao.logoUrl ?? "",
-      nomeDisplay: empresa.configuracao.nomeDisplay ?? "",
+      nomeDisplay: empresa.configuracao.nomeDisplay,
       enderecoDisplay: empresa.configuracao.enderecoDisplay ?? "",
-      corPrimaria: empresa.configuracao.corPrimaria ?? "",
-      corSobreposicao: empresa.configuracao.corSobreposicao ?? "",
+      corPrimaria: empresa.configuracao.corPrimaria,
+      corSobreposicao: empresa.configuracao.corSobreposicao,
     },
   });
 
@@ -60,15 +60,14 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
           <ConfiguracaoDados form={form}></ConfiguracaoDados>
           <ConfiguracaoVisual form={form}></ConfiguracaoVisual>
         </Card>
+        <Button
+          type="submit"
+          className="w-full sm:w-30 sm:ml-auto block"
+          disabled={loading}
+        >
+          {loading ? "Salvando..." : "Salvar"}
+        </Button>
       </form>
-
-      <Button
-        type="submit"
-        className="w-full sm:w-30 sm:ml-auto block"
-        disabled={loading}
-      >
-        {loading ? "Salvando..." : "Salvar"}
-      </Button>
     </Form>
   );
 }

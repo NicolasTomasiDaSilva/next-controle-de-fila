@@ -37,16 +37,16 @@ interface ConfiguracaoVisualProps {
       nomeDisplay: string;
       enderecoDisplay: string | null;
       logoUrl: string | null;
-      corPrimaria: string | null;
-      corSobreposicao: string | null;
+      corPrimaria: string;
+      corSobreposicao: string;
     },
     any,
     {
       nomeDisplay: string;
       enderecoDisplay: string | null;
       logoUrl: string | null;
-      corPrimaria: string | null;
-      corSobreposicao: string | null;
+      corPrimaria: string;
+      corSobreposicao: string;
     }
   >;
 }
