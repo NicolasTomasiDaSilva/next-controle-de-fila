@@ -10,9 +10,8 @@ export const configuracaoSchema = entidadeSchema.extend({
   mensagemChamada: z.string().trim().nullable(),
   mensagemRemovido: z.string().nullable(),
   logoUrl: z.string().trim().url().nullable(),
-  corPrimaria: z.string().trim().nullable(),
-  corSobreposicao: z.string().trim().nullable(),
-  corTexto: z.string().trim().nullable(),
+  corPrimaria: z.string().trim(),
+  corSobreposicao: z.string().trim(),
 });
 
 export type Configuracao = z.infer<typeof configuracaoSchema>;
