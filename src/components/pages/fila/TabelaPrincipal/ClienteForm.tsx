@@ -12,9 +12,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { TelefoneInput } from "../shared/inputs/TelefoneInput";
-import { Input } from "../ui/input";
+} from "../../../ui/form";
+import { TelefoneInput } from "../../../shared/inputs/TelefoneInput";
+import { Input } from "../../../ui/input";
 import { Cliente } from "@/models/cliente";
 
 interface ClienteFormProps {

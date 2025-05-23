@@ -1,12 +1,12 @@
 "use client";
 
 import { StatusEnum, StatusLabel } from "@/enums/status-enum";
-import ClienteRowTable from "../shared/ClienteRowTabela";
+import ClienteRowTable from "../ClienteRowTabela";
 
 import React, { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useFila } from "@/hooks/use-fila";
 import { normalizeString } from "@/utils/normalize-string";
-import { Input } from "../ui/input";
+import { Input } from "../../../ui/input";
 import { ArrowUp, CircleArrowUp, MoveVertical } from "lucide-react";
 
 export default function TabelaRecentes() {

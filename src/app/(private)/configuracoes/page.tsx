@@ -1,5 +1,5 @@
 import { Section } from "@/components/Section";
-import { ConfiguracaoCard } from "@/components/ConfiguracaoCard";
+import { ConfiguracaoCard } from "@/components/pages/configuracoes/ConfiguracaoCard";
 import { MessageCircle, MessageSquare, Monitor, Palette } from "lucide-react";
 
 export default async function FilaPage() {

@@ -15,8 +15,8 @@ import {
 } from "lucide-react";
 import { StatusEnum, StatusMap } from "@/enums/status-enum";
 import { useFila } from "@/hooks/use-fila";
-import { EditarClienteDialog } from "../TabelaPrincipal/EditarClienteDialog";
-import { TempoDecorrido } from "./TempoDecorrido";
+import { EditarClienteDialog } from "./TabelaPrincipal/EditarClienteDialog";
+import { TempoDecorrido } from "../../shared/TempoDecorrido";
 
 interface RowClientePersonalizadaProps {
   cliente: Cliente;
