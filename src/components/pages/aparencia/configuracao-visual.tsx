@@ -30,25 +30,10 @@ import {
 } from "@/components/ui/popover";
 import { HexColorPicker } from "react-colorful";
 import { ColorPickerField } from "./color-picker";
+import { configuracaoFormDTO } from "@/dtos/configuracao";
 
 interface ConfiguracaoVisualProps {
-  form: UseFormReturn<
-    {
-      nomeDisplay: string;
-      enderecoDisplay: string | null;
-      logoUrl: string | null;
-      corPrimaria: string;
-      corSobreposicao: string;
-    },
-    any,
-    {
-      nomeDisplay: string;
-      enderecoDisplay: string | null;
-      logoUrl: string | null;
-      corPrimaria: string;
-      corSobreposicao: string;
-    }
-  >;
+  form: UseFormReturn<configuracaoFormDTO>;
 }
 
 export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {

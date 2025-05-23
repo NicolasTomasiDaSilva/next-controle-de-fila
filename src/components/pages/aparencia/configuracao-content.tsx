@@ -32,6 +32,10 @@ import z from "zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { ConfiguracaoVisual } from "./configuracao-visual";
+import { Configuracao } from "@/models/configuracao";
+import { empresaService } from "@/services/empresa-service";
+import { toast } from "sonner";
+import { PreVisualizacaoAparencia } from "./pre-visualizacao-aparencia";
 
 interface ConfiguracaoContentProps {
   empresa: Empresa;
@@ -51,7 +55,20 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
   });
 
   async function handleSubmit(data: z.infer<typeof configuracaoFormSchema>) {
-    console.log(data);
+    try {
+      setLoading(true);
+      const configuracao: Configuracao = {
+        ...empresa.configuracao,
+        ...data,
+      };
+
+      await empresaService.atualizarConfiguracao(configuracao);
+      toast.success("Configuração atualizada com sucesso.", { icon: "✅" });
+    } catch (error) {
+      toast.error("Erro ao atualizadar configuração.");
+    } finally {
+      setLoading(false);
+    }
   }
   return (
     <Form {...form}>
@@ -59,6 +76,10 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
         <Card className="w-full">
           <ConfiguracaoDados form={form}></ConfiguracaoDados>
           <ConfiguracaoVisual form={form}></ConfiguracaoVisual>
+          <PreVisualizacaoAparencia
+            form={form}
+            empresa={empresa}
+          ></PreVisualizacaoAparencia>
         </Card>
         <Button
           type="submit"

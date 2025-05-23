@@ -18,34 +18,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { configuracaoFormDTO } from "@/dtos/configuracao";
-import { Empresa } from "@/models/empresa";
-import { uploadService } from "@/services/upload-service";
-import axios from "axios";
-import { useRef, useState } from "react";
+
 import { UseFormReturn } from "react-hook-form";
-import { Upload } from "lucide-react";
-import { toast } from "sonner";
+import { configuracaoFormDTO } from "@/dtos/configuracao";
 
 interface ConfiguracaoDadosProps {
-  form: UseFormReturn<
-    {
-      nomeDisplay: string;
-      enderecoDisplay: string | null;
-      logoUrl: string | null;
-      corPrimaria: string;
-      corSobreposicao: string;
-    },
-    any,
-    {
-      nomeDisplay: string;
-      enderecoDisplay: string | null;
-      logoUrl: string | null;
-      corPrimaria: string;
-      corSobreposicao: string;
-    }
-  >;
+  form: UseFormReturn<configuracaoFormDTO>;
 }
 
 export function ConfiguracaoDados({ form }: ConfiguracaoDadosProps) {
