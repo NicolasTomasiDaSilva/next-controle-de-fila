@@ -1,6 +1,4 @@
-import { AuthTokens } from "@/models/auth-tokens";
-import { empresaService } from "@/services/empresa-service-client";
-import Cookies from "js-cookie";
+import { empresaService } from "@/services/empresa-service";
 import { useRouter } from "next/navigation";
 
 export const useAuth = () => {

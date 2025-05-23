@@ -18,12 +18,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { empresaService } from "@/services/empresa-service-client";
+
 import { empresaSchema } from "@/models/empresa";
 import { useAuth } from "@/hooks/use-auth";
 import Link from "next/link";
 import { useCooldown } from "@/hooks/use-cooldown";
 import { toast } from "sonner";
+import { empresaService } from "@/services/empresa-service";
 
 export const emailSchema = empresaSchema.pick({
   email: true,

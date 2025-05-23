@@ -1,17 +1,23 @@
-import { Api, axiosInstance } from "@/api/api";
-import { AuthTokens, authTokensSchema } from "@/models/auth-tokens";
+import { api, axiosInstance } from "@/api/api";
+import { Empresa, empresaSchema } from "@/models/empresa";
 import axios from "axios";
 
 export const empresaService = {
+  async obterEmpresa(): Promise<Empresa> {
+    return (await api.get<Empresa>(`/empresas`, undefined, {
+      schema: empresaSchema,
+    })) as Empresa;
+  },
+
   async enviarCodigoAcesso(email: string): Promise<void> {
     try {
       const payload = {
         email,
       };
-
-      await Api.post(`/autenticacao/codigo-acesso`, payload);
+      await api.post(`/autenticacao/codigo-acesso`, payload, {
+        rawResponse: true,
+      });
     } catch (error: any) {
-      console.log(error);
       if (
         error.response?.status === 404 &&
         error.response?.data?.message === "Empresa nao encontrada"

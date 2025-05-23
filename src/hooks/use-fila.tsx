@@ -1,9 +1,11 @@
 import { FilaContext } from "@/contexts/fila-context";
 import { AdicionarClienteDTO } from "@/dtos/cliente";
+import { AcoesAdminEnum } from "@/enums/acoes-admin-enum";
 import { StatusEnum } from "@/enums/status-enum";
 import { Cliente } from "@/models/cliente";
 import { Fila } from "@/models/fila";
-import { filaService } from "@/services/fila-service-client";
+import { filaService } from "@/services/fila-service";
+
 import { useContext } from "react";
 import { toast } from "sonner";
 
@@ -17,7 +19,7 @@ export const useFila = () => {
 
   async function handleAdicionar(cliente: AdicionarClienteDTO) {
     try {
-      const filaAtualizada: Fila = await filaService.AdicionarCliente(cliente);
+      const filaAtualizada: Fila = await filaService.adicionarCliente(cliente);
       setFila(filaAtualizada);
       toast.success("Cliente adicionado à fila.", { icon: "➕" });
     } catch (error: any) {
@@ -26,7 +28,9 @@ export const useFila = () => {
   }
   async function handleAtualizar(cliente: Cliente) {
     try {
-      const filaAtualizada: Fila = await filaService.AtualizarCliente(cliente);
+      const filaAtualizada: Fila = await filaService.atualizarDadosCliente(
+        cliente
+      );
       setFila(filaAtualizada);
       toast.success("Cliente atualizado com sucesso.", { icon: "✏️" });
     } catch (error: any) {
@@ -36,7 +40,10 @@ export const useFila = () => {
 
   async function handleChamar(cliente: Cliente) {
     try {
-      const filaAtualizada: Fila = await filaService.ChamarCliente(cliente.id);
+      const filaAtualizada: Fila = await filaService.atualizarStatusCliente(
+        cliente.id,
+        AcoesAdminEnum.ChamarClientes
+      );
       setFila(filaAtualizada);
       toast.success("Cliente chamado.", { icon: "📢" });
     } catch (error: any) {
@@ -45,7 +52,10 @@ export const useFila = () => {
   }
   async function handleRemover(cliente: Cliente) {
     try {
-      const filaAtualizada: Fila = await filaService.RemoverCliente(cliente.id);
+      const filaAtualizada: Fila = await filaService.atualizarStatusCliente(
+        cliente.id,
+        AcoesAdminEnum.RemoverClientes
+      );
       setFila(filaAtualizada);
       toast.success("Cliente removido da fila.", { icon: "❌" });
     } catch (error: any) {
@@ -54,13 +64,40 @@ export const useFila = () => {
   }
   async function handleAusentar(cliente: Cliente) {
     try {
-      const filaAtualizada: Fila = await filaService.AusentarCliente(
-        cliente.id
+      const filaAtualizada: Fila = await filaService.atualizarStatusCliente(
+        cliente.id,
+        AcoesAdminEnum.AusentarClientes
       );
       setFila(filaAtualizada);
       toast.success("Cliente marcado como ausente.", { icon: "⏱️" });
     } catch (error: any) {
       toast.error("Erro ao marcar cliente como ausente.");
+    }
+  }
+
+  async function handleAtender(cliente: Cliente) {
+    try {
+      const filaAtualizada: Fila = await filaService.atualizarStatusCliente(
+        cliente.id,
+        AcoesAdminEnum.AtenderClientes
+      );
+      setFila(filaAtualizada);
+      toast.success("Cliente atendido.", { icon: "✅" });
+    } catch (error: any) {
+      toast.error("Erro ao atender cliente.");
+    }
+  }
+
+  async function handleVoltar(cliente: Cliente) {
+    try {
+      const filaAtualizada: Fila = await filaService.atualizarStatusCliente(
+        cliente.id,
+        AcoesAdminEnum.VoltarParaFilaClientes
+      );
+      setFila(filaAtualizada);
+      toast.success("Cliente voltou para a fila.", { icon: "↩️" });
+    } catch (error: any) {
+      toast.error("Erro ao devolver cliente para a fila.");
     }
   }
   async function handleMoverCima(cliente: Cliente) {
@@ -93,26 +130,6 @@ export const useFila = () => {
       toast.success("Cliente movido para baixo.", { icon: "⬇️" });
     } catch (error: any) {
       toast.error("Erro ao mover cliente para baixo.");
-    }
-  }
-
-  async function handleAtender(cliente: Cliente) {
-    try {
-      const filaAtualizada: Fila = await filaService.AtenderCliente(cliente.id);
-      setFila(filaAtualizada);
-      toast.success("Cliente atendido.", { icon: "✅" });
-    } catch (error: any) {
-      toast.error("Erro ao atender cliente.");
-    }
-  }
-
-  async function handleVoltar(cliente: Cliente) {
-    try {
-      const filaAtualizada: Fila = await filaService.VoltarCliente(cliente.id);
-      setFila(filaAtualizada);
-      toast.success("Cliente voltou para a fila.", { icon: "↩️" });
-    } catch (error: any) {
-      toast.error("Erro ao devolver cliente para a fila.");
     }
   }
 
