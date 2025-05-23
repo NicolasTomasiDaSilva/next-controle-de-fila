@@ -55,9 +55,9 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
   const [preview, setPreview] = useState<string | null>(null);
 
   return (
-    <Card className="w-full">
+    <>
       <CardHeader>
-        <CardTitle>Personalizar visual</CardTitle>
+        <CardTitle>Identidade visual</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <FormField
@@ -145,7 +145,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
           )}
         />
 
-        <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center sm:max-w-[50%]">
+        <div className="flex flex-col gap-2 sm:flex-row justify-around sm:items-center py-5">
           <FormField
             control={form.control}
             name="corPrimaria"
@@ -199,6 +199,6 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
         </Button>
       </CardContent>
       <CardFooter className="flex justify-between"></CardFooter>
-    </Card>
+    </>
   );
 }

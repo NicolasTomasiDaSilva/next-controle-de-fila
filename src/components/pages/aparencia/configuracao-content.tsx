@@ -56,8 +56,10 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
-        <ConfiguracaoDados form={form}></ConfiguracaoDados>
-        <ConfiguracaoVisual form={form}></ConfiguracaoVisual>
+        <Card className="w-full">
+          <ConfiguracaoDados form={form}></ConfiguracaoDados>
+          <ConfiguracaoVisual form={form}></ConfiguracaoVisual>
+        </Card>
       </form>
 
       <Button

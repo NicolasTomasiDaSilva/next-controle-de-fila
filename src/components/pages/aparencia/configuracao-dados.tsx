@@ -50,7 +50,7 @@ interface ConfiguracaoDadosProps {
 
 export function ConfiguracaoDados({ form }: ConfiguracaoDadosProps) {
   return (
-    <Card className="w-full">
+    <>
       <CardHeader>
         <CardTitle>Dados empresa</CardTitle>
       </CardHeader>
@@ -83,6 +83,6 @@ export function ConfiguracaoDados({ form }: ConfiguracaoDadosProps) {
         />
       </CardContent>
       <CardFooter className="flex justify-between"></CardFooter>
-    </Card>
+    </>
   );
 }
