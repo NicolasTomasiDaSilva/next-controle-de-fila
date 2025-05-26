@@ -36,7 +36,7 @@ export function AdicionarClienteDialog() {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button variant="outline" className="w-full sm:w-40 block ml-auto">
-          + Adicionar à fila
+          Adicionar
         </Button>
       </DialogTrigger>
       <DialogContent>

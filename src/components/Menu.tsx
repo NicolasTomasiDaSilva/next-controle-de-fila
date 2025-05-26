@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ChevronDown, LogOut, Settings, User } from "lucide-react";
+import { ChevronDown, ListOrdered, LogOut, Settings, User } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/hooks/use-auth";
 
@@ -37,6 +37,12 @@ export default function Menu() {
         align="end"
         className="w-48 sm:w-56 shadow-md rounded-md"
       >
+        <Link href="/fila" passHref>
+          <DropdownMenuItem className="cursor-pointer">
+            <ListOrdered className="w-4 h-4" />
+            <span>Fila</span>
+          </DropdownMenuItem>
+        </Link>
         <Link href="/configuracoes" passHref>
           <DropdownMenuItem className="cursor-pointer">
             <Settings className="w-4 h-4" />

@@ -54,7 +54,6 @@ export default function TabelaPrincipal() {
               <div className="flex flex-row items-center gap-2 text-left">
                 <Users className="size-4 shrink-0 text-blue-600" />
                 <span className="text-sm font-bold text-blue-600 whitespace-nowrap">
-                  <span className="hidden md:inline">Na Fila: </span>
                   {totalAguardando}
                 </span>
                 <Input
