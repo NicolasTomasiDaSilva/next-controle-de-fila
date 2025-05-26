@@ -80,7 +80,7 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
         </Card>
         <Button
           type="submit"
-          className="w-full sm:w-30 sm:ml-auto block"
+          className="w-full sm:w-[max-content] block ml-auto"
           disabled={loading}
         >
           {loading ? "Salvando..." : "Salvar"}
