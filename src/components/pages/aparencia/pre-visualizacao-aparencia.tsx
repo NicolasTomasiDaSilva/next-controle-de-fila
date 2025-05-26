@@ -4,6 +4,7 @@ import { configuracaoFormDTO } from "@/dtos/configuracao";
 import { Empresa } from "@/models/empresa";
 import { useDebounce } from "use-debounce";
 import { UseFormReturn } from "react-hook-form";
+import Simulador from "./simulador";
 
 interface PreVisualizacaoAparenciaProps {
   form: UseFormReturn<configuracaoFormDTO>;
@@ -13,7 +14,7 @@ export function PreVisualizacaoAparencia({
   form,
 }: PreVisualizacaoAparenciaProps) {
   const valores = form.watch();
-  const scale = 0.2;
+
   const [debouncedValores] = useDebounce(valores, 300);
 
   const params = new URLSearchParams();
@@ -28,30 +29,12 @@ export function PreVisualizacaoAparencia({
     params.set("logoUrl", debouncedValores.logoUrl);
   }
 
-  const url = `/preview?${params.toString()}`;
-
   return (
-    <div className="mx-auto">
-      <div
-        className="overflow-hidden border shadow rounded"
-        style={{
-          width: `${1920 * scale}px`,
-          height: `${1080 * scale}px`,
-        }}
-      >
-        <iframe
-          key={url}
-          src={url}
-          style={{
-            width: "1920px",
-            height: "1080px",
-            transform: `scale(${scale})`,
-            transformOrigin: "top left",
-            pointerEvents: "none",
-            border: "none",
-          }}
-        />
-      </div>
-    </div>
+    <Simulador
+      scale={0.25}
+      width={1920}
+      height={1080}
+      url={`/preview/monitor?${params.toString()}`}
+    ></Simulador>
   );
 }
