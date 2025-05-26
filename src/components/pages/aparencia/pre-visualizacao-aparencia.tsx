@@ -25,7 +25,7 @@ export function PreVisualizacaoAparencia({
   const containerRef = useRef<HTMLDivElement>(null);
   const [maxPreviewHeight, setMaxPreviewHeight] = useState(300);
 
-  const MAX_HEIGHT = 1000;
+  const MAX_HEIGHT = 600;
   const monitorSize = { width: 1920, height: 1080 };
   const celularSize = { width: 1080, height: 1920 };
 
@@ -134,8 +134,8 @@ export function PreVisualizacaoAparencia({
         </CarouselContent>
 
         {/* Botões de navegação */}
-        <CarouselPrevious className="left-2" />
-        <CarouselNext className="right-2" />
+        <CarouselPrevious className="left-2 cursor-pointer" />
+        <CarouselNext className="right-2 cursor-pointer" />
       </Carousel>
     </div>
   );
