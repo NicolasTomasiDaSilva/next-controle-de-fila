@@ -28,9 +28,7 @@ export const empresaService = {
       const payload = {
         email,
       };
-      await api.post(`/autenticacao/codigo-acesso`, payload, {
-        rawResponse: true,
-      });
+      await api.post(`/autenticacao/codigo-acesso`, payload);
     } catch (error: any) {
       if (
         error.response?.status === 404 &&

@@ -111,9 +111,6 @@ async function request<TResponse = any, TData = any>({
     return rawResponse ? response : response.data;
   } catch (error) {
     if (isAxiosError(error)) {
-      if (rawResponse && error.response) {
-        return error.response as AxiosResponse;
-      }
       throw error;
     }
     throw new Error("Erro inesperado na requisição");
