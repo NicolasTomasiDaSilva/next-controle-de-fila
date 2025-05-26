@@ -41,7 +41,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
   const [preview, setPreview] = useState<string | null>(null);
   const inputFileRef = useRef<HTMLInputElement | null>(null);
 
-  async function uploadImagem(
+  async function handleUploadImagem(
     e: ChangeEvent<HTMLInputElement>,
     field: ControllerRenderProps<configuracaoFormDTO, "logoUrl">
   ) {
@@ -91,14 +91,14 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                   Logo da Empresa
                 </FormLabel>
                 <FormControl>
-                  <div className="flex flex-row gap-2">
+                  <div className="flex flex-row gap-2 justify-center">
                     <input
                       ref={inputFileRef}
                       type="file"
                       accept="image/*"
                       id="logo-upload"
                       className="hidden"
-                      onChange={(e) => uploadImagem(e, field)}
+                      onChange={(e) => handleUploadImagem(e, field)}
                     />
 
                     <label
@@ -107,12 +107,12 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                     >
                       <Button
                         type="button"
-                        className="sm:w-full py-5.5"
+                        className="sm:w-full py-5.5 "
                         variant="outline"
                         asChild
                       >
                         <span>
-                          <Upload className="size-5 text-gray-700" />
+                          <Upload className="size-5 text-gray-700 " />
                           <span className="whitespace-normal">
                             Selecionar Imagem
                           </span>
@@ -121,6 +121,9 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                     </label>
                   </div>
                 </FormControl>
+                <p className="text-sm text-muted-foreground">
+                  Formatos aceitos: PNG e JPG. Tamanho máximo: 2MB
+                </p>
                 <FormMessage />
               </FormItem>
               <div className="flex flex-col items-center sm:mx-auto ">

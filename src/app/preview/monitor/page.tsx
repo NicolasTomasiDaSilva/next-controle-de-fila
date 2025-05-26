@@ -20,5 +20,9 @@ export default function MonitorPreview() {
     enderecoDisplay,
   };
 
-  return <Monitor valores={valores}></Monitor>;
+  return (
+    <div className="overflow-hidden">
+      <Monitor valores={valores}></Monitor>
+    </div>
+  );
 }

@@ -15,7 +15,7 @@ export default function Simulador({
 }: SimuladorProps) {
   return (
     <div
-      className=" overflow-hidden"
+      className=" overflow-hidden border rounded-md"
       style={{
         width: width * scale,
         height: maxPreviewHeight,

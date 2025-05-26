@@ -19,5 +19,9 @@ export default function MonitorPreview() {
     enderecoDisplay,
   };
 
-  return <AppUsuario valores={valores}></AppUsuario>;
+  return (
+    <div className="overflow-hidden">
+      <AppUsuario valores={valores}></AppUsuario>
+    </div>
+  );
 }

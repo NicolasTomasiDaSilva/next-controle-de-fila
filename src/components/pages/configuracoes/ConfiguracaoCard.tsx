@@ -83,7 +83,7 @@ export function ConfiguracaoCard({
           <ChevronRight className="w-5 h-5 text-gray-400 transition-colors group-hover:text-blue-800 flex-shrink-0" />
         </CardHeader>
         <CardContent>
-          <p>{texto}</p>
+          <p className="text-sm text-muted-foreground">{texto}</p>
         </CardContent>
       </Link>
     </Card>

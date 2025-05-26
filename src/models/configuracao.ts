@@ -3,7 +3,11 @@ import { z } from "zod";
 
 export const configuracaoSchema = entidadeSchema.extend({
   empresaId: z.string().uuid("ID da empresa inválido"),
-  nomeDisplay: z.string().trim().min(4, "Nome deve ter no mínimo 4 caracteres"),
+  nomeDisplay: z
+    .string()
+    .trim()
+    .min(4, "Nome deve ter no mínimo 3 caracteres")
+    .max(50, "Nome deve ter máximo 50 caracteres"),
   whatsappAtivo: z.boolean(),
   enderecoDisplay: z
     .string()
@@ -11,7 +15,10 @@ export const configuracaoSchema = entidadeSchema.extend({
     .transform((val) => (val === "" ? null : val))
     .nullable()
     .refine((val) => val === null || val.length >= 4, {
-      message: "Endreço deve ter no mínimo 4 caracteres",
+      message: "Endereço deve ter no mínimo 3 caracteres",
+    })
+    .refine((val) => val === null || val.length <= 50, {
+      message: "Endereço deve ter no máximo 50 caracteres",
     }),
   mensagemEntrada: z.string().trim().nullable(),
   mensagemChamada: z.string().trim().nullable(),
