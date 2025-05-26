@@ -9,7 +9,10 @@ export const configuracaoSchema = entidadeSchema.extend({
     .string()
     .trim()
     .transform((val) => (val === "" ? null : val))
-    .nullable(),
+    .nullable()
+    .refine((val) => val === null || val.length >= 4, {
+      message: "Endreço deve ter no mínimo 4 caracteres",
+    }),
   mensagemEntrada: z.string().trim().nullable(),
   mensagemChamada: z.string().trim().nullable(),
   mensagemRemovido: z.string().nullable(),

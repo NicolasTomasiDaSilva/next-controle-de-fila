@@ -34,7 +34,7 @@ const CardUltimosChamados = ({ valores }: CardUltimosChamadosProps) => {
               color: valores?.corSobreposicao ?? "#000000",
             }}
           >
-            17:59
+            16:35
           </h1>
           <ArrowRight
             className="text-texto/50 sm:size-5 md:size-5 lg:size-7 xl:size-12"
@@ -48,7 +48,7 @@ const CardUltimosChamados = ({ valores }: CardUltimosChamadosProps) => {
               color: valores?.corSobreposicao ?? "#000000",
             }}
           >
-            Nicolas Tomasi da Sivla
+            Nicolas Tomasi da Silva
           </h1>
         </div>
         <div className="h-[25%] w-[100%] flex flex-row items-center justify-around py-2 sm:px-1 md:px-2 lg:px-5 xl:px-10 sm:gap-x-2 md:gap-x-4 lg:gap-x-8 xl:gap-x-15 border-b border-b-texto/30 last:border-b-0 font-bold">
@@ -58,7 +58,7 @@ const CardUltimosChamados = ({ valores }: CardUltimosChamadosProps) => {
               color: valores?.corSobreposicao ?? "#000000",
             }}
           >
-            17:59
+            16:32
           </h1>
           <ArrowRight
             className="text-texto/50 sm:size-5 md:size-5 lg:size-7 xl:size-12"
@@ -72,7 +72,7 @@ const CardUltimosChamados = ({ valores }: CardUltimosChamadosProps) => {
               color: valores?.corSobreposicao ?? "#000000",
             }}
           >
-            Nicolas Tomasi da Sivla
+            Camila Duarte Fernandes
           </h1>
         </div>
       </div>
