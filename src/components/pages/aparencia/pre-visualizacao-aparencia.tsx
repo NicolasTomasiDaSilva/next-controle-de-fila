@@ -12,6 +12,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Simulador from "./simulador";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface PreVisualizacaoAparenciaProps {
   form: UseFormReturn<configuracaoFormDTO>;
@@ -71,33 +72,40 @@ export function PreVisualizacaoAparencia({
   const scaleCelular = maxPreviewHeight / celularSize.height;
 
   return (
-    <div ref={containerRef} className="w-full mx-auto sm:w-[80%]	">
-      <Carousel className="relative w-full max-w-full overflow-hidden">
-        <CarouselContent>
-          <CarouselItem className="flex justify-center">
-            <Simulador
-              url={`/preview/monitor?${params.toString()}`}
-              width={monitorSize.width}
-              height={monitorSize.height}
-              scale={scaleMonitor}
-              maxPreviewHeight={maxPreviewHeight}
-            ></Simulador>
-          </CarouselItem>
+    <>
+      <CardHeader>
+        <CardTitle>Pré Visualização</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div ref={containerRef} className="w-full mx-auto sm:w-[80%]	">
+          <Carousel className="relative w-full max-w-full overflow-hidden">
+            <CarouselContent>
+              <CarouselItem className="flex justify-center">
+                <Simulador
+                  url={`/preview/monitor?${params.toString()}`}
+                  width={monitorSize.width}
+                  height={monitorSize.height}
+                  scale={scaleMonitor}
+                  maxPreviewHeight={maxPreviewHeight}
+                ></Simulador>
+              </CarouselItem>
 
-          <CarouselItem className="flex justify-center">
-            <Simulador
-              url={`/preview/app-usuario?${params.toString()}`}
-              width={celularSize.width}
-              height={celularSize.height}
-              scale={scaleCelular}
-              maxPreviewHeight={maxPreviewHeight}
-            ></Simulador>
-          </CarouselItem>
-        </CarouselContent>
+              <CarouselItem className="flex justify-center">
+                <Simulador
+                  url={`/preview/app-usuario?${params.toString()}`}
+                  width={celularSize.width}
+                  height={celularSize.height}
+                  scale={scaleCelular}
+                  maxPreviewHeight={maxPreviewHeight}
+                ></Simulador>
+              </CarouselItem>
+            </CarouselContent>
 
-        <CarouselPrevious className="left-0 ml-2 cursor-pointer sm:ml-0" />
-        <CarouselNext className="right-0 mr-2 cursor-pointer sm:mr-0" />
-      </Carousel>
-    </div>
+            <CarouselPrevious className="left-0 ml-2 cursor-pointer sm:ml-0" />
+            <CarouselNext className="right-0 mr-2 cursor-pointer sm:mr-0" />
+          </Carousel>
+        </div>
+      </CardContent>
+    </>
   );
 }
