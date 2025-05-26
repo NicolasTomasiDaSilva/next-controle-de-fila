@@ -25,7 +25,7 @@ export function PreVisualizacaoAparencia({
   const containerRef = useRef<HTMLDivElement>(null);
   const [maxPreviewHeight, setMaxPreviewHeight] = useState(300);
 
-  const MAX_HEIGHT = 600;
+  const MAX_HEIGHT = 1000;
   const monitorSize = { width: 1920, height: 1080 };
   const celularSize = { width: 1080, height: 1920 };
 
@@ -72,79 +72,70 @@ export function PreVisualizacaoAparencia({
 
   return (
     <div ref={containerRef} className="w-full max-w-full">
-      <Carousel className="w-full">
+      <Carousel className="relative w-full max-w-full overflow-hidden">
         <CarouselContent>
-          {/* Slide Monitor */}
           <CarouselItem className="flex justify-center">
-            <div className="flex flex-col items-center">
-              <span className="text-sm text-muted-foreground mb-2">
-                Monitor 1920x1080
-              </span>
-              <div
-                className="border shadow overflow-hidden"
+            {/* Preview Monitor */}
+            <div
+              className="border shadow overflow-hidden"
+              style={{
+                width: monitorSize.width * scaleMonitor,
+                height: maxPreviewHeight,
+                position: "relative",
+              }}
+            >
+              <iframe
+                src={url}
+                width={monitorSize.width}
+                height={monitorSize.height}
                 style={{
-                  width: monitorSize.width * scaleMonitor,
-                  height: maxPreviewHeight,
-                  position: "relative",
+                  transform: `scale(${scaleMonitor})`,
+                  transformOrigin: "top left",
+                  width: monitorSize.width,
+                  height: monitorSize.height,
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  pointerEvents: "none",
+                  border: "none",
                 }}
-              >
-                <iframe
-                  src={url}
-                  width={monitorSize.width}
-                  height={monitorSize.height}
-                  style={{
-                    transform: `scale(${scaleMonitor})`,
-                    transformOrigin: "top left",
-                    width: monitorSize.width,
-                    height: monitorSize.height,
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    pointerEvents: "none",
-                    border: "none",
-                  }}
-                />
-              </div>
+              />
             </div>
           </CarouselItem>
 
-          {/* Slide Celular */}
           <CarouselItem className="flex justify-center">
-            <div className="flex flex-col items-center">
-              <span className="text-sm text-muted-foreground mb-2">
-                App do Usuário (1080x1920)
-              </span>
-              <div
-                className="border shadow overflow-hidden"
+            {/* Preview Celular */}
+            <div
+              className="border shadow overflow-hidden"
+              style={{
+                width: celularSize.width * scaleCelular,
+                height: maxPreviewHeight,
+                position: "relative",
+              }}
+            >
+              <iframe
+                src={url}
+                width={celularSize.width}
+                height={celularSize.height}
                 style={{
-                  width: celularSize.width * scaleCelular,
-                  height: maxPreviewHeight,
-                  position: "relative",
+                  transform: `scale(${scaleCelular})`,
+                  transformOrigin: "top left",
+                  width: celularSize.width,
+                  height: celularSize.height,
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  pointerEvents: "none",
+                  border: "none",
                 }}
-              >
-                <iframe
-                  src={url}
-                  width={celularSize.width}
-                  height={celularSize.height}
-                  style={{
-                    transform: `scale(${scaleCelular})`,
-                    transformOrigin: "top left",
-                    width: celularSize.width,
-                    height: celularSize.height,
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    pointerEvents: "none",
-                    border: "none",
-                  }}
-                />
-              </div>
+              />
             </div>
           </CarouselItem>
         </CarouselContent>
 
-        <CarouselPrevious />
-        <CarouselNext />
+        {/* Botões de navegação */}
+        <CarouselPrevious className="left-2" />
+        <CarouselNext className="right-2" />
       </Carousel>
     </div>
   );
