@@ -11,6 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Simulador from "./simulador";
 
 interface PreVisualizacaoAparenciaProps {
   form: UseFormReturn<configuracaoFormDTO>;
@@ -71,69 +72,30 @@ export function PreVisualizacaoAparencia({
   const url = `/preview/monitor?${params.toString()}`;
 
   return (
-    <div ref={containerRef} className="w-full max-w-full">
+    <div ref={containerRef} className="w-full mx-auto sm:w-[80%]	">
       <Carousel className="relative w-full max-w-full overflow-hidden">
         <CarouselContent>
           <CarouselItem className="flex justify-center">
-            {/* Preview Monitor */}
-            <div
-              className="border shadow overflow-hidden"
-              style={{
-                width: monitorSize.width * scaleMonitor,
-                height: maxPreviewHeight,
-                position: "relative",
-              }}
-            >
-              <iframe
-                src={url}
-                width={monitorSize.width}
-                height={monitorSize.height}
-                style={{
-                  transform: `scale(${scaleMonitor})`,
-                  transformOrigin: "top left",
-                  width: monitorSize.width,
-                  height: monitorSize.height,
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  pointerEvents: "none",
-                  border: "none",
-                }}
-              />
-            </div>
+            <Simulador
+              url={url}
+              width={monitorSize.width}
+              height={monitorSize.height}
+              scale={scaleMonitor}
+              maxPreviewHeight={maxPreviewHeight}
+            ></Simulador>
           </CarouselItem>
 
           <CarouselItem className="flex justify-center">
-            {/* Preview Celular */}
-            <div
-              className="border shadow overflow-hidden"
-              style={{
-                width: celularSize.width * scaleCelular,
-                height: maxPreviewHeight,
-                position: "relative",
-              }}
-            >
-              <iframe
-                src={url}
-                width={celularSize.width}
-                height={celularSize.height}
-                style={{
-                  transform: `scale(${scaleCelular})`,
-                  transformOrigin: "top left",
-                  width: celularSize.width,
-                  height: celularSize.height,
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  pointerEvents: "none",
-                  border: "none",
-                }}
-              />
-            </div>
+            <Simulador
+              url={url}
+              width={celularSize.width}
+              height={celularSize.height}
+              scale={scaleCelular}
+              maxPreviewHeight={maxPreviewHeight}
+            ></Simulador>
           </CarouselItem>
         </CarouselContent>
 
-        {/* Botões de navegação */}
         <CarouselPrevious className="left-2 cursor-pointer" />
         <CarouselNext className="right-2 cursor-pointer" />
       </Carousel>
