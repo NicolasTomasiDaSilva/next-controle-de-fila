@@ -1,38 +1,20 @@
+import { useEffect, useRef, useState } from "react";
+
 interface SimuladorProps {
-  scale: number;
+  url: string;
   width: number;
   height: number;
-  url: string;
+  fixedHeight?: number; // altura fixa para simular telefone alinhado
 }
 
 export default function Simulador({
-  scale,
+  url,
   width,
   height,
-  url,
+  fixedHeight,
 }: SimuladorProps) {
-  return (
-    <div className="mx-auto bg-red-500">
-      <div
-        className="overflow-hidden border shadow rounded"
-        style={{
-          width: `${width * scale}px`,
-          height: `${height * scale}px`,
-        }}
-      >
-        <iframe
-          key={url}
-          src={url}
-          style={{
-            width: `${width}px`,
-            height: `${height}px`,
-            transform: `scale(${scale})`,
-            transformOrigin: "top left",
-            pointerEvents: "none",
-            border: "none",
-          }}
-        />
-      </div>
-    </div>
-  );
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+
+  return <div></div>;
 }
