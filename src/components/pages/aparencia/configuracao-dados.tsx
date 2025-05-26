@@ -30,7 +30,7 @@ export function ConfiguracaoDados({ form }: ConfiguracaoDadosProps) {
   return (
     <>
       <CardHeader>
-        <CardTitle>Dados empresa</CardTitle>
+        <CardTitle>Dados da Empresa</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <FormField

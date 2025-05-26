@@ -12,7 +12,7 @@ export default function Simulador({
   url,
 }: SimuladorProps) {
   return (
-    <div className="mx-auto">
+    <div className="mx-auto bg-red-500">
       <div
         className="overflow-hidden border shadow rounded"
         style={{

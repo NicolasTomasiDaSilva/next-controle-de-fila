@@ -44,7 +44,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
   return (
     <>
       <CardHeader>
-        <CardTitle>Identidade visual</CardTitle>
+        <CardTitle>Identidade Visual</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <FormField
@@ -54,7 +54,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
             <div className="flex flex-col-reverse gap-2 items-center sm:flex-row sm:justify-between">
               <FormItem className="sm:w-[60%]">
                 <FormLabel className="text-center block sm:text-left">
-                  Logo da empresa
+                  Logo da Empresa
                 </FormLabel>
                 <FormControl>
                   <div className="flex flex-row gap-2">
@@ -112,7 +112,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                         <span>
                           <Upload className="size-5 text-gray-700" />
                           <span className="whitespace-normal">
-                            Selecionar imagem
+                            Selecionar Imagem
                           </span>
                         </span>
                       </Button>
@@ -147,7 +147,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                       onChange={field.onChange}
                     />
                   </FormControl>
-                  <FormLabel>Primária</FormLabel>
+                  <FormLabel>Cor Primária</FormLabel>
                 </div>
                 <FormMessage />
               </FormItem>
@@ -166,7 +166,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                       onChange={field.onChange}
                     />
                   </FormControl>
-                  <FormLabel>Sobreposição</FormLabel>
+                  <FormLabel>Cor Sobreposição</FormLabel>
                 </div>
                 <FormMessage />
               </FormItem>

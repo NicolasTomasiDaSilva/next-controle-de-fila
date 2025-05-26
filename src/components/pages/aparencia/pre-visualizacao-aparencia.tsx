@@ -5,6 +5,13 @@ import { Empresa } from "@/models/empresa";
 import { useDebounce } from "use-debounce";
 import { UseFormReturn } from "react-hook-form";
 import Simulador from "./simulador";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface PreVisualizacaoAparenciaProps {
   form: UseFormReturn<configuracaoFormDTO>;
@@ -30,11 +37,27 @@ export function PreVisualizacaoAparencia({
   }
 
   return (
-    <Simulador
-      scale={0.25}
-      width={1920}
-      height={1080}
-      url={`/preview/monitor?${params.toString()}`}
-    ></Simulador>
+    <Carousel className="max-w-fit mx-auto bg-red-500">
+      <CarouselContent className="p-0 m-0">
+        <CarouselItem className="flex justify-center p-0 m-0">
+          <Simulador
+            scale={0.3}
+            width={1920}
+            height={1080}
+            url={`/preview/monitor?${params.toString()}`}
+          />
+        </CarouselItem>
+        <CarouselItem className="flex justify-center p-0 m-0">
+          <Simulador
+            scale={0.3}
+            width={607.5}
+            height={1080}
+            url={`/preview/monitor?${params.toString()}`}
+          />
+        </CarouselItem>
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
   );
 }
