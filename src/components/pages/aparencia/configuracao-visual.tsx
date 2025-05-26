@@ -66,7 +66,9 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                       className="hidden"
                       onChange={async (e) => {
                         const file = e.target.files?.[0];
-                        if (!file) return;
+                        if (!file) {
+                          return;
+                        }
 
                         if (!["image/png", "image/jpeg"].includes(file.type)) {
                           toast.error(
@@ -93,8 +95,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                           field.onChange(url);
                           setPreview(url);
                         } catch (error) {
-                          console.error("Erro ao enviar imagem:", error);
-                          alert("Erro ao enviar imagem.");
+                          toast.error("Erro ao fazer upload da imagem.");
                         }
                       }}
                     />
@@ -127,7 +128,8 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                   alt="Preview logo"
                   width={128}
                   height={128}
-                  className="rounded-md border object-cover "
+                  className="rounded-md border object-cover"
+                  priority
                 />
               </div>
             </div>
@@ -176,7 +178,6 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
         <Button
           type="button"
           variant="outline"
-          className=""
           onClick={() => {
             form.setValue("corPrimaria", coresPadrao.CorPrimaria);
             form.setValue("corSobreposicao", coresPadrao.CorSobreposicao);

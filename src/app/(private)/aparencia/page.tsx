@@ -11,7 +11,7 @@ export default async function AparenciaPage() {
   const empresa: Empresa = await empresaService.obterEmpresa();
   return (
     <EmpresaProvider empresaInicial={empresa}>
-      <Section title="Aparência">
+      <Section title="Customizar Aparência">
         <ConfiguracaoContent empresa={empresa}></ConfiguracaoContent>
       </Section>
     </EmpresaProvider>

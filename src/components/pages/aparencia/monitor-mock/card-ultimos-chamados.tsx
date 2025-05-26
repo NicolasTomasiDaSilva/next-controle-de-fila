@@ -2,8 +2,6 @@
 
 import { CircleCheck, ArrowRight } from "lucide-react";
 
-import dayjs from "dayjs";
-
 import { TituloCard } from "./titulo-do-card";
 import { configuracaoFormDTO } from "@/dtos/configuracao";
 interface CardUltimosChamadosProps {
