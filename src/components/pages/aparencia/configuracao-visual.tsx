@@ -31,6 +31,7 @@ import {
 import { HexColorPicker } from "react-colorful";
 import { ColorPickerField } from "./color-picker";
 import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { coresPadrao } from "@/constantes/cores-padrao";
 
 interface ConfiguracaoVisualProps {
   form: UseFormReturn<configuracaoFormDTO>;
@@ -38,6 +39,7 @@ interface ConfiguracaoVisualProps {
 
 export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
   const [preview, setPreview] = useState<string | null>(null);
+  const inputFileRef = useRef<HTMLInputElement | null>(null);
 
   return (
     <>
@@ -57,6 +59,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                 <FormControl>
                   <div className="flex flex-row gap-2">
                     <input
+                      ref={inputFileRef}
                       type="file"
                       accept="image/*"
                       id="logo-upload"
@@ -86,6 +89,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                           const { url } = await uploadService.uploadImagem(
                             formData
                           );
+
                           field.onChange(url);
                           setPreview(url);
                         } catch (error) {
@@ -139,7 +143,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                 <div className="flex flex-row gap-2">
                   <FormControl>
                     <ColorPickerField
-                      value={field.value ?? "#000000"}
+                      value={field.value}
                       onChange={field.onChange}
                     />
                   </FormControl>
@@ -158,7 +162,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                 <div className="flex flex-row gap-2">
                   <FormControl>
                     <ColorPickerField
-                      value={field.value ?? "#000000"}
+                      value={field.value}
                       onChange={field.onChange}
                     />
                   </FormControl>
@@ -174,10 +178,13 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
           variant="outline"
           className="block ml-auto sm:ml-0"
           onClick={() => {
-            form.setValue("corPrimaria", "#FFFFFF");
-            form.setValue("corSobreposicao", "#FFFFFF");
-            form.setValue("logoUrl", null);
+            form.setValue("corPrimaria", coresPadrao.CorPrimaria);
+            form.setValue("corSobreposicao", coresPadrao.CorSobreposicao);
+            form.setValue("logoUrl", "");
             setPreview(null);
+            if (inputFileRef.current) {
+              inputFileRef.current.value = "";
+            }
           }}
         >
           Redefinir
