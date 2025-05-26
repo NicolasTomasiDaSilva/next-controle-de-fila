@@ -4,7 +4,13 @@ import { configuracaoFormDTO } from "@/dtos/configuracao";
 import { UseFormReturn } from "react-hook-form";
 import { useDebounce } from "use-debounce";
 import { useEffect, useRef, useState } from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface PreVisualizacaoAparenciaProps {
   form: UseFormReturn<configuracaoFormDTO>;
@@ -20,7 +26,6 @@ export function PreVisualizacaoAparencia({
   const [maxPreviewHeight, setMaxPreviewHeight] = useState(300);
 
   const MAX_HEIGHT = 600;
-
   const monitorSize = { width: 1920, height: 1080 };
   const celularSize = { width: 1080, height: 1920 };
 
@@ -67,68 +72,80 @@ export function PreVisualizacaoAparencia({
 
   return (
     <div ref={containerRef} className="w-full max-w-full">
-      <Tabs defaultValue="monitor" className="w-full">
-        <TabsList className=" block mx-auto">
-          <TabsTrigger value="monitor">Monitor</TabsTrigger>
-          <TabsTrigger value="celular">App Usuario</TabsTrigger>
-        </TabsList>
+      <Carousel className="w-full">
+        <CarouselContent>
+          {/* Slide Monitor */}
+          <CarouselItem className="flex justify-center">
+            <div className="flex flex-col items-center">
+              <span className="text-sm text-muted-foreground mb-2">
+                Monitor 1920x1080
+              </span>
+              <div
+                className="border shadow overflow-hidden"
+                style={{
+                  width: monitorSize.width * scaleMonitor,
+                  height: maxPreviewHeight,
+                  position: "relative",
+                }}
+              >
+                <iframe
+                  src={url}
+                  width={monitorSize.width}
+                  height={monitorSize.height}
+                  style={{
+                    transform: `scale(${scaleMonitor})`,
+                    transformOrigin: "top left",
+                    width: monitorSize.width,
+                    height: monitorSize.height,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    pointerEvents: "none",
+                    border: "none",
+                  }}
+                />
+              </div>
+            </div>
+          </CarouselItem>
 
-        <TabsContent value="monitor" className="flex flex-col items-center">
-          <div
-            className="border shadow overflow-hidden"
-            style={{
-              width: monitorSize.width * scaleMonitor,
-              height: maxPreviewHeight,
-              position: "relative",
-            }}
-          >
-            <iframe
-              src={url}
-              width={monitorSize.width}
-              height={monitorSize.height}
-              style={{
-                transform: `scale(${scaleMonitor})`,
-                transformOrigin: "top left",
-                width: monitorSize.width,
-                height: monitorSize.height,
-                position: "absolute",
-                top: 0,
-                left: 0,
-                pointerEvents: "none",
-                border: "none",
-              }}
-            />
-          </div>
-        </TabsContent>
+          {/* Slide Celular */}
+          <CarouselItem className="flex justify-center">
+            <div className="flex flex-col items-center">
+              <span className="text-sm text-muted-foreground mb-2">
+                App do Usuário (1080x1920)
+              </span>
+              <div
+                className="border shadow overflow-hidden"
+                style={{
+                  width: celularSize.width * scaleCelular,
+                  height: maxPreviewHeight,
+                  position: "relative",
+                }}
+              >
+                <iframe
+                  src={url}
+                  width={celularSize.width}
+                  height={celularSize.height}
+                  style={{
+                    transform: `scale(${scaleCelular})`,
+                    transformOrigin: "top left",
+                    width: celularSize.width,
+                    height: celularSize.height,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    pointerEvents: "none",
+                    border: "none",
+                  }}
+                />
+              </div>
+            </div>
+          </CarouselItem>
+        </CarouselContent>
 
-        <TabsContent value="celular" className="flex flex-col items-center">
-          <div
-            className="border shadow overflow-hidden"
-            style={{
-              width: celularSize.width * scaleCelular,
-              height: maxPreviewHeight,
-              position: "relative",
-            }}
-          >
-            <iframe
-              src={url}
-              width={celularSize.width}
-              height={celularSize.height}
-              style={{
-                transform: `scale(${scaleCelular})`,
-                transformOrigin: "top left",
-                width: celularSize.width,
-                height: celularSize.height,
-                position: "absolute",
-                top: 0,
-                left: 0,
-                pointerEvents: "none",
-                border: "none",
-              }}
-            />
-          </div>
-        </TabsContent>
-      </Tabs>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
     </div>
   );
 }
