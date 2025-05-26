@@ -22,13 +22,25 @@ export function PreVisualizacaoAparencia({
 }: PreVisualizacaoAparenciaProps) {
   const valores = form.watch();
   const [debouncedValores] = useDebounce(valores, 300);
+  const params = new URLSearchParams();
+  params.set("nomeDisplay", debouncedValores.nomeDisplay);
+  params.set("corPrimaria", debouncedValores.corPrimaria);
+  params.set("corSobreposicao", debouncedValores.corSobreposicao);
+  if (debouncedValores.enderecoDisplay) {
+    params.set("enderecoDisplay", debouncedValores.enderecoDisplay);
+  }
+  if (debouncedValores.logoUrl) {
+    params.set("logoUrl", debouncedValores.logoUrl);
+  }
+
+  const url = `/preview/monitor?${params.toString()}`;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [maxPreviewHeight, setMaxPreviewHeight] = useState(300);
 
   const MAX_HEIGHT = 600;
   const monitorSize = { width: 1920, height: 1080 };
-  const celularSize = { width: 1080, height: 1920 };
+  const celularSize = { width: 540, height: 960 };
 
   useEffect(() => {
     function updateSize() {
@@ -58,26 +70,13 @@ export function PreVisualizacaoAparencia({
   const scaleMonitor = maxPreviewHeight / monitorSize.height;
   const scaleCelular = maxPreviewHeight / celularSize.height;
 
-  const params = new URLSearchParams();
-  params.set("nomeDisplay", debouncedValores.nomeDisplay);
-  params.set("corPrimaria", debouncedValores.corPrimaria);
-  params.set("corSobreposicao", debouncedValores.corSobreposicao);
-  if (debouncedValores.enderecoDisplay) {
-    params.set("enderecoDisplay", debouncedValores.enderecoDisplay);
-  }
-  if (debouncedValores.logoUrl) {
-    params.set("logoUrl", debouncedValores.logoUrl);
-  }
-
-  const url = `/preview/monitor?${params.toString()}`;
-
   return (
     <div ref={containerRef} className="w-full mx-auto sm:w-[80%]	">
       <Carousel className="relative w-full max-w-full overflow-hidden">
         <CarouselContent>
           <CarouselItem className="flex justify-center">
             <Simulador
-              url={url}
+              url={`/preview/monitor?${params.toString()}`}
               width={monitorSize.width}
               height={monitorSize.height}
               scale={scaleMonitor}
@@ -87,7 +86,7 @@ export function PreVisualizacaoAparencia({
 
           <CarouselItem className="flex justify-center">
             <Simulador
-              url={url}
+              url={`/preview/app-usuario?${params.toString()}`}
               width={celularSize.width}
               height={celularSize.height}
               scale={scaleCelular}
@@ -96,8 +95,8 @@ export function PreVisualizacaoAparencia({
           </CarouselItem>
         </CarouselContent>
 
-        <CarouselPrevious className="left-2 cursor-pointer" />
-        <CarouselNext className="right-2 cursor-pointer" />
+        <CarouselPrevious className="left-0 ml-2 cursor-pointer sm:ml-0" />
+        <CarouselNext className="right-0 mr-2 cursor-pointer sm:mr-0" />
       </Carousel>
     </div>
   );

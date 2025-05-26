@@ -176,7 +176,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
         <Button
           type="button"
           variant="outline"
-          className="block ml-auto sm:ml-0"
+          className=""
           onClick={() => {
             form.setValue("corPrimaria", coresPadrao.CorPrimaria);
             form.setValue("corSobreposicao", coresPadrao.CorSobreposicao);
