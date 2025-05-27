@@ -34,8 +34,6 @@ export function PreVisualizacaoAparencia({
     params.set("logoUrl", debouncedValores.logoUrl);
   }
 
-  const url = `/preview/monitor?${params.toString()}`;
-
   const containerRef = useRef<HTMLDivElement>(null);
   const [maxPreviewHeight, setMaxPreviewHeight] = useState(300);
 

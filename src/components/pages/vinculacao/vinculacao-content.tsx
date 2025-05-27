@@ -24,18 +24,24 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { QrScanner } from "./QrScanner";
 
 const codeSchema = z.object({
   code: z.string().regex(/^\d{4}$/, { message: "Código inválido" }),
 });
 
 export default function VinculacaoContent() {
+  const [qrScannerOpen, setQrScannerOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const codeForm = useForm<z.infer<typeof codeSchema>>({
     resolver: zodResolver(codeSchema),
     defaultValues: { code: "" },
   });
 
+  function handleQrScan(code: string) {
+    codeForm.setValue("code", code);
+    setQrScannerOpen(false);
+  }
   async function handleVerificarCodigo(data: z.infer<typeof codeSchema>) {}
 
   return (
@@ -71,9 +77,22 @@ export default function VinculacaoContent() {
               className="space-y-4"
             >
               <div className="flex flex-row gap-2 justify-center">
-                <Button variant="outline">
+                <Button
+                  variant="outline"
+                  type="button" // garante que não seja submit
+                  onClick={() => {
+                    setQrScannerOpen(true);
+                  }}
+                >
                   <QrCode />
                 </Button>
+
+                {qrScannerOpen && (
+                  <QrScanner
+                    onScan={handleQrScan}
+                    onClose={() => setQrScannerOpen(false)}
+                  />
+                )}
                 <FormField
                   control={codeForm.control}
                   name="code"
@@ -100,7 +119,7 @@ export default function VinculacaoContent() {
               </div>
               <Button
                 type="submit"
-                className="w-[max-content] mx-auto  md:mr-0 block"
+                className="w-[max-content]  mx-auto block"
                 disabled={loading}
               >
                 {loading ? "Vinculando..." : "Vincular"}

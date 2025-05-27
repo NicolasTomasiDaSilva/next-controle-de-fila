@@ -6,7 +6,7 @@ export const configuracaoSchema = entidadeSchema.extend({
   nomeDisplay: z
     .string()
     .trim()
-    .min(4, "Nome deve ter no mínimo 3 caracteres")
+    .min(3, "Nome deve ter no mínimo 3 caracteres")
     .max(50, "Nome deve ter máximo 50 caracteres"),
   whatsappAtivo: z.boolean(),
   enderecoDisplay: z
@@ -14,7 +14,7 @@ export const configuracaoSchema = entidadeSchema.extend({
     .trim()
     .transform((val) => (val === "" ? null : val))
     .nullable()
-    .refine((val) => val === null || val.length >= 4, {
+    .refine((val) => val === null || val.length >= 3, {
       message: "Endereço deve ter no mínimo 3 caracteres",
     })
     .refine((val) => val === null || val.length <= 50, {

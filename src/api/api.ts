@@ -86,6 +86,7 @@ async function request<TResponse = any, TData = any>({
       : {};
 
     const api = await axiosInstance({});
+
     const response: AxiosResponse<TResponse> = await api.request<TResponse>({
       method,
       url: endpoint,
@@ -110,6 +111,7 @@ async function request<TResponse = any, TData = any>({
 
     return rawResponse ? response : response.data;
   } catch (error) {
+    console.error("Erro na requisição:", error);
     if (isAxiosError(error)) {
       throw error;
     }

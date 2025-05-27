@@ -88,7 +88,7 @@ export default function LoginForm() {
   const handleVerificarCodigo = async (data: z.infer<typeof codeSchema>) => {
     try {
       setLoading(true);
-      login({ email, codigo: data.code });
+      await login({ email, codigo: data.code });
     } catch (error: any) {
       if (error?.message === "Código não encontrado") {
         codeForm.setError("code", {
@@ -96,7 +96,7 @@ export default function LoginForm() {
           message: error.message,
         });
       } else {
-        toast.error("Erro ao verificar código de acesso");
+        toast.error(error.message);
       }
     } finally {
       setLoading(false);

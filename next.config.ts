@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["avatars.githubusercontent.com"],
   },
+  allowedDevOrigins: ["http://10.0.0.208:3000"],
   reactStrictMode: false,
   logging: {
     fetches: {

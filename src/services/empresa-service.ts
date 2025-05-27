@@ -49,7 +49,7 @@ export const empresaService = {
       };
 
       await axios.post(
-        `http://localhost:3000/api/autenticacao/login`,
+        `${process.env.NEXT_PUBLIC_NEXT_API_BASE_URL}/autenticacao/login`,
         payload,
         {
           headers: {
