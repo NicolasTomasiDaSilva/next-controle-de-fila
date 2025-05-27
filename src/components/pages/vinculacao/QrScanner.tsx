@@ -111,7 +111,7 @@ export function QrScanner({ onScan, onClose }: QrScannerProps) {
       {/* Vídeo com brilho reduzido e blur para dar destaque na área do scanner */}
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover brightness-75 blur-[1px]"
+        className="absolute inset-0 w-full h-full object-cover brightness-75"
         muted
         playsInline
         autoPlay
