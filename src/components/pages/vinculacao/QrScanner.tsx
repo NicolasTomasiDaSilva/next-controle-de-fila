@@ -194,7 +194,7 @@ export function QrScanner({ onScan, onClose }: QrScannerProps) {
       <div className="pointer-events-none fixed inset-0 z-20 flex flex-col">
         <div className="flex-grow bg-black/70" />
         <div className="relative flex justify-center">
-          <div className="w-80 h-80 border-4 border-white rounded-lg relative overflow-hidden">
+          <div className="w-80 h-80 border-4 border-white relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-green-400 animate-scanLine" />
           </div>
         </div>
