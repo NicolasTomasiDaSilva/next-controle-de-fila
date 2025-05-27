@@ -42,7 +42,15 @@ export default function VinculacaoContent() {
     codeForm.setValue("code", code);
     setQrScannerOpen(false);
   }
-  async function handleVerificarCodigo(data: z.infer<typeof codeSchema>) {}
+
+  async function handleVerificarCodigo(data: z.infer<typeof codeSchema>) {
+    try {
+      setLoading(true);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div
