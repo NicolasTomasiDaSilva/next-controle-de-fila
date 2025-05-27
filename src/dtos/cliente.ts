@@ -1,14 +1,14 @@
 import { clienteSchema } from "@/models/cliente";
 import { z } from "zod";
 
-export const adicionarClienteDTOSchema = clienteSchema.pick({
+export const adicionarClienteSchema = clienteSchema.pick({
   filaId: true,
   nome: true,
   telefone: true,
   observacao: true,
 });
 
-export type AdicionarClienteDTO = z.infer<typeof adicionarClienteDTOSchema>;
+export type AdicionarClienteDTO = z.infer<typeof adicionarClienteSchema>;
 
 export const clienteFormSchema = clienteSchema.pick({
   nome: true,

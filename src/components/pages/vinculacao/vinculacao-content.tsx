@@ -25,16 +25,13 @@ import {
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { QrScanner } from "./QrScanner";
-
-const codeSchema = z.object({
-  code: z.string().regex(/^\d{4}$/, { message: "Código inválido" }),
-});
+import { codigoVinculacaoDTO, codigoVinculacaoSchema } from "@/models/codigos";
 
 export default function VinculacaoContent() {
   const [qrScannerOpen, setQrScannerOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const codeForm = useForm<z.infer<typeof codeSchema>>({
-    resolver: zodResolver(codeSchema),
+  const codeForm = useForm<codigoVinculacaoDTO>({
+    resolver: zodResolver(codigoVinculacaoSchema),
     defaultValues: { code: "" },
   });
 
@@ -43,7 +40,7 @@ export default function VinculacaoContent() {
     setQrScannerOpen(false);
   }
 
-  async function handleVerificarCodigo(data: z.infer<typeof codeSchema>) {
+  async function handleVerificarCodigo(data: codigoVinculacaoDTO) {
     try {
       setLoading(true);
     } catch (error) {

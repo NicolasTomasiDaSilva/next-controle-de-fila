@@ -25,13 +25,10 @@ import Link from "next/link";
 import { useCooldown } from "@/hooks/use-cooldown";
 import { toast } from "sonner";
 import { empresaService } from "@/services/empresa-service";
+import { codigoAcessoDTO, codigoAcessoSchema } from "@/models/codigos";
 
 export const emailSchema = empresaSchema.pick({
   email: true,
-});
-
-const codeSchema = z.object({
-  code: z.string().regex(/^\d{6}$/, { message: "Código inválido" }),
 });
 
 export default function LoginForm() {
@@ -46,8 +43,8 @@ export default function LoginForm() {
     defaultValues: { email: "" },
   });
 
-  const codeForm = useForm<z.infer<typeof codeSchema>>({
-    resolver: zodResolver(codeSchema),
+  const codeForm = useForm<codigoAcessoDTO>({
+    resolver: zodResolver(codigoAcessoSchema),
     defaultValues: { code: "" },
   });
 
@@ -85,7 +82,7 @@ export default function LoginForm() {
     }
   };
 
-  const handleVerificarCodigo = async (data: z.infer<typeof codeSchema>) => {
+  const handleVerificarCodigo = async (data: codigoAcessoDTO) => {
     try {
       setLoading(true);
       await login({ email, codigo: data.code });
