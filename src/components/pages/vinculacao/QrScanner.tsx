@@ -85,13 +85,37 @@ export function QrScanner({ onScan, onClose }: QrScannerProps) {
 
       {/* Overlays ao redor da área do scanner */}
       <div className="fixed inset-0 z-20 pointer-events-none">
-        <div className="absolute top-0 left-0 right-0 h-[calc(50%-9rem)] bg-black bg-opacity-60 backdrop-blur-sm" />
-        <div className="absolute bottom-0 left-0 right-0 h-[calc(50%-9rem)] bg-black bg-opacity-60 backdrop-blur-sm" />
-        <div className="absolute top-[calc(50%-9rem)] bottom-[calc(50%-9rem)] left-0 w-[calc(50%-9rem)] bg-black bg-opacity-60 backdrop-blur-sm" />
-        <div className="absolute top-[calc(50%-9rem)] bottom-[calc(50%-9rem)] right-0 w-[calc(50%-9rem)] bg-black bg-opacity-60 backdrop-blur-sm" />
+        <div
+          className="absolute top-0 left-0 right-0"
+          style={{
+            height: "calc(50% - 9rem)",
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+          }}
+        />
+        <div
+          className="absolute bottom-0 left-0 right-0"
+          style={{
+            height: "calc(50% - 9rem)",
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+          }}
+        />
+        <div
+          className="absolute top-[calc(50%-9rem)] bottom-[calc(50%-9rem)] left-0"
+          style={{
+            width: "calc(50% - 9rem)",
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+          }}
+        />
+        <div
+          className="absolute top-[calc(50%-9rem)] bottom-[calc(50%-9rem)] right-0"
+          style={{
+            width: "calc(50% - 9rem)",
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+          }}
+        />
       </div>
 
-      <div className="absolute top-1/2 left-1/2 w-72 h-72 -translate-x-1/2 -translate-y-1/2 border-4 border-white rounded-lg relative overflow-hidden z-30">
+      <div className="absolute top-1/2 left-1/2 w-72 h-72 -translate-x-1/2 -translate-y-1/2 border-4 border-white relative overflow-hidden z-30">
         <div className="absolute top-0 left-0 w-full h-1 bg-green-400 animate-scanLine" />
       </div>
 
