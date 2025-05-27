@@ -135,10 +135,10 @@ export function QrScanner({ onScan, onClose }: QrScannerProps) {
 
           onClose();
         }}
-        className="absolute top-4 right-4 z-40 p-2 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition"
+        className="cursor-pointer absolute top-4 right-4 z-40 p-2 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition"
         aria-label="Fechar scanner"
       >
-        <X className="w-6 h-6" />
+        <X className="w-6 h-6 " />
       </button>
 
       <style jsx>{`
