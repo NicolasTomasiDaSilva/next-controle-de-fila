@@ -30,13 +30,14 @@ import { codigoVinculacaoDTO, codigoVinculacaoSchema } from "@/models/codigos";
 export default function VinculacaoContent() {
   const [qrScannerOpen, setQrScannerOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const codeForm = useForm<codigoVinculacaoDTO>({
+
+  const codigoAcessoForm = useForm<codigoVinculacaoDTO>({
     resolver: zodResolver(codigoVinculacaoSchema),
-    defaultValues: { code: "" },
+    defaultValues: { codigo: "" },
   });
 
   function handleQrScan(code: string) {
-    codeForm.setValue("code", code);
+    codigoAcessoForm.setValue("codigo", code);
     setQrScannerOpen(false);
   }
 
@@ -76,9 +77,9 @@ export default function VinculacaoContent() {
           </p>
         </CardContent>
         <CardFooter className="block space-y-4">
-          <Form {...codeForm}>
+          <Form {...codigoAcessoForm}>
             <form
-              onSubmit={codeForm.handleSubmit(handleVerificarCodigo)}
+              onSubmit={codigoAcessoForm.handleSubmit(handleVerificarCodigo)}
               className="space-y-4"
             >
               <div className="flex flex-row gap-2 justify-center">
@@ -99,8 +100,8 @@ export default function VinculacaoContent() {
                   />
                 )}
                 <FormField
-                  control={codeForm.control}
-                  name="code"
+                  control={codigoAcessoForm.control}
+                  name="codigo"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>

@@ -43,9 +43,8 @@ export default function LoginForm() {
     defaultValues: { email: "" },
   });
 
-  const codeForm = useForm<codigoAcessoDTO>({
+  const codigoAcessoForm = useForm<codigoAcessoDTO>({
     resolver: zodResolver(codigoAcessoSchema),
-    defaultValues: { code: "" },
   });
 
   const handleEnviarCodigo = async (data: z.infer<typeof emailSchema>) => {
@@ -85,10 +84,10 @@ export default function LoginForm() {
   const handleVerificarCodigo = async (data: codigoAcessoDTO) => {
     try {
       setLoading(true);
-      await login({ email, codigo: data.code });
+      await login({ email, codigo: data.codigo });
     } catch (error: any) {
       if (error?.message === "Código não encontrado") {
-        codeForm.setError("code", {
+        codigoAcessoForm.setError("codigo", {
           type: "manual",
           message: error.message,
         });
@@ -153,14 +152,14 @@ export default function LoginForm() {
       )}
 
       {step === 2 && (
-        <Form {...codeForm}>
+        <Form {...codigoAcessoForm}>
           <form
-            onSubmit={codeForm.handleSubmit(handleVerificarCodigo)}
+            onSubmit={codigoAcessoForm.handleSubmit(handleVerificarCodigo)}
             className="space-y-4"
           >
             <FormField
-              control={codeForm.control}
-              name="code"
+              control={codigoAcessoForm.control}
+              name="codigo"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Código</FormLabel>
