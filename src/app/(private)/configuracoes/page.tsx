@@ -11,7 +11,7 @@ export default async function ConfiguracaoPage() {
             return <Palette className={`${cor}`} />;
           }}
           titulo="Customizar Aparência"
-          texto="Personalize as cores do monitor de exibição para melhorar a experiência visual dos seus clientes."
+          texto="Personalize as cores do monitor de exibição para melhorar a experiência visual dos seus clientes"
           className="col-span-2 sm:col-span-1"
           cor="red"
           link="/aparencia"
@@ -21,7 +21,7 @@ export default async function ConfiguracaoPage() {
             return <MessageSquare className={`${cor}`} />;
           }}
           titulo="Customizar Mensagem"
-          texto="Crie mensagens personalizadas no WhatsApp para diferentes situações e melhore a comunicação com seus clientes."
+          texto="Crie mensagens personalizadas no WhatsApp para diferentes situações e melhore a comunicação com seus clientes"
           className="col-span-2 sm:col-span-1"
           cor="purple"
           link="/mensagens"
@@ -31,7 +31,7 @@ export default async function ConfiguracaoPage() {
             return <MessageCircle className={`${cor}`} />;
           }}
           titulo="Vinculação WhatsApp"
-          texto="Vincule seu número para enviar notificações e atualizações da fila diretamente para os clientes."
+          texto="Vincule seu número para enviar notificações e atualizações da fila diretamente para os clientes"
           className="col-span-2 sm:col-span-1"
           cor="green"
           link="/whatsapp"
@@ -41,7 +41,7 @@ export default async function ConfiguracaoPage() {
             return <Monitor className={`${cor}`} />;
           }}
           titulo="Vinculação Monitor"
-          texto="Crie mensagens personalizadas no WhatsApp para diferentes situações e melhore a comunicação com seus clientes."
+          texto="Crie mensagens personalizadas no WhatsApp para diferentes situações e melhore a comunicação com seus clientes"
           className="col-span-2 sm:col-span-1"
           cor="cyan"
           link="/vinculacao"

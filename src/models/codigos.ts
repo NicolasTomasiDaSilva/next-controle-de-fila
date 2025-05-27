@@ -7,7 +7,9 @@ export const codigoAcessoSchema = z.object({
 export type codigoAcessoDTO = z.infer<typeof codigoAcessoSchema>;
 
 export const codigoVinculacaoSchema = z.object({
-  codigo: z.string().regex(/^\d{4}$/, { message: "Código inválido" }),
+  codigo: z
+    .string()
+    .regex(/^[a-zA-Z0-9]{0,4}$/, { message: "Código inválido" }),
 });
 
 export type codigoVinculacaoDTO = z.infer<typeof codigoVinculacaoSchema>;

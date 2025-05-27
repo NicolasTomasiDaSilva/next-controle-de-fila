@@ -23,28 +23,51 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { QrScanner } from "./QrScanner";
 import { codigoVinculacaoDTO, codigoVinculacaoSchema } from "@/models/codigos";
+import { useVinculacao } from "@/hooks/use-vinculacao";
+import { EmpresaContext } from "@/contexts/empresa-context";
+import { useEmpresa } from "@/hooks/use-empresa";
+import { toast } from "sonner";
 
 export default function VinculacaoContent() {
+  const { empresa } = useEmpresa();
+  const { vincularMonitor } = useVinculacao();
   const [qrScannerOpen, setQrScannerOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const codigoAcessoForm = useForm<codigoVinculacaoDTO>({
+  const codigoVinculacaoForm = useForm<codigoVinculacaoDTO>({
     resolver: zodResolver(codigoVinculacaoSchema),
     defaultValues: { codigo: "" },
   });
 
   function handleQrScan(code: string) {
-    codigoAcessoForm.setValue("codigo", code);
+    codigoVinculacaoForm.setValue("codigo", code);
     setQrScannerOpen(false);
   }
 
   async function handleVerificarCodigo(data: codigoVinculacaoDTO) {
     try {
       setLoading(true);
-    } catch (error) {
+      const filaId = empresa.filas[0].id;
+      await vincularMonitor({
+        codigo: data.codigo,
+        filaId: filaId,
+        observacao: null,
+      });
+      codigoVinculacaoForm.setValue("codigo", "");
+      toast.success("Monitor vinculado com sucesso.");
+    } catch (error: any) {
+      if (error.message === "Código não encontrado") {
+        codigoVinculacaoForm.setError("codigo", {
+          type: "manual",
+          message: error.message,
+        });
+        toast.error("Código não encontrado.");
+      } else {
+        toast.error("Erro ao vincular monitor.");
+      }
     } finally {
       setLoading(false);
     }
@@ -77,9 +100,11 @@ export default function VinculacaoContent() {
           </p>
         </CardContent>
         <CardFooter className="block space-y-4">
-          <Form {...codigoAcessoForm}>
+          <Form {...codigoVinculacaoForm}>
             <form
-              onSubmit={codigoAcessoForm.handleSubmit(handleVerificarCodigo)}
+              onSubmit={codigoVinculacaoForm.handleSubmit(
+                handleVerificarCodigo
+              )}
               className="space-y-4"
             >
               <div className="flex flex-row gap-2 justify-center">
@@ -100,7 +125,7 @@ export default function VinculacaoContent() {
                   />
                 )}
                 <FormField
-                  control={codigoAcessoForm.control}
+                  control={codigoVinculacaoForm.control}
                   name="codigo"
                   render={({ field }) => (
                     <FormItem>
@@ -108,12 +133,12 @@ export default function VinculacaoContent() {
                         <Input
                           className="w-35"
                           placeholder="Digite o código"
-                          type="numeric"
+                          type="text"
                           {...field}
                           onChange={(e) => {
                             const value = e.target.value;
-                            if (/^\d{0,4}$/.test(value)) {
-                              field.onChange(e);
+                            if (/^[a-zA-Z0-9]{0,4}$/.test(value)) {
+                              field.onChange(value);
                             }
                           }}
                         />

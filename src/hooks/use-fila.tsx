@@ -9,7 +9,7 @@ import { filaService } from "@/services/fila-service";
 import { useContext } from "react";
 import { toast } from "sonner";
 
-export const useFila = () => {
+export function useFila() {
   const context = useContext(FilaContext);
   if (context === undefined) {
     throw new Error("useUser must be used within a UserProvider");
@@ -155,4 +155,4 @@ export const useFila = () => {
     handleAtender,
     handleVoltar,
   };
-};
+}
