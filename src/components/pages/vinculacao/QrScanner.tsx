@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { BrowserMultiFormatReader } from "@zxing/library";
+import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 import { Button } from "@/components/ui/button";
 
 interface QrScannerProps {
@@ -11,37 +11,82 @@ interface QrScannerProps {
 
 export function QrScanner({ onScan, onClose }: QrScannerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const codeReader = useRef<BrowserMultiFormatReader | null>(null);
+  const codeReaderRef = useRef<BrowserMultiFormatReader | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const scanning = useRef(true);
 
   useEffect(() => {
-    codeReader.current = new BrowserMultiFormatReader();
+    const codeReader = new BrowserMultiFormatReader();
+    codeReaderRef.current = codeReader;
 
-    codeReader.current
-      .listVideoInputDevices()
-      .then((videoInputDevices) => {
-        const deviceId =
-          videoInputDevices.length > 1
-            ? videoInputDevices[videoInputDevices.length - 1].deviceId
-            : videoInputDevices[0].deviceId;
+    async function setupCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: { ideal: "environment" } },
+        });
+
+        streamRef.current = stream;
 
         if (videoRef.current) {
-          codeReader.current?.decodeFromVideoDevice(
-            deviceId,
-            videoRef.current,
-            (result, err) => {
-              if (result) {
-                onScan(result.getText());
-                codeReader.current?.reset();
-                onClose();
-              }
-            }
-          );
+          videoRef.current.srcObject = stream;
+          videoRef.current.setAttribute("playsinline", "true");
+          await videoRef.current.play();
         }
-      })
-      .catch(console.error);
+
+        startDecoding();
+      } catch (err) {
+        console.error("Erro ao acessar a câmera:", err);
+        alert(
+          "Erro ao acessar a câmera. Verifique as permissões e tente novamente."
+        );
+      }
+    }
+
+    async function startDecoding() {
+      if (!codeReaderRef.current || !videoRef.current) return;
+
+      scanning.current = true;
+
+      while (scanning.current) {
+        try {
+          const result = await codeReaderRef.current.decodeFromVideoElement(
+            videoRef.current
+          );
+          if (result) {
+            scanning.current = false;
+            onScan(result.getText());
+            handleClose();
+          }
+        } catch (err) {
+          if (!(err instanceof NotFoundException)) {
+            console.error("Erro ao decodificar QR Code:", err);
+          }
+          // NotFoundException pode acontecer constantemente enquanto nada é detectado
+          // Ignoramos até encontrar um código válido
+        }
+      }
+    }
+
+    function handleClose() {
+      scanning.current = false;
+      codeReaderRef.current?.reset();
+
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop());
+        streamRef.current = null;
+      }
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = null;
+      }
+
+      onClose();
+    }
+
+    setupCamera();
 
     return () => {
-      codeReader.current?.reset();
+      handleClose();
     };
   }, [onScan, onClose]);
 
@@ -55,7 +100,6 @@ export function QrScanner({ onScan, onClose }: QrScannerProps) {
           playsInline
           autoPlay
         />
-        {/* Overlay para ajudar a posicionar o QR code */}
         <div
           aria-hidden="true"
           className="absolute top-1/2 left-1/2 w-72 h-72 -translate-x-1/2 -translate-y-1/2 border-4 border-white rounded-md pointer-events-none"
@@ -67,7 +111,18 @@ export function QrScanner({ onScan, onClose }: QrScannerProps) {
         className="mt-4"
         variant="destructive"
         onClick={() => {
-          codeReader.current?.reset();
+          scanning.current = false;
+          codeReaderRef.current?.reset();
+
+          if (streamRef.current) {
+            streamRef.current.getTracks().forEach((track) => track.stop());
+            streamRef.current = null;
+          }
+
+          if (videoRef.current) {
+            videoRef.current.srcObject = null;
+          }
+
           onClose();
         }}
       >
