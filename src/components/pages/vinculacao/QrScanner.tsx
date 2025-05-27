@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { BrowserMultiFormatReader, Result } from "@zxing/library";
+import { BrowserMultiFormatReader } from "@zxing/library";
 import { X } from "lucide-react";
 
 interface QrScannerProps {
@@ -12,133 +12,141 @@ interface QrScannerProps {
 export function QrScanner({ onScan, onClose }: QrScannerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const codeReaderRef = useRef<BrowserMultiFormatReader | null>(null);
-  const streamRef = useRef<MediaStream | null>(null);
-  const scannedRef = useRef(false);
 
   useEffect(() => {
+    console.log("🔄 Iniciando QrScanner...");
+
     const codeReader = new BrowserMultiFormatReader();
     codeReaderRef.current = codeReader;
 
-    async function setupCamera() {
+    async function startScanner() {
+      if (!videoRef.current) {
+        console.error("❌ Video element não encontrado");
+        return;
+      }
+
       try {
+        // Lista dispositivos e escolhe a câmera traseira (se houver)
+        const videoInputDevices = await codeReader.listVideoInputDevices();
+        console.log("📷 Dispositivos de vídeo disponíveis:", videoInputDevices);
+
+        const rearCamera = videoInputDevices.find(
+          (device) =>
+            device.label.toLowerCase().includes("back") ||
+            device.label.toLowerCase().includes("rear") ||
+            device.label.toLowerCase().includes("environment")
+        );
+        const selectedDeviceId =
+          rearCamera?.deviceId ?? videoInputDevices[0]?.deviceId ?? null;
+        console.log("🎯 Usando deviceId:", selectedDeviceId);
+
+        // Solicita o stream com configurações para melhor qualidade
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: { ideal: "environment" } },
+          video: {
+            deviceId: selectedDeviceId
+              ? { exact: selectedDeviceId }
+              : undefined,
+            facingMode: "environment",
+            width: { ideal: 1280 },
+            height: { ideal: 720 },
+          },
         });
 
-        streamRef.current = stream;
+        videoRef.current.srcObject = stream;
+        await videoRef.current.play();
 
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          videoRef.current.setAttribute("playsinline", "true");
-          await videoRef.current.play();
-        }
+        // Decodifica o stream diretamente, usando a stream configurada
+        codeReader.decodeFromStream(
+          stream,
+          videoRef.current,
+          (result, error) => {
+            console.log("🌀 Frame analisado");
 
-        codeReader.decodeFromVideoElementContinuously(
-          videoRef.current!,
-          (result: Result | undefined) => {
-            if (result && !scannedRef.current) {
-              scannedRef.current = true;
-              onScan(result.getText());
-              handleClose();
+            if (result) {
+              const text = result.getText();
+              console.log("✅ QR Code detectado:", text);
+              onScan(text);
+            }
+
+            if (error) {
+              if (
+                error.name !== "NotFoundException" &&
+                error.name !== "ChecksumException" &&
+                error.name !== "FormatException"
+              ) {
+                console.warn("⚠️ Erro de decodificação:", error);
+              }
             }
           }
         );
+
+        console.log("▶️ Decodificação iniciada");
       } catch (err) {
-        console.error("Erro ao acessar a câmera:", err);
+        console.error("❌ Erro ao acessar a câmera:", err);
         alert(
-          "Erro ao acessar a câmera. Verifique as permissões e tente novamente."
+          "Erro ao acessar a câmera. Verifique permissões e tente novamente."
         );
+        onClose();
       }
     }
 
-    function handleClose() {
+    startScanner();
+
+    return () => {
+      console.log("🛑 Resetando e parando scanner");
       codeReader.reset();
 
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((track) => track.stop());
-        streamRef.current = null;
-      }
-
-      if (videoRef.current) {
+      if (videoRef.current && videoRef.current.srcObject) {
+        const stream = videoRef.current.srcObject as MediaStream;
+        stream.getTracks().forEach((track) => track.stop());
         videoRef.current.srcObject = null;
       }
 
       onClose();
-    }
-
-    setupCamera();
-
-    return () => {
-      handleClose();
     };
   }, [onScan, onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black">
+    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+      {/* Vídeo com brilho reduzido e blur para dar destaque na área do scanner */}
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover brightness-75 blur-[1px]"
         muted
         playsInline
         autoPlay
       />
 
-      {/* Overlays ao redor da área do scanner */}
-      <div className="fixed inset-0 z-20 pointer-events-none">
-        <div
-          className="absolute top-0 left-0 right-0"
-          style={{
-            height: "calc(50% - 9rem)",
-            backgroundColor: "rgba(0, 0, 0, 0.4)",
-          }}
-        />
-        <div
-          className="absolute bottom-0 left-0 right-0"
-          style={{
-            height: "calc(50% - 9rem)",
-            backgroundColor: "rgba(0, 0, 0, 0.4)",
-          }}
-        />
-        <div
-          className="absolute top-[calc(50%-9rem)] bottom-[calc(50%-9rem)] left-0"
-          style={{
-            width: "calc(50% - 9rem)",
-            backgroundColor: "rgba(0, 0, 0, 0.4)",
-          }}
-        />
-        <div
-          className="absolute top-[calc(50%-9rem)] bottom-[calc(50%-9rem)] right-0"
-          style={{
-            width: "calc(50% - 9rem)",
-            backgroundColor: "rgba(0, 0, 0, 0.4)",
-          }}
-        />
+      {/* Máscara escura ao redor da área do scanner */}
+      <div className="pointer-events-none fixed inset-0 z-20 flex flex-col">
+        <div className="flex-grow bg-black/70" />
+        <div className="relative flex justify-center">
+          <div className="w-80 h-80 border-4 border-white rounded-lg relative overflow-hidden">
+            {/* Linha animada */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-green-400 animate-scanLine" />
+          </div>
+        </div>
+        <div className="flex-grow bg-black/70" />
       </div>
 
-      <div className="absolute top-1/2 left-1/2 w-72 h-72 -translate-x-1/2 -translate-y-1/2 border-4 border-white relative overflow-hidden z-30">
-        <div className="absolute top-0 left-0 w-full h-1 bg-green-400 animate-scanLine" />
+      {/* Máscaras laterais para cobrir fora da área do scanner */}
+      <div className="pointer-events-none fixed inset-0 z-20 flex items-center justify-center">
+        <div className="w-[calc(50%-10rem)] h-80 bg-black/70" />
+        <div className="w-80 h-80 relative" />
+        <div className="w-[calc(50%-10rem)] h-80 bg-black/70" />
       </div>
 
+      {/* Botão fechar */}
       <button
         onClick={() => {
-          scannedRef.current = true;
+          console.log("❎ Scanner fechado pelo usuário");
           codeReaderRef.current?.reset();
-
-          if (streamRef.current) {
-            streamRef.current.getTracks().forEach((track) => track.stop());
-            streamRef.current = null;
-          }
-
-          if (videoRef.current) {
-            videoRef.current.srcObject = null;
-          }
-
           onClose();
         }}
         className="cursor-pointer absolute top-4 right-4 z-40 p-2 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition"
         aria-label="Fechar scanner"
       >
-        <X className="w-6 h-6 " />
+        <X className="w-6 h-6" />
       </button>
 
       <style jsx>{`
