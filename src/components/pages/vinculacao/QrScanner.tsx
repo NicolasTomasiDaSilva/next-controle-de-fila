@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
-import { Button } from "@/components/ui/button";
+import { BrowserMultiFormatReader, Result } from "@zxing/library";
+import { X } from "lucide-react";
 
 interface QrScannerProps {
   onScan: (decodedText: string) => void;
@@ -13,7 +13,7 @@ export function QrScanner({ onScan, onClose }: QrScannerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const codeReaderRef = useRef<BrowserMultiFormatReader | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
-  const scanning = useRef(true);
+  const scannedRef = useRef(false);
 
   useEffect(() => {
     const codeReader = new BrowserMultiFormatReader();
@@ -33,7 +33,16 @@ export function QrScanner({ onScan, onClose }: QrScannerProps) {
           await videoRef.current.play();
         }
 
-        startDecoding();
+        codeReader.decodeFromVideoElementContinuously(
+          videoRef.current!,
+          (result: Result | undefined) => {
+            if (result && !scannedRef.current) {
+              scannedRef.current = true;
+              onScan(result.getText());
+              handleClose();
+            }
+          }
+        );
       } catch (err) {
         console.error("Erro ao acessar a câmera:", err);
         alert(
@@ -42,34 +51,8 @@ export function QrScanner({ onScan, onClose }: QrScannerProps) {
       }
     }
 
-    async function startDecoding() {
-      if (!codeReaderRef.current || !videoRef.current) return;
-
-      scanning.current = true;
-
-      while (scanning.current) {
-        try {
-          const result = await codeReaderRef.current.decodeFromVideoElement(
-            videoRef.current
-          );
-          if (result) {
-            scanning.current = false;
-            onScan(result.getText());
-            handleClose();
-          }
-        } catch (err) {
-          if (!(err instanceof NotFoundException)) {
-            console.error("Erro ao decodificar QR Code:", err);
-          }
-          // NotFoundException pode acontecer constantemente enquanto nada é detectado
-          // Ignoramos até encontrar um código válido
-        }
-      }
-    }
-
     function handleClose() {
-      scanning.current = false;
-      codeReaderRef.current?.reset();
+      codeReader.reset();
 
       if (streamRef.current) {
         streamRef.current.getTracks().forEach((track) => track.stop());
@@ -91,27 +74,30 @@ export function QrScanner({ onScan, onClose }: QrScannerProps) {
   }, [onScan, onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 flex flex-col items-center justify-center p-4">
-      <div className="relative w-full h-[calc(100vh-200px)] rounded-md overflow-hidden max-w-none">
-        <video
-          ref={videoRef}
-          className="w-full h-full object-cover"
-          muted
-          playsInline
-          autoPlay
-        />
-        <div
-          aria-hidden="true"
-          className="absolute top-1/2 left-1/2 w-72 h-72 -translate-x-1/2 -translate-y-1/2 border-4 border-white rounded-md pointer-events-none"
-          style={{ boxShadow: "0 0 0 9999px rgba(0, 0, 0, 0.6)" }}
-        />
+    <div className="fixed inset-0 z-50 bg-black">
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        muted
+        playsInline
+        autoPlay
+      />
+
+      {/* Overlays ao redor da área do scanner */}
+      <div className="fixed inset-0 z-20 pointer-events-none">
+        <div className="absolute top-0 left-0 right-0 h-[calc(50%-9rem)] bg-black bg-opacity-60 backdrop-blur-sm" />
+        <div className="absolute bottom-0 left-0 right-0 h-[calc(50%-9rem)] bg-black bg-opacity-60 backdrop-blur-sm" />
+        <div className="absolute top-[calc(50%-9rem)] bottom-[calc(50%-9rem)] left-0 w-[calc(50%-9rem)] bg-black bg-opacity-60 backdrop-blur-sm" />
+        <div className="absolute top-[calc(50%-9rem)] bottom-[calc(50%-9rem)] right-0 w-[calc(50%-9rem)] bg-black bg-opacity-60 backdrop-blur-sm" />
       </div>
 
-      <Button
-        className="mt-4"
-        variant="destructive"
+      <div className="absolute top-1/2 left-1/2 w-72 h-72 -translate-x-1/2 -translate-y-1/2 border-4 border-white rounded-lg relative overflow-hidden z-30">
+        <div className="absolute top-0 left-0 w-full h-1 bg-green-400 animate-scanLine" />
+      </div>
+
+      <button
         onClick={() => {
-          scanning.current = false;
+          scannedRef.current = true;
           codeReaderRef.current?.reset();
 
           if (streamRef.current) {
@@ -125,9 +111,29 @@ export function QrScanner({ onScan, onClose }: QrScannerProps) {
 
           onClose();
         }}
+        className="absolute top-4 right-4 z-40 p-2 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 transition"
+        aria-label="Fechar scanner"
       >
-        Fechar
-      </Button>
+        <X className="w-6 h-6" />
+      </button>
+
+      <style jsx>{`
+        @keyframes scanLine {
+          0% {
+            top: 0;
+          }
+          100% {
+            top: calc(100% - 4px);
+          }
+        }
+        .animate-scanLine {
+          animation: scanLine 2s infinite linear;
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 4px;
+        }
+      `}</style>
     </div>
   );
 }
