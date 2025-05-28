@@ -10,7 +10,7 @@ export default async function ConfiguracaoPage() {
           icone={(cor: string) => {
             return <Palette className={`${cor}`} />;
           }}
-          titulo="Customizar Aparência"
+          titulo="Customização Aparência"
           texto="Personalize as cores do monitor de exibição para melhorar a experiência visual dos seus clientes"
           className="col-span-2 sm:col-span-1"
           cor="red"
@@ -20,7 +20,7 @@ export default async function ConfiguracaoPage() {
           icone={(cor: string) => {
             return <MessageSquare className={`${cor}`} />;
           }}
-          titulo="Customizar Mensagens"
+          titulo="Customização Mensagens"
           texto="Crie mensagens personalizadas no WhatsApp para diferentes situações e melhore a comunicação com seus clientes"
           className="col-span-2 sm:col-span-1"
           cor="purple"
@@ -30,7 +30,7 @@ export default async function ConfiguracaoPage() {
           icone={(cor: string) => {
             return <MessageCircle className={`${cor}`} />;
           }}
-          titulo="Vincular WhatsApp"
+          titulo="Vinculação WhatsApp"
           texto="Vincule seu número para enviar notificações e atualizações da fila diretamente para os clientes"
           className="col-span-2 sm:col-span-1"
           cor="green"
@@ -40,7 +40,7 @@ export default async function ConfiguracaoPage() {
           icone={(cor: string) => {
             return <Monitor className={`${cor}`} />;
           }}
-          titulo="Vincular Monitor"
+          titulo="Vinculação Monitor"
           texto="Crie mensagens personalizadas no WhatsApp para diferentes situações e melhore a comunicação com seus clientes"
           className="col-span-2 sm:col-span-1"
           cor="cyan"

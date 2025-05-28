@@ -10,3 +10,11 @@ export const configuracaoFormSchema = configuracaoSchema.pick({
 });
 
 export type configuracaoFormDTO = z.infer<typeof configuracaoFormSchema>;
+
+export const mensagensFormSchema = configuracaoSchema.pick({
+  mensagemEntrada: true,
+  mensagemChamada: true,
+  mensagemRemovido: true,
+});
+
+export type mensagensFormDTO = z.infer<typeof mensagensFormSchema>;

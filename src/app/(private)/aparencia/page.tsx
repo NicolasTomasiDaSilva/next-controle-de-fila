@@ -13,7 +13,7 @@ export default async function AparenciaPage() {
   return (
     <EmpresaProvider empresaInicial={empresa}>
       <Section
-        title="Customizar Aparência"
+        title="Customização Aparência"
         linkRetorno={"/configuracoes"}
         cor="red"
       >

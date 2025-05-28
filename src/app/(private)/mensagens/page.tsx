@@ -4,6 +4,7 @@ import { Empresa } from "@/models/empresa";
 import { EmpresaProvider } from "@/contexts/empresa-context";
 
 import VinculacaoContent from "@/components/pages/vinculacao/vinculacao-content";
+import MensagensContent from "@/components/pages/mensagens/mensagens-content";
 
 export default async function MensagensPage() {
   const empresa: Empresa = await empresaService.obterEmpresa();
@@ -11,10 +12,12 @@ export default async function MensagensPage() {
   return (
     <EmpresaProvider empresaInicial={empresa}>
       <Section
-        title="Customizar Mensagens"
+        title="Customização Mensagens"
         linkRetorno={"/configuracoes"}
         cor="purple"
-      ></Section>
+      >
+        <MensagensContent></MensagensContent>
+      </Section>
     </EmpresaProvider>
   );
 }
