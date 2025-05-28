@@ -10,7 +10,11 @@ export default async function VinculacaoPage() {
 
   return (
     <EmpresaProvider empresaInicial={empresa}>
-      <Section title="Vinculação Monitor" linkRetorno={"/configuracoes"}>
+      <Section
+        title="Vinculação Monitor"
+        linkRetorno={"/configuracoes"}
+        cor="cyan"
+      >
         <VinculacaoContent></VinculacaoContent>
       </Section>
     </EmpresaProvider>

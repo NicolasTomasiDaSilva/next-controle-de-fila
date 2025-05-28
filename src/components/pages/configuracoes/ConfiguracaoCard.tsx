@@ -6,44 +6,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { sectionCores } from "@/constantes/section-cores";
 import { cn } from "@/lib/utils";
 import { ChevronRight, Palette } from "lucide-react";
 import Link from "next/link";
 import { JSX } from "react";
 
-const cores = {
-  blue: {
-    border: "border-blue-500",
-    bg: "bg-blue-200",
-    icon: "text-blue-500",
-  },
-  red: {
-    border: "border-red-500",
-    bg: "bg-red-200",
-    icon: "text-red-500",
-  },
-  green: {
-    border: "border-green-500",
-    bg: "bg-green-200",
-    icon: "text-green-500",
-  },
-  purple: {
-    border: "border-purple-500",
-    bg: "bg-purple-200",
-    icon: "text-purple-500",
-  },
-  cyan: {
-    border: "border-cyan-500",
-    bg: "bg-cyan-200",
-    icon: "text-cyan-500",
-  },
-};
-
 interface ConfiguracaoCardProps {
   icone: (cor: string) => JSX.Element;
   titulo: string;
   texto: string;
-  cor: keyof typeof cores;
+  cor: keyof typeof sectionCores;
   className?: string;
   link: string;
 }
@@ -56,13 +29,13 @@ export function ConfiguracaoCard({
   link,
   className,
 }: ConfiguracaoCardProps) {
-  const estilos = cores[cor];
+  const estilos = sectionCores[cor];
 
   return (
     <Card
       asChild
       className={cn(
-        "cursor-pointer transition-transform duration-300 bg-gradient-to-l from-blue-100/10 to-transparent hover:scale-101 group",
+        "cursor-pointer transition-transform duration-300  hover:scale-101 group",
         estilos.border,
         className
       )}

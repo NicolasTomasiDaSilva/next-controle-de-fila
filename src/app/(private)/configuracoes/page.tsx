@@ -30,7 +30,7 @@ export default async function ConfiguracaoPage() {
           icone={(cor: string) => {
             return <MessageCircle className={`${cor}`} />;
           }}
-          titulo="Vinculação WhatsApp"
+          titulo="Vincular WhatsApp"
           texto="Vincule seu número para enviar notificações e atualizações da fila diretamente para os clientes"
           className="col-span-2 sm:col-span-1"
           cor="green"
@@ -40,7 +40,7 @@ export default async function ConfiguracaoPage() {
           icone={(cor: string) => {
             return <Monitor className={`${cor}`} />;
           }}
-          titulo="Vinculação Monitor"
+          titulo="Vincular Monitor"
           texto="Crie mensagens personalizadas no WhatsApp para diferentes situações e melhore a comunicação com seus clientes"
           className="col-span-2 sm:col-span-1"
           cor="cyan"

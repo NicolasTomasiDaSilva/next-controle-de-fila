@@ -13,6 +13,7 @@ export default async function MensagensPage() {
       <Section
         title="Customizar Mensagens"
         linkRetorno={"/configuracoes"}
+        cor="purple"
       ></Section>
     </EmpresaProvider>
   );

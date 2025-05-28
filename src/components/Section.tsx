@@ -5,11 +5,13 @@ import { SectionTitle } from "./SectionTittle";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "./ui/button";
+import { sectionCores } from "@/constantes/section-cores";
 
 interface SectionProps {
   title: string;
   className?: string;
   linkRetorno?: string | null;
+  cor?: keyof typeof sectionCores | null;
   children?: React.ReactNode;
 }
 
@@ -17,8 +19,11 @@ export function Section({
   title,
   children,
   className,
+  cor,
   linkRetorno,
 }: SectionProps) {
+  const corSection = sectionCores[cor || "blue"];
+
   return (
     <section className={cn("pt-25 espaco-lateral-conteudo", className)}>
       <div className="mb-5 flex items-center gap-2 md:gap-5">
@@ -34,7 +39,7 @@ export function Section({
             </Button>
           </Link>
         )}
-        <SectionTitle title={title} />
+        <SectionTitle title={title} cor={corSection.traco} />
       </div>
 
       {children}
