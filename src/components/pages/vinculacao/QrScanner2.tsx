@@ -130,15 +130,15 @@ export function QrScanner2({ onScan, onClose }: QrScannerProps) {
         {/* Overlay com quadrado e linha */}
         {!cameraError && (
           <div className="pointer-events-none fixed inset-0 z-70 flex flex-col">
-            <div className="flex-grow bg-black/90" />
+            <div className="flex-grow bg-black/40" />
             <div className="flex items-center">
-              <div className="w-[calc(50%-10rem)] h-80 bg-black/90" />
+              <div className="w-[calc(50%-10rem)] h-80 bg-black/40" />
               <div className="relative w-80 h-80 border border-white overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-[2px] bg-green-400 animate-scanLine" />
               </div>
-              <div className="w-[calc(50%-10rem)] h-80 bg-black/90" />
+              <div className="w-[calc(50%-10rem)] h-80 bg-black/40" />
             </div>
-            <div className="flex-grow bg-black/90" />
+            <div className="flex-grow bg-black/40" />
           </div>
         )}
       </div>
