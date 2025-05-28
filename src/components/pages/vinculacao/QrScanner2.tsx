@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
 type QrScannerProps = {
@@ -12,12 +12,21 @@ export function QrScanner2({ onScan, onClose }: QrScannerProps) {
   const html5QrCodeRef = useRef<Html5Qrcode | null>(null);
   const isStoppingRef = useRef(false);
   const isStartedRef = useRef(false);
+  const [cameraError, setCameraError] = useState<string | null>(null);
 
-  const startScanner = useCallback(() => {
+  const startScanner = useCallback(async () => {
     if (!html5QrCodeRef.current) return;
 
-    html5QrCodeRef.current
-      .start(
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const hasCamera = devices.some((device) => device.kind === "videoinput");
+
+      if (!hasCamera) {
+        setCameraError("Nenhuma câmera foi encontrada no dispositivo.");
+        return;
+      }
+
+      await html5QrCodeRef.current.start(
         { facingMode: "environment" },
         {
           fps: 10,
@@ -28,15 +37,17 @@ export function QrScanner2({ onScan, onClose }: QrScannerProps) {
           onScan(decodedText);
         },
         (errorMessage) => {
-          // console.debug("Scan error:", errorMessage);
+          // Ignorado para não poluir console
         }
-      )
-      .then(() => {
-        isStartedRef.current = true;
-      })
-      .catch((err) => {
-        console.error("Erro ao iniciar scanner:", err);
-      });
+      );
+
+      isStartedRef.current = true;
+    } catch (err) {
+      console.error("Erro ao iniciar scanner:", err);
+      setCameraError(
+        "Não foi possível acessar a câmera. Verifique as permissões ou se a câmera está sendo usada por outro aplicativo."
+      );
+    }
   }, [onScan]);
 
   const stopScanner = useCallback(() => {
@@ -51,9 +62,7 @@ export function QrScanner2({ onScan, onClose }: QrScannerProps) {
 
     return html5QrCodeRef.current
       .stop()
-      .then(() => {
-        return html5QrCodeRef.current?.clear();
-      })
+      .then(() => html5QrCodeRef.current?.clear())
       .catch((err) => {
         console.warn("Erro ao parar scanner:", err);
       })
@@ -78,7 +87,7 @@ export function QrScanner2({ onScan, onClose }: QrScannerProps) {
       onClose();
     } catch (error) {
       console.error("Erro ao fechar scanner:", error);
-      onClose(); // Fecha mesmo se der erro para evitar travar a UI
+      onClose(); // Evita travar a UI
     }
   };
 
@@ -111,23 +120,27 @@ export function QrScanner2({ onScan, onClose }: QrScannerProps) {
           }}
         />
 
-        {/* Overlay escuro com o quadrado e linha */}
-        <div className="pointer-events-none fixed inset-0 z-70 flex flex-col">
-          <div className="flex-grow bg-black/90" /> {/* topo escuro */}
-          <div className="flex items-center">
-            <div className="w-[calc(50%-10rem)] h-80 bg-black/90" />{" "}
-            {/* lado esquerdo */}
-            <div className="relative w-80 h-80 border border-white rounded-sm overflow-hidden">
-              {/* Quadrado central com borda branca */}
-
-              {/* Linha verde animada */}
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-green-400 animate-scanLine" />
-            </div>
-            <div className="w-[calc(50%-10rem)] h-80 bg-black/90" />{" "}
-            {/* lado direito */}
+        {/* Mensagem de erro se necessário */}
+        {cameraError && (
+          <div className="absolute bottom-10 text-red-500 bg-black/80 px-4 py-2 rounded z-70 text-center max-w-sm">
+            {cameraError}
           </div>
-          <div className="flex-grow bg-black/90" /> {/* base escura */}
-        </div>
+        )}
+
+        {/* Overlay com quadrado e linha */}
+        {!cameraError && (
+          <div className="pointer-events-none fixed inset-0 z-70 flex flex-col">
+            <div className="flex-grow bg-black/90" />
+            <div className="flex items-center">
+              <div className="w-[calc(50%-10rem)] h-80 bg-black/90" />
+              <div className="relative w-80 h-80 border border-white overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-[2px] bg-green-400 animate-scanLine" />
+              </div>
+              <div className="w-[calc(50%-10rem)] h-80 bg-black/90" />
+            </div>
+            <div className="flex-grow bg-black/90" />
+          </div>
+        )}
       </div>
 
       <style jsx global>{`
@@ -144,8 +157,6 @@ export function QrScanner2({ onScan, onClose }: QrScannerProps) {
         #qr-reader video {
           width: 100% !important;
           height: 100% !important;
-          margin: 0;
-          padding: 0;
           position: absolute !important;
           top: 0 !important;
           left: 0 !important;
@@ -168,6 +179,7 @@ export function QrScanner2({ onScan, onClose }: QrScannerProps) {
             top: 0;
           }
         }
+
         .animate-scanLine {
           animation: scanLine 3s infinite ease-in-out;
           position: absolute;
