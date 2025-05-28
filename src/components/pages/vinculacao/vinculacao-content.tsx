@@ -48,7 +48,7 @@ export default function VinculacaoContent() {
 
   function handleQrScan(code: string) {
     setQrScannerOpen(false);
-    codigoVinculacaoForm.setValue("codigo", code, { shouldValidate: true });
+    codigoVinculacaoForm.setValue("codigo", code);
     formRef.current?.requestSubmit();
   }
 
