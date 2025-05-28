@@ -80,8 +80,8 @@ export default function VinculacaoContent() {
 
   return (
     <div
-      className="flex items-center justify-center px-4"
-      style={{ minHeight: "calc(100vh - 20rem)" }}
+      className="flex items-center justify-center"
+      style={{ height: "calc(100vh - 180px)" }}
     >
       <Card className="w-full max-w-md space-y-4">
         <CardHeader>
