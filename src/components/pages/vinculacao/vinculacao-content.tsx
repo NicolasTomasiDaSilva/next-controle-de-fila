@@ -82,23 +82,27 @@ export default function VinculacaoContent() {
     <Card className="max-w-md space-y-4 mx-auto ">
       <CardHeader>
         <CardTitle>Vincular Monitor</CardTitle>
-        <CardDescription>
-          Siga o passo a passo para vincular seu monitor
-        </CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-muted-foreground">
-          <span className="font-bold">1.</span> Acesse o link do monitor:
-          https://example.com
-        </p>
-        <p className="text-muted-foreground">
-          <span className="font-bold">2.</span> Insira o CPF ou CNPJ no campo de
-          texto
-        </p>
-        <p className="text-muted-foreground">
-          <span className="font-bold">3.</span> Insira o código de 4 dígitos ou
-          escaneie o QR Code
-        </p>
+        <Card className="bg-gray-50 shadow-sm">
+          <CardHeader>
+            <CardTitle>Instruções</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground">
+              <span className="font-bold">1.</span> Acesse o link do monitor:
+              https://example.com
+            </p>
+            <p className="text-muted-foreground">
+              <span className="font-bold">2.</span> Insira o CPF ou CNPJ no
+              campo de texto
+            </p>
+            <p className="text-muted-foreground">
+              <span className="font-bold">3.</span> Insira o código de 4 dígitos
+              ou escaneie o QR Code
+            </p>
+          </CardContent>
+        </Card>
       </CardContent>
       <CardFooter className="block space-y-4">
         <Form {...codigoVinculacaoForm}>

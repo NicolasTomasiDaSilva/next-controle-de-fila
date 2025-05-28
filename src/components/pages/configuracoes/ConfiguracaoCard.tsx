@@ -15,7 +15,7 @@ const cores = {
   blue: {
     border: "border-blue-500",
     bg: "bg-blue-200",
-    icon: "text-red-500",
+    icon: "text-blue-500",
   },
   red: {
     border: "border-red-500",
@@ -62,7 +62,7 @@ export function ConfiguracaoCard({
     <Card
       asChild
       className={cn(
-        "cursor-pointer transition-transform duration-300 hover:scale-101",
+        "cursor-pointer transition-transform duration-300 bg-gradient-to-l from-blue-100/10 to-transparent hover:scale-101 group",
         estilos.border,
         className
       )}
@@ -72,7 +72,7 @@ export function ConfiguracaoCard({
           <div className="flex flex-row items-center gap-2">
             <div
               className={cn(
-                "h-9 w-9 rounded-md flex flex-row items-center justify-center flex-shrink-0",
+                "h-11 w-11 rounded-md flex flex-row items-center justify-center flex-shrink-0",
                 estilos.bg
               )}
             >
@@ -80,7 +80,7 @@ export function ConfiguracaoCard({
             </div>
             <CardTitle>{titulo}</CardTitle>
           </div>
-          <ChevronRight className="w-5 h-5 text-gray-400 transition-colors group-hover:text-blue-800 flex-shrink-0" />
+          <ChevronRight className={"w-5 h-5 text-gray-400 transition-colors"} />
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">{texto}</p>
