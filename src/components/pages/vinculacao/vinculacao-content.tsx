@@ -30,8 +30,9 @@ import { useVinculacao } from "@/hooks/use-vinculacao";
 import { EmpresaContext } from "@/contexts/empresa-context";
 import { useEmpresa } from "@/hooks/use-empresa";
 import { toast } from "sonner";
-import { QrScanner2 } from "./QrScanner2";
+
 import { QrScanner } from "./QrScanner";
+import { QrScanner2 } from "./QrScanner2";
 
 export default function VinculacaoContent() {
   const { empresa } = useEmpresa();
@@ -121,7 +122,7 @@ export default function VinculacaoContent() {
                 </Button>
 
                 {qrScannerOpen && (
-                  <QrScanner
+                  <QrScanner2
                     onScan={handleQrScan}
                     onClose={() => setQrScannerOpen(false)}
                   />

@@ -110,6 +110,24 @@ export function QrScanner2({ onScan, onClose }: QrScannerProps) {
             overflow: "hidden",
           }}
         />
+
+        {/* Overlay escuro com o quadrado e linha */}
+        <div className="pointer-events-none fixed inset-0 z-70 flex flex-col">
+          <div className="flex-grow bg-black/90" /> {/* topo escuro */}
+          <div className="flex items-center">
+            <div className="w-[calc(50%-10rem)] h-80 bg-black/90" />{" "}
+            {/* lado esquerdo */}
+            <div className="relative w-80 h-80 border border-white rounded-sm overflow-hidden">
+              {/* Quadrado central com borda branca */}
+
+              {/* Linha verde animada */}
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-green-400 animate-scanLine" />
+            </div>
+            <div className="w-[calc(50%-10rem)] h-80 bg-black/90" />{" "}
+            {/* lado direito */}
+          </div>
+          <div className="flex-grow bg-black/90" /> {/* base escura */}
+        </div>
       </div>
 
       <style jsx global>{`
@@ -137,6 +155,26 @@ export function QrScanner2({ onScan, onClose }: QrScannerProps) {
 
         #qr-reader canvas {
           display: none !important;
+        }
+
+        @keyframes scanLine {
+          0% {
+            top: 0;
+          }
+          50% {
+            top: calc(100% - 2px);
+          }
+          100% {
+            top: 0;
+          }
+        }
+        .animate-scanLine {
+          animation: scanLine 3s infinite ease-in-out;
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          box-shadow: 0 0 8px 2px #22c55e;
         }
       `}</style>
     </>
