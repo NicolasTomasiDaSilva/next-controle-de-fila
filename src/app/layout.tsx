@@ -27,6 +27,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ minHeight: "100vh" }}
         suppressHydrationWarning={true}
       >
         {children}

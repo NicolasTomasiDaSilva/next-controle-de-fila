@@ -83,7 +83,7 @@ export default function VinculacaoContent() {
       className="flex items-center justify-center"
       style={{ height: "calc(100vh - 180px)" }}
     >
-      <Card className="w-full max-w-md space-y-4">
+      <Card className="max-w-md space-y-4">
         <CardHeader>
           <CardTitle>Vincular Monitor</CardTitle>
           <CardDescription>

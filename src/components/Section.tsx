@@ -11,9 +11,8 @@ interface SectionProps {
 
 export function Section({ title, children, className }: SectionProps) {
   return (
-    <section className={cn("mt-5 pb-5 espaco-lateral-conteudo", className)}>
-      {title && <SectionTitle title={title} />}
-      <div className="h-5"></div>
+    <section className={cn("pt-20 espaco-lateral-conteudo", className)}>
+      {title && <SectionTitle className="py-4" title={title} />}
       {children}
     </section>
   );

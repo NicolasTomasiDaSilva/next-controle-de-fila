@@ -45,6 +45,7 @@ export default function LoginForm() {
 
   const codigoAcessoForm = useForm<codigoAcessoDTO>({
     resolver: zodResolver(codigoAcessoSchema),
+    defaultValues: { codigo: "" },
   });
 
   const handleEnviarCodigo = async (data: z.infer<typeof emailSchema>) => {

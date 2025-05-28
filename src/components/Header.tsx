@@ -4,7 +4,7 @@ import Menu from "./Menu";
 
 export default function Header() {
   return (
-    <header className="h-20 shadow-sm flex items-center">
+    <header className="absolute top-0 left-0 w-full h-20 shadow-sm flex items-center bg-white">
       <div className=" w-full flex justify-between espaco-lateral-conteudo">
         <div className="flex items-center gap-2 ">
           <Image
