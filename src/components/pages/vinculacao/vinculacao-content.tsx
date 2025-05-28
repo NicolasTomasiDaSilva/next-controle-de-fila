@@ -24,12 +24,14 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
-import { QrScanner } from "./QrScanner";
+
 import { codigoVinculacaoDTO, codigoVinculacaoSchema } from "@/models/codigos";
 import { useVinculacao } from "@/hooks/use-vinculacao";
 import { EmpresaContext } from "@/contexts/empresa-context";
 import { useEmpresa } from "@/hooks/use-empresa";
 import { toast } from "sonner";
+import { QrScanner2 } from "./QrScanner2";
+import { QrScanner } from "./QrScanner";
 
 export default function VinculacaoContent() {
   const { empresa } = useEmpresa();
