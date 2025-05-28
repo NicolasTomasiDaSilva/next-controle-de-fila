@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useCallback, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
+import { Button } from "@/components/ui/button";
+import { X } from "lucide-react";
 
 type QrScannerProps = {
   onScan: (decodedText: string) => void;
@@ -102,13 +104,15 @@ export function QrScanner2({ onScan, onClose }: QrScannerProps) {
           touchAction: "none",
         }}
       >
-        <button
+        <Button
+          className="absolute top-6 right-6 z-99"
+          variant="destructive"
+          size="icon"
           onClick={handleCloseClick}
-          className="absolute top-6 right-6 text-white text-4xl font-bold z-60 hover:text-red-500"
-          aria-label="Fechar scanner"
+          aria-label="Fechar"
         >
-          ✕
-        </button>
+          <X className="h-4 w-4" />
+        </Button>
 
         <div
           id="qr-reader"
