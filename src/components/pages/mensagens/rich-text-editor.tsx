@@ -4,7 +4,11 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useEffect } from "react";
 
-import { htmlFromTokens, tokensFromHtml } from "@/utils/token-transform";
+import {
+  htmlFromTokens,
+  parseTokensFromText,
+  tokensFromHtml,
+} from "@/utils/token-transform";
 import { Token } from "./extensions/tokens";
 
 interface RichTextEditorProps {
@@ -18,7 +22,7 @@ export default function RichTextEditor({
 }: RichTextEditorProps) {
   const editor = useEditor({
     extensions: [StarterKit, Token],
-    content: htmlFromTokens(value),
+    content: parseTokensFromText(value),
     onUpdate({ editor }) {
       console.log(value);
       const plainTextWithTokens = tokensFromHtml(editor.getJSON());

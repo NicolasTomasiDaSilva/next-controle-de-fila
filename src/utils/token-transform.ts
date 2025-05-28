@@ -28,3 +28,16 @@ export function htmlFromTokens(text: string): string {
 
   return `<p>${html}</p>`;
 }
+
+export function parseTokensFromText(text: string) {
+  const parts = text.split(/({\w+})/g);
+  return parts.map((part) => {
+    const match = part.match(/^{(\w+)}$/);
+    if (match) {
+      const label = match[1];
+      return { type: "token", attrs: { label } };
+    } else {
+      return { type: "text", text: part };
+    }
+  });
+}
