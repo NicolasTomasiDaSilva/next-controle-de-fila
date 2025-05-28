@@ -23,7 +23,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 import { codigoVinculacaoDTO, codigoVinculacaoSchema } from "@/models/codigos";
 import { useVinculacao } from "@/hooks/use-vinculacao";
@@ -35,6 +35,7 @@ import { QrScanner } from "./QrScanner";
 import { QrScanner2 } from "./QrScanner2";
 
 export default function VinculacaoContent() {
+  const formRef = useRef<HTMLFormElement>(null);
   const { empresa } = useEmpresa();
   const { vincularMonitor } = useVinculacao();
   const [qrScannerOpen, setQrScannerOpen] = useState(false);
@@ -46,8 +47,9 @@ export default function VinculacaoContent() {
   });
 
   function handleQrScan(code: string) {
-    codigoVinculacaoForm.setValue("codigo", code);
     setQrScannerOpen(false);
+    codigoVinculacaoForm.setValue("codigo", code, { shouldValidate: true });
+    formRef.current?.requestSubmit();
   }
 
   async function handleVerificarCodigo(data: codigoVinculacaoDTO) {
@@ -105,6 +107,7 @@ export default function VinculacaoContent() {
         <CardFooter className="block space-y-4">
           <Form {...codigoVinculacaoForm}>
             <form
+              ref={formRef}
               onSubmit={codigoVinculacaoForm.handleSubmit(
                 handleVerificarCodigo
               )}
