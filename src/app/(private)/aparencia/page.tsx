@@ -2,6 +2,7 @@ import { Section } from "@/components/Section";
 import { ConfiguracaoContent } from "@/components/pages/aparencia/configuracao-content";
 import { ConfiguracaoDados } from "@/components/pages/aparencia/configuracao-dados";
 import { ConfiguracaoCard } from "@/components/pages/configuracoes/ConfiguracaoCard";
+
 import { EmpresaProvider } from "@/contexts/empresa-context";
 import { Empresa } from "@/models/empresa";
 import { empresaService } from "@/services/empresa-service";
@@ -11,7 +12,7 @@ export default async function AparenciaPage() {
   const empresa: Empresa = await empresaService.obterEmpresa();
   return (
     <EmpresaProvider empresaInicial={empresa}>
-      <Section title="Customizar Aparência">
+      <Section title="Customizar Aparência" linkRetorno={"/configuracoes"}>
         <ConfiguracaoContent empresa={empresa}></ConfiguracaoContent>
       </Section>
     </EmpresaProvider>

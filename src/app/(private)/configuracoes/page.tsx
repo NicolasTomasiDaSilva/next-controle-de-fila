@@ -20,7 +20,7 @@ export default async function ConfiguracaoPage() {
           icone={(cor: string) => {
             return <MessageSquare className={`${cor}`} />;
           }}
-          titulo="Customizar Mensagem"
+          titulo="Customizar Mensagens"
           texto="Crie mensagens personalizadas no WhatsApp para diferentes situações e melhore a comunicação com seus clientes"
           className="col-span-2 sm:col-span-1"
           cor="purple"

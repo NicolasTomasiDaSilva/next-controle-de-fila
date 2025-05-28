@@ -5,14 +5,15 @@ import { EmpresaProvider } from "@/contexts/empresa-context";
 
 import VinculacaoContent from "@/components/pages/vinculacao/vinculacao-content";
 
-export default async function VinculacaoPage() {
+export default async function MensagensPage() {
   const empresa: Empresa = await empresaService.obterEmpresa();
 
   return (
     <EmpresaProvider empresaInicial={empresa}>
-      <Section title="Vinculação Monitor" linkRetorno={"/configuracoes"}>
-        <VinculacaoContent></VinculacaoContent>
-      </Section>
+      <Section
+        title="Customizar Mensagens"
+        linkRetorno={"/configuracoes"}
+      ></Section>
     </EmpresaProvider>
   );
 }
