@@ -9,7 +9,39 @@ import { FormField } from "@/components/ui/form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MessageCircle } from "lucide-react";
 
-export default function PreVisualizacaoMensagens() {
+interface PreVisualizacaoMensagensProps {
+  mensagem: string;
+}
+export default function PreVisualizacaoMensagens({
+  mensagem,
+}: PreVisualizacaoMensagensProps) {
+  function renderMensagem(text: string) {
+    // Expressão regular para capturar os placeholders {{nome}} e {{link}}
+    const regex = /(\{\{nome\}\}|\{\{link\}\})/g;
+
+    // Divide o texto pelas ocorrências dos placeholders, mantendo os placeholders no array
+    const partes = text.split(regex);
+
+    return partes.map((parte, i) => {
+      if (parte === "{{nome}}") {
+        return (
+          <strong key={i} className="font-bold">
+            João da Silva
+          </strong>
+        );
+      } else if (parte === "{{link}}") {
+        return (
+          <a key={i} className="text-blue-600 underline">
+            https://controledefila.com.br/acompanhar
+          </a>
+        );
+      } else {
+        // Texto comum
+        return <span key={i}>{parte}</span>;
+      }
+    });
+  }
+
   return (
     <>
       <CardHeader>
@@ -32,9 +64,8 @@ export default function PreVisualizacaoMensagens() {
                 <p className="text-xs text-muted-foreground">Hoje, 14:30</p>
               </div>
             </div>
-            <p className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none text-xs">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
-              qui cumque facere mollitia eius similique, nesciunt
+            <p className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none  break-words">
+              {renderMensagem(mensagem)}
             </p>
           </div>
         </div>

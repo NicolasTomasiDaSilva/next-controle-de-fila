@@ -27,6 +27,9 @@ import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
 import PreVisualizacaoMensagens from "./pre-visualizacao-mensagens";
 
 export default function MensagensContent() {
+  const [tabSelecionada, setTabSelecionada] = useState<
+    "mensagemEntrada" | "mensagemChamada" | "mensagemRemovido"
+  >("mensagemEntrada");
   const { empresa } = useEmpresa();
 
   const configuracao = empresa.configuracao;
@@ -44,6 +47,8 @@ export default function MensagensContent() {
     },
   });
 
+  const mensagemAtual = form.watch(tabSelecionada);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
@@ -55,13 +60,24 @@ export default function MensagensContent() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <Tabs defaultValue="entrada" className="w-full">
+              <Tabs
+                value={tabSelecionada}
+                onValueChange={(value) =>
+                  setTabSelecionada(
+                    value as
+                      | "mensagemEntrada"
+                      | "mensagemChamada"
+                      | "mensagemRemovido"
+                  )
+                }
+                className="w-full"
+              >
                 <TabsList className="mx-auto ">
-                  <TabsTrigger value="entrada">Entrada</TabsTrigger>
-                  <TabsTrigger value="chamada">Chamada</TabsTrigger>
-                  <TabsTrigger value="removido">Removido</TabsTrigger>
+                  <TabsTrigger value="mensagemEntrada">Entrada</TabsTrigger>
+                  <TabsTrigger value="mensagemChamada">Chamada</TabsTrigger>
+                  <TabsTrigger value="mensagemRemovido">Removido</TabsTrigger>
                 </TabsList>
-                <TabsContent value="entrada">
+                <TabsContent value="mensagemEntrada">
                   <FormField
                     control={form.control}
                     name="mensagemEntrada"
@@ -79,7 +95,7 @@ export default function MensagensContent() {
                     )}
                   />
                 </TabsContent>
-                <TabsContent value="chamada">
+                <TabsContent value="mensagemChamada">
                   <FormField
                     control={form.control}
                     name="mensagemChamada"
@@ -97,7 +113,7 @@ export default function MensagensContent() {
                     )}
                   />
                 </TabsContent>
-                <TabsContent value="removido">
+                <TabsContent value="mensagemRemovido">
                   <FormField
                     control={form.control}
                     name="mensagemRemovido"
@@ -119,7 +135,7 @@ export default function MensagensContent() {
             </CardContent>
           </div>
           <div className="">
-            <PreVisualizacaoMensagens />
+            <PreVisualizacaoMensagens mensagem={mensagemAtual ?? ""} />
           </div>
         </Card>
         <BotaoSalvarAlteracoes className="ml-auto block" />
