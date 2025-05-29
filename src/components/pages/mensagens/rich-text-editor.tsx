@@ -7,7 +7,10 @@ import { htmlFromTokens, tokensFromHtml } from "@/utils/token-transform";
 import { Token } from "./extensions/Token";
 
 import CabecalhoEditor from "./cabecalho-editor";
-import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
+import {
+  contarCaracteresSemPlaceholders,
+  removerTokensHtmlDuplicados,
+} from "@/utils/contar-caracteres";
 
 interface RichTextEditorProps {
   value: string;
@@ -31,6 +34,13 @@ export default function RichTextEditor({
     },
     onUpdate({ editor }) {
       const html = editor.getHTML();
+      const novoHtml = removerTokensHtmlDuplicados(html);
+
+      if (novoHtml !== html) {
+        editor.commands.setContent(novoHtml, false); // atualiza sem histórico extra
+        return;
+      }
+
       onChange(tokensFromHtml(html));
     },
   });
