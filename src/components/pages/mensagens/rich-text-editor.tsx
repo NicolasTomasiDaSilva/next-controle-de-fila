@@ -2,11 +2,12 @@
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-
+import CharacterCount from "@tiptap/extension-character-count";
 import { htmlFromTokens, tokensFromHtml } from "@/utils/token-transform";
 import { Token } from "./extensions/Token";
 
 import CabecalhoEditor from "./cabecalho-editor";
+import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
 
 interface RichTextEditorProps {
   value: string;
@@ -28,8 +29,6 @@ export default function RichTextEditor({
     onUpdate({ editor }) {
       const html = editor.getHTML();
       onChange(tokensFromHtml(html));
-      const res = tokensFromHtml(html);
-      console.log(res);
     },
   });
 
@@ -43,6 +42,9 @@ export default function RichTextEditor({
         Use as variáveis para personalizar a mensagem para cada cliente.
       </p>
       <CabecalhoEditor editor={editor} />
+      <p>
+        {contarCaracteresSemPlaceholders(tokensFromHtml(editor.getHTML()))}/100
+      </p>
     </div>
   );
 }

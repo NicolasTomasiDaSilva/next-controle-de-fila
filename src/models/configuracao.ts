@@ -1,3 +1,4 @@
+import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
 import { Entidade, entidadeSchema } from "./entidade";
 import { z } from "zod";
 
@@ -25,34 +26,52 @@ export const configuracaoSchema = entidadeSchema.extend({
     .trim()
     .transform((val) => (val === "" ? null : val))
     .nullable()
-    .refine((val) => val === null || val.length >= 1, {
-      message: "Mensagem de entrada deve ter no mínimo 1 caracteres",
-    })
-    .refine((val) => val === null || val.length <= 100, {
-      message: "Mensagem de entrada deve ter no máximo 100 caracteres",
-    }),
+    .refine(
+      (val) => val === null || contarCaracteresSemPlaceholders(val) >= 1,
+      {
+        message: "Mensagem de entrada deve ter no mínimo 1 caractere",
+      }
+    )
+    .refine(
+      (val) => val === null || contarCaracteresSemPlaceholders(val) <= 100,
+      {
+        message: "Mensagem de entrada deve ter no máximo 100 caracteres",
+      }
+    ),
   mensagemChamada: z
     .string()
     .trim()
     .transform((val) => (val === "" ? null : val))
     .nullable()
-    .refine((val) => val === null || val.length >= 1, {
-      message: "Mensagem de chamada deve ter no mínimo 1 caracteres",
-    })
-    .refine((val) => val === null || val.length <= 100, {
-      message: "Mensagem de chamada deve ter no máximo 100 caracteres",
-    }),
+    .refine(
+      (val) => val === null || contarCaracteresSemPlaceholders(val) >= 1,
+      {
+        message: "Mensagem de chamada deve ter no mínimo 1 caractere",
+      }
+    )
+    .refine(
+      (val) => val === null || contarCaracteresSemPlaceholders(val) <= 100,
+      {
+        message: "Mensagem de chamada deve ter no máximo 100 caracteres",
+      }
+    ),
   mensagemRemovido: z
     .string()
     .trim()
     .transform((val) => (val === "" ? null : val))
     .nullable()
-    .refine((val) => val === null || val.length >= 1, {
-      message: "Mensagem de removido deve ter no mínimo 1 caracteres",
-    })
-    .refine((val) => val === null || val.length <= 100, {
-      message: "Mensagem de removido deve ter no máximo 100 caracteres",
-    }),
+    .refine(
+      (val) => val === null || contarCaracteresSemPlaceholders(val) >= 1,
+      {
+        message: "Mensagem de removido deve ter no mínimo 1 caractere",
+      }
+    )
+    .refine(
+      (val) => val === null || contarCaracteresSemPlaceholders(val) <= 100,
+      {
+        message: "Mensagem de removido deve ter no máximo 100 caracteres",
+      }
+    ),
   logoUrl: z
     .string()
     .transform((val) => (val === "" ? null : val))

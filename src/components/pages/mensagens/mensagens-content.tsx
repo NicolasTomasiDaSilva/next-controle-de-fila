@@ -23,6 +23,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import WhatsAppMessageEditor from "./rich-text-editor";
+import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
 
 export default function MensagensContent() {
   const { empresa } = useEmpresa();
@@ -44,7 +45,7 @@ export default function MensagensContent() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
         <Card>
           <CardHeader>
             <CardTitle>Editor Mensagens</CardTitle>
@@ -113,6 +114,7 @@ export default function MensagensContent() {
             <p>Card Footer</p>
           </CardFooter>
         </Card>
+        <BotaoSalvarAlteracoes className="ml-auto block" />
       </form>
     </Form>
   );
