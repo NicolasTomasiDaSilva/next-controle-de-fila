@@ -29,7 +29,7 @@ export default function RichTextEditor({
     editorProps: {
       attributes: {
         class:
-          "min-h-[120px] max-h-[300px] overflow-auto break-all whitespace-pre-wrap border p-2 rounded bg-white",
+          "min-h-[120px] max-h-[300px] overflow-auto break-all whitespace-pre-wrap border p-2  bg-white border-none focus:outline-none rounded-md focus:ring-0",
       },
     },
     onUpdate({ editor }) {
@@ -42,7 +42,7 @@ export default function RichTextEditor({
   if (!editor) return null;
 
   return (
-    <div className="space-y-2">
+    <div className="">
       <CabecalhoEditor editor={editor} limiteCaracteres={limiteCaracteres} />
       <EditorContent editor={editor} />
       <p className="text-sm text-muted-foreground">

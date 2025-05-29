@@ -18,7 +18,7 @@ export default function CabecalhoEditor({
   limiteCaracteres,
 }: CabecalhoEditorProps) {
   return (
-    <div className="flex flex-row items-center gap-2 justify-between">
+    <div className="flex flex-row items-center gap-2 justify-between bg-gray-200">
       <div className="flex gap-2">
         {/* Estilo de texto */}
         <Button
