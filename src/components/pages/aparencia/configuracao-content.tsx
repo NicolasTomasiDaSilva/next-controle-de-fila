@@ -72,7 +72,7 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
         <Card className="w-full">
           <ConfiguracaoDados form={form}></ConfiguracaoDados>
           <ConfiguracaoVisual form={form}></ConfiguracaoVisual>

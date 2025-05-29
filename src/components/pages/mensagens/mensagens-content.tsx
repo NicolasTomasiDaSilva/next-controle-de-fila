@@ -47,10 +47,10 @@ export default function MensagensContent() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <Card className="flex flex-col md:flex-row md:justify-evenly">
+        <Card className=" md:flex-row md:justify-evenly">
           <div>
             <CardHeader>
-              <CardTitle className="whitespace-nowrap">
+              <CardTitle className="whitespace-nowrap mb-4">
                 Editor Mensagens
               </CardTitle>
             </CardHeader>
@@ -117,9 +117,6 @@ export default function MensagensContent() {
                 </TabsContent>
               </Tabs>
             </CardContent>
-            <CardFooter>
-              <p>Card Footer</p>
-            </CardFooter>
           </div>
           <PreVisualizacaoMensagens />
         </Card>

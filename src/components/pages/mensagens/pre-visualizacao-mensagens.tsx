@@ -13,10 +13,12 @@ export default function PreVisualizacaoMensagens() {
   return (
     <div>
       <CardHeader>
-        <CardTitle className="whitespace-nowrap">Pré Visualização</CardTitle>
+        <CardTitle className="whitespace-nowrap mb-4">
+          Pré Visualização
+        </CardTitle>
       </CardHeader>
       <CardContent className="">
-        <div className="w-100 mx-auto  rounded-b-md shadow-sm bg-white">
+        <div className="max-w-xs mx-auto  rounded-b-md shadow-sm bg-white">
           <div className="bg-green-600 py-3 px-3 font-semibold text-white">
             WhatsApp
           </div>
@@ -30,14 +32,13 @@ export default function PreVisualizacaoMensagens() {
                 <p className="text-xs text-muted-foreground">Hoje, 14:30</p>
               </div>
             </div>
-            <p className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none">
+            <p className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none text-xs">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
               qui cumque facere mollitia eius similique, nesciunt
             </p>
           </div>
         </div>
       </CardContent>
-
       <CardFooter></CardFooter>
     </div>
   );
