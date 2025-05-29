@@ -2,14 +2,9 @@
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useEffect } from "react";
 
-import {
-  htmlFromTokens,
-  parseTokensFromText,
-  tokensFromHtml,
-} from "@/utils/token-transform";
-import { Token } from "./extensions/tokens";
+import { htmlFromTokens, tokensFromHtml } from "@/utils/token-transform";
+import { Token } from "./extensions/Token";
 
 interface RichTextEditorProps {
   value: string;
@@ -22,45 +17,41 @@ export default function RichTextEditor({
 }: RichTextEditorProps) {
   const editor = useEditor({
     extensions: [StarterKit, Token],
-    content: parseTokensFromText(value),
+    content: htmlFromTokens(value),
+    editorProps: {
+      attributes: {
+        class: "min-h-[120px] border p-2 rounded bg-white",
+      },
+    },
     onUpdate({ editor }) {
-      console.log(value);
-      const plainTextWithTokens = tokensFromHtml(editor.getJSON());
-      onChange(plainTextWithTokens);
+      const html = editor.getHTML();
+      onChange(tokensFromHtml(html));
+      const res = tokensFromHtml(html);
+      console.log(res);
     },
   });
 
-  useEffect(() => {
-    if (editor && tokensFromHtml(editor.getJSON()) !== value) {
-      editor.commands.setContent(htmlFromTokens(value));
-    }
-  }, [value]);
-
-  const insertToken = (label: string) => {
-    editor?.commands.insertToken(label);
-  };
+  if (!editor) return null;
 
   return (
     <div className="space-y-2">
       <div className="flex gap-2">
         <button
           type="button"
-          onClick={() => insertToken("nome")}
-          className="bg-gray-300 px-2 py-1 rounded text-sm"
+          onClick={() => editor.chain().focus().insertToken("nome").run()}
+          className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
         >
-          NOME CLIENTE
+          Nome
         </button>
         <button
           type="button"
-          onClick={() => insertToken("link")}
-          className="bg-gray-300 px-2 py-1 rounded text-sm"
+          onClick={() => editor.chain().focus().insertToken("link").run()}
+          className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm"
         >
-          LINK ACOMPANHAMENTO
+          Link
         </button>
       </div>
-      <div className="border rounded p-2 min-h-[150px]">
-        <EditorContent editor={editor} />
-      </div>
+      <EditorContent editor={editor} />
     </div>
   );
 }
