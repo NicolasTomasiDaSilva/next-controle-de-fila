@@ -4,13 +4,13 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import CharacterCount from "@tiptap/extension-character-count";
 import { htmlFromTokens, tokensFromHtml } from "@/utils/token-transform";
-import { Token } from "./extensions/Token";
 
 import CabecalhoEditor from "./cabecalho-editor";
 import {
   contarCaracteresSemPlaceholders,
   removerTokensHtmlDuplicados,
 } from "@/utils/contar-caracteres";
+import { TokenText } from "./extensions/Token";
 
 interface RichTextEditorProps {
   value: string;
@@ -24,7 +24,7 @@ export default function RichTextEditor({
   limiteCaracteres,
 }: RichTextEditorProps) {
   const editor = useEditor({
-    extensions: [StarterKit, Token],
+    extensions: [StarterKit, TokenText],
     content: htmlFromTokens(value),
     editorProps: {
       attributes: {

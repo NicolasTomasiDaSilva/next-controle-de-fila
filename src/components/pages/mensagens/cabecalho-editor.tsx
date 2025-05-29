@@ -23,11 +23,8 @@ export default function CabecalhoEditor({
           type="button"
           variant={"ghost"}
           onClick={() => {
-            if (!hasToken(tokensFromHtml(editor.getHTML()), "nome")) {
-              editor.chain().focus().insertToken("nome").run();
-            }
+            editor.chain().focus().insertToken("nome").run();
           }}
-          disabled={hasToken(tokensFromHtml(editor.getHTML()), "nome")}
           className="bg-blue-100 text-blue-800"
         >
           NOME
@@ -36,11 +33,8 @@ export default function CabecalhoEditor({
           variant={"ghost"}
           type="button"
           onClick={() => {
-            if (!hasToken(tokensFromHtml(editor.getHTML()), "link")) {
-              editor.chain().focus().insertToken("link").run();
-            }
+            editor.chain().focus().insertToken("link").run();
           }}
-          disabled={hasToken(tokensFromHtml(editor.getHTML()), "link")}
           className="bg-green-100 text-green-800"
         >
           LINK
