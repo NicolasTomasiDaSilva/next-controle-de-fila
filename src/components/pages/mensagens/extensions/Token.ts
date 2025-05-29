@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Node, mergeAttributes } from "@tiptap/core";
 import { Editor } from "@tiptap/core";
 
@@ -36,14 +37,26 @@ export const Token = Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
-    const label =
-      HTMLAttributes.type === "nome" ? "NOME CLIENTE" : "LINK ACOMPANHAMENTO";
+    let cores = "";
+    let label = "";
+    switch (HTMLAttributes.type) {
+      case "nome":
+        label = "NOME CLIENTE";
+        cores = "bg-blue-100 text-blue-800";
+        break;
+      case "link":
+        label = "LINK ACOMPANHAMENTO";
+        cores = "bg-green-100 text-green-800";
+        break;
+      default:
+        break;
+    }
+
     return [
       "span",
       mergeAttributes(HTMLAttributes, {
         "data-token": HTMLAttributes.type,
-        class:
-          "bg-blue-100 text-blue-800 text-sm px-1.5 py-0.5 rounded font-mono",
+        class: cn("text-sm px-1.5 py-0.5 rounded font-mono", cores),
       }),
       label,
     ];
