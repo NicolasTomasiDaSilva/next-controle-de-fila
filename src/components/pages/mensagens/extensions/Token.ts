@@ -36,7 +36,8 @@ export const Token = Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
-    const label = HTMLAttributes.type === "nome" ? "{{nome}}" : "{{link}}";
+    const label =
+      HTMLAttributes.type === "nome" ? "NOME CLIENTE" : "LINK ACOMPANHAMENTO";
     return [
       "span",
       mergeAttributes(HTMLAttributes, {
