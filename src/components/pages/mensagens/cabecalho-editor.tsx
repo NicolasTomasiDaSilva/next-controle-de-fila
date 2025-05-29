@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
+import {
+  contarCaracteresSemPlaceholders,
+  hasToken,
+} from "@/utils/contar-caracteres";
 
 import { tokensFromHtml } from "@/utils/token-transform";
 import { Editor } from "@tiptap/react";
@@ -19,7 +22,12 @@ export default function CabecalhoEditor({
         <Button
           type="button"
           variant={"ghost"}
-          onClick={() => editor.chain().focus().insertToken("nome").run()}
+          onClick={() => {
+            if (!hasToken(tokensFromHtml(editor.getHTML()), "nome")) {
+              editor.chain().focus().insertToken("nome").run();
+            }
+          }}
+          disabled={hasToken(tokensFromHtml(editor.getHTML()), "nome")}
           className="bg-blue-100 text-blue-800"
         >
           Nome
@@ -27,7 +35,12 @@ export default function CabecalhoEditor({
         <Button
           variant={"ghost"}
           type="button"
-          onClick={() => editor.chain().focus().insertToken("link").run()}
+          onClick={() => {
+            if (!hasToken(tokensFromHtml(editor.getHTML()), "link")) {
+              editor.chain().focus().insertToken("link").run();
+            }
+          }}
+          disabled={hasToken(tokensFromHtml(editor.getHTML()), "link")}
           className="bg-green-100 text-green-800"
         >
           Link
