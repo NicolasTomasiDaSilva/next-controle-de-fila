@@ -81,7 +81,7 @@ export default function VinculacaoContent() {
   return (
     <Card className="max-w-md space-y-4 mx-auto">
       <CardHeader>
-        <CardTitle className="text-lg">Vincular Monitor</CardTitle>
+        <CardTitle>Vincular Monitor</CardTitle>
       </CardHeader>
       <CardContent>
         <Card className="bg-gray-50 shadow-sm">
