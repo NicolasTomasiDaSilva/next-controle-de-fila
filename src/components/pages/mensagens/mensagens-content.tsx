@@ -65,6 +65,7 @@ export default function MensagensContent() {
                     <FormItem>
                       <FormControl>
                         <RichTextEditor
+                          limiteCaracteres={100}
                           value={field.value ?? ""}
                           onChange={field.onChange}
                         />
@@ -82,6 +83,7 @@ export default function MensagensContent() {
                     <FormItem>
                       <FormControl>
                         <RichTextEditor
+                          limiteCaracteres={100}
                           value={field.value ?? ""}
                           onChange={field.onChange}
                         />
@@ -99,6 +101,7 @@ export default function MensagensContent() {
                     <FormItem>
                       <FormControl>
                         <RichTextEditor
+                          limiteCaracteres={100}
                           value={field.value ?? ""}
                           onChange={field.onChange}
                         />

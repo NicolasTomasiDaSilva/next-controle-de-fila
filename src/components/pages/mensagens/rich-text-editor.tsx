@@ -11,12 +11,14 @@ import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
 
 interface RichTextEditorProps {
   value: string;
+  limiteCaracteres: number;
   onChange: (value: string) => void;
 }
 
 export default function RichTextEditor({
   value,
   onChange,
+  limiteCaracteres,
 }: RichTextEditorProps) {
   const editor = useEditor({
     extensions: [StarterKit, Token],
@@ -39,12 +41,9 @@ export default function RichTextEditor({
       <EditorContent editor={editor} />
 
       <p className="text-sm text-muted-foreground">
-        Use as variáveis para personalizar a mensagem para cada cliente.
+        Use as variáveis para personalizar a mensagem para cada cliente
       </p>
-      <CabecalhoEditor editor={editor} />
-      <p>
-        {contarCaracteresSemPlaceholders(tokensFromHtml(editor.getHTML()))}/100
-      </p>
+      <CabecalhoEditor editor={editor} limiteCaracteres={limiteCaracteres} />
     </div>
   );
 }
