@@ -30,7 +30,7 @@ export default function CabecalhoEditor({
           disabled={hasToken(tokensFromHtml(editor.getHTML()), "nome")}
           className="bg-blue-100 text-blue-800"
         >
-          Nome
+          NOME
         </Button>
         <Button
           variant={"ghost"}
@@ -43,7 +43,7 @@ export default function CabecalhoEditor({
           disabled={hasToken(tokensFromHtml(editor.getHTML()), "link")}
           className="bg-green-100 text-green-800"
         >
-          Link
+          LINK
         </Button>
       </div>
       <span

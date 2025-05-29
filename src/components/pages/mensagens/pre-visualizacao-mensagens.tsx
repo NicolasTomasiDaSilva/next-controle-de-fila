@@ -16,10 +16,7 @@ export default function PreVisualizacaoMensagens({
   mensagem,
 }: PreVisualizacaoMensagensProps) {
   function renderMensagem(text: string) {
-    // Expressão regular para capturar os placeholders {{nome}} e {{link}}
     const regex = /(\{\{nome\}\}|\{\{link\}\})/g;
-
-    // Divide o texto pelas ocorrências dos placeholders, mantendo os placeholders no array
     const partes = text.split(regex);
 
     return partes.map((parte, i) => {

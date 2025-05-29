@@ -25,6 +25,7 @@ import {
 import WhatsAppMessageEditor from "./rich-text-editor";
 import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
 import PreVisualizacaoMensagens from "./pre-visualizacao-mensagens";
+import { AlertCircle } from "lucide-react";
 
 export default function MensagensContent() {
   const [tabSelecionada, setTabSelecionada] = useState<
@@ -48,6 +49,7 @@ export default function MensagensContent() {
   });
 
   const mensagemAtual = form.watch(tabSelecionada);
+  const { errors } = form.formState;
 
   return (
     <Form {...form}>
@@ -73,9 +75,24 @@ export default function MensagensContent() {
                 className="w-full"
               >
                 <TabsList className="mx-auto ">
-                  <TabsTrigger value="mensagemEntrada">Entrada</TabsTrigger>
-                  <TabsTrigger value="mensagemChamada">Chamada</TabsTrigger>
-                  <TabsTrigger value="mensagemRemovido">Removido</TabsTrigger>
+                  <TabsTrigger value="mensagemEntrada">
+                    Entrada
+                    {errors.mensagemEntrada && (
+                      <AlertCircle className="w-4 h-4 text-red-500" />
+                    )}
+                  </TabsTrigger>
+                  <TabsTrigger value="mensagemChamada">
+                    Chamada
+                    {errors.mensagemChamada && (
+                      <AlertCircle className="w-4 h-4 text-red-500" />
+                    )}
+                  </TabsTrigger>
+                  <TabsTrigger value="mensagemRemovido">
+                    Removido
+                    {errors.mensagemRemovido && (
+                      <AlertCircle className="w-4 h-4 text-red-500" />
+                    )}
+                  </TabsTrigger>
                 </TabsList>
                 <TabsContent value="mensagemEntrada">
                   <FormField
