@@ -6,6 +6,8 @@ import StarterKit from "@tiptap/starter-kit";
 import { htmlFromTokens, tokensFromHtml } from "@/utils/token-transform";
 import { Token } from "./extensions/Token";
 
+import CabecalhoEditor from "./cabecalho-editor";
+
 interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
@@ -35,23 +37,12 @@ export default function RichTextEditor({
 
   return (
     <div className="space-y-2">
-      <div className="flex gap-2">
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().insertToken("nome").run()}
-          className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm"
-        >
-          Nome
-        </button>
-        <button
-          type="button"
-          onClick={() => editor.chain().focus().insertToken("link").run()}
-          className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm"
-        >
-          Link
-        </button>
-      </div>
       <EditorContent editor={editor} />
+
+      <p className="text-sm text-muted-foreground">
+        Use as variáveis para personalizar a mensagem para cada cliente.
+      </p>
+      <CabecalhoEditor editor={editor} />
     </div>
   );
 }
