@@ -25,7 +25,8 @@ export default function RichTextEditor({
     content: htmlFromTokens(value),
     editorProps: {
       attributes: {
-        class: "min-h-[120px] border p-2 rounded bg-white",
+        class:
+          "min-h-[120px] max-h-[300px] overflow-auto break-all whitespace-pre-wrap border p-2 rounded bg-white",
       },
     },
     onUpdate({ editor }) {
