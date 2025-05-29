@@ -26,7 +26,7 @@ export function Section({
 
   return (
     <section className={cn("pt-25 espaco-lateral-conteudo", className)}>
-      <div className="mb-5 flex items-center gap-2 md:gap-5">
+      <div className="mb-10 flex items-center gap-2 md:gap-5">
         {linkRetorno && (
           <Link href={linkRetorno} passHref>
             <Button

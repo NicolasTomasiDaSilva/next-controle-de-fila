@@ -3,6 +3,13 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-t from-blue-100/50 to-transparent`}
+        className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-t from-blue-100/50 to-transparent`}
         style={{ minHeight: "100vh" }}
         suppressHydrationWarning={true}
       >

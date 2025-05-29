@@ -17,7 +17,7 @@ export function SectionTitle({ title, className, cor }: SectionTitleProps) {
   return (
     <div className={cn("flex  items-center gap-2", className)}>
       <div className={cn("w-1.5 h-10 rounded-sm", cor)} />
-      <h1 className="text-2xl font-bold">{title}</h1>
+      <h1 className="text-3xl font-bold">{title}</h1>
     </div>
   );
 }
