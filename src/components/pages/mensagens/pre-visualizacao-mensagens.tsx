@@ -11,7 +11,7 @@ import { MessageCircle } from "lucide-react";
 
 export default function PreVisualizacaoMensagens() {
   return (
-    <div>
+    <>
       <CardHeader>
         <CardTitle className="whitespace-nowrap mb-4">
           Pré Visualização
@@ -40,6 +40,6 @@ export default function PreVisualizacaoMensagens() {
         </div>
       </CardContent>
       <CardFooter></CardFooter>
-    </div>
+    </>
   );
 }
