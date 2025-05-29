@@ -31,9 +31,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html
+      lang="pt-BR"
+      className={`${inter.variable} ${geistSans.variable} ${geistMono.variable}`}
+    >
       <body
-        className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-t from-blue-100/50 to-transparent`}
+        className="antialiased bg-gradient-to-t from-blue-100/50 to-transparent"
         style={{ minHeight: "100vh" }}
         suppressHydrationWarning={true}
       >
