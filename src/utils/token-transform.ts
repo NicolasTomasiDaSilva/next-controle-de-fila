@@ -1,64 +1,57 @@
-export function htmlToWhatsappTemplate(html: string): string {
-  const container = document.createElement("div");
-  container.innerHTML = html;
+export function toWhatsAppMarkdown(node: any): string {
+  if (!node) return "";
 
-  function walk(node: Node): string {
-    if (node.nodeType === Node.TEXT_NODE) {
-      return node.textContent || "";
+  if (node.type === "text") {
+    let text = node.text;
+
+    if (node.marks) {
+      node.marks.forEach((mark: any) => {
+        switch (mark.type) {
+          case "bold":
+            text = `*${text}*`;
+            break;
+          case "italic":
+            text = `_${text}_`;
+            break;
+          case "underline":
+            // WhatsApp não suporta underline, mas você pode usar ~ ou deixar assim
+            text = `~${text}~`;
+            break;
+          // Adicione outros marks que você use
+          default:
+            break;
+        }
+      });
     }
-
-    if (node.nodeType !== Node.ELEMENT_NODE) {
-      return "";
-    }
-
-    const el = node as HTMLElement;
-    const tag = el.tagName.toLowerCase();
-
-    let content = Array.from(el.childNodes).map(walk).join("");
-
-    switch (tag) {
-      case "strong":
-        return `*${content}*`;
-      case "b":
-        return `*${content}*`;
-      case "em":
-        return `_${content}_`;
-      case "i":
-        return `_${content}_`;
-      case "u":
-        return `__${content}__`;
-      case "s":
-      case "del":
-        return `~${content}~`;
-      case "span":
-        if (el.dataset.type === "nome") return `{{nome}}`;
-        if (el.dataset.type === "link") return `{{link}}`;
-        return content;
-      default:
-        return content;
-    }
+    return text;
   }
 
-  return walk(container).trim();
+  if (node.content && Array.isArray(node.content)) {
+    return node.content.map(toWhatsAppMarkdown).join("");
+  }
+
+  return "";
 }
 
-export function whatsappToHtmlTemplate(template: string): string {
-  // Substitui tokens {{nome}} e {{link}} por spans com data-type
-  let html = template
-    .replace(/{{\s*nome\s*}}/gi, '<span data-type="nome">{{nome}}</span>')
-    .replace(/{{\s*link\s*}}/gi, '<span data-type="link">{{link}}</span>');
+export function whatsappToHtml(text: string) {
+  if (!text) return "";
 
-  // Sublinhado: __texto__
-  html = html.replace(/__([^_]+?)__/g, "<u>$1</u>");
+  // Substitui combinações de negrito+itálico primeiro
+  text = text.replace(/(\*|_)(\*|_)(.*?)\2\1/g, (_, p1, p2, inner) => {
+    // Aqui a ordem importa, se for *_texto_*, ou _*texto*_
+    return `<strong><em>${inner}</em></strong>`;
+  });
 
-  // Negrito: *texto*
-  html = html.replace(/\*([^\*]+?)\*/g, "<strong>$1</strong>");
+  // Depois negrito
+  text = text.replace(/\*(.*?)\*/g, "<strong>$1</strong>");
 
-  // Itálico: _texto_
-  html = html.replace(/_([^_]+?)_/g, "<em>$1</em>");
+  // Depois itálico
+  text = text.replace(/_(.*?)_/g, "<em>$1</em>");
 
-  // Tachado: ~texto~
-  html = html.replace(/~([^~]+?)~/g, "<s>$1</s>");
+  // Depois sublinhado (usando ~ como no seu caso)
+  text = text.replace(/~(.*?)~/g, "<u>$1</u>");
 
-  return `<p>${html}</p>`;
+  // Para evitar conflito com tags já criadas, se quiser pode usar algo mais sofisticado (ex: parser tokenizado)
+
+  return text;
 }

@@ -7,10 +7,7 @@ import CharacterCount from "@tiptap/extension-character-count";
 import CabecalhoEditor from "./cabecalho-editor";
 import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
 import { TokenText } from "./extensions/Token";
-import {
-  htmlToWhatsappTemplate,
-  whatsappToHtmlTemplate,
-} from "@/utils/token-transform";
+import { toWhatsAppMarkdown } from "@/utils/token-transform";
 
 interface RichTextEditorProps {
   value: string;
@@ -25,7 +22,7 @@ export default function RichTextEditor({
 }: RichTextEditorProps) {
   const editor = useEditor({
     extensions: [StarterKit, TokenText],
-    content: whatsappToHtmlTemplate(value),
+    content: value,
     editorProps: {
       attributes: {
         class:
@@ -33,9 +30,8 @@ export default function RichTextEditor({
       },
     },
     onUpdate({ editor }) {
-      const html = editor.getHTML();
-      onChange(htmlToWhatsappTemplate(html));
-      console.log(htmlToWhatsappTemplate(html));
+      const markdownWhatsApp = toWhatsAppMarkdown(editor.getJSON());
+      onChange(markdownWhatsApp);
     },
   });
 
