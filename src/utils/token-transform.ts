@@ -13,11 +13,9 @@ export function toWhatsAppMarkdown(node: any): string {
           case "italic":
             text = `_${text}_`;
             break;
-          case "underline":
-            // WhatsApp não suporta underline, mas você pode usar ~ ou deixar assim
+          case "strike":
             text = `~${text}~`;
             break;
-          // Adicione outros marks que você use
           default:
             break;
         }
@@ -48,8 +46,8 @@ export function whatsappToHtml(text: string) {
   // Depois itálico
   text = text.replace(/_(.*?)_/g, "<em>$1</em>");
 
-  // Depois sublinhado (usando ~ como no seu caso)
-  text = text.replace(/~(.*?)~/g, "<u>$1</u>");
+  // Riscado ~texto~
+  text = text.replace(/~(.*?)~/g, "<s>$1</s>");
 
   // Para evitar conflito com tags já criadas, se quiser pode usar algo mais sofisticado (ex: parser tokenizado)
 

@@ -8,6 +8,7 @@ import CabecalhoEditor from "./cabecalho-editor";
 import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
 import { TokenText } from "./extensions/Token";
 import { toWhatsAppMarkdown } from "@/utils/token-transform";
+import Strike from "@tiptap/extension-strike";
 
 interface RichTextEditorProps {
   value: string;
@@ -21,7 +22,7 @@ export default function RichTextEditor({
   limiteCaracteres,
 }: RichTextEditorProps) {
   const editor = useEditor({
-    extensions: [StarterKit, TokenText],
+    extensions: [StarterKit, Strike, TokenText],
     content: value,
     editorProps: {
       attributes: {

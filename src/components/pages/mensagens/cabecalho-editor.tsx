@@ -4,7 +4,7 @@ import { Toggle } from "@/components/ui/toggle";
 import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
 
 import { Editor } from "@tiptap/react";
-
+import { Slash } from "lucide-react";
 import { MousePointerClick, Bold, Italic, Underline } from "lucide-react";
 
 interface CabecalhoEditorProps {
@@ -35,6 +35,12 @@ export default function CabecalhoEditor({
           }}
         >
           <Italic className="h-4 w-4" />
+        </Toggle>
+        <Toggle
+          pressed={editor.isActive("strike")}
+          onPressedChange={() => editor.chain().focus().toggleStrike().run()}
+        >
+          <Slash className="h-4 w-4" />
         </Toggle>
         <div className="w-0.5 self-stretch bg-gray-200" />
         {/* <Button
