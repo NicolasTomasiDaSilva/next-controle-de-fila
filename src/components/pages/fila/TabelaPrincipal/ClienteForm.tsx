@@ -49,7 +49,7 @@ export function ClienteForm({
           name="nome"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nome</FormLabel>
+              <FormLabel>Nome *</FormLabel>
               <FormControl>
                 <Input
                   {...field}

@@ -38,7 +38,7 @@ export function ConfiguracaoDados({ form }: ConfiguracaoDadosProps) {
           name="nomeDisplay"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nome Fantasia</FormLabel>
+              <FormLabel>Nome Fantasia *</FormLabel>
               <FormControl>
                 <Input placeholder="Digite o nome fantasia" {...field} />
               </FormControl>

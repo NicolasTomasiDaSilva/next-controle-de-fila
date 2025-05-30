@@ -25,7 +25,7 @@ import {
 import WhatsAppMessageEditor from "./rich-text-editor";
 import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
 import PreVisualizacaoMensagens from "./pre-visualizacao-mensagens";
-import { AlertCircle, Car } from "lucide-react";
+import { AlertCircle, Car, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { mensagensPadraoWhatsapp } from "@/constantes/mensagens-padrao-whatsapp";
 import { useConfiguracao } from "@/hooks/use-configuracao";
@@ -166,6 +166,7 @@ export default function MensagensContent() {
                   }}
                   variant={"outline"}
                 >
+                  <RotateCcw />
                   Redefinir
                 </Button>
               </CardFooter>

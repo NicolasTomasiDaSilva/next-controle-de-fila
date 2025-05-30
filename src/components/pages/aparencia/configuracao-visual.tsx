@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 import { uploadService } from "@/services/upload-service";
 import { ChangeEvent, useRef, useState } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import { Upload } from "lucide-react";
+import { RotateCcw, Upload } from "lucide-react";
 import { toast } from "sonner";
 import {
   Popover,
@@ -192,6 +192,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
             }
           }}
         >
+          <RotateCcw />
           Redefinir
         </Button>
       </CardContent>
