@@ -54,105 +54,108 @@ export default function MensagensContent() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <div className="gap-4 grid grid-cols-1 gap-4 md:grid md:grid-cols-2">
-          <Card className="self-start">
-            <CardHeader>
-              <CardTitle className="whitespace-nowrap mb-4">
-                Editor Mensagens
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Tabs
-                value={tabSelecionada}
-                onValueChange={(value) =>
-                  setTabSelecionada(
-                    value as
-                      | "mensagemEntrada"
-                      | "mensagemChamada"
-                      | "mensagemRemovido"
-                  )
-                }
-                className="w-full"
-              >
-                <TabsList className="mx-auto md:ml-0">
-                  <TabsTrigger value="mensagemEntrada">
-                    Entrada
-                    {errors.mensagemEntrada && (
-                      <AlertCircle className="w-4 h-4 text-red-500" />
-                    )}
-                  </TabsTrigger>
-                  <TabsTrigger value="mensagemChamada">
-                    Chamada
-                    {errors.mensagemChamada && (
-                      <AlertCircle className="w-4 h-4 text-red-500" />
-                    )}
-                  </TabsTrigger>
-                  <TabsTrigger value="mensagemRemovido">
-                    Removido
-                    {errors.mensagemRemovido && (
-                      <AlertCircle className="w-4 h-4 text-red-500" />
-                    )}
-                  </TabsTrigger>
-                </TabsList>
-                <TabsContent value="mensagemEntrada">
-                  <FormField
-                    control={form.control}
-                    name="mensagemEntrada"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <RichTextEditor
-                            limiteCaracteres={500}
-                            value={field.value ?? ""}
-                            onChange={field.onChange}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </TabsContent>
-                <TabsContent value="mensagemChamada">
-                  <FormField
-                    control={form.control}
-                    name="mensagemChamada"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <RichTextEditor
-                            limiteCaracteres={500}
-                            value={field.value ?? ""}
-                            onChange={field.onChange}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </TabsContent>
-                <TabsContent value="mensagemRemovido">
-                  <FormField
-                    control={form.control}
-                    name="mensagemRemovido"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <RichTextEditor
-                            limiteCaracteres={500}
-                            value={field.value ?? ""}
-                            onChange={field.onChange}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </TabsContent>
-              </Tabs>
-            </CardContent>
-          </Card>
-
-          <PreVisualizacaoMensagens mensagem={mensagemAtual ?? ""} />
+        <div className="flex gap-4 flex-col xl:flex-row ">
+          <div className="flex-1 min-w-0 ">
+            <Card>
+              <CardHeader>
+                <CardTitle className="whitespace-nowrap mb-4">
+                  Editor Mensagens
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Tabs
+                  value={tabSelecionada}
+                  onValueChange={(value) =>
+                    setTabSelecionada(
+                      value as
+                        | "mensagemEntrada"
+                        | "mensagemChamada"
+                        | "mensagemRemovido"
+                    )
+                  }
+                  className="w-full"
+                >
+                  <TabsList className="mx-auto md:ml-0">
+                    <TabsTrigger value="mensagemEntrada">
+                      Entrada
+                      {errors.mensagemEntrada && (
+                        <AlertCircle className="w-4 h-4 text-red-500" />
+                      )}
+                    </TabsTrigger>
+                    <TabsTrigger value="mensagemChamada">
+                      Chamada
+                      {errors.mensagemChamada && (
+                        <AlertCircle className="w-4 h-4 text-red-500" />
+                      )}
+                    </TabsTrigger>
+                    <TabsTrigger value="mensagemRemovido">
+                      Removido
+                      {errors.mensagemRemovido && (
+                        <AlertCircle className="w-4 h-4 text-red-500" />
+                      )}
+                    </TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="mensagemEntrada">
+                    <FormField
+                      control={form.control}
+                      name="mensagemEntrada"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <RichTextEditor
+                              limiteCaracteres={500}
+                              value={field.value ?? ""}
+                              onChange={field.onChange}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </TabsContent>
+                  <TabsContent value="mensagemChamada">
+                    <FormField
+                      control={form.control}
+                      name="mensagemChamada"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <RichTextEditor
+                              limiteCaracteres={500}
+                              value={field.value ?? ""}
+                              onChange={field.onChange}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </TabsContent>
+                  <TabsContent value="mensagemRemovido">
+                    <FormField
+                      control={form.control}
+                      name="mensagemRemovido"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <RichTextEditor
+                              limiteCaracteres={500}
+                              value={field.value ?? ""}
+                              onChange={field.onChange}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="flex-1  min-w-0">
+            <PreVisualizacaoMensagens mensagem={mensagemAtual ?? ""} />
+          </div>
         </div>
         <BotaoSalvarAlteracoes className="ml-auto block" />
       </form>

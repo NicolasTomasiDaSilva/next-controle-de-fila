@@ -34,6 +34,9 @@ export function toWhatsAppMarkdown(node: any): string {
 export function whatsappToHtml(text: string) {
   if (!text) return "";
 
+  // Escape básico para evitar problemas de segurança/HTML malformado
+  text = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
   // Substitui combinações de negrito+itálico primeiro
   text = text.replace(/(\*|_)(\*|_)(.*?)\2\1/g, (_, p1, p2, inner) => {
     // Aqui a ordem importa, se for *_texto_*, ou _*texto*_
@@ -49,7 +52,9 @@ export function whatsappToHtml(text: string) {
   // Riscado ~texto~
   text = text.replace(/~(.*?)~/g, "<s>$1</s>");
 
-  // Para evitar conflito com tags já criadas, se quiser pode usar algo mais sofisticado (ex: parser tokenizado)
+  // Nova linha
+  text = text.replace(/\n/g, "<br>");
 
+  // Envolve tudo em <p>
   return text;
 }

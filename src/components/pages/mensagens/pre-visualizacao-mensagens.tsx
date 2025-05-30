@@ -43,10 +43,12 @@ export default function PreVisualizacaoMensagens({
                 <p className="text-xs text-muted-foreground">Hoje, 14:30</p>
               </div>
             </div>
-            <div
-              className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none break-words min-h-20 whitespace-pre-wrap"
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
+            <div className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none min-h-20 ">
+              <div
+                className="whitespace-pre-wrap break-words min-w-0 max-w-full"
+                dangerouslySetInnerHTML={{ __html: html }}
+              ></div>
+            </div>
           </div>
         </div>
       </CardContent>
