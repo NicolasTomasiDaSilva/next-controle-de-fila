@@ -79,11 +79,11 @@ export default function VinculacaoContent() {
   }
 
   return (
-    <Card className="max-w-md space-y-4 mx-auto">
+    <Card className=" space-y-4 mx-auto">
       <CardHeader>
         <CardTitle>Vincular Monitor</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-4 sm:flex-row">
         <Card className="bg-gray-50 shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg">Instruções</CardTitle>
@@ -103,66 +103,68 @@ export default function VinculacaoContent() {
             </p>
           </CardContent>
         </Card>
-      </CardContent>
-      <CardFooter className="block space-y-4">
-        <Form {...codigoVinculacaoForm}>
-          <form
-            ref={formRef}
-            onSubmit={codigoVinculacaoForm.handleSubmit(handleVerificarCodigo)}
-            className="space-y-4"
-          >
-            <div className="flex flex-row gap-2 justify-center">
-              <Button
-                variant="outline"
-                type="button" // garante que não seja submit
-                onClick={() => {
-                  setQrScannerOpen(true);
-                }}
-              >
-                <QrCode />
-              </Button>
-
-              {qrScannerOpen && (
-                <QrScanner2
-                  onScan={handleQrScan}
-                  onClose={() => setQrScannerOpen(false)}
-                />
+        <div className="block space-y-4 mx-auto my-auto">
+          <Form {...codigoVinculacaoForm}>
+            <form
+              ref={formRef}
+              onSubmit={codigoVinculacaoForm.handleSubmit(
+                handleVerificarCodigo
               )}
-              <FormField
-                control={codigoVinculacaoForm.control}
-                name="codigo"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        className="w-35"
-                        placeholder="Digite o código"
-                        type="text"
-                        {...field}
-                        onChange={(e) => {
-                          const value = e.target.value;
-                          if (/^[a-zA-Z0-9]{0,4}$/.test(value)) {
-                            field.onChange(value);
-                          }
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <Button
-              type="submit"
-              variant={"azul"}
-              className="w-[max-content]  mx-auto block"
-              disabled={loading}
+              className="space-y-4"
             >
-              {loading ? "Vinculando..." : "Vincular"}
-            </Button>
-          </form>
-        </Form>
-      </CardFooter>
+              <div className="flex flex-row gap-2 justify-center">
+                <Button
+                  variant="outline"
+                  type="button" // garante que não seja submit
+                  onClick={() => {
+                    setQrScannerOpen(true);
+                  }}
+                >
+                  <QrCode />
+                </Button>
+
+                {qrScannerOpen && (
+                  <QrScanner2
+                    onScan={handleQrScan}
+                    onClose={() => setQrScannerOpen(false)}
+                  />
+                )}
+                <FormField
+                  control={codigoVinculacaoForm.control}
+                  name="codigo"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          className="w-35"
+                          placeholder="Digite o código"
+                          type="text"
+                          {...field}
+                          onChange={(e) => {
+                            const value = e.target.value;
+                            if (/^[a-zA-Z0-9]{0,4}$/.test(value)) {
+                              field.onChange(value);
+                            }
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <Button
+                type="submit"
+                variant={"azul"}
+                className="w-[max-content]  mx-auto block"
+                disabled={loading}
+              >
+                {loading ? "Vinculando..." : "Vincular"}
+              </Button>
+            </form>
+          </Form>
+        </div>
+      </CardContent>
     </Card>
   );
 }

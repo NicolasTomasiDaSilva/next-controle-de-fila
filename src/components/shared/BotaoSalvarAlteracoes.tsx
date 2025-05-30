@@ -18,7 +18,7 @@ export default function BotaoSalvarAlteracoes({
       type="submit"
       variant="azul"
       onClick={onClick}
-      className={cn("w-50", className)}
+      className={cn("w-50 mt-2", className)}
       disabled={isSubmitting}
     >
       <div className="flex flex-row items-center justify-center gap-2">
