@@ -3,12 +3,31 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import CharacterCount from "@tiptap/extension-character-count";
+import { Bold } from "@tiptap/extension-bold";
+import { Italic } from "@tiptap/extension-italic";
 
 import CabecalhoEditor from "./cabecalho-editor";
 import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
 import { TokenText } from "./extensions/Token";
 import { toWhatsAppMarkdown } from "@/utils/token-transform";
 import Strike from "@tiptap/extension-strike";
+
+const BoldWithoutInputRules = Bold.extend({
+  addInputRules() {
+    return [];
+  },
+});
+
+const ItalicWithoutInputRules = Italic.extend({
+  addInputRules() {
+    return []; // remove as regras de input
+  },
+});
+const StrikeWithoutInputRules = Strike.extend({
+  addInputRules() {
+    return []; // remove as regras de input
+  },
+});
 
 interface RichTextEditorProps {
   value: string;
@@ -22,7 +41,18 @@ export default function RichTextEditor({
   limiteCaracteres,
 }: RichTextEditorProps) {
   const editor = useEditor({
-    extensions: [StarterKit, Strike, TokenText],
+    extensions: [
+      StarterKit.configure({
+        // aqui você desabilita as extensões que quer controlar manualmente
+        bold: false,
+        italic: false,
+        strike: false,
+      }),
+      BoldWithoutInputRules,
+      ItalicWithoutInputRules,
+      StrikeWithoutInputRules,
+      TokenText,
+    ],
     content: value,
     editorProps: {
       attributes: {

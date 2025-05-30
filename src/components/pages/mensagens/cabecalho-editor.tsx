@@ -18,8 +18,6 @@ export default function CabecalhoEditor({
   return (
     <div className="flex flex-row items-center gap-2 justify-between bg-gray-50 p-2 	border-b ">
       <div className="flex gap-2">
-        {/* Estilo de texto */}
-
         <Toggle
           pressed={editor.isActive("bold")}
           onPressedChange={() => {
@@ -43,18 +41,6 @@ export default function CabecalhoEditor({
           <Slash className="h-4 w-4" />
         </Toggle>
         <div className="w-0.5 self-stretch bg-gray-200" />
-        {/* <Button
-          type="button"
-          variant="ghost"
-          onClick={() => editor.chain().focus().toggleUnderline().run()}
-          className={
-            editor.isActive("underline")
-              ? "bg-zinc-800 text-white"
-              : "bg-muted text-muted-foreground"
-          }
-        >
-          <Underline size={16} />
-        </Button> */}
 
         <Button
           type="button"
