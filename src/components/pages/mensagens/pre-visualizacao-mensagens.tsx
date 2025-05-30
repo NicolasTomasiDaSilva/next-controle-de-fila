@@ -52,7 +52,27 @@ export default function PreVisualizacaoMensagens({
           </div>
         </div>
       </CardContent>
-      <CardFooter></CardFooter>
+      <CardFooter>
+        <Card className="bg-gray-50 shadow-sm w-full gap-0">
+          <CardHeader>
+            <CardTitle className="text-lg">Dicas de formatação</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground">
+              <span className="font-bold">1.</span> Acesse o link do monitor:
+              https://example.com
+            </p>
+            <p className="text-muted-foreground">
+              <span className="font-bold">2.</span> Insira o CPF ou CNPJ no
+              campo de texto
+            </p>
+            <p className="text-muted-foreground">
+              <span className="font-bold">3.</span> Insira o código de 4 dígitos
+              ou escaneie o QR Code
+            </p>
+          </CardContent>
+        </Card>
+      </CardFooter>
     </Card>
   );
 }

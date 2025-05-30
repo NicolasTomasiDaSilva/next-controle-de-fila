@@ -75,7 +75,7 @@ export default function MensagensContent() {
                   }
                   className="w-full"
                 >
-                  <TabsList className="mx-auto md:ml-0">
+                  <TabsList className="mx-auto md:ml-0 h-10 px-2 shadow-sm">
                     <TabsTrigger value="mensagemEntrada">
                       Entrada
                       {errors.mensagemEntrada && (

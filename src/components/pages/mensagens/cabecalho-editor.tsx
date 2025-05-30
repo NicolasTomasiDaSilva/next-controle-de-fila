@@ -16,7 +16,7 @@ export default function CabecalhoEditor({
   limiteCaracteres,
 }: CabecalhoEditorProps) {
   return (
-    <div className="flex flex-row items-center gap-2 justify-between bg-gray-50 p-2 	border-b ">
+    <div className="flex flex-row items-center gap-2 justify-between bg-gray-50 p-2 border-b ">
       <div className="flex gap-2">
         <Toggle
           pressed={editor.isActive("bold")}
@@ -41,25 +41,6 @@ export default function CabecalhoEditor({
           <Slash className="h-4 w-4" />
         </Toggle>
         <div className="w-0.5 self-stretch bg-gray-200" />
-
-        <Button
-          type="button"
-          variant={"ghost"}
-          onClick={() => {
-            editor.chain().focus().insertToken("nome").run();
-          }}
-        >
-          {"{nome}"}
-        </Button>
-        <Button
-          variant={"ghost"}
-          type="button"
-          onClick={() => {
-            editor.chain().focus().insertToken("link").run();
-          }}
-        >
-          {"{link}"}
-        </Button>
       </div>
       {
         <span

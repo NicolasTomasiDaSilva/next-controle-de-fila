@@ -11,6 +11,7 @@ import CabecalhoEditor from "./cabecalho-editor";
 import { TokenText } from "./extensions/Token";
 import { toWhatsAppMarkdown } from "@/utils/token-transform";
 import Strike from "@tiptap/extension-strike";
+import FooterEditor from "./footer-editor";
 
 const BoldWithoutInputRules = Bold.extend({
   addInputRules() {
@@ -72,6 +73,7 @@ export default function RichTextEditor({
       <div className="border rounded-md overflow-hidden shadow-sm">
         <CabecalhoEditor editor={editor} limiteCaracteres={limiteCaracteres} />
         <EditorContent editor={editor} />
+        <FooterEditor editor={editor} limiteCaracteres={limiteCaracteres} />
       </div>
 
       <p className="text-sm text-muted-foreground">
