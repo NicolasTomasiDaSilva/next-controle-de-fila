@@ -68,11 +68,11 @@ export default function RichTextEditor({
   });
 
   // Atualiza conteúdo quando `value` muda externamente
-  useEffect(() => {
-    if (editor && value !== editor.getText()) {
-      editor.commands.setContent(value);
-    }
-  }, [value, editor]);
+  // useEffect(() => {
+  //   if (editor && value !== editor.getText()) {
+  //     editor.commands.setContent(value);
+  //   }
+  // }, [value, editor]);
 
   if (!editor) return null;
 

@@ -7,20 +7,22 @@ import {
 } from "@/components/ui/card";
 import { FormField } from "@/components/ui/form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { mensagensFormDTO } from "@/dtos/configuracao";
 import { whatsappToHtml } from "@/utils/token-transform";
 import { MessageCircle } from "lucide-react";
 import MarkdownIt from "markdown-it/dist/index.cjs.js";
+import { UseFormReturn } from "react-hook-form";
 
 interface PreVisualizacaoMensagensProps {
-  mensagemEntrada: string;
-  mensagemChamada: string;
-  mensagemRemovido: string;
+  form: UseFormReturn<mensagensFormDTO>;
 }
 export default function PreVisualizacaoMensagens({
-  mensagemEntrada,
-  mensagemChamada,
-  mensagemRemovido,
+  form,
 }: PreVisualizacaoMensagensProps) {
+  let mensagemEntrada = form.watch("mensagemEntrada") || "";
+  let mensagemChamada = form.watch("mensagemChamada") || "";
+  let mensagemRemovido = form.watch("mensagemRemovido") || "";
+
   mensagemEntrada = mensagemEntrada.replace(/{nome}/g, "João da Silva");
   mensagemEntrada = mensagemEntrada.replace(/{link}/g, "https://example.com");
   const htmlMensagemEntrada = whatsappToHtml(mensagemEntrada);

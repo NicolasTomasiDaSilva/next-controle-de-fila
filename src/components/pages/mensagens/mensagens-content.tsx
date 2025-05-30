@@ -28,36 +28,35 @@ import PreVisualizacaoMensagens from "./pre-visualizacao-mensagens";
 import { AlertCircle, Car } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { mensagensPadraoWhatsapp } from "@/constantes/mensagens-padrao-whatsapp";
+import { useConfiguracao } from "@/hooks/use-configuracao";
 
 export default function MensagensContent() {
+  const [resetCount, setResetCount] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [tabSelecionada, setTabSelecionada] = useState<
     "mensagemEntrada" | "mensagemChamada" | "mensagemRemovido"
   >("mensagemEntrada");
-  const { empresa } = useEmpresa();
 
-  const configuracao = empresa.configuracao;
-
-  async function handleSubmit(data: mensagensFormDTO) {
-    console.log(data);
-  }
+  const { handleAtualizarMensagens, configuracao } = useConfiguracao();
 
   const form = useForm<mensagensFormDTO>({
     resolver: zodResolver(mensagensFormSchema),
     defaultValues: {
-      mensagemEntrada: configuracao.mensagemEntrada ?? "",
-      mensagemChamada: configuracao.mensagemChamada ?? "",
-      mensagemRemovido: configuracao.mensagemRemovido ?? "",
+      mensagemEntrada: configuracao.mensagemEntrada,
+      mensagemChamada: configuracao.mensagemChamada,
+      mensagemRemovido: configuracao.mensagemRemovido,
     },
   });
 
-  const mensagemEntrada = form.watch("mensagemEntrada");
-  const mensagemChamada = form.watch("mensagemChamada");
-  const mensagemRemovido = form.watch("mensagemRemovido");
   const { errors } = form.formState;
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form
+        onSubmit={form.handleSubmit(
+          async (data) => await handleAtualizarMensagens(data, setIsSubmitting)
+        )}
+      >
         <div className="flex gap-4 flex-col xl:flex-row ">
           <div className="flex-1 min-w-0 ">
             <Card>
@@ -107,6 +106,7 @@ export default function MensagensContent() {
                         <FormItem>
                           <FormControl>
                             <RichTextEditor
+                              key={resetCount}
                               limiteCaracteres={500}
                               value={field.value ?? ""}
                               onChange={field.onChange}
@@ -125,6 +125,7 @@ export default function MensagensContent() {
                         <FormItem>
                           <FormControl>
                             <RichTextEditor
+                              key={resetCount}
                               limiteCaracteres={500}
                               value={field.value ?? ""}
                               onChange={field.onChange}
@@ -143,6 +144,7 @@ export default function MensagensContent() {
                         <FormItem>
                           <FormControl>
                             <RichTextEditor
+                              key={resetCount}
                               limiteCaracteres={500}
                               value={field.value ?? ""}
                               onChange={field.onChange}
@@ -157,8 +159,10 @@ export default function MensagensContent() {
               </CardContent>
               <CardFooter>
                 <Button
+                  type="button"
                   onClick={() => {
-                    form.reset({ ...mensagensPadraoWhatsapp });
+                    form.reset(mensagensPadraoWhatsapp);
+                    setResetCount(resetCount + 1);
                   }}
                   variant={"outline"}
                 >
@@ -168,14 +172,13 @@ export default function MensagensContent() {
             </Card>
           </div>
           <div className="flex-1  min-w-0">
-            <PreVisualizacaoMensagens
-              mensagemEntrada={mensagemEntrada ?? ""}
-              mensagemChamada={mensagemChamada ?? ""}
-              mensagemRemovido={mensagemRemovido ?? ""}
-            />
+            <PreVisualizacaoMensagens form={form} />
           </div>
         </div>
-        <BotaoSalvarAlteracoes className="ml-auto block" />
+        <BotaoSalvarAlteracoes
+          isSubmitting={isSubmitting}
+          className="ml-auto block"
+        />
       </form>
     </Form>
   );
