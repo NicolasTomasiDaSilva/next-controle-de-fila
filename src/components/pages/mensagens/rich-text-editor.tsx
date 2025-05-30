@@ -7,7 +7,7 @@ import { Bold } from "@tiptap/extension-bold";
 import { Italic } from "@tiptap/extension-italic";
 
 import CabecalhoEditor from "./cabecalho-editor";
-import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
+
 import { TokenText } from "./extensions/Token";
 import { toWhatsAppMarkdown } from "@/utils/token-transform";
 import Strike from "@tiptap/extension-strike";
@@ -43,7 +43,6 @@ export default function RichTextEditor({
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        // aqui você desabilita as extensões que quer controlar manualmente
         bold: false,
         italic: false,
         strike: false,

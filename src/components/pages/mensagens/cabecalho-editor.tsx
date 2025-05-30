@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Toggle } from "@/components/ui/toggle";
-import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
+import { toWhatsAppMarkdown } from "@/utils/token-transform";
 
 import { Editor } from "@tiptap/react";
 import { Slash } from "lucide-react";
@@ -61,20 +61,17 @@ export default function CabecalhoEditor({
           {"{link}"}
         </Button>
       </div>
-      {/* <span
-        className={`text-sm  px-2 py-1 rounded ${
-          contarCaracteresSemPlaceholders(
-            htmlToWhatsappTemplate(editor.getHTML())
-          ) > limiteCaracteres
-            ? "bg-red-100 text-red-800"
-            : "bg-muted text-muted-foreground"
-        }`}
-      >
-        {contarCaracteresSemPlaceholders(
-          htmlToWhatsappTemplate(editor.getHTML())
-        )}
-        /{limiteCaracteres}
-      </span> */}
+      {
+        <span
+          className={`text-sm  px-2 py-1 rounded ${
+            toWhatsAppMarkdown(editor.getJSON()).length > limiteCaracteres
+              ? "bg-red-100 text-red-800"
+              : "bg-muted text-muted-foreground"
+          }`}
+        >
+          {toWhatsAppMarkdown(editor.getJSON()).length}/{limiteCaracteres}
+        </span>
+      }
     </div>
   );
 }
