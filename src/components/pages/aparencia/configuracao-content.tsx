@@ -49,7 +49,7 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
     defaultValues: {
       logoUrl: empresa.configuracao.logoUrl ?? "",
       nomeDisplay: empresa.configuracao.nomeDisplay,
-      enderecoDisplay: empresa.configuracao.enderecoDisplay ?? "",
+      enderecoDisplay: empresa.configuracao.enderecoDisplay,
       corPrimaria: empresa.configuracao.corPrimaria,
       corSobreposicao: empresa.configuracao.corSobreposicao,
     },
