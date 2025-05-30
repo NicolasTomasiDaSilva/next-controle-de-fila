@@ -12,6 +12,7 @@ import { TokenText } from "./extensions/Token";
 import { toWhatsAppMarkdown } from "@/utils/token-transform";
 import Strike from "@tiptap/extension-strike";
 import FooterEditor from "./footer-editor";
+import { useEffect } from "react";
 
 const BoldWithoutInputRules = Bold.extend({
   addInputRules() {
@@ -66,16 +67,22 @@ export default function RichTextEditor({
     },
   });
 
+  // Atualiza conteúdo quando `value` muda externamente
+  useEffect(() => {
+    if (editor && value !== editor.getText()) {
+      editor.commands.setContent(value);
+    }
+  }, [value, editor]);
+
   if (!editor) return null;
 
   return (
-    <div className="">
+    <div className="space-y-2">
       <div className="border rounded-md overflow-hidden shadow-sm">
         <CabecalhoEditor editor={editor} limiteCaracteres={limiteCaracteres} />
         <EditorContent editor={editor} />
         <FooterEditor editor={editor} limiteCaracteres={limiteCaracteres} />
       </div>
-
       <p className="text-sm text-muted-foreground">
         Use as variáveis para personalizar a mensagem para cada cliente
       </p>

@@ -12,14 +12,26 @@ import { MessageCircle } from "lucide-react";
 import MarkdownIt from "markdown-it/dist/index.cjs.js";
 
 interface PreVisualizacaoMensagensProps {
-  mensagem: string;
+  mensagemEntrada: string;
+  mensagemChamada: string;
+  mensagemRemovido: string;
 }
 export default function PreVisualizacaoMensagens({
-  mensagem,
+  mensagemEntrada,
+  mensagemChamada,
+  mensagemRemovido,
 }: PreVisualizacaoMensagensProps) {
-  mensagem = mensagem.replace(/{nome}/g, "João da Silva");
-  mensagem = mensagem.replace(/{link}/g, "https://example.com");
-  const html = whatsappToHtml(mensagem);
+  mensagemEntrada = mensagemEntrada.replace(/{nome}/g, "João da Silva");
+  mensagemEntrada = mensagemEntrada.replace(/{link}/g, "https://example.com");
+  const htmlMensagemEntrada = whatsappToHtml(mensagemEntrada);
+
+  mensagemChamada = mensagemChamada.replace(/{nome}/g, "João da Silva");
+  mensagemChamada = mensagemChamada.replace(/{link}/g, "https://example.com");
+  const htmlMensagemChamada = whatsappToHtml(mensagemChamada);
+
+  mensagemRemovido = mensagemRemovido.replace(/{nome}/g, "João da Silva");
+  mensagemRemovido = mensagemRemovido.replace(/{link}/g, "https://example.com");
+  const htmlMensagemRemovido = whatsappToHtml(mensagemRemovido);
 
   return (
     <Card>
@@ -43,17 +55,38 @@ export default function PreVisualizacaoMensagens({
                 <p className="text-xs text-muted-foreground">Hoje, 14:30</p>
               </div>
             </div>
-            <div className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none min-h-20 ">
-              <div
-                className="whitespace-pre-wrap break-words min-w-0 max-w-full"
-                dangerouslySetInnerHTML={{ __html: html }}
-              ></div>
+            <div>
+              <p className="font-semibold">Entrada:</p>
+              <div className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none min-h-20 ">
+                <div
+                  className="whitespace-pre-wrap break-words min-w-0 max-w-full"
+                  dangerouslySetInnerHTML={{ __html: htmlMensagemEntrada }}
+                ></div>
+              </div>
+            </div>
+            <div>
+              <p className="font-semibold">Chamada:</p>
+              <div className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none min-h-20 ">
+                <div
+                  className="whitespace-pre-wrap break-words min-w-0 max-w-full"
+                  dangerouslySetInnerHTML={{ __html: htmlMensagemChamada }}
+                ></div>
+              </div>
+            </div>
+            <div>
+              <p className="font-semibold">Removido:</p>
+              <div className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none min-h-20 ">
+                <div
+                  className="whitespace-pre-wrap break-words min-w-0 max-w-full"
+                  dangerouslySetInnerHTML={{ __html: htmlMensagemRemovido }}
+                ></div>
+              </div>
             </div>
           </div>
         </div>
       </CardContent>
       <CardFooter>
-        <Card className="bg-gray-50 shadow-sm w-full gap-0">
+        {/* <Card className="bg-gray-50 shadow-sm w-full gap-0">
           <CardHeader>
             <CardTitle className="text-lg">Dicas de formatação</CardTitle>
           </CardHeader>
@@ -71,7 +104,7 @@ export default function PreVisualizacaoMensagens({
               ou escaneie o QR Code
             </p>
           </CardContent>
-        </Card>
+        </Card> */}
       </CardFooter>
     </Card>
   );

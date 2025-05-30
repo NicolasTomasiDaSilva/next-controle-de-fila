@@ -25,7 +25,9 @@ import {
 import WhatsAppMessageEditor from "./rich-text-editor";
 import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
 import PreVisualizacaoMensagens from "./pre-visualizacao-mensagens";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Car } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { mensagensPadraoWhatsapp } from "@/constantes/mensagens-padrao-whatsapp";
 
 export default function MensagensContent() {
   const [tabSelecionada, setTabSelecionada] = useState<
@@ -48,7 +50,9 @@ export default function MensagensContent() {
     },
   });
 
-  const mensagemAtual = form.watch(tabSelecionada);
+  const mensagemEntrada = form.watch("mensagemEntrada");
+  const mensagemChamada = form.watch("mensagemChamada");
+  const mensagemRemovido = form.watch("mensagemRemovido");
   const { errors } = form.formState;
 
   return (
@@ -151,10 +155,24 @@ export default function MensagensContent() {
                   </TabsContent>
                 </Tabs>
               </CardContent>
+              <CardFooter>
+                <Button
+                  onClick={() => {
+                    form.reset({ ...mensagensPadraoWhatsapp });
+                  }}
+                  variant={"outline"}
+                >
+                  Redefinir
+                </Button>
+              </CardFooter>
             </Card>
           </div>
           <div className="flex-1  min-w-0">
-            <PreVisualizacaoMensagens mensagem={mensagemAtual ?? ""} />
+            <PreVisualizacaoMensagens
+              mensagemEntrada={mensagemEntrada ?? ""}
+              mensagemChamada={mensagemChamada ?? ""}
+              mensagemRemovido={mensagemRemovido ?? ""}
+            />
           </div>
         </div>
         <BotaoSalvarAlteracoes className="ml-auto block" />
