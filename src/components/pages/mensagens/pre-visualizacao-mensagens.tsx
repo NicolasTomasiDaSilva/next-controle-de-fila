@@ -22,14 +22,14 @@ export default function PreVisualizacaoMensagens({
   const html = whatsappToHtml(mensagem);
 
   return (
-    <>
+    <Card>
       <CardHeader>
         <CardTitle className="whitespace-nowrap mb-4">
           Pré Visualização
         </CardTitle>
       </CardHeader>
-      <CardContent className="">
-        <div className="w-full mx-auto  rounded-b-md shadow-sm bg-white">
+      <CardContent className="h-full">
+        <div className="w-full mx-auto  rounded-b-md shadow-sm bg-white h-full">
           <div className="bg-green-600 py-3 px-3 font-semibold text-white">
             WhatsApp
           </div>
@@ -51,6 +51,6 @@ export default function PreVisualizacaoMensagens({
         </div>
       </CardContent>
       <CardFooter></CardFooter>
-    </>
+    </Card>
   );
 }

@@ -54,8 +54,8 @@ export default function MensagensContent() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <Card className="w-full  md:grid md:grid-cols-2">
-          <div className="">
+        <div className="gap-4 grid grid-cols-1 gap-4 md:grid md:grid-cols-2">
+          <Card className="self-start">
             <CardHeader>
               <CardTitle className="whitespace-nowrap mb-4">
                 Editor Mensagens
@@ -150,11 +150,10 @@ export default function MensagensContent() {
                 </TabsContent>
               </Tabs>
             </CardContent>
-          </div>
-          <div className="">
-            <PreVisualizacaoMensagens mensagem={mensagemAtual ?? ""} />
-          </div>
-        </Card>
+          </Card>
+
+          <PreVisualizacaoMensagens mensagem={mensagemAtual ?? ""} />
+        </div>
         <BotaoSalvarAlteracoes className="ml-auto block" />
       </form>
     </Form>
