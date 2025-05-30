@@ -36,6 +36,7 @@ import { Configuracao } from "@/models/configuracao";
 import { empresaService } from "@/services/empresa-service";
 import { toast } from "sonner";
 import { PreVisualizacaoAparencia } from "./pre-visualizacao-aparencia";
+import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
 
 interface ConfiguracaoContentProps {
   empresa: Empresa;
@@ -78,13 +79,10 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
           <ConfiguracaoVisual form={form}></ConfiguracaoVisual>
           <PreVisualizacaoAparencia form={form}></PreVisualizacaoAparencia>
         </Card>
-        <Button
-          type="submit"
-          className="w-full sm:w-[max-content] block ml-auto"
-          disabled={loading}
-        >
-          {loading ? "Salvando..." : "Salvar"}
-        </Button>
+        <BotaoSalvarAlteracoes
+          className="block ml-auto"
+          isSubmitting={loading}
+        ></BotaoSalvarAlteracoes>
       </form>
     </Form>
   );

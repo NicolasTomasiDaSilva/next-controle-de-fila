@@ -35,7 +35,7 @@ export function AdicionarClienteDialog() {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-full sm:w-40 block ml-auto">
+        <Button variant="azul" className="w-full sm:w-40 block ml-auto">
           Adicionar
         </Button>
       </DialogTrigger>

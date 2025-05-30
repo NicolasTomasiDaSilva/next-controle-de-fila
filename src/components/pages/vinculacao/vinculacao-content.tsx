@@ -154,6 +154,7 @@ export default function VinculacaoContent() {
             </div>
             <Button
               type="submit"
+              variant={"azul"}
               className="w-[max-content]  mx-auto block"
               disabled={loading}
             >

@@ -16,6 +16,7 @@ export default function BotaoSalvarAlteracoes({
   return (
     <Button
       type="submit"
+      variant="azul"
       onClick={onClick}
       className={cn("w-50", className)}
       disabled={isSubmitting}
