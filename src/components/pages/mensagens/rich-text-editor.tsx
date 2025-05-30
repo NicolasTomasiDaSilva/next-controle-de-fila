@@ -29,7 +29,7 @@ export default function RichTextEditor({
     editorProps: {
       attributes: {
         class:
-          "min-h-[120px] max-h-[300px] overflow-auto break-all whitespace-pre-wrap border p-2  bg-white border-none focus:outline-none rounded-md focus:ring-0",
+          "min-h-[120px] max-h-[300px] border-none focus:outline-none rounded-md focus:ring-0 overflow-auto break-all whitespace-pre-wrap p-2  bg-white ",
       },
     },
     onUpdate({ editor }) {
@@ -43,8 +43,11 @@ export default function RichTextEditor({
 
   return (
     <div className="">
-      <CabecalhoEditor editor={editor} limiteCaracteres={limiteCaracteres} />
-      <EditorContent editor={editor} />
+      <div className="border rounded-md overflow-hidden shadow-sm">
+        <CabecalhoEditor editor={editor} limiteCaracteres={limiteCaracteres} />
+        <EditorContent editor={editor} />
+      </div>
+
       <p className="text-sm text-muted-foreground">
         Use as variáveis para personalizar a mensagem para cada cliente
       </p>

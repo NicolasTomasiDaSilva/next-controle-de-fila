@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
-import {
-  contarCaracteresSemPlaceholders,
-  hasToken,
-} from "@/utils/contar-caracteres";
+import { Separator } from "@/components/ui/separator";
+import { Toggle } from "@/components/ui/toggle";
+import { contarCaracteresSemPlaceholders } from "@/utils/contar-caracteres";
 import { htmlToWhatsappTemplate } from "@/utils/token-transform";
 
 import { Editor } from "@tiptap/react";
@@ -18,35 +17,27 @@ export default function CabecalhoEditor({
   limiteCaracteres,
 }: CabecalhoEditorProps) {
   return (
-    <div className="flex flex-row items-center gap-2 justify-between bg-gray-200">
+    <div className="flex flex-row items-center gap-2 justify-between bg-gray-50 p-2 	border-b ">
       <div className="flex gap-2">
         {/* Estilo de texto */}
-        <Button
-          type="button"
-          variant="ghost"
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          className={
-            editor.isActive("bold")
-              ? "bg-zinc-800 text-white"
-              : "bg-muted text-muted-foreground"
-          }
-        >
-          <Bold size={16} />
-        </Button>
 
-        <Button
-          type="button"
-          variant="ghost"
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={
-            editor.isActive("italic")
-              ? "bg-zinc-800 text-white"
-              : "bg-muted text-muted-foreground"
-          }
+        <Toggle
+          pressed={editor.isActive("bold")}
+          onPressedChange={() => {
+            editor.chain().focus().toggleBold().run();
+          }}
         >
-          <Italic size={16} />
-        </Button>
-
+          <Bold className="h-4 w-4" />
+        </Toggle>
+        <Toggle
+          pressed={editor.isActive("italic")}
+          onPressedChange={() => {
+            editor.chain().focus().toggleItalic().run();
+          }}
+        >
+          <Italic className="h-4 w-4" />
+        </Toggle>
+        <div className="w-0.5 self-stretch bg-gray-200" />
         {/* <Button
           type="button"
           variant="ghost"
@@ -59,15 +50,15 @@ export default function CabecalhoEditor({
         >
           <Underline size={16} />
         </Button> */}
+
         <Button
           type="button"
           variant={"ghost"}
           onClick={() => {
             editor.chain().focus().insertToken("nome").run();
           }}
-          className="bg-blue-100 text-blue-800"
         >
-          Inserir Nome
+          {"{nome}"}
         </Button>
         <Button
           variant={"ghost"}
@@ -75,9 +66,8 @@ export default function CabecalhoEditor({
           onClick={() => {
             editor.chain().focus().insertToken("link").run();
           }}
-          className="bg-green-100 text-green-800"
         >
-          Inserir Link
+          {"{link}"}
         </Button>
       </div>
       <span

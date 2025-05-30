@@ -18,7 +18,7 @@ export const TokenText = Extension.create({
       insertToken:
         (type: "nome" | "link") =>
         ({ chain }: CommandProps) => {
-          return chain().insertContent(`{{${type}}}`).run();
+          return chain().insertContent(`{${type}}`).run();
         },
     };
   },
