@@ -89,7 +89,10 @@ export default function CardVincularVinculacao() {
       >
         <Card>
           <CardHeader>
-            <CardTitle>Vincular</CardTitle>
+            <CardTitle>
+              <Link className="inline mr-2" />
+              Vincular
+            </CardTitle>
             <CardDescription>
               Escaneie o QR Code ou digite o código exibido no monitor para
               estabelecer a conexão

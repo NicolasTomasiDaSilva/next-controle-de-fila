@@ -9,7 +9,7 @@ import { FormField } from "@/components/ui/form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { mensagensFormDTO } from "@/dtos/configuracao";
 import { whatsappToHtml } from "@/utils/token-transform";
-import { MessageCircle } from "lucide-react";
+import { Eye, MessageCircle } from "lucide-react";
 import MarkdownIt from "markdown-it/dist/index.cjs.js";
 import { UseFormReturn } from "react-hook-form";
 
@@ -39,6 +39,7 @@ export default function PreVisualizacaoMensagens({
     <Card>
       <CardHeader>
         <CardTitle className="whitespace-nowrap mb-4">
+          <Eye className="inline mr-2" />
           Pré Visualização
         </CardTitle>
       </CardHeader>

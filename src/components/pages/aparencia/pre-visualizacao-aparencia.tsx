@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/carousel";
 import Simulador from "./simulador";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Eye } from "lucide-react";
 
 interface PreVisualizacaoAparenciaProps {
   form: UseFormReturn<configuracaoFormDTO>;
@@ -72,7 +73,10 @@ export function PreVisualizacaoAparencia({
   return (
     <>
       <CardHeader>
-        <CardTitle>Pré Visualização</CardTitle>
+        <CardTitle>
+          <Eye className="inline mr-2" />
+          Pré Visualização
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div ref={containerRef} className="w-full mx-auto sm:w-[80%]	">

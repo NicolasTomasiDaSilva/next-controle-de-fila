@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 
 import { UseFormReturn } from "react-hook-form";
 import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { Building2 } from "lucide-react";
 
 interface ConfiguracaoDadosProps {
   form: UseFormReturn<configuracaoFormDTO>;
@@ -30,7 +31,10 @@ export function ConfiguracaoDados({ form }: ConfiguracaoDadosProps) {
   return (
     <>
       <CardHeader>
-        <CardTitle>Dados da Empresa</CardTitle>
+        <CardTitle>
+          <Building2 className="inline mr-2" />
+          Dados da Empresa
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <FormField

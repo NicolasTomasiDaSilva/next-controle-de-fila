@@ -25,7 +25,7 @@ import {
 import WhatsAppMessageEditor from "./rich-text-editor";
 import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
 import PreVisualizacaoMensagens from "./pre-visualizacao-mensagens";
-import { AlertCircle, Car, RotateCcw } from "lucide-react";
+import { AlertCircle, Car, PenLine, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { mensagensPadraoWhatsapp } from "@/constantes/mensagens-padrao-whatsapp";
 import { useConfiguracao } from "@/hooks/use-configuracao";
@@ -62,6 +62,7 @@ export default function MensagensContent() {
             <Card>
               <CardHeader>
                 <CardTitle className="whitespace-nowrap mb-4">
+                  <PenLine className="inline mr-2" />
                   Editor Mensagens
                 </CardTitle>
               </CardHeader>

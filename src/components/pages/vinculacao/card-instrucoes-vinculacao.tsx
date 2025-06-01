@@ -7,13 +7,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Link, LinkIcon, QrCode, Shield } from "lucide-react";
+import { Link, LinkIcon, ListChecks, QrCode, Shield } from "lucide-react";
 
 export default function CardInstrucoesVinculacao() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Instruções</CardTitle>
+        <CardTitle>
+          <ListChecks className="inline mr-2" />
+          Instruções
+        </CardTitle>
         <CardDescription>
           Siga os passos abaixo para vincular seu monitor ao sistema
         </CardDescription>

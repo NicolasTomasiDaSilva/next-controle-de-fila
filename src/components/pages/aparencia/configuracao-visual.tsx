@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 import { uploadService } from "@/services/upload-service";
 import { ChangeEvent, useRef, useState } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
-import { RotateCcw, Upload } from "lucide-react";
+import { Palette, RotateCcw, Upload } from "lucide-react";
 import { toast } from "sonner";
 import {
   Popover,
@@ -78,7 +78,10 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
   return (
     <>
       <CardHeader>
-        <CardTitle>Identidade Visual</CardTitle>
+        <CardTitle>
+          <Palette className="inline mr-2" />
+          Identidade Visual
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <FormField
@@ -122,7 +125,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
                   </div>
                 </FormControl>
                 <p className="text-sm text-muted-foreground">
-                  Formatos aceitos: PNG e JPG. Tamanho máximo: 2MB
+                  PNG, JPG até 2MB
                 </p>
                 <FormMessage />
               </FormItem>
