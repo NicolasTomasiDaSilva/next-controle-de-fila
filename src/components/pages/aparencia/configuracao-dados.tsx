@@ -29,12 +29,15 @@ interface ConfiguracaoDadosProps {
 
 export function ConfiguracaoDados({ form }: ConfiguracaoDadosProps) {
   return (
-    <>
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>
           <Building2 className="inline mr-2" />
           Dados da Empresa
         </CardTitle>
+        <CardDescription>
+          Configure as informações principais da sua empresa
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <FormField
@@ -68,7 +71,6 @@ export function ConfiguracaoDados({ form }: ConfiguracaoDadosProps) {
           )}
         />
       </CardContent>
-      <CardFooter className="flex justify-between"></CardFooter>
-    </>
+    </Card>
   );
 }

@@ -76,12 +76,15 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
   }
 
   return (
-    <>
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>
           <Palette className="inline mr-2" />
           Identidade Visual
         </CardTitle>
+        <CardDescription>
+          Faça upload da logo e defina as cores principais da sua empresa
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <FormField
@@ -182,6 +185,8 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
             )}
           />
         </div>
+      </CardContent>
+      <CardFooter>
         <Button
           type="button"
           variant="outline"
@@ -198,8 +203,7 @@ export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
           <RotateCcw />
           Redefinir
         </Button>
-      </CardContent>
-      <CardFooter className="flex justify-between"></CardFooter>
-    </>
+      </CardFooter>
+    </Card>
   );
 }

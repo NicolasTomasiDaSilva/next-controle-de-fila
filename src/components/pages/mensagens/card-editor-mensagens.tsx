@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -44,10 +45,13 @@ export default function CardEditorMensagens({
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle className="whitespace-nowrap mb-4">
+        <CardTitle className="whitespace-nowrap">
           <PenLine className="inline mr-2" />
           Editor Mensagens
         </CardTitle>
+        <CardDescription>
+          Personalize as mensagens que serão enviadas ao seu cliente
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs

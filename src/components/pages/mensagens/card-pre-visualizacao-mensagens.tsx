@@ -1,6 +1,7 @@
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -38,10 +39,11 @@ export default function CardPreVisualizacaoMensagens({
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle className="whitespace-nowrap mb-4">
+        <CardTitle className="whitespace-nowrap">
           <Eye className="inline mr-2" />
-          Pré Visualização
+          Pré-Visualização
         </CardTitle>
+        <CardDescription>Veja como ficará sua configuração</CardDescription>
       </CardHeader>
       <CardContent className="h-full">
         <div className="w-full mx-auto  rounded-b-md shadow-sm bg-white h-full">
@@ -88,27 +90,6 @@ export default function CardPreVisualizacaoMensagens({
           </div>
         </div>
       </CardContent>
-      <CardFooter>
-        {/* <Card className="bg-gray-50 shadow-sm w-full gap-0">
-          <CardHeader>
-            <CardTitle className="text-lg">Dicas de formatação</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">
-              <span className="font-bold">1.</span> Acesse o link do monitor:
-              https://example.com
-            </p>
-            <p className="text-muted-foreground">
-              <span className="font-bold">2.</span> Insira o CPF ou CNPJ no
-              campo de texto
-            </p>
-            <p className="text-muted-foreground">
-              <span className="font-bold">3.</span> Insira o código de 4 dígitos
-              ou escaneie o QR Code
-            </p>
-          </CardContent>
-        </Card> */}
-      </CardFooter>
     </Card>
   );
 }

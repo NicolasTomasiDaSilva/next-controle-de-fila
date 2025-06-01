@@ -1,5 +1,5 @@
 import { Section } from "@/components/Section";
-import { ConfiguracaoContent } from "@/components/pages/aparencia/configuracao-content";
+import { AparenciaContent } from "@/components/pages/aparencia/aparencia-content";
 import { ConfiguracaoDados } from "@/components/pages/aparencia/configuracao-dados";
 import { ConfiguracaoCard } from "@/components/pages/configuracoes/ConfiguracaoCard";
 
@@ -17,7 +17,7 @@ export default async function AparenciaPage() {
         linkRetorno={"/configuracoes"}
         cor="red"
       >
-        <ConfiguracaoContent empresa={empresa}></ConfiguracaoContent>
+        <AparenciaContent empresa={empresa}></AparenciaContent>
       </Section>
     </EmpresaProvider>
   );

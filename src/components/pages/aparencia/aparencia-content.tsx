@@ -35,14 +35,14 @@ import { ConfiguracaoVisual } from "./configuracao-visual";
 import { Configuracao } from "@/models/configuracao";
 import { empresaService } from "@/services/empresa-service";
 import { toast } from "sonner";
-import { PreVisualizacaoAparencia } from "./pre-visualizacao-aparencia";
+import { CardPreVisualizacaoAparencia } from "./card-pre-visualizacao-aparencia";
 import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
 
-interface ConfiguracaoContentProps {
+interface AparenciaContentProps {
   empresa: Empresa;
 }
 
-export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
+export function AparenciaContent({ empresa }: AparenciaContentProps) {
   const [loading, setLoading] = useState(false);
   const form = useForm<configuracaoFormDTO>({
     resolver: zodResolver(configuracaoFormSchema),
@@ -74,11 +74,15 @@ export function ConfiguracaoContent({ empresa }: ConfiguracaoContentProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <Card className="w-full">
-          <ConfiguracaoDados form={form}></ConfiguracaoDados>
-          <ConfiguracaoVisual form={form}></ConfiguracaoVisual>
-          <PreVisualizacaoAparencia form={form}></PreVisualizacaoAparencia>
-        </Card>
+        <div className="flex flex-col gap-4 ">
+          <div className="w-full flex flex-col gap-4  md:flex-row ">
+            <ConfiguracaoDados form={form}></ConfiguracaoDados>
+            <ConfiguracaoVisual form={form}></ConfiguracaoVisual>
+          </div>
+          <CardPreVisualizacaoAparencia
+            form={form}
+          ></CardPreVisualizacaoAparencia>
+        </div>
         <BotaoSalvarAlteracoes
           className="block ml-auto"
           isSubmitting={loading}

@@ -12,16 +12,22 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Simulador from "./simulador";
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Eye } from "lucide-react";
 
-interface PreVisualizacaoAparenciaProps {
+interface CardPreVisualizacaoAparenciaProps {
   form: UseFormReturn<configuracaoFormDTO>;
 }
 
-export function PreVisualizacaoAparencia({
+export function CardPreVisualizacaoAparencia({
   form,
-}: PreVisualizacaoAparenciaProps) {
+}: CardPreVisualizacaoAparenciaProps) {
   const valores = form.watch();
   const [debouncedValores] = useDebounce(valores, 300);
   const params = new URLSearchParams();
@@ -71,12 +77,13 @@ export function PreVisualizacaoAparencia({
   const scaleCelular = maxPreviewHeight / celularSize.height;
 
   return (
-    <>
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>
           <Eye className="inline mr-2" />
-          Pré Visualização
+          Pré-Visualização
         </CardTitle>
+        <CardDescription>Veja como ficará sua configuração</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div ref={containerRef} className="w-full mx-auto sm:w-[80%]	">
@@ -108,6 +115,6 @@ export function PreVisualizacaoAparencia({
           </Carousel>
         </div>
       </CardContent>
-    </>
+    </Card>
   );
 }
