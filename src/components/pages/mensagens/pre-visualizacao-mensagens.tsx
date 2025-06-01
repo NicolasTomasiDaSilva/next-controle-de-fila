@@ -36,7 +36,7 @@ export default function PreVisualizacaoMensagens({
   const htmlMensagemRemovido = whatsappToHtml(mensagemRemovido);
 
   return (
-    <Card>
+    <Card className="w-full">
       <CardHeader>
         <CardTitle className="whitespace-nowrap mb-4">
           <Eye className="inline mr-2" />

@@ -42,7 +42,7 @@ export default function CardEditor({
 }: CardEditorProps) {
   const { errors } = form.formState;
   return (
-    <Card>
+    <Card className="w-full">
       <CardHeader>
         <CardTitle className="whitespace-nowrap mb-4">
           <PenLine className="inline mr-2" />

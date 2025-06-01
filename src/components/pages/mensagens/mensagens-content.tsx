@@ -56,19 +56,16 @@ export default function MensagensContent() {
           async (data) => await handleAtualizarMensagens(data, setIsSubmitting)
         )}
       >
-        <div className="flex gap-4 flex-col xl:flex-row ">
-          <div className="flex-1 min-w-0 ">
-            <CardEditor
-              tabSelecionada={tabSelecionada}
-              setTabSelecionada={setTabSelecionada}
-              form={form}
-              resetCount={resetCount}
-              setResetCount={setResetCount}
-            />
-          </div>
-          <div className="flex-1  min-w-0">
-            <PreVisualizacaoMensagens form={form} />
-          </div>
+        <div className="flex flex-col gap-4 xl:flex-row xl:items-start">
+          <CardEditor
+            tabSelecionada={tabSelecionada}
+            setTabSelecionada={setTabSelecionada}
+            form={form}
+            resetCount={resetCount}
+            setResetCount={setResetCount}
+          />
+
+          <PreVisualizacaoMensagens form={form} />
         </div>
         <BotaoSalvarAlteracoes
           isSubmitting={isSubmitting}
