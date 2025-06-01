@@ -21,7 +21,7 @@ import { UseFormReturn } from "react-hook-form";
 import { mensagensFormDTO } from "@/dtos/configuracao";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-interface CardEditorProps {
+interface CardEditorMensagensProps {
   tabSelecionada: "mensagemEntrada" | "mensagemChamada" | "mensagemRemovido";
   setTabSelecionada: React.Dispatch<
     React.SetStateAction<
@@ -33,13 +33,13 @@ interface CardEditorProps {
   setResetCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function CardEditor({
+export default function CardEditorMensagens({
   tabSelecionada,
   setTabSelecionada,
   form,
   resetCount,
   setResetCount,
-}: CardEditorProps) {
+}: CardEditorMensagensProps) {
   const { errors } = form.formState;
   return (
     <Card className="w-full">

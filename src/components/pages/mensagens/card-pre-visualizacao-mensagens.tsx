@@ -13,12 +13,12 @@ import { Eye, MessageCircle } from "lucide-react";
 import MarkdownIt from "markdown-it/dist/index.cjs.js";
 import { UseFormReturn } from "react-hook-form";
 
-interface PreVisualizacaoMensagensProps {
+interface CardPreVisualizacaoMensagensProps {
   form: UseFormReturn<mensagensFormDTO>;
 }
-export default function PreVisualizacaoMensagens({
+export default function CardPreVisualizacaoMensagens({
   form,
-}: PreVisualizacaoMensagensProps) {
+}: CardPreVisualizacaoMensagensProps) {
   let mensagemEntrada = form.watch("mensagemEntrada") || "";
   let mensagemChamada = form.watch("mensagemChamada") || "";
   let mensagemRemovido = form.watch("mensagemRemovido") || "";

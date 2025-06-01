@@ -1,35 +1,17 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import RichTextEditor from "./rich-text-editor";
 import { useState } from "react";
 import { mensagensFormDTO, mensagensFormSchema } from "@/dtos/configuracao";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEmpresa } from "@/hooks/use-empresa";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import WhatsAppMessageEditor from "./rich-text-editor";
+import { Form } from "@/components/ui/form";
+
 import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
-import PreVisualizacaoMensagens from "./pre-visualizacao-mensagens";
-import { AlertCircle, Car, PenLine, RotateCcw } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { mensagensPadraoWhatsapp } from "@/constantes/mensagens-padrao-whatsapp";
+import CardPreVisualizacaoMensagens from "./card-pre-visualizacao-mensagens";
+
 import { useConfiguracao } from "@/hooks/use-configuracao";
-import CardEditor from "./card-editor";
+import CardEditorMensagens from "./card-editor-mensagens";
 
 export default function MensagensContent() {
   const [resetCount, setResetCount] = useState(0);
@@ -57,7 +39,7 @@ export default function MensagensContent() {
         )}
       >
         <div className="flex flex-col gap-4 xl:flex-row xl:items-start">
-          <CardEditor
+          <CardEditorMensagens
             tabSelecionada={tabSelecionada}
             setTabSelecionada={setTabSelecionada}
             form={form}
@@ -65,7 +47,7 @@ export default function MensagensContent() {
             setResetCount={setResetCount}
           />
 
-          <PreVisualizacaoMensagens form={form} />
+          <CardPreVisualizacaoMensagens form={form} />
         </div>
         <BotaoSalvarAlteracoes
           isSubmitting={isSubmitting}
