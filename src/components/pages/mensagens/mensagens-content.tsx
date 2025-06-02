@@ -39,15 +39,18 @@ export default function MensagensContent() {
         )}
       >
         <div className="flex flex-col gap-4 xl:flex-row xl:items-start">
-          <CardEditorMensagens
-            tabSelecionada={tabSelecionada}
-            setTabSelecionada={setTabSelecionada}
-            form={form}
-            resetCount={resetCount}
-            setResetCount={setResetCount}
-          />
-
-          <CardPreVisualizacaoMensagens form={form} />
+          <div className="flex-1 basis-0 min-w-0">
+            <CardEditorMensagens
+              tabSelecionada={tabSelecionada}
+              setTabSelecionada={setTabSelecionada}
+              form={form}
+              resetCount={resetCount}
+              setResetCount={setResetCount}
+            />
+          </div>
+          <div className="flex-1 basis-0 min-w-0">
+            <CardPreVisualizacaoMensagens form={form} />
+          </div>
         </div>
         <BotaoSalvarAlteracoes
           isSubmitting={isSubmitting}
