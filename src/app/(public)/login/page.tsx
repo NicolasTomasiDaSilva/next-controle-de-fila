@@ -4,7 +4,9 @@ import { Section } from "@/components/Section";
 export default async function LoginPage() {
   return (
     <div className="flex mt-0 pb-0 items-center justify-center min-h-screen">
-      <LoginForm></LoginForm>
+      <Section>
+        <LoginForm></LoginForm>
+      </Section>
     </div>
   );
 }

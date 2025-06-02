@@ -132,7 +132,11 @@ export default function LoginForm() {
                 <FormItem>
                   <FormLabel>E-mail</FormLabel>
                   <FormControl>
-                    <Input placeholder="Digite seu e-mail" {...field} />
+                    <Input
+                      className="bg-white"
+                      placeholder="Digite seu e-mail"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -166,6 +170,7 @@ export default function LoginForm() {
                   <FormLabel>Código</FormLabel>
                   <FormControl>
                     <Input
+                      className="bg-white"
                       placeholder="Digite o código"
                       type="numeric"
                       {...field}

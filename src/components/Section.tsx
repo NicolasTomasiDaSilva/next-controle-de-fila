@@ -8,7 +8,7 @@ import { Button } from "./ui/button";
 import { sectionCores } from "@/constantes/section-cores";
 
 interface SectionProps {
-  title: string;
+  title?: string;
   className?: string;
   linkRetorno?: string | null;
   cor?: keyof typeof sectionCores | null;
@@ -39,7 +39,7 @@ export function Section({
             </Button>
           </Link>
         )}
-        <SectionTitle title={title} cor={corSection.traco} />
+        {title && <SectionTitle title={title} cor={corSection.traco} />}
       </div>
 
       {children}
