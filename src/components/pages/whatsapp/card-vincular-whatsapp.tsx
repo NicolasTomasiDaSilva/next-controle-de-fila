@@ -9,7 +9,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+
 import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
 import { useConfiguracao } from "@/hooks/use-configuracao";
 import { useEmpresa } from "@/hooks/use-empresa";
@@ -103,7 +105,9 @@ export default function CardVincularWhatsapp() {
             {qrcode ? (
               <img src={qrcode} className="w-48 h-48 object-contain" />
             ) : (
-              <Skeleton className="w-48 h-48" />
+              <div className="w-48 h-48 flex justify-center items-center">
+                <Spinner className=" h-20 w-20"></Spinner>
+              </div>
             )}
             {isQrcodeExpirado && (
               <Button

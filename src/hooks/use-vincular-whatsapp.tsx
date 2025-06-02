@@ -136,9 +136,6 @@ export function useVincularWhatsapp() {
           checked ? "ativadas" : "desativadas"
         } com sucesso.`
       );
-
-      // opcional: atualizar empresa/configuração localmente
-      // atualizarConfiguracao({ isWhatsappAtivo: checked });
     } catch (err) {
       toast.error("Erro ao atualizar configuração.");
       setIsChecked(!checked);
