@@ -92,7 +92,12 @@ export function ClienteForm({
           )}
         />
         <div className="flex justify-end">
-          <Button className="w-full sm:w-40" type="submit">
+          <Button
+            variant={"azul"}
+            className="w-full sm:w-40"
+            type="submit"
+            disabled={form.formState.isSubmitting}
+          >
             {textoBotao}
           </Button>
         </div>

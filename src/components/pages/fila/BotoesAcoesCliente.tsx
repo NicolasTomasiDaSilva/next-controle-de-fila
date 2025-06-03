@@ -12,6 +12,7 @@ import {
   Trash,
   XCircle,
 } from "lucide-react";
+import { RemoverClienteDialog } from "./TabelaPrincipal/RemoverClienteDialog";
 
 interface BotoesAcoesClienteProps {
   cliente: Cliente;
@@ -19,6 +20,7 @@ interface BotoesAcoesClienteProps {
 
 export function BotoesAcoesCliente({ cliente }: BotoesAcoesClienteProps) {
   const {
+    isSubmitting,
     handleChamar,
     handleRemover,
     handleMoverCima,
@@ -33,6 +35,7 @@ export function BotoesAcoesCliente({ cliente }: BotoesAcoesClienteProps) {
       {cliente.status === StatusEnum.Aguardando && (
         <div className=" min-w-max w-[max-content] grid grid-cols-2 md:grid-cols-4 gap-2 ">
           <button
+            disabled={isSubmitting}
             onClick={async () => {
               handleMoverCima(cliente);
             }}
@@ -41,6 +44,7 @@ export function BotoesAcoesCliente({ cliente }: BotoesAcoesClienteProps) {
             <CircleArrowUp className="w-7 h-7" />
           </button>
           <button
+            disabled={isSubmitting}
             onClick={async () => {
               handleMoverBaixo(cliente);
             }}
@@ -49,6 +53,7 @@ export function BotoesAcoesCliente({ cliente }: BotoesAcoesClienteProps) {
             <CircleArrowDown className="w-7 h-7" />
           </button>
           <button
+            disabled={isSubmitting}
             onClick={async () => {
               handleChamar(cliente);
             }}
@@ -56,19 +61,13 @@ export function BotoesAcoesCliente({ cliente }: BotoesAcoesClienteProps) {
           >
             <Phone className="w-7 h-7" />
           </button>
-          <button
-            onClick={async () => {
-              handleRemover(cliente);
-            }}
-            className="text-red-500 hover:text-red-700 transition md:order-4 cursor-pointer"
-          >
-            <Trash className="w-7 h-7" />
-          </button>
+          <RemoverClienteDialog cliente={cliente} />
         </div>
       )}
       {cliente.status === StatusEnum.Chamado && (
         <div className=" min-w-max w-[max-content] grid grid-cols-3 gap-2 ">
           <button
+            disabled={isSubmitting}
             onClick={async () => {
               handleAtender(cliente);
             }}
@@ -78,6 +77,7 @@ export function BotoesAcoesCliente({ cliente }: BotoesAcoesClienteProps) {
           </button>
 
           <button
+            disabled={isSubmitting}
             onClick={async () => {
               handleVoltar(cliente);
             }}
@@ -86,6 +86,7 @@ export function BotoesAcoesCliente({ cliente }: BotoesAcoesClienteProps) {
             <CircleArrowLeft className="w-7 h-7" />
           </button>
           <button
+            disabled={isSubmitting}
             onClick={async () => {
               handleAusentar(cliente);
             }}

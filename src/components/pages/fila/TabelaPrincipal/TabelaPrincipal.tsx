@@ -68,13 +68,13 @@ export default function TabelaPrincipal() {
                   onClick={goToTop}
                   className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer"
                 >
-                  <ArrowUp className="w-7 h-7" />
+                  <ArrowUp className="w-6 h-6" />
                 </button>
                 <button
                   onClick={expandirTabela}
                   className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer"
                 >
-                  <MoveVertical className="w-7 h-7" />
+                  <MoveVertical className="w-6 h-6" />
                 </button>
               </div>
             </th>

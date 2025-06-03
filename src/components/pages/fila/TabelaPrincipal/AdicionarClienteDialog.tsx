@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { useFila } from "@/hooks/use-fila";
 import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
 import { ClienteForm } from "./ClienteForm";
+import { PlusCircle } from "lucide-react";
 
 export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);
