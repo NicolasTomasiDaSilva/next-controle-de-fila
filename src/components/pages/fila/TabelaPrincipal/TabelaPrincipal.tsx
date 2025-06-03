@@ -58,7 +58,7 @@ export default function TabelaPrincipal() {
           className="max-w-sm bg-white focus-visible:ring-[1px]"
         />
       </div>
-      <div className="overflow-y-auto ">
+      <div className="overflow-y-auto overflow-x-hidden ">
         <div ref={parent} className="overflow-x-hidden overflow-y-hidden">
           {clientesFiltrados.map((cliente) => (
             <div key={cliente.id}>
