@@ -54,9 +54,9 @@ export default function ClienteRowTable({
   } = useFila();
 
   return (
-    <div className="w-full px-6 md:px-10 py-4 md:flex md:flex-row md:justify-between md:items-center md:gap-2">
-      <div className="flex flex-row justify-between  gap-2 w-full">
-        <div>
+    <div className="w-full px-6 md:px-10 py-6 flex flex-col  md:flex-row md:justify-between  gap-2">
+      <div className="flex flex-row justify-between gap-2 w-full">
+        <div className="">
           <div className="flex flex-row items-center gap-2">
             {cliente.status === StatusEnum.Aguardando && (
               <span className="text-xl font-bold text-blue-600">
@@ -72,7 +72,7 @@ export default function ClienteRowTable({
             </p>
           )}
         </div>
-        <div className="flex flex-col items-end md:items-center justify-center md:flex-row gap-2">
+        <div className="flex flex-col items-end md:items-center justify-center md:flex-row gap-2  md:justify-between ">
           <p className="text-sm text-muted-foreground flex flex-row gap-1 items-center">
             <Clock className="w-3 h-3" />
             23min
@@ -88,7 +88,7 @@ export default function ClienteRowTable({
         </div>
       </div>
       {cliente.status === StatusEnum.Aguardando && (
-        <div className="flex flex-row justify-between md:justify-end md:gap-2 ">
+        <div className="flex flex-row justify-between md:gap-2 ">
           <div className="flex flex-row items-center md:gap-2">
             <Button
               disabled={isSubmitting}
