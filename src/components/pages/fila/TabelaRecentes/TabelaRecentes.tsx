@@ -27,19 +27,18 @@ export default function TabelaRecentes() {
   }, [fila.clientes]);
 
   return (
-    <Card className="w-full h-50 border  p-0 overflow-hidden gap-0">
+    <Card className="w-full border  p-0 overflow-hidden gap-0">
       <div className="bg-gray-100 shadow-sm flex items-center gap-2 px-4">
         <span className="font-semibold whitespace-nowrap py-3">Recentes</span>
       </div>
-      <div className="overflow-y-auto overflow-x-hidden ">
-        <div ref={parent} className="overflow-x-hidden overflow-y-hidden">
-          {clientesFiltrados.map((cliente) => (
-            <div key={cliente.id}>
-              <ClienteRowTable cliente={cliente}></ClienteRowTable>
-              <Separator></Separator>
-            </div>
-          ))}
-        </div>
+
+      <div ref={parent} className="">
+        {clientesFiltrados.map((cliente) => (
+          <div key={cliente.id}>
+            <ClienteRowTable cliente={cliente}></ClienteRowTable>
+            <Separator></Separator>
+          </div>
+        ))}
       </div>
     </Card>
   );

@@ -24,7 +24,7 @@ import { StatusEnum, StatusMap } from "@/enums/status-enum";
 import { useFila } from "@/hooks/use-fila";
 import { EditarClienteDialog } from "./TabelaPrincipal/EditarClienteDialog";
 import { TempoDecorrido } from "../../shared/TempoDecorrido";
-import { BotoesAcoesCliente } from "./BotoesAcoesCliente";
+
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -54,12 +54,12 @@ export default function ClienteRowTable({
   } = useFila();
 
   return (
-    <div className="w-full px-6 md:px-10 py-6 flex flex-col  md:flex-row md:justify-between  gap-2">
+    <div className="w-full px-6 md:px-15 py-6 flex flex-col  md:flex-row md:justify-between gap-2">
       <div className="flex flex-row justify-between gap-2 w-full">
         <div className="">
           <div className="flex flex-row items-center gap-2">
             {cliente.status === StatusEnum.Aguardando && (
-              <span className="text-xl font-bold text-blue-600">
+              <span className="text-xl font-bold text-blue-600 ">
                 {cliente.posicao}
               </span>
             )}

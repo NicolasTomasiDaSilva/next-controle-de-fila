@@ -45,7 +45,7 @@ export default function TabelaPrincipal() {
   }, [fila.clientes]);
 
   return (
-    <Card className="w-full h-120 border border-blue-300 p-0 overflow-hidden gap-0">
+    <Card className="w-full  border border-blue-300 p-0 overflow-hidden gap-0">
       <div className="bg-blue-50 shadow-sm flex items-center gap-2 py-2 px-4">
         <Users className="size-4 shrink-0 text-blue-600" />
         <span className="text-sm font-bold text-blue-600 whitespace-nowrap">
@@ -58,15 +58,14 @@ export default function TabelaPrincipal() {
           className="max-w-sm bg-white focus-visible:ring-[1px]"
         />
       </div>
-      <div className="overflow-y-auto overflow-x-hidden ">
-        <div ref={parent} className="overflow-x-hidden overflow-y-hidden">
-          {clientesFiltrados.map((cliente) => (
-            <div key={cliente.id}>
-              <ClienteRowTable cliente={cliente}></ClienteRowTable>
-              <Separator></Separator>
-            </div>
-          ))}
-        </div>
+
+      <div ref={parent}>
+        {clientesFiltrados.map((cliente) => (
+          <div key={cliente.id}>
+            <ClienteRowTable cliente={cliente}></ClienteRowTable>
+            <Separator></Separator>
+          </div>
+        ))}
       </div>
     </Card>
   );
