@@ -9,6 +9,7 @@ import TabelaRecentes from "@/components/pages/fila/TabelaRecentes/TabelaRecente
 import { empresaService } from "@/services/empresa-service";
 import { Empresa } from "@/models/empresa";
 import { EmpresaProvider } from "@/contexts/empresa-context";
+import FilaContent from "@/components/pages/fila/fila-content";
 
 export default async function FilaPage() {
   const empresa: Empresa = await empresaService.obterEmpresa();
@@ -19,11 +20,7 @@ export default async function FilaPage() {
     <EmpresaProvider empresaInicial={empresa}>
       <FilaProvider filaInicial={fila}>
         <Section title="Fila de Atendimento">
-          <AdicionarClienteDialog></AdicionarClienteDialog>
-          <div className="h-2"></div>
-          <TabelaPrincipal></TabelaPrincipal>
-          <div className="h-10"></div>
-          <TabelaRecentes></TabelaRecentes>
+          <FilaContent></FilaContent>
         </Section>
       </FilaProvider>
     </EmpresaProvider>
