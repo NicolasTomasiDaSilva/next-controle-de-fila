@@ -22,7 +22,7 @@ export default async function FilaPage() {
           <AdicionarClienteDialog></AdicionarClienteDialog>
           <div className="h-2"></div>
           <TabelaPrincipal></TabelaPrincipal>
-          <div className="h-2"></div>
+          <div className="h-10"></div>
           <TabelaRecentes></TabelaRecentes>
         </Section>
       </FilaProvider>

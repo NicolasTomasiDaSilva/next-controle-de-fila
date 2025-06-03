@@ -59,14 +59,21 @@ export default function TabelaPrincipal() {
         />
       </div>
 
-      <div ref={parent}>
-        {clientesFiltrados.map((cliente) => (
-          <div key={cliente.id}>
-            <ClienteRowTable cliente={cliente}></ClienteRowTable>
-            <Separator></Separator>
-          </div>
-        ))}
-      </div>
+      {clientesFiltrados.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-8 text-center text-muted-foreground">
+          <Users className="w-8 h-8 mb-2 text-blue-400" />
+          <p className="text-sm font-medium">Nenhum cliente encontrado</p>
+        </div>
+      ) : (
+        <div ref={parent}>
+          {clientesFiltrados.map((cliente) => (
+            <div key={cliente.id}>
+              <ClienteRowTable cliente={cliente} />
+              <Separator />
+            </div>
+          ))}
+        </div>
+      )}
     </Card>
   );
 }
