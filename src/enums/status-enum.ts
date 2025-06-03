@@ -27,15 +27,15 @@ export const StatusMap: Record<
   },
   [StatusEnum.Chamado]: {
     label: "Chamado",
-    className: "bg-sky-100 text-sky-600 border border-sky-300",
+    className: "bg-green-100 text-green-600 border border-green-300",
   },
   [StatusEnum.Atendido]: {
     label: "Atendido",
-    className: "bg-green-100 text-green-600 border border-green-300",
+    className: "bg-sky-100 text-sky-600 border border-sky-300",
   },
   [StatusEnum.Desistente]: {
     label: "Desistente",
-    className: "bg-orange-100 text-orange-600 border border-orange-300",
+    className: "bg-yellow-100 text-yellow-600 border border-yellow-300",
   },
   [StatusEnum.Removido]: {
     label: "Removido",
@@ -43,6 +43,6 @@ export const StatusMap: Record<
   },
   [StatusEnum.Ausente]: {
     label: "Não Compareceu",
-    className: "bg-gray-100 text-gray-600 border border-gray-300",
+    className: "bg-orange-100 text-orange-600 border border-orange-300",
   },
 };
