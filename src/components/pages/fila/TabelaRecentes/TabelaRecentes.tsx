@@ -10,8 +10,10 @@ import { Input } from "../../../ui/input";
 import { ArrowUp, CircleArrowUp, MoveVertical } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Card } from "@/components/ui/card";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export default function TabelaRecentes() {
+  const [parent] = useAutoAnimate();
   const { fila } = useFila();
 
   const clientesFiltrados = useMemo(() => {
@@ -29,13 +31,15 @@ export default function TabelaRecentes() {
       <div className="bg-gray-100 shadow-sm flex items-center gap-2 px-4">
         <span className="font-semibold whitespace-nowrap py-3">Recentes</span>
       </div>
-      <div className="overflow-y-auto">
-        {clientesFiltrados.map((cliente) => (
-          <div key={cliente.id}>
-            <ClienteRowTable cliente={cliente}></ClienteRowTable>
-            <Separator></Separator>
-          </div>
-        ))}
+      <div className="overflow-y-auto overflow-x-hidden ">
+        <div ref={parent} className="overflow-x-hidden overflow-y-hidden">
+          {clientesFiltrados.map((cliente) => (
+            <div key={cliente.id}>
+              <ClienteRowTable cliente={cliente}></ClienteRowTable>
+              <Separator></Separator>
+            </div>
+          ))}
+        </div>
       </div>
     </Card>
   );
