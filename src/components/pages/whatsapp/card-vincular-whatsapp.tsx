@@ -51,7 +51,7 @@ export default function CardVincularWhatsapp() {
           Configuração WhatsApp
         </CardTitle>
         <CardDescription>
-          Siga os passos abaixo para vincular seu monitor ao sistema
+          Siga os passos abaixo para vincular seu WhatsApp
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -81,7 +81,7 @@ export default function CardVincularWhatsapp() {
           }`}
         >
           <div>
-            <p className="font-semibold mb-1">
+            <p className="font-semibold">
               {isChecked ? "WhatsApp Ativado" : "WhatsApp Desativado"}
             </p>
             <p className="text-sm">
@@ -93,10 +93,12 @@ export default function CardVincularWhatsapp() {
         </div>
         {!isConectado && isChecked ? (
           <>
-            <p className="text-lg font-semibold">Conecte seu WhatsApp</p>
-            <p className="font-sm text-muted-foreground">
-              Escaneie o QR Code com seu WhatsApp para conectar sua conta
-            </p>
+            <div>
+              <p className="text-lg font-semibold">Conecte seu WhatsApp</p>
+              <p className="font-sm text-muted-foreground">
+                Escaneie o QR Code com seu WhatsApp para conectar sua conta
+              </p>
+            </div>
           </>
         ) : null}
 
