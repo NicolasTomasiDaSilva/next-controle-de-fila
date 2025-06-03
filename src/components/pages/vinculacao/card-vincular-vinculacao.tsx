@@ -85,9 +85,8 @@ export default function CardVincularVinculacao() {
       <form
         ref={formRef}
         onSubmit={codigoVinculacaoForm.handleSubmit(handleVerificarCodigo)}
-        className="space-y-4"
       >
-        <Card>
+        <Card className="w-full">
           <CardHeader>
             <CardTitle>
               <Link className="inline mr-2" />
@@ -143,10 +142,6 @@ export default function CardVincularVinculacao() {
                     />
                   </FormControl>
                   <FormMessage />
-                  <p className="text-muted-foreground ">
-                    O código aparece na tela do monitor após inserir sua
-                    identificação
-                  </p>
                 </FormItem>
               )}
             />

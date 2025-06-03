@@ -7,11 +7,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+
 import { Link, LinkIcon, ListChecks, QrCode, Shield } from "lucide-react";
 
 export default function CardInstrucoesVinculacao() {
   return (
-    <Card>
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>
           <ListChecks className="inline mr-2" />
@@ -21,8 +23,8 @@ export default function CardInstrucoesVinculacao() {
           Siga os passos abaixo para vincular seu monitor ao sistema
         </CardDescription>
       </CardHeader>
-      <CardContent className="w-full">
-        <div className="flex flex-row gap-4 border-b pb-6 ">
+      <CardContent className="w-full space-y-4">
+        <div className="flex flex-row gap-4  ">
           <div className="w-10 h-10 flex justify-center items-center bg-blue-500 rounded-full flex-none text-white font-semibold">
             1
           </div>
@@ -46,7 +48,8 @@ export default function CardInstrucoesVinculacao() {
             </div>
           </div>
         </div>
-        <div className="flex flex-row gap-4 border-b pb-6 pt-6 ">
+        <Separator />
+        <div className="flex flex-row gap-4 space-y-4  ">
           <div className="w-10 h-10 flex justify-center items-center bg-blue-500 rounded-full flex-none text-white font-semibold">
             2
           </div>
@@ -59,7 +62,8 @@ export default function CardInstrucoesVinculacao() {
             </p>
           </div>
         </div>
-        <div className="flex flex-row gap-4  pb-6 pt-6 ">
+        <Separator />
+        <div className="flex flex-row gap-4 ">
           <div className="w-10 h-10 flex justify-center items-center bg-blue-500 rounded-full flex-none text-white font-semibold">
             3
           </div>
