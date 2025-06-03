@@ -1,3 +1,5 @@
+"use client";
+
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -16,11 +18,13 @@ import {
 import { TelefoneInput } from "../../../shared/inputs/TelefoneInput";
 import { Input } from "../../../ui/input";
 import { Cliente } from "@/models/cliente";
+import { useFila } from "@/hooks/use-fila";
+import { useRef, useState } from "react";
 
 interface ClienteFormProps {
   textoBotao: string;
   cliente?: Cliente | null;
-  onSubmit: (data: ClienteFormDTO) => void;
+  onSubmit: (data: ClienteFormDTO) => Promise<void>;
 }
 
 export function ClienteForm({
@@ -28,6 +32,8 @@ export function ClienteForm({
   textoBotao,
   onSubmit,
 }: ClienteFormProps) {
+  const { isSubmitting, setIsSubmitting } = useFila();
+  const [isSubmittingForm, setIsSubmittingForm] = useState(false);
   const form = useForm<ClienteFormDTO>({
     resolver: zodResolver(clienteFormSchema),
     defaultValues: {
@@ -37,8 +43,11 @@ export function ClienteForm({
     },
   });
 
-  function handleSubmit(values: ClienteFormDTO) {
-    onSubmit(values);
+  async function handleSubmit(values: ClienteFormDTO) {
+    setIsSubmittingForm(true);
+
+    await onSubmit(values);
+    setIsSubmittingForm(false);
   }
 
   return (
@@ -96,9 +105,9 @@ export function ClienteForm({
             variant={"azul"}
             className="w-full sm:w-40"
             type="submit"
-            disabled={form.formState.isSubmitting}
+            disabled={isSubmitting || isSubmittingForm}
           >
-            {textoBotao}
+            {isSubmitting || isSubmittingForm ? "Salvando..." : textoBotao}
           </Button>
         </div>
       </form>

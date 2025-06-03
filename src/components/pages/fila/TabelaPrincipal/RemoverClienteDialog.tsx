@@ -40,9 +40,13 @@ export function RemoverClienteDialog({ cliente }: RemoverClienteDialogProps) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <button className="text-red-500 hover:text-red-700 transition md:order-4 cursor-pointer">
-          <Trash className="w-7 h-7" />
-        </button>
+        <Button
+          disabled={isSubmitting}
+          variant="ghost"
+          className="!h-auto !p-2 hover:bg-red-100 hover:text-red-600 text-red-600"
+        >
+          <Trash className="!w-5 !h-5" />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

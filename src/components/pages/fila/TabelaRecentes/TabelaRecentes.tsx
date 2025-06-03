@@ -8,38 +8,13 @@ import { useFila } from "@/hooks/use-fila";
 import { normalizeString } from "@/utils/normalize-string";
 import { Input } from "../../../ui/input";
 import { ArrowUp, CircleArrowUp, MoveVertical } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { Card } from "@/components/ui/card";
 
 export default function TabelaRecentes() {
   const { fila } = useFila();
-  const [tabelaExpandida, setTabelaExpandida] = useState(false);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const lastScrollTop = useRef(0);
-
-  function goToTop() {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    }
-  }
-  function expandirTabela() {
-    setTabelaExpandida((prev) => !prev);
-  }
-
-  useLayoutEffect(() => {
-    const scrollEl = scrollContainerRef.current;
-    if (scrollEl) {
-      scrollEl.scrollTop = lastScrollTop.current;
-    }
-  });
 
   const clientesFiltrados = useMemo(() => {
-    const scrollEl = scrollContainerRef.current;
-    if (scrollEl) {
-      lastScrollTop.current = scrollEl.scrollTop;
-    }
-
     return fila.clientes
       .filter((cliente) => cliente.status !== StatusEnum.Aguardando)
       .sort((a, b) => {
@@ -50,55 +25,18 @@ export default function TabelaRecentes() {
   }, [fila.clientes]);
 
   return (
-    <div className="border shadow-sm rounded-md overflow-hidden bg-muted/100 custom-scroll">
-      <table className="w-full table-auto">
-        <thead>
-          <tr>
-            <th className="px-4 py-2 text-left flex items-center justify-between">
-              <div>Recentes</div>
-              <div className="flex items-center">
-                <button
-                  onClick={goToTop}
-                  className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer"
-                >
-                  <ArrowUp className="w-7 h-7" />
-                </button>
-                <button
-                  onClick={expandirTabela}
-                  className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer"
-                >
-                  <MoveVertical className="w-7 h-7" />
-                </button>
-              </div>
-            </th>
-          </tr>
-        </thead>
-      </table>
-
-      <div
-        className={`overflow-y-auto transition-all duration-300 ${
-          tabelaExpandida ? "max-h-none" : "max-h-50"
-        }`}
-        ref={scrollContainerRef}
-      >
-        <table className="w-full table-auto">
-          <tbody>
-            {clientesFiltrados.length > 0 ? (
-              clientesFiltrados.map((cliente, i) => (
-                <tr key={cliente.id} className="border-b">
-                  <ClienteRowTable cliente={cliente} />
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td className="text-center text-gray-500 py-6">
-                  Nenhum cliente encontrado.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+    <Card className="w-full h-50 border  p-0 overflow-hidden gap-0">
+      <div className="bg-gray-100 shadow-sm flex items-center gap-2 px-4">
+        <span className="font-semibold whitespace-nowrap py-3">Recentes</span>
       </div>
-    </div>
+      <div className="overflow-y-auto">
+        {clientesFiltrados.map((cliente) => (
+          <div key={cliente.id}>
+            <ClienteRowTable cliente={cliente}></ClienteRowTable>
+            <Separator></Separator>
+          </div>
+        ))}
+      </div>
+    </Card>
   );
 }

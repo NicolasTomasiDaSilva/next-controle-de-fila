@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 
 import { useFila } from "@/hooks/use-fila";
 
-import { PencilLine } from "lucide-react";
+import { Edit, PencilLine } from "lucide-react";
 import { Cliente, clienteSchema } from "@/models/cliente";
 import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
 import { ClienteForm } from "./ClienteForm";
@@ -43,12 +43,8 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="size-5 text-gray-500 hover:text-gray-700 cursor-pointer ml-auto md:ml-2"
-        >
-          <PencilLine className="size-4" />
+        <Button variant="ghost" className="!h-auto !p-2">
+          <Edit className="!w-5 !h-5 text-gray-500" />
         </Button>
       </DialogTrigger>
       <DialogContent>

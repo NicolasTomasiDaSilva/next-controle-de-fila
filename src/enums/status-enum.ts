@@ -23,17 +23,26 @@ export const StatusMap: Record<
 > = {
   [StatusEnum.Aguardando]: {
     label: "Aguardando",
-    className: "text-blue-600",
+    className: "bg-blue-100 text-blue-600 border border-blue-300",
   },
-  [StatusEnum.Chamado]: { label: "Chamado", className: "text-blue-500" },
-  [StatusEnum.Atendido]: { label: "Atendido", className: "text-green-500" },
+  [StatusEnum.Chamado]: {
+    label: "Chamado",
+    className: "bg-sky-100 text-sky-600 border border-sky-300",
+  },
+  [StatusEnum.Atendido]: {
+    label: "Atendido",
+    className: "bg-green-100 text-green-600 border border-green-300",
+  },
   [StatusEnum.Desistente]: {
     label: "Desistente",
-    className: "text-organge-500",
+    className: "bg-orange-100 text-orange-600 border border-orange-300",
   },
-  [StatusEnum.Removido]: { label: "Removido", className: "text-red-500" },
+  [StatusEnum.Removido]: {
+    label: "Removido",
+    className: "bg-red-100 text-red-600 border border-red-300",
+  },
   [StatusEnum.Ausente]: {
     label: "Não Compareceu",
-    className: "text-orange-200",
+    className: "bg-gray-100 text-gray-600 border border-gray-300",
   },
 };

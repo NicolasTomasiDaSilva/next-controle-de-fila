@@ -1,7 +1,6 @@
 import TabelaPrincipal from "@/components/pages/fila/TabelaPrincipal/TabelaPrincipal";
 import { Section } from "@/components/Section";
 
-import filaData from "@/data/fila-data";
 import { filaService } from "@/services/fila-service";
 import { AdicionarClienteDialog } from "@/components/pages/fila/TabelaPrincipal/AdicionarClienteDialog";
 import { FilaProvider } from "@/contexts/fila-context";

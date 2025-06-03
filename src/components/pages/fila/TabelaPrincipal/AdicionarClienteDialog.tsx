@@ -17,6 +17,7 @@ import { PlusCircle } from "lucide-react";
 
 export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);
+
   const { handleAdicionar, fila } = useFila();
 
   async function handleAdicionarCliente(clienteForm: ClienteFormDTO) {

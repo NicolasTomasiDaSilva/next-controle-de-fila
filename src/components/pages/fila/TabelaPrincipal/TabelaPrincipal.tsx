@@ -5,26 +5,25 @@ import React, { useMemo, useRef, useState } from "react";
 import { useFila } from "@/hooks/use-fila";
 import { normalizeString } from "@/utils/normalize-string";
 import { Input } from "../../../ui/input";
-import { ArrowUp, MoveVertical, Users } from "lucide-react";
+import {
+  ArrowUp,
+  ChevronDown,
+  ChevronUp,
+  Edit,
+  MoveVertical,
+  Phone,
+  Trash,
+  Users,
+} from "lucide-react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 export default function TabelaPrincipal() {
-  const [tabelaExpandida, setTabelaExpandida] = useState(false);
   const { fila } = useFila();
   const [searchTerm, setSearchTerm] = useState("");
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-  function goToTop() {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    }
-  }
-  function expandirTabela() {
-    setTabelaExpandida((prev) => !prev);
-  }
+  const [parent] = useAutoAnimate();
 
   const clientesFiltrados = useMemo(() => {
     return fila.clientes
@@ -46,65 +45,29 @@ export default function TabelaPrincipal() {
   }, [fila.clientes]);
 
   return (
-    <div className="border border-blue-300 shadow-sm rounded-md overflow-hidden ">
-      <table className="w-full table-auto bg-blue-50 ">
-        <thead>
-          <tr>
-            <th className="flex flex-row items-center py-2 px-4 py-2 shadow-sm justify-between">
-              <div className="flex flex-row items-center gap-2 text-left">
-                <Users className="size-4 shrink-0 text-blue-600" />
-                <span className="text-sm font-bold text-blue-600 whitespace-nowrap">
-                  {totalAguardando}
-                </span>
-                <Input
-                  placeholder="Pesquisar cliente..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="max-w-sm bg-white focus-visible:ring-[1px]"
-                />
-              </div>
-              <div className="flex items-center">
-                <button
-                  onClick={goToTop}
-                  className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer"
-                >
-                  <ArrowUp className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={expandirTabela}
-                  className="text-black-600 hover:text-black-700 transition md:order-2 cursor-pointer"
-                >
-                  <MoveVertical className="w-6 h-6" />
-                </button>
-              </div>
-            </th>
-          </tr>
-        </thead>
-      </table>
-      <div
-        className={`overflow-y-auto transition-all duration-300 ${
-          tabelaExpandida ? "max-h-none" : "max-h-96"
-        }`}
-        ref={scrollContainerRef}
-      >
-        <table className="w-full table-auto">
-          <tbody>
-            {clientesFiltrados.length > 0 ? (
-              clientesFiltrados.map((cliente, i) => (
-                <tr key={cliente.id} className="border-b">
-                  <ClienteRowTable cliente={cliente} />
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td className="flex items-center justify-center h-[200px] text-gray-500">
-                  Nenhum cliente encontrado.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+    <Card className="w-full h-120 border border-blue-300 p-0 overflow-hidden gap-0">
+      <div className="bg-blue-50 shadow-sm flex items-center gap-2 py-2 px-4">
+        <Users className="size-4 shrink-0 text-blue-600" />
+        <span className="text-sm font-bold text-blue-600 whitespace-nowrap">
+          {totalAguardando}
+        </span>
+        <Input
+          placeholder="Pesquisar cliente..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="max-w-sm bg-white focus-visible:ring-[1px]"
+        />
       </div>
-    </div>
+      <div className="overflow-y-auto ">
+        <div ref={parent} className="overflow-x-hidden overflow-y-hidden">
+          {clientesFiltrados.map((cliente) => (
+            <div key={cliente.id}>
+              <ClienteRowTable cliente={cliente}></ClienteRowTable>
+              <Separator></Separator>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Card>
   );
 }
