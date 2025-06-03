@@ -106,18 +106,20 @@ export default function CardVincularWhatsapp() {
               <img src={qrcode} className="w-48 h-48 object-contain" />
             ) : (
               <div className="w-48 h-48 flex justify-center items-center">
-                <Spinner className=" h-20 w-20"></Spinner>
+                {isQrcodeExpirado ? (
+                  <Button
+                    type="button"
+                    disabled={isSubmitting}
+                    variant={"outline"}
+                    onClick={handleGerarQrcodeNovamente}
+                  >
+                    <RefreshCcw></RefreshCcw>
+                    {isSubmitting ? "Gerando..." : "Gerar Novamente"}
+                  </Button>
+                ) : (
+                  <Spinner className=" h-20 w-20"></Spinner>
+                )}
               </div>
-            )}
-            {isQrcodeExpirado && (
-              <Button
-                type="button"
-                disabled={isSubmitting}
-                variant={"default"}
-                onClick={handleGerarQrcodeNovamente}
-              >
-                {isSubmitting ? "Gerando..." : "Gerar Novo QR Code"}
-              </Button>
             )}
           </div>
         ) : null}
