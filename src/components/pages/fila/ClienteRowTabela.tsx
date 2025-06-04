@@ -56,12 +56,17 @@ export default function ClienteRowTable({
   } = useFila();
 
   return (
-    <div className="w-full px-6 md:px-15 py-6 flex flex-col md:justify-between md:flex-row gap-2 md:items-center">
+    <div className="w-full px-3  py-6 flex flex-col md:justify-between md:flex-row gap-2 md:items-center md:pr-10 md:pl-0 ">
+      <div className="hidden md:flex w-10 shrink-0 items-center justify-center">
+        <span className="text-xl font-bold text-blue-600">
+          {cliente.posicao}
+        </span>
+      </div>
       <div className="flex flex-row justify-between gap-2 w-full ">
         <div className="flex flex-col justify-center">
-          <div className="flex flex-row items-center gap-2">
+          <div className="flex flex-row items-center">
             {cliente.status === StatusEnum.Aguardando && (
-              <span className="text-xl font-bold text-blue-600 ">
+              <span className="text-xl font-bold text-blue-600 mr-4 md:hidden">
                 {cliente.posicao}
               </span>
             )}
