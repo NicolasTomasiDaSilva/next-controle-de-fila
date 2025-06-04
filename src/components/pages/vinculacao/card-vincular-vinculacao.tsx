@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -27,6 +28,12 @@ import { QrScanner2 } from "./QrScanner2";
 
 import { Link, LinkIcon, QrCode, Shield } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 
 export default function CardVincularVinculacao() {
   const {
@@ -80,30 +87,48 @@ export default function CardVincularVinculacao() {
               <span className="text-muted-foreground text-sm">ou</span>
               <Separator className="flex-1" />
             </div>
-            <FormField
-              control={codigoVinculacaoForm.control}
-              name="codigo"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Código de Vinculação</FormLabel>
-                  <FormControl>
-                    <Input
-                      className="placeholder:text-center text-center h-12"
-                      placeholder="Digite o código"
-                      type="text"
-                      {...field}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        if (/^[a-zA-Z0-9]{0,4}$/.test(value)) {
-                          field.onChange(value);
-                        }
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex items-center justify-center my-5">
+              <FormField
+                control={codigoVinculacaoForm.control}
+                name="codigo"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="mx-auto">
+                      Código de Vinculação
+                    </FormLabel>
+                    <FormControl>
+                      <InputOTP
+                        maxLength={4}
+                        {...field}
+                        pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+                      >
+                        <InputOTPGroup className="gap-2">
+                          <InputOTPSlot
+                            index={0}
+                            className="w-12 h-12 text-2xl rounded-md border border-input"
+                          />
+                          <InputOTPSlot
+                            index={1}
+                            className="w-12 h-12 text-2xl rounded-md border border-input"
+                          />
+                          <InputOTPSlot
+                            index={2}
+                            className="w-12 h-12 text-2xl rounded-md border border-input"
+                          />
+                          <InputOTPSlot
+                            index={3}
+                            className="w-12 h-12 text-2xl rounded-md border border-input"
+                          />
+                        </InputOTPGroup>
+                      </InputOTP>
+                    </FormControl>
+
+                    <FormMessage className="mx-auto" />
+                  </FormItem>
+                )}
+              />
+            </div>
+
             <Button
               type="submit"
               className="w-full h-12"
