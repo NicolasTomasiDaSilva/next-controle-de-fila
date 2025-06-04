@@ -19,7 +19,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { uploadService } from "@/services/upload-service";
-import { ChangeEvent, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  RefObject,
+  SetStateAction,
+  useRef,
+  useState,
+} from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { Palette, RotateCcw, Upload } from "lucide-react";
 import { toast } from "sonner";
@@ -36,45 +43,21 @@ import { useCustomizarAparencia } from "@/hooks/use-customizar-aparencia";
 
 interface ConfiguracaoVisualProps {
   form: UseFormReturn<configuracaoFormDTO>;
-}
-export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
-  const [preview, setPreview] = useState<string | null>(null);
-  const inputFileRef = useRef<HTMLInputElement | null>(null);
-
-  async function handleUploadImagem(
+  preview: string | null;
+  setPreview: Dispatch<SetStateAction<string | null>>;
+  inputFileRef: RefObject<HTMLInputElement | null>;
+  handleUploadImagem: (
     e: ChangeEvent<HTMLInputElement>,
     field: ControllerRenderProps<configuracaoFormDTO, "logoUrl">
-  ) {
-    const file = e.target.files?.[0];
-    if (!file) {
-      return;
-    }
-
-    if (!["image/png", "image/jpeg"].includes(file.type)) {
-      toast.error("Apenas arquivos PNG ou JPG são permitidos.");
-      e.target.value = "";
-      return;
-    }
-
-    if (file.size > 2 * 1024 * 1024) {
-      toast.error("O tamanho máximo permitido é 2MB.");
-      e.target.value = "";
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const { url } = await uploadService.uploadImagem(formData);
-
-      field.onChange(url);
-      setPreview(url);
-    } catch (error) {
-      toast.error("Erro ao fazer upload da imagem.");
-    }
-  }
-
+  ) => void;
+}
+export function ConfiguracaoVisual({
+  form,
+  preview,
+  setPreview,
+  inputFileRef,
+  handleUploadImagem,
+}: ConfiguracaoVisualProps) {
   return (
     <Card className="w-full">
       <CardHeader>

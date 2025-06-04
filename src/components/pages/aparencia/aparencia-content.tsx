@@ -41,7 +41,15 @@ import { useCustomizarAparencia } from "@/hooks/use-customizar-aparencia";
 import { useEmpresa } from "@/hooks/use-empresa";
 
 export function AparenciaContent() {
-  const { form, handleSubmit, isSubmitting } = useCustomizarAparencia();
+  const {
+    form,
+    handleSubmit,
+    isSubmitting,
+    preview,
+    setPreview,
+    inputFileRef,
+    handleUploadImagem,
+  } = useCustomizarAparencia();
 
   return (
     <Form {...form}>
@@ -49,7 +57,13 @@ export function AparenciaContent() {
         <div className="flex flex-col gap-4 ">
           <div className="w-full flex flex-col gap-4  md:flex-row ">
             <ConfiguracaoDados form={form}></ConfiguracaoDados>
-            <ConfiguracaoVisual form={form}></ConfiguracaoVisual>
+            <ConfiguracaoVisual
+              preview={preview}
+              setPreview={setPreview}
+              form={form}
+              inputFileRef={inputFileRef}
+              handleUploadImagem={handleUploadImagem}
+            ></ConfiguracaoVisual>
           </div>
           <CardPreVisualizacaoAparencia
             form={form}

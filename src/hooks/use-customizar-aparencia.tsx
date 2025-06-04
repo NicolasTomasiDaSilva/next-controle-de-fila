@@ -6,11 +6,12 @@ import { Configuracao } from "@/models/configuracao";
 import { empresaService } from "@/services/empresa-service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { ChangeEvent, useRef, useState } from "react";
+import { ControllerRenderProps, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useEmpresa } from "./use-empresa";
 import z from "zod";
+import { uploadService } from "@/services/upload-service";
 
 export const useCustomizarAparencia = () => {
   const { empresa } = useEmpresa();
@@ -44,5 +45,50 @@ export const useCustomizarAparencia = () => {
     }
   }
 
-  return { form, handleSubmit, isSubmitting };
+  const [preview, setPreview] = useState<string | null>(null);
+  const inputFileRef = useRef<HTMLInputElement | null>(null);
+
+  async function handleUploadImagem(
+    e: ChangeEvent<HTMLInputElement>,
+    field: ControllerRenderProps<configuracaoFormDTO, "logoUrl">
+  ) {
+    const file = e.target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    if (!["image/png", "image/jpeg"].includes(file.type)) {
+      toast.error("Apenas arquivos PNG ou JPG são permitidos.");
+      e.target.value = "";
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("O tamanho máximo permitido é 2MB.");
+      e.target.value = "";
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const { url } = await uploadService.uploadImagem(formData);
+
+      field.onChange(url);
+      setPreview(url);
+    } catch (error) {
+      toast.error("Erro ao fazer upload da imagem.");
+    }
+  }
+
+  return {
+    form,
+    handleSubmit,
+    isSubmitting,
+    preview,
+    inputFileRef,
+    handleUploadImagem,
+    setPreview,
+  };
 };
