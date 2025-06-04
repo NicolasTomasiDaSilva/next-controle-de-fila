@@ -5,26 +5,21 @@ import { AdicionarClienteDialog } from "./TabelaPrincipal/AdicionarClienteDialog
 import TabelaPrincipal from "./TabelaPrincipal/TabelaPrincipal";
 import TabelaRecentes from "./TabelaRecentes/TabelaRecentes";
 import { useEffect } from "react";
+import useClienteDesistiu from "@/hooks/fila/use-cliente-desistiu";
 
 export default function FilaContent() {
   const { connection } = useSignalR();
+  const { handleClienteDesistiu } = useClienteDesistiu();
 
   useEffect(() => {
     if (!connection) return;
 
     console.log("Conectado ao SignalR");
 
-    // Adiciona o listener
-    const handleAdicionarCliente = (cliente: any) => {
-      console.log("Novo cliente recebido:", cliente);
-      // Aqui você atualiza seu estado ou faz o que precisar
-    };
+    connection.on("AtualizarFila", handleClienteDesistiu);
 
-    connection.on("AdicionarCliente", handleAdicionarCliente);
-
-    // Limpa o listener ao desmontar ou reconectar
     return () => {
-      connection.off("AdicionarCliente", handleAdicionarCliente);
+      connection.off("AtualizarFila", handleClienteDesistiu);
     };
   }, [connection]);
 
