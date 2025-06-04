@@ -38,9 +38,9 @@ export default function Menu() {
         className="w-48 sm:w-56 shadow-md rounded-md"
       >
         <Link href="/fila" passHref>
-          <DropdownMenuItem className="cursor-pointer">
-            <ListOrdered className="w-4 h-4" />
-            <span>Fila</span>
+          <DropdownMenuItem className="cursor-pointer hover:!bg-blue-100">
+            <ListOrdered className="w-4 h-4 text-blue-600" />
+            <span className="text-blue-600">Fila</span>
           </DropdownMenuItem>
         </Link>
         <Link href="/configuracoes" passHref>
@@ -51,9 +51,12 @@ export default function Menu() {
         </Link>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer" onClick={logout}>
-          <LogOut className="w-4 h-4" />
-          <span>Sair</span>
+        <DropdownMenuItem
+          className="cursor-pointer hover:!bg-red-100"
+          onClick={logout}
+        >
+          <LogOut className="w-4 h-4 text-red-600" />
+          <span className="text-red-600">Sair</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
