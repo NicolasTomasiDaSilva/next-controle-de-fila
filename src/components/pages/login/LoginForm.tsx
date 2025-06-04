@@ -101,7 +101,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-sm">
+    <div className="w-full bg-red-500">
       <Image
         src={LogoCervantes}
         alt="Logo"

@@ -8,7 +8,7 @@ export default function PrivateLayout({
   return (
     <>
       <Header />
-      {children}
+      <div className="espaco-lateral-conteudo pt-25 pb-25"> {children}</div>
     </>
   );
 }

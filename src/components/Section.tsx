@@ -9,23 +9,17 @@ import { sectionCores } from "@/constantes/section-cores";
 
 interface SectionProps {
   title?: string;
-  className?: string;
+
   linkRetorno?: string | null;
   cor?: keyof typeof sectionCores | null;
   children?: React.ReactNode;
 }
 
-export function Section({
-  title,
-  children,
-  className,
-  cor,
-  linkRetorno,
-}: SectionProps) {
+export function Section({ title, children, cor, linkRetorno }: SectionProps) {
   const corSection = sectionCores[cor || "blue"];
 
   return (
-    <section className={cn("pt-25 espaco-lateral-conteudo pb-25", className)}>
+    <section>
       <div className="mb-10 flex items-center gap-2 md:gap-5">
         {linkRetorno && (
           <Link href={linkRetorno} passHref>
@@ -41,7 +35,6 @@ export function Section({
         )}
         {title && <SectionTitle title={title} cor={corSection.traco} />}
       </div>
-
       {children}
     </section>
   );

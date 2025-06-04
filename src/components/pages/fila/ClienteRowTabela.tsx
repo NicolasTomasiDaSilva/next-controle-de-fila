@@ -62,7 +62,7 @@ export default function ClienteRowTable({
           {cliente.posicao}
         </span>
       </div>
-      <div className="flex flex-row justify-between gap-2 w-full mr-2">
+      <div className="flex flex-row justify-between gap-2 w-full">
         <div className="flex flex-col justify-center">
           <div className="flex flex-row items-center">
             {cliente.status === StatusEnum.Aguardando && (
