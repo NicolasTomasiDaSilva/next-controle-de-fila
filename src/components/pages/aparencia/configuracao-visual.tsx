@@ -17,29 +17,15 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { uploadService } from "@/services/upload-service";
-import {
-  ChangeEvent,
-  Dispatch,
-  RefObject,
-  SetStateAction,
-  useRef,
-  useState,
-} from "react";
+
+import { ChangeEvent, Dispatch, RefObject, SetStateAction } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { Palette, RotateCcw, Upload } from "lucide-react";
-import { toast } from "sonner";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+
 import { HexColorPicker } from "react-colorful";
 import { ColorPickerField } from "./color-picker";
 import { configuracaoFormDTO } from "@/dtos/configuracao";
 import { coresPadrao } from "@/constantes/cores-padrao";
-import { useCustomizarAparencia } from "@/hooks/use-customizar-aparencia";
 
 interface ConfiguracaoVisualProps {
   form: UseFormReturn<configuracaoFormDTO>;

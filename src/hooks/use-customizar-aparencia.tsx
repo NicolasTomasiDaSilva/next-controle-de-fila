@@ -53,32 +53,36 @@ export const useCustomizarAparencia = () => {
     field: ControllerRenderProps<configuracaoFormDTO, "logoUrl">
   ) {
     const file = e.target.files?.[0];
-    if (!file) {
-      return;
-    }
-
-    if (!["image/png", "image/jpeg"].includes(file.type)) {
-      toast.error("Apenas arquivos PNG ou JPG são permitidos.");
-      e.target.value = "";
-      return;
-    }
-
-    if (file.size > 2 * 1024 * 1024) {
-      toast.error("O tamanho máximo permitido é 2MB.");
-      e.target.value = "";
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("file", file);
-
     try {
+      if (!file) {
+        return;
+      }
+
+      setIsSubmitting(true);
+
+      if (!["image/png", "image/jpeg"].includes(file.type)) {
+        toast.error("Apenas arquivos PNG ou JPG são permitidos.");
+        e.target.value = "";
+        return;
+      }
+
+      if (file.size > 2 * 1024 * 1024) {
+        toast.error("O tamanho máximo permitido é 2MB.");
+        e.target.value = "";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", file);
+
       const { url } = await uploadService.uploadImagem(formData);
 
       field.onChange(url);
       setPreview(url);
     } catch (error) {
       toast.error("Erro ao fazer upload da imagem.");
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
