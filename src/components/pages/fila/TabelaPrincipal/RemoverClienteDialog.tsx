@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useFila } from "@/hooks/fila/use-fila";
+
 import { Trash } from "lucide-react";
 import { Cliente } from "@/models/cliente";
 

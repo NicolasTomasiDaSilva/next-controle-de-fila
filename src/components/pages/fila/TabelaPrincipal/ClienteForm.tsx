@@ -18,22 +18,22 @@ import {
 import { TelefoneInput } from "../../../shared/inputs/TelefoneInput";
 import { Input } from "../../../ui/input";
 import { Cliente } from "@/models/cliente";
-import { useFila } from "@/hooks/fila/use-fila";
+
 import { useRef, useState } from "react";
 
 interface ClienteFormProps {
   textoBotao: string;
   cliente?: Cliente | null;
   onSubmit: (data: ClienteFormDTO) => Promise<void>;
+  isSubmitting: boolean;
 }
 
 export function ClienteForm({
   cliente,
   textoBotao,
   onSubmit,
+  isSubmitting,
 }: ClienteFormProps) {
-  const { isSubmitting, setIsSubmitting } = useFila();
-  const [isSubmittingForm, setIsSubmittingForm] = useState(false);
   const form = useForm<ClienteFormDTO>({
     resolver: zodResolver(clienteFormSchema),
     defaultValues: {
@@ -44,10 +44,7 @@ export function ClienteForm({
   });
 
   async function handleSubmit(values: ClienteFormDTO) {
-    setIsSubmittingForm(true);
-
     await onSubmit(values);
-    setIsSubmittingForm(false);
   }
 
   return (
@@ -105,9 +102,9 @@ export function ClienteForm({
             variant={"azul"}
             className="w-full sm:w-40"
             type="submit"
-            disabled={isSubmitting || isSubmittingForm}
+            disabled={isSubmitting}
           >
-            {isSubmitting || isSubmittingForm ? "Salvando..." : textoBotao}
+            {isSubmitting ? "Salvando..." : textoBotao}
           </Button>
         </div>
       </form>

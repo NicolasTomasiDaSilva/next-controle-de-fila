@@ -11,12 +11,11 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-import { useFila } from "@/hooks/fila/use-fila";
-
 import { Edit, PencilLine } from "lucide-react";
 import { Cliente, clienteSchema } from "@/models/cliente";
 import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
 import { ClienteForm } from "./ClienteForm";
+import useEditarCliente from "@/hooks/fila/use-editar-cliente";
 
 interface EditarClienteDialogProps {
   cliente: Cliente;
@@ -24,16 +23,20 @@ interface EditarClienteDialogProps {
 
 export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
   const [open, setOpen] = useState(false);
-  const { handleAtualizar } = useFila();
+  const { handleEditarCliente } = useEditarCliente();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleEdtiarCliente(clienteForm: ClienteFormDTO) {
+    setIsSubmitting(true);
     const clienteAtualizado: Cliente = {
       ...cliente,
       ...clienteForm,
     };
 
-    await handleAtualizar(clienteAtualizado);
+    await handleEditarCliente(clienteAtualizado);
     setOpen(false);
+    setIsSubmitting(false);
   }
 
   const handleOpenChange = (isOpen: boolean) => {
@@ -52,6 +55,7 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
           <DialogTitle>Editar Cliente</DialogTitle>
         </DialogHeader>
         <ClienteForm
+          isSubmitting={isSubmitting}
           textoBotao="Salvar"
           cliente={cliente}
           onSubmit={handleEdtiarCliente}

@@ -10,24 +10,22 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useFila } from "@/hooks/fila/use-fila";
+
 import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
 import { ClienteForm } from "./ClienteForm";
 import { PlusCircle } from "lucide-react";
+import useAdicionarCliente from "@/hooks/fila/use-adicionar-cliente";
 
 export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { handleAdicionarCliente } = useAdicionarCliente();
 
-  const { handleAdicionar, fila } = useFila();
-
-  async function handleAdicionarCliente(clienteForm: ClienteFormDTO) {
-    const dadosNovoClienteFormatados: AdicionarClienteDTO = {
-      ...clienteForm,
-      filaId: fila.id,
-    };
-
-    await handleAdicionar(dadosNovoClienteFormatados);
+  async function handleAdicionar(clienteForm: ClienteFormDTO) {
+    setIsSubmitting(true);
+    await handleAdicionarCliente(clienteForm);
     setOpen(false);
+    setIsSubmitting(false);
   }
 
   const handleOpenChange = (isOpen: boolean) => {
@@ -46,8 +44,9 @@ export function AdicionarClienteDialog() {
           <DialogTitle>Adicionar Cliente à Fila</DialogTitle>
         </DialogHeader>
         <ClienteForm
-          onSubmit={handleAdicionarCliente}
+          onSubmit={handleAdicionar}
           textoBotao="Adicionar"
+          isSubmitting={isSubmitting}
         ></ClienteForm>
       </DialogContent>
     </Dialog>

@@ -2,7 +2,7 @@
 import { StatusEnum } from "@/enums/status-enum";
 import ClienteRowTable from "../ClienteRowTabela";
 import React, { useMemo, useRef, useState } from "react";
-import { useFila } from "@/hooks/fila/use-fila";
+
 import { normalizeString } from "@/utils/normalize-string";
 import { Input } from "../../../ui/input";
 import {
@@ -19,6 +19,8 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Fila } from "@/models/fila";
+import { useFila } from "@/hooks/fila/use-fila";
 
 export default function TabelaPrincipal() {
   const { fila } = useFila();
