@@ -10,6 +10,7 @@ import { FormField } from "@/components/ui/form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { mensagensFormDTO } from "@/dtos/configuracao";
 import { whatsappToHtml } from "@/utils/token-transform";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Eye, MessageCircle } from "lucide-react";
 import MarkdownIt from "markdown-it/dist/index.cjs.js";
 import { UseFormReturn } from "react-hook-form";

@@ -54,7 +54,7 @@ export default function ClienteRowTable({
   } = useFila();
 
   return (
-    <div className="w-full px-6 md:px-15 py-6 flex flex-col  md:flex-row md:justify-between gap-2">
+    <div className="w-full px-6 md:px-15 py-6 flex flex-col md:justify-between gap-2">
       <div className="flex flex-row justify-between gap-2 w-full">
         <div className="">
           <div className="flex flex-row items-center gap-2">
@@ -78,12 +78,14 @@ export default function ClienteRowTable({
             23min
           </p>
           {cliente.status !== StatusEnum.Aguardando && (
-            <Badge
-              variant="secondary"
-              className={cn(StatusMap[cliente.status].className, "")}
-            >
-              {StatusMap[cliente.status].label}
-            </Badge>
+            <div className="md:w-24 md:mx-4 md:flex md:flex-row md:justify-center ">
+              <Badge
+                variant="secondary"
+                className={cn(StatusMap[cliente.status].className, "")}
+              >
+                {StatusMap[cliente.status].label}
+              </Badge>
+            </div>
           )}
         </div>
       </div>
