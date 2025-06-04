@@ -1,4 +1,4 @@
 - hook, renderizando muitas vezes a cada alteracao de cor
 - botao adicionar permitindo multiplos envios
 - elevar o hook de acoescliente?
-
+- ver tipo de entrada inputs

@@ -9,7 +9,7 @@ export default function PublicLayout({
   return (
     <div
       className={
-        "espaco-lateral-conteudo min-h-screen flex flex-row items-center mx-auto !max-w-2xl"
+        "espaco-lateral-conteudo min-h-screen flex flex-row items-center mx-auto !max-w-120"
       }
     >
       {children}

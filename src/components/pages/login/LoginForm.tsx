@@ -26,6 +26,13 @@ import { toast } from "sonner";
 import { empresaService } from "@/services/empresa-service";
 import { codigoAcessoDTO, codigoAcessoSchema } from "@/models/codigos";
 import { useLogin } from "@/hooks/auth/use-login";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 
 export default function LoginForm() {
   const {
@@ -82,7 +89,12 @@ export default function LoginForm() {
               )}
             />
 
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
+            <Button
+              type="submit"
+              variant="azul"
+              className="w-full"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Enviando..." : "Enviar código"}
             </Button>
           </form>
@@ -101,32 +113,45 @@ export default function LoginForm() {
             onSubmit={codigoAcessoForm.handleSubmit(handleVerificarCodigo)}
             className="space-y-4"
           >
-            <FormField
-              control={codigoAcessoForm.control}
-              name="codigo"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Código</FormLabel>
-                  <FormControl>
-                    <Input
-                      className="bg-white"
-                      placeholder="Digite o código"
-                      type="numeric"
-                      {...field}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        if (/^\d{0,6}$/.test(value)) {
-                          field.onChange(e);
-                        }
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex items-center justify-center my-5">
+              <FormField
+                control={codigoAcessoForm.control}
+                name="codigo"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="mx-auto">Código de Acesso</FormLabel>
+                    <FormControl>
+                      <InputOTP
+                        maxLength={6}
+                        {...field}
+                        pattern={REGEXP_ONLY_DIGITS}
+                      >
+                        <InputOTPGroup>
+                          <InputOTPSlot index={0} />
+                          <InputOTPSlot index={1} />
+                          <InputOTPSlot index={2} />
+                        </InputOTPGroup>
+                        <InputOTPSeparator />
+                        <InputOTPGroup>
+                          <InputOTPSlot index={3} />
+                          <InputOTPSlot index={4} />
+                          <InputOTPSlot index={5} />
+                        </InputOTPGroup>
+                      </InputOTP>
+                    </FormControl>
 
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    <FormMessage className="mx-auto" />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <Button
+              variant="azul"
+              type="submit"
+              className="w-full"
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Verificando..." : "Verificar código"}
             </Button>
           </form>
