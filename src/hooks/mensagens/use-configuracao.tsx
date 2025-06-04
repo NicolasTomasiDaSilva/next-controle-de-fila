@@ -25,24 +25,5 @@ export function useConfiguracao() {
     }
   }
 
-  async function handleAtivarDesativarWhatsapp(
-    mensagensAtualizadas: mensagensFormDTO,
-    setIsSubmitting: React.Dispatch<React.SetStateAction<boolean>>
-  ) {
-    try {
-      setIsSubmitting(true);
-      const configuracaoAtualizada = {
-        ...empresa.configuracao,
-        ...mensagensAtualizadas,
-      };
-      await empresaService.atualizarConfiguracao(configuracaoAtualizada);
-      toast.success("Mensagens salvas com sucesso.", { icon: "➕" });
-    } catch (error: any) {
-      toast.error("Erro ao salvar mensagens.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
-
   return { configuracao: empresa.configuracao, handleAtualizarMensagens };
 }

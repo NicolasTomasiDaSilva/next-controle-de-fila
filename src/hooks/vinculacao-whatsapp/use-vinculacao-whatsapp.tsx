@@ -7,7 +7,7 @@ import { qrcodeResponseDTO, sessaoWhatsappDTO } from "@/dtos/whatsapp";
 import { set } from "date-fns";
 import { th } from "date-fns/locale";
 
-export function useVincularWhatsapp() {
+export function useVinculacaoWhatsapp() {
   const [qrcode, setQrcode] = useState<string | null>(null);
   const { configuracao } = useConfiguracao();
   const [isChecked, setIsChecked] = useState<boolean>(false);

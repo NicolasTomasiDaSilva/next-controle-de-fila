@@ -9,24 +9,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-
-import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
-import { useConfiguracao } from "@/hooks/mensagens/use-configuracao";
-import { useEmpresa } from "@/hooks/use-empresa";
-import { useVincularWhatsapp } from "@/hooks/vinculacao-whatsapp/use-vincular-whatsapp";
-import {
-  LinkIcon,
-  ListChecks,
-  LogOut,
-  QrCode,
-  RefreshCcw,
-  Settings,
-  Shield,
-} from "lucide-react";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
+import { useVinculacaoWhatsapp } from "@/hooks/vinculacao-whatsapp/use-vinculacao-whatsapp";
+import { RefreshCcw, Settings } from "lucide-react";
+
 import { DesconectarWhatsappDialog } from "./desconectar-dialog";
 
 export default function CardVincularWhatsapp() {
@@ -39,7 +26,7 @@ export default function CardVincularWhatsapp() {
     handleDesconectar,
     isQrcodeExpirado,
     handleGerarQrcodeNovamente,
-  } = useVincularWhatsapp();
+  } = useVinculacaoWhatsapp();
 
   return (
     <Card className="w-full">

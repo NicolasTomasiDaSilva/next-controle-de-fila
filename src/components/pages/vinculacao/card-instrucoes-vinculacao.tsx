@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
-import { Link, LinkIcon, ListChecks, QrCode, Shield } from "lucide-react";
+import { LinkIcon, ListChecks, QrCode, Shield } from "lucide-react";
 
 export default function CardInstrucoesVinculacao() {
   return (

@@ -12,8 +12,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -22,63 +20,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
 
-import { codigoVinculacaoDTO, codigoVinculacaoSchema } from "@/models/codigos";
-import { useVinculacao } from "@/hooks/vinculacao-monitor/use-vinculacao";
-import { EmpresaContext } from "@/contexts/empresa-context";
-import { useEmpresa } from "@/hooks/use-empresa";
-import { toast } from "sonner";
+import { useVinculacaoMonitor } from "@/hooks/vinculacao-monitor/use-vinculacao-monitor";
 
-import { QrScanner } from "./QrScanner";
 import { QrScanner2 } from "./QrScanner2";
 
 import { Link, LinkIcon, QrCode, Shield } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 export default function CardVincularVinculacao() {
-  const formRef = useRef<HTMLFormElement>(null);
-  const { empresa } = useEmpresa();
-  const { vincularMonitor } = useVinculacao();
-  const [qrScannerOpen, setQrScannerOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const {
+    formRef,
+    qrScannerOpen,
+    setQrScannerOpen,
+    handleQrScan,
+    handleVerificarCodigo,
+    codigoVinculacaoForm,
+    isSubmitting,
+  } = useVinculacaoMonitor();
 
-  const codigoVinculacaoForm = useForm<codigoVinculacaoDTO>({
-    resolver: zodResolver(codigoVinculacaoSchema),
-    defaultValues: { codigo: "" },
-  });
-
-  function handleQrScan(code: string) {
-    setQrScannerOpen(false);
-    codigoVinculacaoForm.setValue("codigo", code);
-    formRef.current?.requestSubmit();
-  }
-
-  async function handleVerificarCodigo(data: codigoVinculacaoDTO) {
-    try {
-      setIsSubmitting(true);
-      const filaId = empresa.filas[0].id;
-      await vincularMonitor({
-        codigo: data.codigo,
-        filaId: filaId,
-        observacao: null,
-      });
-      codigoVinculacaoForm.setValue("codigo", "");
-      toast.success("Monitor vinculado com sucesso.");
-    } catch (error: any) {
-      if (error.message === "Código não encontrado") {
-        codigoVinculacaoForm.setError("codigo", {
-          type: "manual",
-          message: error.message,
-        });
-        toast.error("Código não encontrado.");
-      } else {
-        toast.error("Erro ao vincular monitor.");
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
   return (
     <Form {...codigoVinculacaoForm}>
       <form
