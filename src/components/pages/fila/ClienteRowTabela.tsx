@@ -56,8 +56,8 @@ export default function ClienteRowTable({
   } = useFila();
 
   return (
-    <div className="w-full px-3  py-6 flex flex-col md:justify-between md:flex-row gap-2 md:items-center md:pr-10 md:pl-0 ">
-      <div className="hidden md:flex w-10 shrink-0 items-center justify-center">
+    <div className="w-full px-4  py-6 flex flex-col md:justify-between md:flex-row md:items-center md:pr-15 md:pl-0 ">
+      <div className="hidden md:flex w-15 shrink-0 items-center justify-center">
         <span className="text-xl font-bold text-blue-600">
           {cliente.posicao}
         </span>
