@@ -20,7 +20,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { empresaSchema } from "@/models/empresa";
-import { useAuth } from "@/hooks/use-auth";
 import Link from "next/link";
 import { useCooldown } from "@/hooks/use-cooldown";
 import { toast } from "sonner";

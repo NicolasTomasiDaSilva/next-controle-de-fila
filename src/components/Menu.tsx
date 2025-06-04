@@ -10,10 +10,10 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChevronDown, ListOrdered, LogOut, Settings, User } from "lucide-react";
 import Link from "next/link";
-import { useAuth } from "@/hooks/use-auth";
+import { useLogout } from "@/hooks/use-logout";
 
 export default function Menu() {
-  const { logout } = useAuth();
+  const { logout } = useLogout();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

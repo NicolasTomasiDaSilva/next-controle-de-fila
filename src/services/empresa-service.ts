@@ -68,4 +68,19 @@ export const empresaService = {
       }
     }
   },
+  async logout(): Promise<void> {
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_NEXT_API_BASE_URL}/autenticacao/logout`,
+        undefined,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error: any) {
+      throw error;
+    }
+  },
 };
