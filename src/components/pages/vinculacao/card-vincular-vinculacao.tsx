@@ -56,7 +56,6 @@ export default function CardVincularVinculacao() {
 
   async function handleVerificarCodigo(data: codigoVinculacaoDTO) {
     try {
-      console.log(data);
       setIsSubmitting(true);
       const filaId = empresa.filas[0].id;
       await vincularMonitor({

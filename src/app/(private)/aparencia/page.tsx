@@ -17,7 +17,7 @@ export default async function AparenciaPage() {
         linkRetorno={"/configuracoes"}
         cor="red"
       >
-        <AparenciaContent empresa={empresa}></AparenciaContent>
+        <AparenciaContent></AparenciaContent>
       </Section>
     </EmpresaProvider>
   );

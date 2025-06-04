@@ -32,11 +32,11 @@ import { HexColorPicker } from "react-colorful";
 import { ColorPickerField } from "./color-picker";
 import { configuracaoFormDTO } from "@/dtos/configuracao";
 import { coresPadrao } from "@/constantes/cores-padrao";
+import { useCustomizarAparencia } from "@/hooks/use-customizar-aparencia";
 
 interface ConfiguracaoVisualProps {
   form: UseFormReturn<configuracaoFormDTO>;
 }
-
 export function ConfiguracaoVisual({ form }: ConfiguracaoVisualProps) {
   const [preview, setPreview] = useState<string | null>(null);
   const inputFileRef = useRef<HTMLInputElement | null>(null);

@@ -13,7 +13,6 @@ interface SectionTitleProps {
 }
 
 export function SectionTitle({ title, className, cor }: SectionTitleProps) {
-  console.log(cor);
   return (
     <div className={cn("flex  items-center gap-2", className)}>
       <div className={cn("w-1.5 h-10 rounded-sm", cor)} />

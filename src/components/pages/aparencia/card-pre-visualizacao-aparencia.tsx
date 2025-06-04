@@ -20,6 +20,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Eye } from "lucide-react";
+import { usePreVisualizacaoAparencia } from "@/hooks/use-pre-visualizacao-aparencia";
 
 interface CardPreVisualizacaoAparenciaProps {
   form: UseFormReturn<configuracaoFormDTO>;
@@ -28,53 +29,15 @@ interface CardPreVisualizacaoAparenciaProps {
 export function CardPreVisualizacaoAparencia({
   form,
 }: CardPreVisualizacaoAparenciaProps) {
-  const valores = form.watch();
-  const [debouncedValores] = useDebounce(valores, 300);
-  const params = new URLSearchParams();
-  params.set("nomeDisplay", debouncedValores.nomeDisplay);
-  params.set("corPrimaria", debouncedValores.corPrimaria);
-  params.set("corSobreposicao", debouncedValores.corSobreposicao);
-  if (debouncedValores.enderecoDisplay) {
-    params.set("enderecoDisplay", debouncedValores.enderecoDisplay);
-  }
-  if (debouncedValores.logoUrl) {
-    params.set("logoUrl", debouncedValores.logoUrl);
-  }
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [maxPreviewHeight, setMaxPreviewHeight] = useState(300);
-
-  const MAX_HEIGHT = 600;
-  const monitorSize = { width: 1920, height: 1080 };
-  const celularSize = { width: 540, height: 960 };
-
-  useEffect(() => {
-    function updateSize() {
-      if (!containerRef.current) return;
-
-      const width = containerRef.current.clientWidth;
-      const maxWidthPreview = width * 0.9;
-
-      const scaleByWidthMonitor = maxWidthPreview / monitorSize.width;
-      const scaleByHeightMonitor = MAX_HEIGHT / monitorSize.height;
-      const scaleMonitor = Math.min(scaleByWidthMonitor, scaleByHeightMonitor);
-
-      const scaleByWidthCelular = maxWidthPreview / celularSize.width;
-      const scaleByHeightCelular = MAX_HEIGHT / celularSize.height;
-      const scaleCelular = Math.min(scaleByWidthCelular, scaleByHeightCelular);
-
-      const finalScale = Math.min(scaleMonitor, scaleCelular);
-
-      setMaxPreviewHeight(finalScale * monitorSize.height);
-    }
-
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-
-  const scaleMonitor = maxPreviewHeight / monitorSize.height;
-  const scaleCelular = maxPreviewHeight / celularSize.height;
+  const {
+    params,
+    containerRef,
+    maxPreviewHeight,
+    scaleMonitor,
+    scaleCelular,
+    monitorSize,
+    celularSize,
+  } = usePreVisualizacaoAparencia({ form });
 
   return (
     <Card className="w-full">

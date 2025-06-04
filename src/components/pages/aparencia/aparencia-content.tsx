@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Empresa } from "@/models/empresa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ConfiguracaoDados } from "./configuracao-dados";
 
 import {
@@ -37,40 +37,12 @@ import { empresaService } from "@/services/empresa-service";
 import { toast } from "sonner";
 import { CardPreVisualizacaoAparencia } from "./card-pre-visualizacao-aparencia";
 import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
+import { useCustomizarAparencia } from "@/hooks/use-customizar-aparencia";
+import { useEmpresa } from "@/hooks/use-empresa";
 
-interface AparenciaContentProps {
-  empresa: Empresa;
-}
+export function AparenciaContent() {
+  const { form, handleSubmit, isSubmitting } = useCustomizarAparencia();
 
-export function AparenciaContent({ empresa }: AparenciaContentProps) {
-  const [loading, setLoading] = useState(false);
-  const form = useForm<configuracaoFormDTO>({
-    resolver: zodResolver(configuracaoFormSchema),
-    defaultValues: {
-      logoUrl: empresa.configuracao.logoUrl ?? "",
-      nomeDisplay: empresa.configuracao.nomeDisplay,
-      enderecoDisplay: empresa.configuracao.enderecoDisplay,
-      corPrimaria: empresa.configuracao.corPrimaria,
-      corSobreposicao: empresa.configuracao.corSobreposicao,
-    },
-  });
-
-  async function handleSubmit(data: z.infer<typeof configuracaoFormSchema>) {
-    try {
-      setLoading(true);
-      const configuracao: Configuracao = {
-        ...empresa.configuracao,
-        ...data,
-      };
-
-      await empresaService.atualizarConfiguracao(configuracao);
-      toast.success("Configuração atualizada com sucesso.", { icon: "✅" });
-    } catch (error) {
-      toast.error("Erro ao atualizadar configuração.");
-    } finally {
-      setLoading(false);
-    }
-  }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
@@ -85,7 +57,7 @@ export function AparenciaContent({ empresa }: AparenciaContentProps) {
         </div>
         <BotaoSalvarAlteracoes
           className="block ml-auto"
-          isSubmitting={loading}
+          isSubmitting={isSubmitting}
         ></BotaoSalvarAlteracoes>
       </form>
     </Form>

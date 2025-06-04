@@ -1,0 +1,3 @@
+- hook, renderizando muitas vezes a cada alteracao de cor
+- botao adicionar permitindo multiplos envios
+
