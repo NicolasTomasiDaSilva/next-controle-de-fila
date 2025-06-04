@@ -51,10 +51,15 @@ export function useVincularWhatsapp() {
   }, []);
 
   useEffect(() => {
+    let isMounted = true;
+
     async function pegarQrCode() {
       try {
         await whatsappService.iniciarSessao();
         while (true) {
+          if (!isMounted) {
+            return;
+          }
           const response = await whatsappService.pegarQrCode();
           let qrcode = response.data.QRCode;
 
@@ -72,6 +77,9 @@ export function useVincularWhatsapp() {
           await new Promise((resolve) => setTimeout(resolve, INTERVALO_MS));
         }
       } catch (error: any) {
+        if (!isMounted) {
+          return;
+        }
         if (error.message === "Sem sessão") {
           setQrcode(null);
           setBuscarQrcode(false);
@@ -90,9 +98,13 @@ export function useVincularWhatsapp() {
     if (buscarQrcode) {
       pegarQrCode();
     }
+    return () => {
+      isMounted = false;
+    };
   }, [buscarQrcode]);
 
   useEffect(() => {
+    let isMounted = true;
     async function verificarStatusSessao() {
       try {
         const sessao: sessaoWhatsappDTO =
@@ -103,6 +115,9 @@ export function useVincularWhatsapp() {
           setBuscarQrcode(true);
         }
       } catch (error: any) {
+        if (!isMounted) {
+          return;
+        }
         if (error.message === "Usuário não cadastrado") {
           try {
             await whatsappService.cadastrarWhatsapp();
@@ -120,6 +135,10 @@ export function useVincularWhatsapp() {
     if (isChecked) {
       verificarStatusSessao();
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [isChecked]);
 
   async function handleToggleWhatsapp(checked: boolean) {
