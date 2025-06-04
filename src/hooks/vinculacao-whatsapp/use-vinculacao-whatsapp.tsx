@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { useConfiguracao } from "../mensagens/use-configuracao";
 import { toast } from "sonner";
 import { empresaService } from "@/services/empresa-service";
 import { whatsappService } from "@/services/whatsapp-service";
 import { qrcodeResponseDTO, sessaoWhatsappDTO } from "@/dtos/whatsapp";
 import { set } from "date-fns";
 import { th } from "date-fns/locale";
+import { useEmpresa } from "../use-empresa";
 
 export function useVinculacaoWhatsapp() {
+  const { empresa } = useEmpresa();
+  const configuracao = empresa.configuracao;
   const [qrcode, setQrcode] = useState<string | null>(null);
-  const { configuracao } = useConfiguracao();
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isConectado, setIsConectado] = useState<boolean>(false);

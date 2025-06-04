@@ -10,17 +10,18 @@ import { Form } from "@/components/ui/form";
 import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
 import CardPreVisualizacaoMensagens from "./card-pre-visualizacao-mensagens";
 
-import { useConfiguracao } from "@/hooks/mensagens/use-configuracao";
 import CardEditorMensagens from "./card-editor-mensagens";
+import { usePersonalizacaoMensagens } from "@/hooks/mensagens/use-personalizacao-mensagens";
 
 export default function MensagensContent() {
   const [resetCount, setResetCount] = useState(0);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [tabSelecionada, setTabSelecionada] = useState<
     "mensagemEntrada" | "mensagemChamada" | "mensagemRemovido"
   >("mensagemEntrada");
 
-  const { handleAtualizarMensagens, configuracao } = useConfiguracao();
+  const { handleAtualizarMensagens, configuracao, isSubmitting } =
+    usePersonalizacaoMensagens();
 
   const form = useForm<mensagensFormDTO>({
     resolver: zodResolver(mensagensFormSchema),
@@ -33,11 +34,7 @@ export default function MensagensContent() {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(
-          async (data) => await handleAtualizarMensagens(data, setIsSubmitting)
-        )}
-      >
+      <form onSubmit={form.handleSubmit(handleAtualizarMensagens)}>
         <div className="flex flex-col gap-4 xl:flex-row xl:items-start">
           <div className="flex-1 basis-0 min-w-0">
             <CardEditorMensagens
