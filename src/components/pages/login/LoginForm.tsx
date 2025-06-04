@@ -26,79 +26,19 @@ import { useCooldown } from "@/hooks/use-cooldown";
 import { toast } from "sonner";
 import { empresaService } from "@/services/empresa-service";
 import { codigoAcessoDTO, codigoAcessoSchema } from "@/models/codigos";
-
-export const emailSchema = empresaSchema.pick({
-  email: true,
-});
+import { useLogin } from "@/hooks/use-login";
 
 export default function LoginForm() {
-  const { cooldown, startCooldown } = useCooldown(30);
-  const { login } = useAuth();
-  const [step, setStep] = useState<1 | 2>(1);
-  const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
-
-  const emailForm = useForm<z.infer<typeof emailSchema>>({
-    resolver: zodResolver(emailSchema),
-    defaultValues: { email: "" },
-  });
-
-  const codigoAcessoForm = useForm<codigoAcessoDTO>({
-    resolver: zodResolver(codigoAcessoSchema),
-    defaultValues: { codigo: "" },
-  });
-
-  const handleEnviarCodigo = async (data: z.infer<typeof emailSchema>) => {
-    try {
-      setLoading(true);
-      await empresaService.enviarCodigoAcesso(data.email);
-      setEmail(data.email);
-      startCooldown();
-      setStep(2);
-    } catch (error: any) {
-      if (error?.message === "E-mail não encontrado") {
-        emailForm.setError("email", {
-          type: "manual",
-          message: error.message,
-        });
-      } else {
-        toast.error("Erro ao enviar código de acesso");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleReenviarCodigo = async () => {
-    try {
-      if (cooldown > 0) return;
-      setLoading(true);
-      await empresaService.enviarCodigoAcesso(email);
-      startCooldown();
-    } catch (error: any) {
-      toast.error("Erro ao enviar código de acesso");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleVerificarCodigo = async (data: codigoAcessoDTO) => {
-    try {
-      setLoading(true);
-      await login({ email, codigo: data.codigo });
-    } catch (error: any) {
-      if (error?.message === "Código não encontrado") {
-        codigoAcessoForm.setError("codigo", {
-          type: "manual",
-          message: error.message,
-        });
-      } else {
-        toast.error(error.message);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    handleEnviarCodigo,
+    handleReenviarCodigo,
+    handleVerificarCodigo,
+    emailForm,
+    codigoAcessoForm,
+    step,
+    isSubmitting,
+    cooldown,
+  } = useLogin();
 
   return (
     <div className="w-full">
@@ -143,8 +83,8 @@ export default function LoginForm() {
               )}
             />
 
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Enviando..." : "Enviar código"}
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Enviando..." : "Enviar código"}
             </Button>
           </form>
           <p className="text-sm text-center px-10 mt-3">
@@ -187,8 +127,8 @@ export default function LoginForm() {
               )}
             />
 
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Verificando..." : "Verificar código"}
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Verificando..." : "Verificar código"}
             </Button>
           </form>
           <p className="text-sm text-left mt-3">
@@ -196,7 +136,7 @@ export default function LoginForm() {
             <button
               type="button"
               onClick={handleReenviarCodigo}
-              disabled={loading || cooldown > 0}
+              disabled={isSubmitting || cooldown > 0}
               className={`underline underline-offset-2 ${
                 cooldown > 0
                   ? "cursor-not-allowed opacity-50"
