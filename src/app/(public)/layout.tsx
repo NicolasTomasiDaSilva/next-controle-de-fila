@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import { cn } from "@/lib/utils";
 
 export default function PublicLayout({
   children,
@@ -6,7 +7,11 @@ export default function PublicLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-screen flex flex-row items-center max-w-xl mx-auto">
+    <div
+      className={
+        "espaco-lateral-conteudo min-h-screen flex flex-row items-center mx-auto !max-w-2xl"
+      }
+    >
       {children}
     </div>
   );
