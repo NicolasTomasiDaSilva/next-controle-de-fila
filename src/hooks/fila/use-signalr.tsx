@@ -1,4 +1,3 @@
-// hooks/useSignalR.ts
 import { useEffect, useState } from "react";
 import { HubConnection } from "@microsoft/signalr";
 import { connectToHub } from "@/lib/signalr/token/client";
@@ -8,18 +7,25 @@ export function useSignalR() {
 
   useEffect(() => {
     let isMounted = true;
+    let currentConnection: HubConnection | null = null;
+
     connectToHub()
       .then((conn) => {
-        if (isMounted) {
-          setConnection(conn);
-          // ex: conn.on("evento", handler)
-        }
+        if (!isMounted) return;
+
+        setConnection(conn);
+        currentConnection = conn;
       })
       .catch(console.error);
 
     return () => {
       isMounted = false;
-      connection?.stop();
+
+      if (currentConnection) {
+        currentConnection.stop().then(() => {
+          console.log("SignalR desconectado");
+        });
+      }
     };
   }, []);
 

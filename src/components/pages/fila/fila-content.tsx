@@ -8,12 +8,24 @@ import { useEffect } from "react";
 
 export default function FilaContent() {
   const { connection } = useSignalR();
+
   useEffect(() => {
-    console.log("AINDA NAO CONECTOU");
-    if (connection) {
-      console.log("CONECTOU");
-      connection.on("AdicionarCliente", () => {});
-    }
+    if (!connection) return;
+
+    console.log("Conectado ao SignalR");
+
+    // Adiciona o listener
+    const handleAdicionarCliente = (cliente: any) => {
+      console.log("Novo cliente recebido:", cliente);
+      // Aqui você atualiza seu estado ou faz o que precisar
+    };
+
+    connection.on("AdicionarCliente", handleAdicionarCliente);
+
+    // Limpa o listener ao desmontar ou reconectar
+    return () => {
+      connection.off("AdicionarCliente", handleAdicionarCliente);
+    };
   }, [connection]);
 
   return (

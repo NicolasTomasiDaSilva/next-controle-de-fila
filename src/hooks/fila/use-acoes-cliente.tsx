@@ -7,8 +7,9 @@ import { Fila } from "@/models/fila";
 import { filaService } from "@/services/fila-service";
 import { de } from "date-fns/locale";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useSignalR } from "./use-signalr";
 
 export function useAcoesCliente() {
   const context = useContext(FilaContext);
