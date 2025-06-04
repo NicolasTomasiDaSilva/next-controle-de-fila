@@ -10,7 +10,7 @@ import { Form } from "@/components/ui/form";
 import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
 import CardPreVisualizacaoMensagens from "./card-pre-visualizacao-mensagens";
 
-import { useConfiguracao } from "@/hooks/use-configuracao";
+import { useConfiguracao } from "@/hooks/mensagens/use-configuracao";
 import CardEditorMensagens from "./card-editor-mensagens";
 
 export default function MensagensContent() {

@@ -25,7 +25,7 @@ import {
 import { useForm } from "react-hook-form";
 
 import { codigoVinculacaoDTO, codigoVinculacaoSchema } from "@/models/codigos";
-import { useVinculacao } from "@/hooks/use-vinculacao";
+import { useVinculacao } from "@/hooks/vinculacao-monitor/use-vinculacao";
 import { EmpresaContext } from "@/contexts/empresa-context";
 import { useEmpresa } from "@/hooks/use-empresa";
 import { toast } from "sonner";

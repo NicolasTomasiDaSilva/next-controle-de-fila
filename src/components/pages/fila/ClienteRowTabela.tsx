@@ -21,7 +21,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { StatusEnum, StatusMap } from "@/enums/status-enum";
-import { useFila } from "@/hooks/use-fila";
+import { useFila } from "@/hooks/fila/use-fila";
 import { EditarClienteDialog } from "./TabelaPrincipal/EditarClienteDialog";
 import { TempoDecorrido } from "../../shared/TempoDecorrido";
 

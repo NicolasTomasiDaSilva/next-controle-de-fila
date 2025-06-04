@@ -1,5 +1,5 @@
 import { mensagensFormDTO } from "@/dtos/configuracao";
-import { useEmpresa } from "./use-empresa";
+import { useEmpresa } from "../use-empresa";
 import { toast } from "sonner";
 import { empresaService } from "@/services/empresa-service";
 

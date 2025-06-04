@@ -20,7 +20,6 @@ import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
 import { configuracaoFormDTO } from "@/dtos/configuracao";
 import { Building2 } from "lucide-react";
-import { useCustomizarAparencia } from "@/hooks/use-customizar-aparencia";
 
 interface ConfiguracaoDadosProps {
   form: UseFormReturn<configuracaoFormDTO>;

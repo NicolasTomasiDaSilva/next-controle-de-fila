@@ -5,7 +5,7 @@ import { Form } from "@/components/ui/form";
 import { ConfiguracaoVisual } from "./configuracao-visual";
 import { CardPreVisualizacaoAparencia } from "./card-pre-visualizacao-aparencia";
 import BotaoSalvarAlteracoes from "@/components/shared/BotaoSalvarAlteracoes";
-import { useCustomizarAparencia } from "@/hooks/use-customizar-aparencia";
+import { useCustomizarAparencia } from "@/hooks/aparencia/use-customizar-aparencia";
 
 export function AparenciaContent() {
   const {

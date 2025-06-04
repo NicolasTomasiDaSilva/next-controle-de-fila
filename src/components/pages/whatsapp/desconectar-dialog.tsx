@@ -12,25 +12,21 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useFila } from "@/hooks/fila/use-fila";
-import { Trash } from "lucide-react";
-import { Cliente } from "@/models/cliente";
 
-interface RemoverClienteDialogProps {
-  cliente: Cliente;
-  handleRemover: (cliente: Cliente) => Promise<void>;
+import { LogOut } from "lucide-react";
+
+interface DesconectarWhatsappDialogProps {
+  handleDesconectar: () => Promise<void>;
   isSubmitting: boolean;
 }
-
-export function RemoverClienteDialog({
-  cliente,
-  handleRemover,
+export function DesconectarWhatsappDialog({
+  handleDesconectar,
   isSubmitting,
-}: RemoverClienteDialogProps) {
+}: DesconectarWhatsappDialogProps) {
   const [open, setOpen] = useState(false);
 
   async function handleConfirmar() {
-    await handleRemover(cliente);
+    await handleDesconectar();
     setOpen(false);
   }
 
@@ -42,19 +38,20 @@ export function RemoverClienteDialog({
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button
+          type="button"
+          className="bg-red-100 text-red-600 hover:bg-red-200"
           disabled={isSubmitting}
-          variant="ghost"
-          className="!h-auto !p-2 hover:bg-red-100 hover:text-red-600 text-red-600"
         >
-          <Trash className="!w-5 !h-5" />
+          <LogOut />
+          {isSubmitting ? "Desconectando..." : "Desconectar"}
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Remover Cliente</DialogTitle>
+          <DialogTitle>Desconectar WhatsApp</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          Tem certeza que deseja remover este cliente da fila?
+          Tem certeza que deseja desconectar do WhatsApp?
         </DialogDescription>
 
         <DialogFooter>
@@ -66,7 +63,7 @@ export function RemoverClienteDialog({
             onClick={handleConfirmar}
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Removendo..." : "Confirmar"}
+            {isSubmitting ? "Desconectando..." : "Confirmar"}
           </Button>
         </DialogFooter>
       </DialogContent>

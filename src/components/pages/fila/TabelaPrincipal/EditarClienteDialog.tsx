@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-import { useFila } from "@/hooks/use-fila";
+import { useFila } from "@/hooks/fila/use-fila";
 
 import { Edit, PencilLine } from "lucide-react";
 import { Cliente, clienteSchema } from "@/models/cliente";

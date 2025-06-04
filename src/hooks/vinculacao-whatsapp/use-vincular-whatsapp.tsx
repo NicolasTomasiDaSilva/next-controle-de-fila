@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useConfiguracao } from "./use-configuracao";
+import { useConfiguracao } from "../mensagens/use-configuracao";
 import { toast } from "sonner";
 import { empresaService } from "@/services/empresa-service";
 import { whatsappService } from "@/services/whatsapp-service";
@@ -25,7 +25,7 @@ export function useVincularWhatsapp() {
     setIsSubmitting(false);
   }
 
-  async function handleLogout() {
+  async function handleDesconectar() {
     try {
       setIsSubmitting(true);
       await whatsappService.desconectarWhatsapp();
@@ -173,7 +173,7 @@ export function useVincularWhatsapp() {
     isSubmitting,
     setIsSubmitting,
     handleToggleWhatsapp,
-    handleLogout,
+    handleDesconectar,
     handleGerarQrcodeNovamente,
   };
 }

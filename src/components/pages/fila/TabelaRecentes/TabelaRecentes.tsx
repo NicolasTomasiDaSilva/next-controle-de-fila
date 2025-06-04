@@ -4,7 +4,7 @@ import { StatusEnum, StatusLabel } from "@/enums/status-enum";
 import ClienteRowTable from "../ClienteRowTabela";
 
 import React, { useLayoutEffect, useMemo, useRef, useState } from "react";
-import { useFila } from "@/hooks/use-fila";
+import { useFila } from "@/hooks/fila/use-fila";
 import { normalizeString } from "@/utils/normalize-string";
 import { Input } from "../../../ui/input";
 import { ArrowUp, CircleArrowUp, MoveVertical, Users } from "lucide-react";

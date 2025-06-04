@@ -1,6 +1,6 @@
 import { empresaService } from "@/services/empresa-service";
 import { useRouter } from "next/navigation";
-import { useCooldown } from "./use-cooldown";
+import { useCooldown } from "../use-cooldown";
 import { useState } from "react";
 import { toast } from "sonner";
 import { codigoAcessoDTO, codigoAcessoSchema } from "@/models/codigos";

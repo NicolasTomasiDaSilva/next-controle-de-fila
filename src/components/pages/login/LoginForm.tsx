@@ -25,7 +25,7 @@ import { useCooldown } from "@/hooks/use-cooldown";
 import { toast } from "sonner";
 import { empresaService } from "@/services/empresa-service";
 import { codigoAcessoDTO, codigoAcessoSchema } from "@/models/codigos";
-import { useLogin } from "@/hooks/use-login";
+import { useLogin } from "@/hooks/auth/use-login";
 
 export default function LoginForm() {
   const {

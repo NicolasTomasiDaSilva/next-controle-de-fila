@@ -13,9 +13,9 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
-import { useConfiguracao } from "@/hooks/use-configuracao";
+import { useConfiguracao } from "@/hooks/mensagens/use-configuracao";
 import { useEmpresa } from "@/hooks/use-empresa";
-import { useVincularWhatsapp } from "@/hooks/use-vincular-whatsapp";
+import { useVincularWhatsapp } from "@/hooks/vinculacao-whatsapp/use-vincular-whatsapp";
 import {
   LinkIcon,
   ListChecks,
@@ -27,18 +27,16 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { DesconectarWhatsappDialog } from "./desconectar-dialog";
 
 export default function CardVincularWhatsapp() {
   const {
     isChecked,
-    setIsChecked,
     isSubmitting,
-    setIsSubmitting,
     qrcode,
     isConectado,
-    setBuscarQrcode,
     handleToggleWhatsapp,
-    handleLogout,
+    handleDesconectar,
     isQrcodeExpirado,
     handleGerarQrcodeNovamente,
   } = useVincularWhatsapp();
@@ -127,15 +125,10 @@ export default function CardVincularWhatsapp() {
         ) : null}
         {isConectado && isChecked ? (
           <div className="flex flex-col gap-2 items-center justify-center">
-            <Button
-              type="button"
-              onClick={handleLogout}
-              disabled={isSubmitting}
-              variant={"destructive"}
-            >
-              <LogOut />
-              {isSubmitting ? "Desconectando..." : "Desconectar"}
-            </Button>
+            <DesconectarWhatsappDialog
+              handleDesconectar={handleDesconectar}
+              isSubmitting={isSubmitting}
+            />
           </div>
         ) : null}
       </CardContent>

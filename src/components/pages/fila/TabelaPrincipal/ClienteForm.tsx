@@ -18,7 +18,7 @@ import {
 import { TelefoneInput } from "../../../shared/inputs/TelefoneInput";
 import { Input } from "../../../ui/input";
 import { Cliente } from "@/models/cliente";
-import { useFila } from "@/hooks/use-fila";
+import { useFila } from "@/hooks/fila/use-fila";
 import { useRef, useState } from "react";
 
 interface ClienteFormProps {

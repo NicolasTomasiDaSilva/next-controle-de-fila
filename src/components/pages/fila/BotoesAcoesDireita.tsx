@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { StatusEnum } from "@/enums/status-enum";
-import { useFila } from "@/hooks/use-fila";
+import { useFila } from "@/hooks/fila/use-fila";
 import { Cliente } from "@/models/cliente";
 import { Check, Phone, RotateCcw, X } from "lucide-react";
 import { RemoverClienteDialog } from "./TabelaPrincipal/RemoverClienteDialog";
@@ -38,7 +38,11 @@ export default function BotoesAcoesDireita({
         >
           <Phone className="!w-5 !h-5" />
         </Button>
-        <RemoverClienteDialog cliente={cliente} />
+        <RemoverClienteDialog
+          cliente={cliente}
+          handleRemover={handleRemover}
+          isSubmitting={isSubmitting}
+        />
       </>
     );
   }

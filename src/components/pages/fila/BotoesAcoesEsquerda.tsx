@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { useFila } from "@/hooks/use-fila";
+import { useFila } from "@/hooks/fila/use-fila";
 import { Cliente } from "@/models/cliente";
 import { ChevronDown, ChevronUp, Clock } from "lucide-react";
 import { EditarClienteDialog } from "./TabelaPrincipal/EditarClienteDialog";

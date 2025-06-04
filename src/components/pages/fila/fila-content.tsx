@@ -1,6 +1,6 @@
 "use client";
 
-import { useSignalR } from "@/hooks/use-signalr";
+import { useSignalR } from "@/hooks/fila/use-signalr";
 import { AdicionarClienteDialog } from "./TabelaPrincipal/AdicionarClienteDialog";
 import TabelaPrincipal from "./TabelaPrincipal/TabelaPrincipal";
 import TabelaRecentes from "./TabelaRecentes/TabelaRecentes";

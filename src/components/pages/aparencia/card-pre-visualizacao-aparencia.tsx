@@ -20,7 +20,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Eye } from "lucide-react";
-import { usePreVisualizacaoAparencia } from "@/hooks/use-pre-visualizacao-aparencia";
+import { usePreVisualizacaoAparencia } from "@/hooks/aparencia/use-pre-visualizacao-aparencia";
 
 interface CardPreVisualizacaoAparenciaProps {
   form: UseFormReturn<configuracaoFormDTO>;

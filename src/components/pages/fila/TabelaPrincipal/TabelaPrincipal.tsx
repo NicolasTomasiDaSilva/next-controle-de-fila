@@ -2,7 +2,7 @@
 import { StatusEnum } from "@/enums/status-enum";
 import ClienteRowTable from "../ClienteRowTabela";
 import React, { useMemo, useRef, useState } from "react";
-import { useFila } from "@/hooks/use-fila";
+import { useFila } from "@/hooks/fila/use-fila";
 import { normalizeString } from "@/utils/normalize-string";
 import { Input } from "../../../ui/input";
 import {
