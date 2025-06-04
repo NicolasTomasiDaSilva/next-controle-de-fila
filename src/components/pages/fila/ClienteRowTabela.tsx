@@ -30,6 +30,8 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { RemoverClienteDialog } from "./TabelaPrincipal/RemoverClienteDialog";
+import BotoesAcoesEsquerda from "./BotoesAcoesEsquerda";
+import BotoesAcoesDireita from "./BotoesAcoesDireita";
 
 interface RowClientePersonalizadaProps {
   cliente: Cliente;
@@ -54,9 +56,9 @@ export default function ClienteRowTable({
   } = useFila();
 
   return (
-    <div className="w-full px-6 md:px-15 py-6 flex flex-col md:justify-between gap-2">
-      <div className="flex flex-row justify-between gap-2 w-full">
-        <div className="">
+    <div className="w-full px-6 md:px-15 py-6 flex flex-col md:justify-between md:flex-row gap-2 md:items-center">
+      <div className="flex flex-row justify-between gap-2 w-full ">
+        <div className="flex flex-col justify-center">
           <div className="flex flex-row items-center gap-2">
             {cliente.status === StatusEnum.Aguardando && (
               <span className="text-xl font-bold text-blue-600 ">
@@ -66,22 +68,18 @@ export default function ClienteRowTable({
             <span className="font-semibold">{cliente.nome}</span>
           </div>
           <p className="text-sm text-muted-foreground">{cliente.telefone}</p>
-          {cliente.status === StatusEnum.Aguardando && (
-            <p className="text-sm text-muted-foreground">
-              {cliente.observacao}
-            </p>
-          )}
+          <p className="text-sm text-muted-foreground">{cliente.observacao}</p>
         </div>
-        <div className="flex flex-col items-end md:items-center justify-center md:flex-row gap-2  md:justify-between ">
+        <div className="flex flex-col items-center gap-5 justify-center md:flex-row">
           <p className="text-sm text-muted-foreground flex flex-row gap-1 items-center">
             <Clock className="w-3 h-3" />
             23min
           </p>
           {cliente.status !== StatusEnum.Aguardando && (
-            <div className="md:w-24 md:mx-4 md:flex md:flex-row md:justify-center ">
+            <div className="w-27 flex flex-row items-center justify-center">
               <Badge
                 variant="secondary"
-                className={cn(StatusMap[cliente.status].className, "")}
+                className={cn(StatusMap[cliente.status].className)}
               >
                 {StatusMap[cliente.status].label}
               </Badge>
@@ -89,69 +87,16 @@ export default function ClienteRowTable({
           )}
         </div>
       </div>
-      {cliente.status === StatusEnum.Aguardando && (
-        <div className="flex flex-row justify-between md:gap-2 ">
-          <div className="flex flex-row items-center md:gap-2">
-            <Button
-              disabled={isSubmitting}
-              onClick={async () => handleMoverCima(cliente)}
-              variant="ghost"
-              className="!h-auto !p-2"
-            >
-              <ChevronUp className="!w-5 !h-5" />
-            </Button>
-            <Button
-              disabled={isSubmitting}
-              onClick={async () => handleMoverBaixo(cliente)}
-              variant="ghost"
-              className="!h-auto !p-2"
-            >
-              <ChevronDown className="!w-5 !h-5" />
-            </Button>
-            <EditarClienteDialog cliente={cliente} />
+      {(cliente.status === StatusEnum.Aguardando ||
+        cliente.status === StatusEnum.Chamado) && (
+        <div className=" flex flex-row  items-center justify-between">
+          <div className="flex flex-row items-center">
+            {cliente.status === StatusEnum.Aguardando && (
+              <BotoesAcoesEsquerda cliente={cliente}></BotoesAcoesEsquerda>
+            )}
           </div>
-          <div className="flex flex-row items-center md:gap-2">
-            <Button
-              disabled={isSubmitting}
-              onClick={async () => handleChamar(cliente)}
-              variant="ghost"
-              className="!h-auto !p-2 text-green-600 hover:bg-green-100 hover:text-green-600 text-green-600"
-            >
-              <Phone className="!w-5 !h-5" />
-            </Button>
-            <RemoverClienteDialog cliente={cliente} />
-          </div>
-        </div>
-      )}
-
-      {cliente.status === StatusEnum.Chamado && (
-        <div className="flex flex-row justify-between md:justify-end md:gap-2 ">
-          <div className="flex flex-row items-center md:gap-2"></div>
-          <div className="flex flex-row items-center md:gap-2">
-            <Button
-              disabled={isSubmitting}
-              onClick={async () => handleAtender(cliente)}
-              variant="ghost"
-              className="!h-auto !p-2 text-green-600 hover:bg-green-100 hover:text-green-600 text-green-600"
-            >
-              <Check className="!w-5 !h-5" />
-            </Button>
-            <Button
-              disabled={isSubmitting}
-              onClick={async () => handleVoltar(cliente)}
-              variant="ghost"
-              className="!h-auto !p-2 hover:bg-blue-100 hover:text-blue-600 text-blue-600"
-            >
-              <RotateCcw className="!w-5 !h-5" />
-            </Button>
-            <Button
-              disabled={isSubmitting}
-              onClick={async () => handleAusentar(cliente)}
-              variant="ghost"
-              className="!h-auto !p-2 hover:bg-orange-100 hover:text-orange-600 text-orange-600"
-            >
-              <X className="!w-5 !h-5" />
-            </Button>
+          <div className="flex flex-row items-center">
+            <BotoesAcoesDireita cliente={cliente}></BotoesAcoesDireita>
           </div>
         </div>
       )}
