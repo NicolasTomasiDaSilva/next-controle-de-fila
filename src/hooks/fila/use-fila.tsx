@@ -20,5 +20,6 @@ export function useFila() {
 
   return {
     fila,
+    setFila,
   };
 }

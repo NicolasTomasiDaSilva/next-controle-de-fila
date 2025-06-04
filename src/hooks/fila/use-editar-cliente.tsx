@@ -5,14 +5,10 @@ import { Fila } from "@/models/fila";
 import { filaService } from "@/services/fila-service";
 import { useContext, useState } from "react";
 import { toast } from "sonner";
+import { useFila } from "./use-fila";
 
 export default function useEditarCliente() {
-  const context = useContext(FilaContext);
-  if (context === undefined) {
-    throw new Error("useEditarCliente must be used within a UserProvider");
-  }
-
-  const { setFila } = context;
+  const { fila, setFila } = useFila();
 
   async function handleEditarCliente(cliente: Cliente) {
     try {

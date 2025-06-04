@@ -10,15 +10,11 @@ import { de } from "date-fns/locale";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useSignalR } from "./use-signalr";
+import { useFila } from "./use-fila";
 
 export function useAcoesCliente() {
-  const context = useContext(FilaContext);
-  if (context === undefined) {
-    throw new Error("useAcoesCliente must be used within a UserProvider");
-  }
+  const { fila, setFila } = useFila();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const { fila, setFila } = context;
 
   async function handleChamarCliente(cliente: Cliente) {
     try {
