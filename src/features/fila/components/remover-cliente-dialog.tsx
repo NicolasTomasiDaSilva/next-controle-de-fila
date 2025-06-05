@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { Trash } from "lucide-react";
-import { Cliente } from "@/models/cliente";
+import { Cliente } from "@/features/fila/models/cliente";
 import useRemoverCliente from "@/features/fila/hooks/use-remover-cliente";
 
 interface RemoverClienteDialogProps {

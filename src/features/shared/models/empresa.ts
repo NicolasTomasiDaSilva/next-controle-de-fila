@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { configuracaoSchema } from "./configuracao";
 import { entidadeSchema } from "./entidade";
-import { filaSchema } from "./fila";
-import { vinculacaoSchema } from "./vinculacao";
+import { filaSchema } from "@/features/fila/models/fila";
+import { vinculacaoSchema } from "@/features/vinculacao-monitor/models/vinculacao";
 
 export const empresaSchema = entidadeSchema.extend({
   nome: z

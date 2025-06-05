@@ -1,5 +1,6 @@
-import { StatusEnum } from "../enums/status-enum";
-import { Entidade, entidadeSchema } from "./entidade";
+import { entidadeSchema } from "@/features/shared/models/entidade";
+import { StatusEnum } from "../../../enums/status-enum";
+
 import { z } from "zod";
 
 export const statusEnumSchema = z.nativeEnum(StatusEnum);

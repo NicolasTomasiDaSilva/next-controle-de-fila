@@ -1,4 +1,4 @@
-import { configuracaoSchema } from "@/models/configuracao";
+import { configuracaoSchema } from "@/features/shared/models/configuracao";
 import z from "zod";
 
 export const configuracaoFormSchema = configuracaoSchema.pick({

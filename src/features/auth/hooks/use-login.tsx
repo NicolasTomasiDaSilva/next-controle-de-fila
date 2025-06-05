@@ -3,12 +3,14 @@ import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { codigoAcessoDTO, codigoAcessoSchema } from "@/models/codigos";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { empresaSchema } from "@/models/empresa";
+
 import z from "zod";
 import { useCooldown } from "@/features/shared/hooks/use-cooldown";
+import { codigoAcessoDTO, codigoAcessoSchema } from "../models/codigo-acesso";
+import { empresaSchema } from "@/features/shared/models/empresa";
 
 export const useLogin = () => {
   const emailSchema = empresaSchema.pick({

@@ -2,7 +2,7 @@ import {
   configuracaoFormDTO,
   configuracaoFormSchema,
 } from "@/dtos/configuracao";
-import { Configuracao } from "@/models/configuracao";
+
 import { empresaService } from "@/services/empresa-service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChangeEvent, useRef, useState } from "react";
@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import z from "zod";
 import { uploadService } from "@/services/upload-service";
 import { useEmpresa } from "../../shared/hooks/use-empresa";
+import { Configuracao } from "@/features/shared/models/configuracao";
 
 export const useCustomizarAparencia = () => {
   const { empresa } = useEmpresa();

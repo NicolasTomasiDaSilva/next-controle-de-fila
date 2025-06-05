@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 
-import { Cliente } from "@/models/cliente";
+import { Cliente } from "@/features/fila/models/cliente";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { EditarClienteDialog } from "./editar-cliente-dialog";
 import { StatusEnum } from "@/enums/status-enum";

@@ -1,5 +1,5 @@
-import { Cliente } from "@/models/cliente";
-import { Fila } from "@/models/fila";
+import { Cliente } from "@/features/fila/models/cliente";
+import { Fila } from "@/features/fila/models/fila";
 import { filaService } from "@/services/fila-service";
 
 import { toast } from "sonner";

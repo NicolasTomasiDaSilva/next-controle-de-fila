@@ -1,7 +1,7 @@
 import { AcoesAdminEnum } from "@/enums/acoes-admin-enum";
 import { StatusEnum } from "@/enums/status-enum";
-import { Cliente } from "@/models/cliente";
-import { Fila } from "@/models/fila";
+import { Cliente } from "@/features/fila/models/cliente";
+import { Fila } from "@/features/fila/models/fila";
 import { filaService } from "@/services/fila-service";
 import { useState } from "react";
 import { toast } from "sonner";

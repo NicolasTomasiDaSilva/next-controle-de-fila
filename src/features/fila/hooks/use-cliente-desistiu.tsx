@@ -1,4 +1,4 @@
-import { Fila } from "@/models/fila";
+import { Fila } from "@/features/fila/models/fila";
 import { filaService } from "@/services/fila-service";
 
 import { toast } from "sonner";

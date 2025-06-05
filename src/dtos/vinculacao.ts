@@ -1,5 +1,5 @@
 import { codigoVinculacaoSchema } from "@/models/codigos";
-import { vinculacaoSchema } from "@/models/vinculacao";
+import { vinculacaoSchema } from "@/features/vinculacao-monitor/models/vinculacao";
 import z from "zod";
 
 export const criarVinculacaoSchema = z.object({

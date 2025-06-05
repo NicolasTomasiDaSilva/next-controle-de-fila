@@ -1,6 +1,10 @@
+import {
+  Configuracao,
+  configuracaoSchema,
+} from "@/features/shared/models/configuracao";
+import { Empresa, empresaSchema } from "@/features/shared/models/empresa";
 import { api, axiosInstance } from "@/lib/api/api";
-import { Configuracao, configuracaoSchema } from "@/models/configuracao";
-import { Empresa, empresaSchema } from "@/models/empresa";
+
 import axios from "axios";
 import { Config } from "tailwind-merge";
 

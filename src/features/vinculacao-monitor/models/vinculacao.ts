@@ -1,4 +1,4 @@
-import { entidadeSchema } from "./entidade";
+import { entidadeSchema } from "@/features/shared/models/entidade";
 import { z } from "zod";
 
 export const vinculacaoSchema = entidadeSchema.extend({

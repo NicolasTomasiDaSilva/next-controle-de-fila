@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { StatusEnum } from "@/enums/status-enum";
-import { Cliente } from "@/models/cliente";
+import { Cliente } from "@/features/fila/models/cliente";
 import { Check, Phone, RotateCcw, X } from "lucide-react";
 import { RemoverClienteDialog } from "./remover-cliente-dialog";
 

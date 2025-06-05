@@ -1,6 +1,6 @@
 "use client";
 
-import { Empresa } from "@/models/empresa";
+import { Empresa } from "@/features/shared/models/empresa";
 import { createContext, useState, ReactNode } from "react";
 
 type EmpresaContextType = {

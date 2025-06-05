@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const body = await request.json();
+
   const api = await axiosInstance({ withoutRetry: true });
   const response = await api.post(`/autenticacao/login`, body, {
     validateStatus: () => true,
