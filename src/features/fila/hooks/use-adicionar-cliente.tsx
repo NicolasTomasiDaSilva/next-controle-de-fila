@@ -17,7 +17,7 @@ export default function useAdicionarCliente() {
 
       const filaAtualizada: Fila = await filaService.adicionarCliente(cliente);
       setFila(filaAtualizada);
-      toast.success("Cliente adicionado com sucesso.");
+      toast.success("Cliente adicionado com sucesso.", { icon: "➕" });
     } catch (error: any) {
       toast.error("Erro ao adicionar cliente.");
     }

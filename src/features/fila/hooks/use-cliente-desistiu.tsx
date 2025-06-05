@@ -13,6 +13,7 @@ export default function useClienteDesistiu() {
       const { fila: filaAtualizada, cliente } = data;
       toast.warning(`Cliente ${cliente.nome} desistiu.`, {
         duration: 5000,
+        icon: "😞",
       });
       setFila(filaAtualizada);
     } catch (error: any) {

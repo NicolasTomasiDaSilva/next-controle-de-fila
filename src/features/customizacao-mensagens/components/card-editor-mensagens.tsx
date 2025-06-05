@@ -21,6 +21,7 @@ import RichTextEditor from "./rich-text-editor";
 import { UseFormReturn } from "react-hook-form";
 import { mensagensFormDTO } from "@/dtos/configuracao";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 interface CardEditorMensagensProps {
   tabSelecionada: "mensagemEntrada" | "mensagemChamada" | "mensagemRemovido";
@@ -42,8 +43,9 @@ export default function CardEditorMensagens({
   setResetCount,
 }: CardEditorMensagensProps) {
   const { errors } = form.formState;
+
   return (
-    <Card className="w-full">
+    <Card className="w-full ">
       <CardHeader>
         <CardTitle className="whitespace-nowrap">
           <PenLine className="inline mr-2" />

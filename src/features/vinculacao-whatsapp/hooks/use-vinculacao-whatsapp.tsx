@@ -155,7 +155,8 @@ export function useVinculacaoWhatsapp() {
       toast.success(
         `Notificações por WhatsApp ${
           checked ? "ativadas" : "desativadas"
-        } com sucesso.`
+        } com sucesso.`,
+        { icon: "✅" }
       );
     } catch (err) {
       toast.error("Erro ao atualizar configuração.");

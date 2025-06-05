@@ -8,7 +8,7 @@ export const useLogout = () => {
     try {
       await empresaService.logout();
       router.push("/login");
-      toast.success("Deslogado com sucesso.");
+      toast.success("Deslogado com sucesso.", { icon: "🔓" });
     } catch (error) {
       toast.error("Erro ao deslogar.");
     }
