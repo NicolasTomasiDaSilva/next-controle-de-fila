@@ -1,27 +1,15 @@
-import { IMaskInput } from "react-imask";
+import IMask from "imask";
 
 type TelefoneFormatadoProps = {
   value: string;
 };
 
 export function TelefoneFormatado({ value }: TelefoneFormatadoProps) {
-  return (
-    <IMaskInput
-      mask={[
-        {
-          mask: "(00) 0000-0000",
-          lazy: false,
-        },
-        {
-          mask: "(00) 00000-0000",
-          lazy: false,
-        },
-      ]}
-      value={value}
-      readOnly
-      className="focus:outline-none"
-      unmask={false} // mantém a máscara no valor exibido
-      style={{ border: "none", background: "transparent" }}
-    />
-  );
+  const numero = value.replace(/\D/g, ""); // remove não dígitos
+  const mask = numero.length > 10 ? "(00) 00000-0000" : "(00) 0000-0000";
+
+  const masked = IMask.createMask({ mask });
+  masked.resolve(value);
+
+  return <span className="text-sm text-muted-foreground">{masked.value}</span>;
 }

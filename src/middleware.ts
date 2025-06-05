@@ -2,7 +2,6 @@ import { NextURL } from "next/dist/server/web/next-url";
 import { MiddlewareConfig, NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { jwtIsValid } from "./utils/jwt";
-import { Api } from "./api/api";
 
 import { tokensCookiesParams } from "./utils/tokens-cookies-params";
 

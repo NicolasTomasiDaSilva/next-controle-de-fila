@@ -12,6 +12,7 @@ import BotoesAcoesEsquerda from "./BotoesAcoesEsquerda";
 import BotoesAcoesDireita from "./BotoesAcoesDireita";
 import { useAcoesCliente } from "@/hooks/fila/use-acoes-cliente";
 import { TelefoneFormatado } from "@/components/shared/telefone-formatado";
+import { TempoDecorrido } from "@/components/shared/TempoDecorrido";
 
 interface RowClientePersonalizadaProps {
   cliente: Cliente;
@@ -42,25 +43,43 @@ export default function ClienteRowTable({
         <div className="flex flex-col justify-center">
           <div className="flex flex-row items-center">
             {cliente.status === StatusEnum.Aguardando && (
-              <span className="text-xl font-bold text-blue-600 mr-4 md:hidden">
+              <p className="text-xl font-bold text-blue-600 mr-4 md:hidden">
                 {cliente.posicao}
-              </span>
+              </p>
             )}
-            <span className="font-semibold">{cliente.nome}</span>
-          </div>
-          <p className="text-sm text-muted-foreground ">
-            {cliente.telefone && (
+            <p
+              className="font-semibold break-normal "
+              style={{ overflowWrap: "anywhere" }}
+            >
+              {cliente.nome}
+            </p>
+          </div>{" "}
+          {cliente.telefone && (
+            <p className="text-sm text-muted-foreground  ">
               <TelefoneFormatado
                 value={cliente.telefone || ""}
               ></TelefoneFormatado>
-            )}
+            </p>
+          )}
+          <p
+            className="text-sm text-muted-foreground"
+            style={{ overflowWrap: "anywhere" }}
+          >
+            {cliente.observacao}
           </p>
-          <p className="text-sm text-muted-foreground">{cliente.observacao}</p>
         </div>
-        <div className="flex flex-col items-center gap-5 justify-center md:flex-row">
-          <p className="text-sm text-muted-foreground flex flex-row gap-1 items-center">
+        <div className="flex flex-col items-center md:gap-5 justify-center md:flex-row">
+          <p className="text-sm text-muted-foreground flex flex-row  gap-1 items-center">
             <Clock className="w-3 h-3" />
-            23min
+            <span className="whitespace-nowrap">
+              <TempoDecorrido
+                data={
+                  cliente.status === StatusEnum.Aguardando
+                    ? cliente.dataHoraCriado
+                    : cliente.dataHoraAlterado
+                }
+              />
+            </span>
           </p>
           {cliente.status !== StatusEnum.Aguardando && (
             <div className="w-27 flex flex-row items-center justify-center">
