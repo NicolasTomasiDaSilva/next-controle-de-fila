@@ -128,13 +128,13 @@ export default function CardVincularVinculacao() {
                 )}
               />
             </div>
-
             <Button
               type="submit"
-              className="w-full h-12"
+              className="w-full h-12 block"
               variant={"azul"}
               disabled={isSubmitting}
             >
+              <Link className="inline mr-2"></Link>
               {isSubmitting ? "Vinculando..." : "Vincular Monitor"}
             </Button>
           </CardContent>

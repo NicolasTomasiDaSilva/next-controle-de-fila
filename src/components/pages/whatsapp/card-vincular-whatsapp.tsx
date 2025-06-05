@@ -36,7 +36,8 @@ export default function CardVincularWhatsapp() {
           Configuração WhatsApp
         </CardTitle>
         <CardDescription>
-          Siga os passos abaixo para vincular seu WhatsApp
+          Vincule seu WhatsApp para seus clientes receberem notificações de
+          atualizações da fila
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">

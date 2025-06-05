@@ -33,7 +33,7 @@ export function ConfiguracaoDados({ form }: ConfiguracaoDadosProps) {
           Dados da Empresa
         </CardTitle>
         <CardDescription>
-          Configure as informações principais da sua empresa
+          Edite as principais informações da sua empresa
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
