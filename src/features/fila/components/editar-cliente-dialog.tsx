@@ -34,6 +34,7 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
     };
     await handleEditarCliente(clienteAtualizado);
     setOpen(false);
+    await new Promise((resolve) => setTimeout(resolve, 500));
     setIsSubmitting(false);
   }
 

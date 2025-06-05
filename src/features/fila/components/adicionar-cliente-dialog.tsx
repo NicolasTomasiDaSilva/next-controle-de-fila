@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -24,6 +24,7 @@ export function AdicionarClienteDialog() {
     setIsSubmitting(true);
     await handleAdicionarCliente(clienteForm);
     setOpen(false);
+    await new Promise((resolve) => setTimeout(resolve, 500));
     setIsSubmitting(false);
   }
 
