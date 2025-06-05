@@ -11,8 +11,9 @@ import { cn } from "@/lib/utils";
 import BotoesAcoesEsquerda from "./BotoesAcoesEsquerda";
 import BotoesAcoesDireita from "./BotoesAcoesDireita";
 import { useAcoesCliente } from "@/hooks/fila/use-acoes-cliente";
-import { TelefoneFormatado } from "@/components/shared/telefone-formatado";
+
 import { TempoDecorrido } from "@/components/shared/TempoDecorrido";
+import { formatarTelefone } from "@/utils/formatar-telefone";
 
 interface RowClientePersonalizadaProps {
   cliente: Cliente;
@@ -53,12 +54,10 @@ export default function ClienteRowTable({
             >
               {cliente.nome}
             </p>
-          </div>{" "}
+          </div>
           {cliente.telefone && (
             <p className="text-sm text-muted-foreground  ">
-              <TelefoneFormatado
-                value={cliente.telefone || ""}
-              ></TelefoneFormatado>
+              {formatarTelefone(cliente.telefone)}
             </p>
           )}
           <p
