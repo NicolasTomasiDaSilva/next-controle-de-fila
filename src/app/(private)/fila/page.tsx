@@ -6,7 +6,7 @@ import { empresaService } from "@/services/empresa-service";
 import { Empresa } from "@/models/empresa";
 import { EmpresaProvider } from "@/contexts/empresa-context";
 import FilaContent from "@/features/fila/components/fila-content";
-
+export const dynamic = "force-dynamic";
 export default async function FilaPage() {
   const empresa: Empresa = await empresaService.obterEmpresa();
   const filaId = empresa.filas[0].id;

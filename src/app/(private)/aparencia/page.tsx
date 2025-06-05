@@ -3,7 +3,7 @@ import { EmpresaProvider } from "@/contexts/empresa-context";
 import { Empresa } from "@/models/empresa";
 import { empresaService } from "@/services/empresa-service";
 import { AparenciaContent } from "@/features/customizacao-aparencia/components/aparencia-content";
-
+export const dynamic = "force-dynamic";
 export default async function AparenciaPage() {
   const empresa: Empresa = await empresaService.obterEmpresa();
   return (

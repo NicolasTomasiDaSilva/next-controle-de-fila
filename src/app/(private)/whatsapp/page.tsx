@@ -4,6 +4,8 @@ import { Empresa } from "@/models/empresa";
 import { EmpresaProvider } from "@/contexts/empresa-context";
 import WhatsAppContent from "@/features/vinculacao-whatsapp/components/whatsapp-content";
 
+export const dynamic = "force-dynamic";
+
 export default async function VinculacaoPage() {
   const empresa: Empresa = await empresaService.obterEmpresa();
 
