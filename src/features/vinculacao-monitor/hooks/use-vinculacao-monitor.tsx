@@ -1,12 +1,15 @@
 import { criarVinculacaoDTO } from "@/dtos/vinculacao";
-import { codigoVinculacaoDTO, codigoVinculacaoSchema } from "@/models/codigos";
 
-import { vinculacaoService } from "@/services/vinculacao-service";
+import { vinculacaoService } from "@/features/vinculacao-monitor/services/vinculacao-service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useEmpresa } from "../../shared/hooks/use-empresa";
+import {
+  codigoVinculacaoDTO,
+  codigoVinculacaoSchema,
+} from "../models/codigo-vinculacao";
 
 export const useVinculacaoMonitor = () => {
   const [openDialogSucesso, setOpenDialogSucesso] = useState(false);

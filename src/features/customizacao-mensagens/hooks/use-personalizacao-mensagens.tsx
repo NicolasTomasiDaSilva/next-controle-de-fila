@@ -1,7 +1,7 @@
 import { mensagensFormDTO } from "@/dtos/configuracao";
 import { useEmpresa } from "../../shared/hooks/use-empresa";
 import { toast } from "sonner";
-import { empresaService } from "@/services/empresa-service";
+import { empresaService } from "@/features/shared/services/empresa-service";
 import { useState } from "react";
 
 export function usePersonalizacaoMensagens() {

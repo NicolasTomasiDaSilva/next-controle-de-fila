@@ -1,5 +1,5 @@
 import { Section } from "@/features/shared/components/section";
-import { empresaService } from "@/services/empresa-service";
+import { empresaService } from "@/features/shared/services/empresa-service";
 
 import { EmpresaProvider } from "@/contexts/empresa-context";
 import WhatsAppContent from "@/features/vinculacao-whatsapp/components/whatsapp-content";

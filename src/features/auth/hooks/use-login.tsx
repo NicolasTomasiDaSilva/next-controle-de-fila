@@ -1,4 +1,4 @@
-import { empresaService } from "@/services/empresa-service";
+import { empresaService } from "@/features/shared/services/empresa-service";
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
@@ -11,6 +11,7 @@ import z from "zod";
 import { useCooldown } from "@/features/shared/hooks/use-cooldown";
 import { codigoAcessoDTO, codigoAcessoSchema } from "../models/codigo-acesso";
 import { empresaSchema } from "@/features/shared/models/empresa";
+import { autenticacaoService } from "../services/autenticacao-service";
 
 export const useLogin = () => {
   const emailSchema = empresaSchema.pick({
@@ -34,14 +35,14 @@ export const useLogin = () => {
 
   const router = useRouter();
   async function login({ email, codigo }: { email: string; codigo: string }) {
-    await empresaService.verificarCodigoAcesso(email, codigo);
+    await autenticacaoService.verificarCodigoAcesso(email, codigo);
     router.push("/fila");
   }
 
   const handleEnviarCodigo = async (data: z.infer<typeof emailSchema>) => {
     try {
       setIsSubmitting(true);
-      await empresaService.enviarCodigoAcesso(data.email);
+      await autenticacaoService.enviarCodigoAcesso(data.email);
       setEmail(data.email);
       startCooldown();
       setStep(2);
@@ -63,7 +64,7 @@ export const useLogin = () => {
     try {
       if (cooldown > 0) return;
       setIsSubmitting(true);
-      await empresaService.enviarCodigoAcesso(email);
+      await autenticacaoService.enviarCodigoAcesso(email);
       startCooldown();
     } catch (error: any) {
       toast.error("Erro ao enviar código de acesso");

@@ -1,6 +1,6 @@
 import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
 import { Fila } from "@/features/fila/models/fila";
-import { filaService } from "@/services/fila-service";
+import { filaService } from "@/features/fila/services/fila-service";
 
 import { toast } from "sonner";
 import { useFila } from "./use-fila";

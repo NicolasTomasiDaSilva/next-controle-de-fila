@@ -1,12 +1,13 @@
-import { empresaService } from "@/services/empresa-service";
+import { empresaService } from "@/features/shared/services/empresa-service";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { autenticacaoService } from "../services/autenticacao-service";
 
 export const useLogout = () => {
   const router = useRouter();
   async function logout() {
     try {
-      await empresaService.logout();
+      await autenticacaoService.logout();
       router.push("/login");
       toast.success("Deslogado com sucesso.", { icon: "🔓" });
     } catch (error) {

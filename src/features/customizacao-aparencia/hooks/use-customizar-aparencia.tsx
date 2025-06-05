@@ -3,14 +3,14 @@ import {
   configuracaoFormSchema,
 } from "@/dtos/configuracao";
 
-import { empresaService } from "@/services/empresa-service";
+import { empresaService } from "@/features/shared/services/empresa-service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChangeEvent, useRef, useState } from "react";
 import { ControllerRenderProps, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import z from "zod";
-import { uploadService } from "@/services/upload-service";
+import { uploadService } from "@/features/shared/services/upload-service";
 import { useEmpresa } from "../../shared/hooks/use-empresa";
 import { Configuracao } from "@/features/shared/models/configuracao";
 
