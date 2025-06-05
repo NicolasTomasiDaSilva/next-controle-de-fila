@@ -1,6 +1,5 @@
-// app/preview/page.tsx
 "use client";
-import { AppUsuario } from "@/components/pages/aparencia/app-usuario-mock/app-usuario";
+import { AppUsuario } from "@/features/customizacao-aparencia/components/app-usuario-mock/app-usuario";
 import { useSearchParams } from "next/navigation";
 
 export default function MonitorPreview() {

@@ -1,4 +1,4 @@
-import { api } from "@/api/api";
+import { api } from "@/lib/api/api";
 import { criarVinculacaoDTO } from "@/dtos/vinculacao";
 import { Fila, filaSchema } from "@/models/fila";
 

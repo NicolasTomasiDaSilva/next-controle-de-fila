@@ -1,4 +1,3 @@
-// lib/signalr/client.ts
 import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
 
 export async function connectToHub(): Promise<HubConnection> {

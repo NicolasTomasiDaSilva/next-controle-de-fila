@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/api/api";
+import { axiosInstance } from "@/lib/api/api";
 import { authTokensSchema } from "@/models/auth-tokens";
 import { tokensCookiesParams } from "@/utils/tokens-cookies-params";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";

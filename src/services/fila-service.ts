@@ -1,4 +1,4 @@
-import { api } from "@/api/api";
+import { api } from "@/lib/api/api";
 import { AdicionarClienteDTO } from "@/dtos/cliente";
 import { AcoesAdminEnum } from "@/enums/acoes-admin-enum";
 import { Cliente } from "@/models/cliente";

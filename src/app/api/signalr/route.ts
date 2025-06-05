@@ -1,6 +1,5 @@
 import getTokensAction from "@/actions/cookies/get-tokens-action";
 import { NextResponse } from "next/server";
-// ajuste o caminho se necessário
 
 export async function GET() {
   const { accessToken } = await getTokensAction();

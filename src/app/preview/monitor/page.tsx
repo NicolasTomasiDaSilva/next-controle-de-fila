@@ -1,7 +1,6 @@
-// app/preview/page.tsx
 "use client";
 
-import { Monitor } from "@/components/pages/aparencia/monitor-mock/monitor";
+import { Monitor } from "@/features/customizacao-aparencia/components/monitor-mock/monitor";
 import { useSearchParams } from "next/navigation";
 
 export default function MonitorPreview() {

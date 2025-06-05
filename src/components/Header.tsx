@@ -1,6 +1,6 @@
 import Image from "next/image";
 import logo from "@/assets/images/logoTeste.png";
-import Menu from "./Menu";
+import Menu from "./menu";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
 

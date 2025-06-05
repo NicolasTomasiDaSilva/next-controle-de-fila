@@ -1,12 +1,8 @@
-import { Section } from "@/components/Section";
-import { AparenciaContent } from "@/components/pages/aparencia/aparencia-content";
-import { ConfiguracaoDados } from "@/components/pages/aparencia/configuracao-dados";
-import { ConfiguracaoCard } from "@/components/pages/configuracoes/ConfiguracaoCard";
-
+import { Section } from "@/features/shared/components/section";
 import { EmpresaProvider } from "@/contexts/empresa-context";
 import { Empresa } from "@/models/empresa";
 import { empresaService } from "@/services/empresa-service";
-import { MessageCircle, MessageSquare, Monitor, Palette } from "lucide-react";
+import { AparenciaContent } from "@/features/customizacao-aparencia/components/aparencia-content";
 
 export default async function AparenciaPage() {
   const empresa: Empresa = await empresaService.obterEmpresa();

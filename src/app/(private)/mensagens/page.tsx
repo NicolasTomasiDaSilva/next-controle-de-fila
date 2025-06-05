@@ -1,10 +1,8 @@
-import { Section } from "@/components/Section";
+import { Section } from "@/features/shared/components/section";
 import { empresaService } from "@/services/empresa-service";
 import { Empresa } from "@/models/empresa";
 import { EmpresaProvider } from "@/contexts/empresa-context";
-
-import VinculacaoContent from "@/components/pages/vinculacao/vinculacao-content";
-import MensagensContent from "@/components/pages/mensagens/mensagens-content";
+import MensagensContent from "@/features/customizacao-mensagens/components/mensagens-content";
 
 export default async function MensagensPage() {
   const empresa: Empresa = await empresaService.obterEmpresa();

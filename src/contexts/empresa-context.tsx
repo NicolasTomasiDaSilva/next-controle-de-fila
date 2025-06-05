@@ -1,7 +1,7 @@
 "use client";
 
 import { Empresa } from "@/models/empresa";
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode } from "react";
 
 type EmpresaContextType = {
   empresa: Empresa;

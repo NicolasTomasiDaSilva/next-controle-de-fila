@@ -10,7 +10,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChevronDown, ListOrdered, LogOut, Settings, User } from "lucide-react";
 import Link from "next/link";
-import { useLogout } from "@/hooks/auth/use-logout";
+import { useLogout } from "@/features/auth/hooks/use-logout";
 
 export default function Menu() {
   const { logout } = useLogout();
