@@ -11,7 +11,9 @@ export default function useClienteDesistiu() {
   async function handleClienteDesistiu(data: dataEventoHubAcaoClienteDTO) {
     try {
       const { fila: filaAtualizada, cliente } = data;
-      toast.warning(`Cliente ${cliente.nome} desistiu.`);
+      toast.warning(`Cliente ${cliente.nome} desistiu.`, {
+        duration: 5000,
+      });
       setFila(filaAtualizada);
     } catch (error: any) {
       toast.error("Erro ao atualizar fila.");
