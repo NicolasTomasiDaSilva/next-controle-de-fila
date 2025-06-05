@@ -80,7 +80,7 @@ export const useLogin = () => {
           message: error.message,
         });
       } else {
-        toast.error(error.message);
+        toast.error("Erro ao verificar código de acesso.");
       }
     } finally {
       setIsSubmitting(false);
