@@ -10,11 +10,11 @@ export const clienteSchema = entidadeSchema.extend({
     .string()
     .trim()
     .min(1, "Nome é obrigatório")
-    .max(20, "Nome deve ter no máximo 20 caracteres"),
+    .max(50, "Nome deve ter no máximo 50 caracteres"),
   observacao: z
     .string()
     .trim()
-    .max(20, "Observação deve ter no máximo 20 caracteres")
+    .max(30, "Observação deve ter no máximo 30 caracteres")
     .transform((val) => (val === "" ? null : val))
     .nullable(),
   telefone: z

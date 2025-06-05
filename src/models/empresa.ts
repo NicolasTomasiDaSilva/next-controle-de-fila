@@ -8,7 +8,7 @@ export const empresaSchema = entidadeSchema.extend({
   nome: z
     .string()
     .trim()
-    .min(3, "Nome deve ter no mínimo 3 caracteres")
+    .min(1, "Nome é obrigatório")
     .max(50, "Nome deve ter no máximo 50 caracteres"),
   cpfCnpj: z
     .string()
