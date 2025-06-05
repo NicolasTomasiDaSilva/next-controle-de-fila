@@ -31,9 +31,9 @@ export function ClienteForm({ cliente, botao, onSubmit }: ClienteFormProps) {
   const form = useForm<ClienteFormDTO>({
     resolver: zodResolver(clienteFormSchema),
     defaultValues: {
-      nome: cliente?.nome,
-      telefone: cliente?.telefone,
-      observacao: cliente?.observacao,
+      nome: cliente?.nome ?? "",
+      telefone: cliente?.telefone ?? "",
+      observacao: cliente?.observacao ?? "",
     },
   });
 
