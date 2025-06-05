@@ -31,21 +31,7 @@ export function useAcoesCliente() {
       setIsSubmitting(false);
     }
   }
-  async function handleRemoverCliente(cliente: Cliente) {
-    try {
-      setIsSubmitting(true);
-      const filaAtualizada: Fila = await filaService.atualizarStatusCliente(
-        cliente.id,
-        AcoesAdminEnum.RemoverClientes
-      );
-      setFila(filaAtualizada);
-      toast.success("Cliente removido da fila.", { icon: "❌" });
-    } catch (error: any) {
-      toast.error("Erro ao remover cliente.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
+
   async function handleAusentarCliente(cliente: Cliente) {
     try {
       setIsSubmitting(true);
@@ -144,7 +130,6 @@ export function useAcoesCliente() {
   return {
     isSubmitting,
     handleChamarCliente,
-    handleRemoverCliente,
     handleAusentarCliente,
     handleMoverCimaCliente,
     handleMoverBaixoCliente,

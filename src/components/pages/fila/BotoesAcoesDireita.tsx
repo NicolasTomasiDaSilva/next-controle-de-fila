@@ -17,7 +17,6 @@ interface BotoesAcoesDireitaProps {
 export default function BotoesAcoesDireita({
   cliente,
   isSubmitting,
-  handleRemoverCliente,
   handleChamarCliente,
   handleAtenderCliente,
   handleVoltarCliente,
@@ -34,11 +33,7 @@ export default function BotoesAcoesDireita({
         >
           <Phone className="!w-5 !h-5" />
         </Button>
-        <RemoverClienteDialog
-          cliente={cliente}
-          handleRemover={handleRemoverCliente}
-          isSubmitting={isSubmitting}
-        />
+        <RemoverClienteDialog cliente={cliente} />
       </>
     );
   }

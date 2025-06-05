@@ -15,23 +15,22 @@ import { Button } from "@/components/ui/button";
 
 import { Trash } from "lucide-react";
 import { Cliente } from "@/models/cliente";
+import useRemoverCliente from "@/hooks/fila/use-remover-cliente";
 
 interface RemoverClienteDialogProps {
   cliente: Cliente;
-  handleRemover: (cliente: Cliente) => Promise<void>;
-  isSubmitting: boolean;
 }
 
-export function RemoverClienteDialog({
-  cliente,
-  handleRemover,
-  isSubmitting,
-}: RemoverClienteDialogProps) {
+export function RemoverClienteDialog({ cliente }: RemoverClienteDialogProps) {
   const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { handleRemoverCliente } = useRemoverCliente();
 
   async function handleConfirmar() {
-    await handleRemover(cliente);
+    setIsSubmitting(true);
+    await handleRemoverCliente(cliente);
     setOpen(false);
+    setIsSubmitting(false);
   }
 
   const handleOpenChange = (isOpen: boolean) => {

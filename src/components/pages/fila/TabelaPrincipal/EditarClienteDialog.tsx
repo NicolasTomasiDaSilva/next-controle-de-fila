@@ -33,7 +33,6 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
       ...cliente,
       ...clienteForm,
     };
-
     await handleEditarCliente(clienteAtualizado);
     setOpen(false);
     setIsSubmitting(false);
