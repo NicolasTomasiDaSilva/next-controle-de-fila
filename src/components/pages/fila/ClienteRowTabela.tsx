@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import BotoesAcoesEsquerda from "./BotoesAcoesEsquerda";
 import BotoesAcoesDireita from "./BotoesAcoesDireita";
 import { useAcoesCliente } from "@/hooks/fila/use-acoes-cliente";
+import { TelefoneFormatado } from "@/components/shared/telefone-formatado";
 
 interface RowClientePersonalizadaProps {
   cliente: Cliente;
@@ -47,7 +48,13 @@ export default function ClienteRowTable({
             )}
             <span className="font-semibold">{cliente.nome}</span>
           </div>
-          <p className="text-sm text-muted-foreground">{cliente.telefone}</p>
+          <p className="text-sm text-muted-foreground">
+            {cliente.telefone && (
+              <TelefoneFormatado
+                value={cliente.telefone || ""}
+              ></TelefoneFormatado>
+            )}
+          </p>
           <p className="text-sm text-muted-foreground">{cliente.observacao}</p>
         </div>
         <div className="flex flex-col items-center gap-5 justify-center md:flex-row">
