@@ -113,7 +113,7 @@ export default function LoginForm() {
             onSubmit={codigoAcessoForm.handleSubmit(handleVerificarCodigo)}
             className="space-y-4"
           >
-            <div className="flex items-center justify-center my-5">
+            <div className="flex items-center justify-center">
               <FormField
                 control={codigoAcessoForm.control}
                 name="codigo"
