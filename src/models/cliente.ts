@@ -26,7 +26,7 @@ export const clienteSchema = entidadeSchema.extend({
     })
     .nullable(),
   hash: z.string().min(1),
-  posicao: z.number().nullable(),
+  posicao: z.number().nullable().optional(),
   status: statusEnumSchema,
   dataHoraOrdenacao: z.coerce.date(),
   dataHoraChamada: z.coerce.date().nullable(),

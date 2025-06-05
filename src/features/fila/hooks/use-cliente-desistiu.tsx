@@ -3,14 +3,15 @@ import { filaService } from "@/services/fila-service";
 
 import { toast } from "sonner";
 import { useFila } from "./use-fila";
+import { dataEventoHubAcaoClienteDTO } from "@/dtos/data-evento-hub-acao-cliente";
 
 export default function useClienteDesistiu() {
   const { fila, setFila } = useFila();
 
-  async function handleClienteDesistiu() {
+  async function handleClienteDesistiu(data: dataEventoHubAcaoClienteDTO) {
     try {
-      toast.warning("Cliente desistiu.");
-      const filaAtualizada: Fila = await filaService.obterFilaPorId(fila.id);
+      const { fila: filaAtualizada, cliente } = data;
+      toast.warning(`Cliente ${cliente.nome} desistiu.`);
       setFila(filaAtualizada);
     } catch (error: any) {
       toast.error("Erro ao atualizar fila.");
