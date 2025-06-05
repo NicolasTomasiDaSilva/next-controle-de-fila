@@ -48,7 +48,7 @@ export default function ClienteRowTable({
             )}
             <span className="font-semibold">{cliente.nome}</span>
           </div>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground ">
             {cliente.telefone && (
               <TelefoneFormatado
                 value={cliente.telefone || ""}

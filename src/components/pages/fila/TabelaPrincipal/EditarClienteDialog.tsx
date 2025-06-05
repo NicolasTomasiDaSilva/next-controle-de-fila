@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-import { Edit, PencilLine } from "lucide-react";
+import { Edit, PencilLine, Save } from "lucide-react";
 import { Cliente, clienteSchema } from "@/models/cliente";
 import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
 import { ClienteForm } from "./ClienteForm";
@@ -55,8 +55,17 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
           <DialogTitle>Editar Cliente</DialogTitle>
         </DialogHeader>
         <ClienteForm
-          isSubmitting={isSubmitting}
-          textoBotao="Salvar"
+          botao={() => (
+            <Button
+              variant={"azul"}
+              className="w-full sm:w-40 block ml-auto"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              <Save className="inline mr-2" />
+              {isSubmitting ? "Salvando..." : "Salvar"}
+            </Button>
+          )}
           cliente={cliente}
           onSubmit={handleEdtiarCliente}
         ></ClienteForm>

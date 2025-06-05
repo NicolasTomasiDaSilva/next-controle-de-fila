@@ -12,7 +12,9 @@ export default function FilaContent() {
   const { handleClienteDesistiu } = useClienteDesistiu();
 
   useEffect(() => {
-    if (!connection) return;
+    if (!connection) {
+      return;
+    }
 
     console.log("Conectado ao SignalR");
 

@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 
 import { AdicionarClienteDTO, ClienteFormDTO } from "@/dtos/cliente";
 import { ClienteForm } from "./ClienteForm";
-import { PlusCircle } from "lucide-react";
+import { Plus, PlusCircle } from "lucide-react";
 import useAdicionarCliente from "@/hooks/fila/use-adicionar-cliente";
 
 export function AdicionarClienteDialog() {
@@ -36,6 +36,7 @@ export function AdicionarClienteDialog() {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button variant="azul" className="w-full sm:w-40 block ml-auto">
+          <Plus className="mr-2 inline"></Plus>
           Adicionar
         </Button>
       </DialogTrigger>
@@ -44,9 +45,18 @@ export function AdicionarClienteDialog() {
           <DialogTitle>Adicionar Cliente à Fila</DialogTitle>
         </DialogHeader>
         <ClienteForm
+          botao={() => (
+            <Button
+              variant={"azul"}
+              className="w-full sm:w-40 block ml-auto"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              <Plus className="inline mr-2" />
+              {isSubmitting ? "Adicionando..." : "Adicionar"}
+            </Button>
+          )}
           onSubmit={handleAdicionar}
-          textoBotao="Adicionar"
-          isSubmitting={isSubmitting}
         ></ClienteForm>
       </DialogContent>
     </Dialog>

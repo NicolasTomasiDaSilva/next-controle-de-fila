@@ -22,18 +22,12 @@ import { Cliente } from "@/models/cliente";
 import { useRef, useState } from "react";
 
 interface ClienteFormProps {
-  textoBotao: string;
+  botao?: () => React.ReactNode;
   cliente?: Cliente | null;
   onSubmit: (data: ClienteFormDTO) => Promise<void>;
-  isSubmitting: boolean;
 }
 
-export function ClienteForm({
-  cliente,
-  textoBotao,
-  onSubmit,
-  isSubmitting,
-}: ClienteFormProps) {
+export function ClienteForm({ cliente, botao, onSubmit }: ClienteFormProps) {
   const form = useForm<ClienteFormDTO>({
     resolver: zodResolver(clienteFormSchema),
     defaultValues: {
@@ -97,16 +91,7 @@ export function ClienteForm({
             </FormItem>
           )}
         />
-        <div className="flex justify-end">
-          <Button
-            variant={"azul"}
-            className="w-full sm:w-40"
-            type="submit"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Salvando..." : textoBotao}
-          </Button>
-        </div>
+        {botao && botao()}
       </form>
     </Form>
   );
