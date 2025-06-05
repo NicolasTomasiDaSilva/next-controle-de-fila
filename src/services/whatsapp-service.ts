@@ -42,7 +42,19 @@ export const whatsappService = {
   },
 
   async desconectarWhatsapp(): Promise<void> {
-    await api.post("/whatsapp/logout");
+    try {
+      await api.post("/whatsapp/logout");
+    } catch (error: any) {
+      if (
+        error.response?.status === 500 &&
+        error.response?.data?.error ===
+          "could not logout as it was not logged in"
+      ) {
+        return;
+      } else {
+        throw error;
+      }
+    }
   },
 
   async pegarQrCode(): Promise<qrcodeResponseDTO> {

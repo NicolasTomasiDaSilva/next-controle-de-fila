@@ -32,6 +32,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
+import { DialogSucesso } from "@/features/shared/components/dialog-sucesso";
 
 export default function CardVincularVinculacao() {
   const {
@@ -42,6 +43,8 @@ export default function CardVincularVinculacao() {
     handleVerificarCodigo,
     codigoVinculacaoForm,
     isSubmitting,
+    openDialogSucesso,
+    setOpenDialogSucesso,
   } = useVinculacaoMonitor();
 
   return (
@@ -137,6 +140,11 @@ export default function CardVincularVinculacao() {
             </Button>
           </CardContent>
         </Card>
+        <DialogSucesso
+          texto="Monitor vinculado com sucesso!"
+          open={openDialogSucesso}
+          onOpenChange={setOpenDialogSucesso}
+        />
       </form>
     </Form>
   );

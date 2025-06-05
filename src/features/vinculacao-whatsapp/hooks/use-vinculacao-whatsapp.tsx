@@ -15,6 +15,7 @@ export function useVinculacaoWhatsapp() {
   const [isConectado, setIsConectado] = useState<boolean>(false);
   const [buscarQrcode, setBuscarQrcode] = useState<boolean>(false);
   const [isQrcodeExpirado, setIsQrcodeExpirado] = useState<boolean>(false);
+  const [openDialogSucesso, setOpenDialogSucesso] = useState(false);
 
   const INTERVALO_MS = 5000;
 
@@ -88,7 +89,8 @@ export function useVinculacaoWhatsapp() {
           setQrcode(null);
           setIsConectado(true);
           setBuscarQrcode(false);
-          toast.success("Conectado com sucesso.");
+          setOpenDialogSucesso(true);
+          setTimeout(() => setOpenDialogSucesso(false), 1500);
         } else {
           toast.error("Erro ao buscar qrcode.");
         }
@@ -175,5 +177,7 @@ export function useVinculacaoWhatsapp() {
     handleToggleWhatsapp,
     handleDesconectar,
     handleGerarQrcodeNovamente,
+    openDialogSucesso,
+    setOpenDialogSucesso,
   };
 }

@@ -15,6 +15,7 @@ import { useVinculacaoWhatsapp } from "@/features/vinculacao-whatsapp/hooks/use-
 import { RefreshCcw, Settings } from "lucide-react";
 
 import { DesconectarWhatsappDialog } from "./desconectar-dialog";
+import { DialogSucesso } from "@/features/shared/components/dialog-sucesso";
 
 export default function CardVincularWhatsapp() {
   const {
@@ -26,6 +27,8 @@ export default function CardVincularWhatsapp() {
     handleDesconectar,
     isQrcodeExpirado,
     handleGerarQrcodeNovamente,
+    openDialogSucesso,
+    setOpenDialogSucesso,
   } = useVinculacaoWhatsapp();
 
   return (
@@ -120,6 +123,11 @@ export default function CardVincularWhatsapp() {
           </div>
         ) : null}
       </CardContent>
+      <DialogSucesso
+        texto="WhatsAppvinculado com sucesso!"
+        open={openDialogSucesso}
+        onOpenChange={setOpenDialogSucesso}
+      />
     </Card>
   );
 }

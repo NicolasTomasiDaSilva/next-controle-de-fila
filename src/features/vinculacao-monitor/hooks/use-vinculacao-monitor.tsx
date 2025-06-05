@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { useEmpresa } from "../../shared/hooks/use-empresa";
 
 export const useVinculacaoMonitor = () => {
+  const [openDialogSucesso, setOpenDialogSucesso] = useState(false);
   const { empresa } = useEmpresa();
   async function vincularMonitor(dto: criarVinculacaoDTO) {
     await vinculacaoService.vincularMonitor(dto);
@@ -39,7 +40,8 @@ export const useVinculacaoMonitor = () => {
         observacao: null,
       });
       codigoVinculacaoForm.setValue("codigo", "");
-      toast.success("Monitor vinculado com sucesso.");
+      setOpenDialogSucesso(true);
+      setTimeout(() => setOpenDialogSucesso(false), 1500);
     } catch (error: any) {
       if (error.message === "Código não encontrado") {
         codigoVinculacaoForm.setError("codigo", {
@@ -63,5 +65,7 @@ export const useVinculacaoMonitor = () => {
     handleVerificarCodigo,
     codigoVinculacaoForm,
     isSubmitting,
+    openDialogSucesso,
+    setOpenDialogSucesso,
   };
 };
