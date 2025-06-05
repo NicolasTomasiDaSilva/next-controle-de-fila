@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/lib/api/api";
-import { authTokensSchema } from "@/features/auth/models/auth-tokens";
+import { authTokensSchema } from "@/features/autenticacao/models/auth-tokens";
 import { tokensCookiesParams } from "@/utils/tokens-cookies-params";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
