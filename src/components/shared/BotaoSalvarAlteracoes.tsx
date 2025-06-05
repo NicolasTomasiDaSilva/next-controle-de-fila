@@ -18,13 +18,11 @@ export default function BotaoSalvarAlteracoes({
       type="submit"
       variant="azul"
       onClick={onClick}
-      className={cn("w-50 mt-2", className)}
+      className={cn("w-full sm:w-50 mt-2", className)}
       disabled={isSubmitting}
     >
-      <div className="flex flex-row items-center justify-center gap-2">
-        <Save />
-        <span> {isSubmitting ? "Salvando..." : "Salvar Alterações"}</span>
-      </div>
+      <Save className="mr-2 inline" />
+      {isSubmitting ? "Salvando..." : "Salvar Alterações"}
     </Button>
   );
 }
