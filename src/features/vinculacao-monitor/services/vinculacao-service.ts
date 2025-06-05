@@ -1,5 +1,5 @@
 import { api } from "@/lib/api/api";
-import { criarVinculacaoDTO } from "@/dtos/vinculacao";
+import { criarVinculacaoDTO } from "@/features/vinculacao-monitor/models/criar-vinculacao-dto";
 import { Fila, filaSchema } from "@/features/fila/models/fila";
 
 export const vinculacaoService = {

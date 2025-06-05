@@ -1,4 +1,4 @@
-import { codigoVinculacaoSchema } from "@/models/codigos";
+import { codigoVinculacaoSchema } from "@/features/vinculacao-monitor/models/codigo-vinculacao";
 import { vinculacaoSchema } from "@/features/vinculacao-monitor/models/vinculacao";
 import z from "zod";
 

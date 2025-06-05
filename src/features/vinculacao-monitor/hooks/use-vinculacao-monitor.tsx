@@ -1,4 +1,4 @@
-import { criarVinculacaoDTO } from "@/dtos/vinculacao";
+import { criarVinculacaoDTO } from "@/features/vinculacao-monitor/models/criar-vinculacao-dto";
 
 import { vinculacaoService } from "@/features/vinculacao-monitor/services/vinculacao-service";
 import { zodResolver } from "@hookform/resolvers/zod";
