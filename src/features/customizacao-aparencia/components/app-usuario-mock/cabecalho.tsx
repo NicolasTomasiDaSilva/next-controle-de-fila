@@ -26,7 +26,7 @@ const Cabecalho = ({ valores }: CabecalhoProps) => {
       >
         {valores.logoUrl && (
           <Image
-            src={valores.logoUrl || "/logoRestaurante.png"}
+            src={valores.logoUrl ?? "/logoRestaurante.png"}
             alt={`Logo ${valores.logoUrl}`}
             fill
             className="object-contain"

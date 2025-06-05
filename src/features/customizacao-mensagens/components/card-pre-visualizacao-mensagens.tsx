@@ -7,9 +7,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { mensagensFormDTO } from "@/dtos/configuracao";
-import { whatsappToHtml } from "@/utils/token-transform";
+
 import { Eye, MessageCircle } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
+import usePreVisualizacaoMensagens from "../hooks/use-pre-visualizacao-mensagens";
 
 interface CardPreVisualizacaoMensagensProps {
   form: UseFormReturn<mensagensFormDTO>;
@@ -17,22 +18,8 @@ interface CardPreVisualizacaoMensagensProps {
 export default function CardPreVisualizacaoMensagens({
   form,
 }: CardPreVisualizacaoMensagensProps) {
-  let mensagemEntrada = form.watch("mensagemEntrada") || "";
-  let mensagemChamada = form.watch("mensagemChamada") || "";
-  let mensagemRemovido = form.watch("mensagemRemovido") || "";
-
-  mensagemEntrada = mensagemEntrada.replace(/{nome}/g, "João da Silva");
-  mensagemEntrada = mensagemEntrada.replace(/{link}/g, "https://example.com");
-  const htmlMensagemEntrada = whatsappToHtml(mensagemEntrada);
-
-  mensagemChamada = mensagemChamada.replace(/{nome}/g, "João da Silva");
-  mensagemChamada = mensagemChamada.replace(/{link}/g, "https://example.com");
-  const htmlMensagemChamada = whatsappToHtml(mensagemChamada);
-
-  mensagemRemovido = mensagemRemovido.replace(/{nome}/g, "João da Silva");
-  mensagemRemovido = mensagemRemovido.replace(/{link}/g, "https://example.com");
-  const htmlMensagemRemovido = whatsappToHtml(mensagemRemovido);
-
+  const { htmlMensagemEntrada, htmlMensagemChamada, htmlMensagemRemovido } =
+    usePreVisualizacaoMensagens(form);
   return (
     <Card className="w-full">
       <CardHeader>

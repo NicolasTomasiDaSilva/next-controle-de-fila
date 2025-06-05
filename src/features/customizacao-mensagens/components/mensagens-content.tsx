@@ -26,9 +26,9 @@ export default function MensagensContent() {
   const form = useForm<mensagensFormDTO>({
     resolver: zodResolver(mensagensFormSchema),
     defaultValues: {
-      mensagemEntrada: configuracao.mensagemEntrada,
-      mensagemChamada: configuracao.mensagemChamada,
-      mensagemRemovido: configuracao.mensagemRemovido,
+      mensagemEntrada: configuracao.mensagemEntrada ?? "",
+      mensagemChamada: configuracao.mensagemChamada ?? "",
+      mensagemRemovido: configuracao.mensagemRemovido ?? "",
     },
   });
 
