@@ -102,7 +102,7 @@ export default function CardVincularVinculacao() {
                         {...field}
                         pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
                       >
-                        <InputOTPGroup className="gap-2">
+                        <InputOTPGroup className="gap-2 bg-white">
                           <InputOTPSlot
                             index={0}
                             className="w-12 h-12 text-2xl rounded-md border border-input"
