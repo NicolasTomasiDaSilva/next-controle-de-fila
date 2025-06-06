@@ -47,8 +47,7 @@ export const whatsappService = {
     } catch (error: any) {
       if (
         error.response?.status === 500 &&
-        error.response?.data?.error ===
-          "could not logout as it was not logged in"
+        error.response?.data?.error === "no session"
       ) {
         return;
       } else {
