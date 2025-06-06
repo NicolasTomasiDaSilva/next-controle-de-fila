@@ -151,7 +151,7 @@
 }
 /* #3b83f613 */
 body {
-  height: 100%;
+  min-height: 100dvh;
   margin: 0;
   padding: 0;
   font-family: var(--font-inter), var(--font-geist-mono), var(--font-geist-sans),

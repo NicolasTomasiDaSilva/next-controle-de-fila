@@ -45,7 +45,11 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="!h-auto !p-2">
+        <Button
+          variant="ghost"
+          className="!h-auto !p-2"
+          disabled={isSubmitting}
+        >
           <Edit className="!w-5 !h-5 text-gray-500" />
         </Button>
       </DialogTrigger>
