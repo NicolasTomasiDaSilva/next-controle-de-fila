@@ -77,6 +77,7 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
 }
 
 export const config: MiddlewareConfig = {
+  //TODO: remover |__nextjs_original-stack-frames
   matcher: [
     "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
   ],

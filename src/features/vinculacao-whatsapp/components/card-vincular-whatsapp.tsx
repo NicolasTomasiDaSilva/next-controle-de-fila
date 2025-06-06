@@ -124,7 +124,7 @@ export default function CardVincularWhatsapp() {
         ) : null}
       </CardContent>
       <DialogSucesso
-        texto="WhatsAppvinculado com sucesso!"
+        texto="WhatsApp vinculado com sucesso!"
         open={openDialogSucesso}
         onOpenChange={setOpenDialogSucesso}
       />

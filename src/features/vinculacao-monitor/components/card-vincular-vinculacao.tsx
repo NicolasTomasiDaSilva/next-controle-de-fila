@@ -99,6 +99,8 @@ export default function CardVincularVinculacao() {
                     </FormLabel>
                     <FormControl>
                       <InputOTP
+                        type="text"
+                        inputMode="text"
                         maxLength={4}
                         {...field}
                         pattern={REGEXP_ONLY_DIGITS_AND_CHARS}

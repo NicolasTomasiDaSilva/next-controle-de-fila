@@ -36,7 +36,7 @@ export default function RootLayout({
       className={`${inter.variable} ${geistSans.variable} ${geistMono.variable}`}
     >
       <body
-        className="antialiased bg-gradient-to-t from-blue-100/50 to-transparent min-h-screen"
+        className="antialiased bg-gradient-to-t from-blue-100/50 to-transparent"
         suppressHydrationWarning={true}
       >
         {children}
