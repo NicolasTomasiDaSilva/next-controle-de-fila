@@ -42,11 +42,7 @@ export function DialogSucesso({
 
         <DialogHeader className="text-center">
           <DialogTitle>Sucesso!</DialogTitle>
-          {texto && (
-            <DialogDescription>
-              <p>{texto}</p>
-            </DialogDescription>
-          )}
+          {texto && <DialogDescription>{texto}</DialogDescription>}
         </DialogHeader>
 
         <div className="mt-2 flex justify-center w-full">
