@@ -66,10 +66,11 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     }
     throw new Error("Sem sessão");
   } catch (error: any) {
-    console.log("ERRO NO MIDDLEWARE", error);
     const redirectUrl: NextURL = req.nextUrl.clone();
     redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
     const response = NextResponse.redirect(redirectUrl);
+    response.cookies.delete("accessToken");
+    response.cookies.delete("refreshToken");
     return response;
   }
 }
