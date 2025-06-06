@@ -1,10 +1,21 @@
 import getTokensAction from "@/actions/cookies/get-tokens-action";
-
+import axiosRetry from "axios-retry";
 import isServer from "@/utils/is-server";
 
-import axios, { AxiosInstance, AxiosResponse, isAxiosError } from "axios";
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  AxiosResponse,
+  isAxiosError,
+} from "axios";
 
 import { ZodSchema } from "zod";
+import { th } from "date-fns/locale";
+import saveTokensAction from "@/actions/cookies/save-tokens-action";
+import {
+  AuthTokens,
+  authTokensSchema,
+} from "@/features/autenticacao/models/auth-tokens";
 
 export const api = {
   get: get,
@@ -12,6 +23,23 @@ export const api = {
   put: put,
   delete: del,
 };
+
+let isRefreshing = false;
+let failedQueue: Array<{
+  resolve: (token: string) => void;
+  reject: (err: any) => void;
+}> = [];
+
+function processQueue(error: any, token: string | null) {
+  failedQueue.forEach((prom) => {
+    if (token) {
+      prom.resolve(token);
+    } else {
+      prom.reject(error);
+    }
+  });
+  failedQueue = [];
+}
 
 export function axiosInstance({
   withoutRetry = false,
@@ -31,6 +59,66 @@ export function axiosInstance({
     },
   });
 
+  if (withoutRetry) return instance;
+
+  instance.interceptors.response.use(
+    (response) => response, // sucesso
+    async (error) => {
+      const originalRequest = error.config;
+      if (
+        error.response?.status === 401 &&
+        !originalRequest._retry &&
+        !isServer()
+      ) {
+        if (isRefreshing) {
+          return new Promise((resolve, reject) => {
+            failedQueue.push({
+              resolve: (token: string) => {
+                originalRequest.headers.Authorization = `Bearer ${token}`;
+                resolve(instance(originalRequest));
+              },
+              reject,
+            });
+          });
+        }
+
+        originalRequest._retry = true;
+        isRefreshing = true;
+
+        try {
+          const { refreshToken: refreshTokenStored } = await getTokensAction();
+          if (!refreshTokenStored) {
+            return Promise.reject(error);
+          }
+          const tokens: AuthTokens = await refreshToken(refreshTokenStored);
+          await saveTokensAction({
+            accessToken: tokens.accessToken,
+            refreshToken: tokens.refreshToken,
+          });
+
+          instance.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${tokens.accessToken}`;
+          originalRequest.headers[
+            "Authorization"
+          ] = `Bearer ${tokens.accessToken}`;
+          console.log("REFRESH TOKEN FEITO COM SUCESSO");
+          processQueue(null, tokens.accessToken);
+          return instance(originalRequest);
+        } catch (err) {
+          console.log(err);
+          console.log("ERRO AO FAZER REFRESH TOKEN");
+          processQueue(err, null);
+          return Promise.reject(err);
+        } finally {
+          isRefreshing = false;
+        }
+      }
+
+      return Promise.reject(error);
+    }
+  );
+
   return instance;
 }
 
@@ -42,6 +130,7 @@ interface RequestParams<TResponse = any, TData = any> {
   headers?: Record<string, string>;
   schema?: ZodSchema<TResponse>;
   rawResponse?: boolean;
+  withoutRetry?: boolean;
 }
 
 async function request<TResponse = any, TData = any>({
@@ -52,6 +141,7 @@ async function request<TResponse = any, TData = any>({
   headers,
   schema,
   rawResponse = false,
+  withoutRetry = false,
 }: RequestParams<TResponse, TData>): Promise<
   TResponse | AxiosResponse<TResponse>
 > {
@@ -75,7 +165,7 @@ async function request<TResponse = any, TData = any>({
       ? { Authorization: `Bearer ${accessToken}` }
       : {};
 
-    const api = await axiosInstance({});
+    const api = await axiosInstance({ withoutRetry: withoutRetry });
 
     const response: AxiosResponse<TResponse> = await api.request<TResponse>({
       method,
@@ -174,5 +264,20 @@ async function getTokens(): Promise<{
     };
   } else {
     return await getTokensAction();
+  }
+}
+
+export async function refreshToken(refreshToken: string): Promise<AuthTokens> {
+  try {
+    const tokens = (await api.post<AuthTokens, { refreshToken: string }>(
+      `/autenticacao/refresh-token`,
+      { refreshToken },
+      { schema: authTokensSchema, withoutRetry: true }
+    )) as AuthTokens;
+
+    return tokens;
+  } catch (error) {
+    console.error("Erro ao atualizar o token de acesso:", error);
+    throw error;
   }
 }
