@@ -1,5 +1,5 @@
 import { configuracaoFormDTO } from "@/dtos/configuracao";
-import { Empresa } from "@/models/empresa";
+
 import { UseFormReturn } from "react-hook-form";
 import Cabecalho from "./cabecalho";
 import CardSenhaAtual from "./card-senha-atual";

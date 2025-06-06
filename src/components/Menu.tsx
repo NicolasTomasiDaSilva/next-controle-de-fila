@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useLogout } from "@/features/autenticacao/hooks/use-logout";
 
 export default function Menu() {
-  const { logout } = useLogout();
+  const { logout, isSubmitting } = useLogout();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -54,6 +54,7 @@ export default function Menu() {
         <DropdownMenuItem
           className="cursor-pointer hover:!bg-red-100"
           onClick={logout}
+          disabled={isSubmitting}
         >
           <LogOut className="w-4 h-4 text-red-600" />
           <span className="text-red-600">Sair</span>
