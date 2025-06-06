@@ -123,6 +123,7 @@ export function useVinculacaoWhatsapp() {
         if (error.message === "Usuário não cadastrado") {
           try {
             await whatsappService.cadastrarWhatsapp();
+            setBuscarQrcode(true);
           } catch (error: any) {
             setIsChecked(false);
             toast.error("Error ao ativar WhatsApp.");
