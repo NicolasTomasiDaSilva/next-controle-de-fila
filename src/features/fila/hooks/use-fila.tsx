@@ -8,10 +8,12 @@ export function useFila() {
     throw new Error("useFila must be used within a UserProvider");
   }
 
-  const { fila, setFila } = context;
+  const { fila, setFila, isSubmitting, setIsSubmitting } = context;
 
   return {
     fila,
     setFila,
+    isSubmitting,
+    setIsSubmitting,
   };
 }

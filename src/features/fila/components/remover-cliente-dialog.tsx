@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { Cliente } from "@/features/fila/models/cliente";
 import useRemoverCliente from "@/features/fila/hooks/use-remover-cliente";
+import { useFila } from "../hooks/use-fila";
 
 interface RemoverClienteDialogProps {
   cliente: Cliente;
@@ -22,7 +23,7 @@ interface RemoverClienteDialogProps {
 
 export function RemoverClienteDialog({ cliente }: RemoverClienteDialogProps) {
   const [open, setOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isSubmitting, setIsSubmitting } = useFila();
   const { handleRemoverCliente } = useRemoverCliente();
 
   async function handleConfirmar() {

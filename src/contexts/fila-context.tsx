@@ -6,6 +6,8 @@ import { createContext, useState, ReactNode } from "react";
 type FilaContextType = {
   fila: Fila;
   setFila: (fila: Fila) => void;
+  isSubmitting: boolean;
+  setIsSubmitting: (isSubmitting: boolean) => void;
 };
 
 export const FilaContext = createContext<FilaContextType | undefined>(
@@ -17,10 +19,13 @@ interface FilaProviderProps {
   children: ReactNode;
 }
 export const FilaProvider = ({ filaInicial, children }: FilaProviderProps) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [fila, setFila] = useState<Fila>(filaInicial);
 
   return (
-    <FilaContext.Provider value={{ fila, setFila }}>
+    <FilaContext.Provider
+      value={{ fila, setFila, isSubmitting, setIsSubmitting }}
+    >
       {children}
     </FilaContext.Provider>
   );

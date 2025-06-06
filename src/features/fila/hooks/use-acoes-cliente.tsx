@@ -9,8 +9,7 @@ import { toast } from "sonner";
 import { useFila } from "./use-fila";
 
 export function useAcoesCliente() {
-  const { fila, setFila } = useFila();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { fila, setFila, isSubmitting, setIsSubmitting } = useFila();
 
   async function handleChamarCliente(cliente: Cliente) {
     try {

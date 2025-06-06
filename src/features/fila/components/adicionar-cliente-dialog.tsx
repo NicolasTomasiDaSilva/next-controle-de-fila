@@ -14,10 +14,11 @@ import { ClienteFormDTO } from "@/dtos/cliente";
 import { Plus } from "lucide-react";
 import useAdicionarCliente from "@/features/fila/hooks/use-adicionar-cliente";
 import { ClienteForm } from "./cliente-form";
+import { useFila } from "../hooks/use-fila";
 
 export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isSubmitting, setIsSubmitting } = useFila();
   const { handleAdicionarCliente } = useAdicionarCliente();
 
   async function handleAdicionar(clienteForm: ClienteFormDTO) {

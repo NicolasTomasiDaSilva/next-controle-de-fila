@@ -15,6 +15,7 @@ import { Cliente } from "@/features/fila/models/cliente";
 import { ClienteFormDTO } from "@/dtos/cliente";
 import { ClienteForm } from "./cliente-form";
 import useEditarCliente from "@/features/fila/hooks/use-editar-cliente";
+import { useFila } from "../hooks/use-fila";
 
 interface EditarClienteDialogProps {
   cliente: Cliente;
@@ -22,9 +23,8 @@ interface EditarClienteDialogProps {
 
 export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
   const [open, setOpen] = useState(false);
+  const { isSubmitting, setIsSubmitting } = useFila();
   const { handleEditarCliente } = useEditarCliente();
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleEdtiarCliente(clienteForm: ClienteFormDTO) {
     setIsSubmitting(true);
