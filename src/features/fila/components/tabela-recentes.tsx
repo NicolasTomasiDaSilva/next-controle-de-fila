@@ -19,9 +19,19 @@ export default function TabelaRecentes() {
     return fila.clientes
       .filter((cliente) => cliente.status !== StatusEnum.Aguardando)
       .sort((a, b) => {
-        const dateA = new Date(a.dataHoraAlterado).getTime();
-        const dateB = new Date(b.dataHoraAlterado).getTime();
-        return dateB - dateA; // crescente. use dateB - dateA pra ordem decrescente
+        const getRelevantDate = (cliente: typeof a) => {
+          if (
+            cliente.status === StatusEnum.Atendido &&
+            cliente.dataHoraChamada
+          ) {
+            return new Date(cliente.dataHoraChamada).getTime();
+          }
+          return new Date(cliente.dataHoraAlterado).getTime();
+        };
+
+        const dateA = getRelevantDate(a);
+        const dateB = getRelevantDate(b);
+        return dateB - dateA; // decrescente
       });
   }, [fila.clientes]);
 

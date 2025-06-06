@@ -21,5 +21,6 @@ export const useLogout = () => {
       setIsSubmitting(false);
     }
   }
+
   return { logout, isSubmitting };
 };
