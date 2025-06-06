@@ -23,13 +23,14 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     const accessTokenStored = cookieStore.get("accessToken")?.value;
     const refreshTokenStored = cookieStore.get("refreshToken")?.value;
 
-    if (!accessTokenStored && !publicRoute) {
+    if (!refreshTokenStored && !publicRoute) {
       const redirectUrl: NextURL = req.nextUrl.clone();
       redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
       return NextResponse.redirect(redirectUrl);
     }
+
     if (
-      accessTokenStored &&
+      refreshTokenStored &&
       publicRoute &&
       publicRoute?.whenAuthenticated === "redirect"
     ) {
