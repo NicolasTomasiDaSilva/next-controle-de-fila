@@ -3,7 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Cliente } from "@/features/fila/models/cliente";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { EditarClienteDialog } from "./editar-cliente-dialog";
-import { StatusEnum } from "@/enums/status-enum";
+import { StatusEnum, StatusMap } from "@/enums/status-enum";
+import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 interface BotoesAcoesEsquerdaProps {
   cliente: Cliente;
@@ -17,6 +19,19 @@ export default function BotoesAcoesEsquerda({
   handleMoverBaixoCliente,
   isSubmitting,
 }: BotoesAcoesEsquerdaProps) {
+  if (cliente.status !== StatusEnum.Aguardando) {
+    return (
+      <div className=" flex flex-row items-center justify-center">
+        <Badge
+          variant="secondary"
+          className={cn(StatusMap[cliente.status].className)}
+        >
+          {StatusMap[cliente.status].label}
+        </Badge>
+      </div>
+    );
+  }
+
   if (cliente.status === StatusEnum.Aguardando) {
     return (
       <>

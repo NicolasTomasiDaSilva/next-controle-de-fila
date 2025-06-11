@@ -32,7 +32,7 @@ export default function ClienteRowTable({
   } = useAcoesCliente();
 
   return (
-    <div className="w-full px-4  py-6 flex flex-col md:justify-between md:flex-row md:items-center md:pr-15 md:pl-0 ">
+    <div className="w-full min-h-25 px-4  py-6 flex flex-col md:justify-between md:flex-row md:items-center md:pr-15 md:pl-0 gap-2 ">
       <div className="hidden md:flex w-15 shrink-0 items-center justify-center">
         <span className="text-xl font-bold text-blue-600">
           {cliente.posicao}
@@ -78,42 +78,28 @@ export default function ClienteRowTable({
               />
             </span>
           </p>
-          {cliente.status !== StatusEnum.Aguardando && (
-            <div className="w-27 flex flex-row items-center justify-center">
-              <Badge
-                variant="secondary"
-                className={cn(StatusMap[cliente.status].className)}
-              >
-                {StatusMap[cliente.status].label}
-              </Badge>
-            </div>
-          )}
         </div>
       </div>
-      {(cliente.status === StatusEnum.Aguardando ||
-        cliente.status === StatusEnum.Chamado) && (
-        <div className=" flex flex-row  items-center justify-between">
-          <div className="flex flex-row items-center">
-            {cliente.status === StatusEnum.Aguardando && (
-              <BotoesAcoesEsquerda
-                handleMoverCimaCliente={handleMoverCimaCliente}
-                handleMoverBaixoCliente={handleMoverBaixoCliente}
-                cliente={cliente}
-                isSubmitting={isSubmitting}
-              ></BotoesAcoesEsquerda>
-            )}
-          </div>
-          <div className="flex flex-row items-center">
-            <BotoesAcoesDireita
-              handleChamarCliente={handleChamarCliente}
-              handleAusentarCliente={handleAusentarCliente}
-              handleVoltarCliente={handleVoltarCliente}
-              isSubmitting={isSubmitting}
-              cliente={cliente}
-            ></BotoesAcoesDireita>
-          </div>
+
+      <div className=" flex flex-row  items-center justify-between gap-2">
+        <div className="flex flex-row items-center">
+          <BotoesAcoesEsquerda
+            handleMoverCimaCliente={handleMoverCimaCliente}
+            handleMoverBaixoCliente={handleMoverBaixoCliente}
+            cliente={cliente}
+            isSubmitting={isSubmitting}
+          ></BotoesAcoesEsquerda>
         </div>
-      )}
+        <div className="flex flex-row items-center">
+          <BotoesAcoesDireita
+            handleChamarCliente={handleChamarCliente}
+            handleAusentarCliente={handleAusentarCliente}
+            handleVoltarCliente={handleVoltarCliente}
+            isSubmitting={isSubmitting}
+            cliente={cliente}
+          ></BotoesAcoesDireita>
+        </div>
+      </div>
     </div>
   );
 }
