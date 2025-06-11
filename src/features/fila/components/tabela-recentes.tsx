@@ -20,12 +20,6 @@ export default function TabelaRecentes() {
       .filter((cliente) => cliente.status !== StatusEnum.Aguardando)
       .sort((a, b) => {
         const getRelevantDate = (cliente: typeof a) => {
-          if (
-            cliente.status === StatusEnum.Atendido &&
-            cliente.dataHoraChamada
-          ) {
-            return new Date(cliente.dataHoraChamada).getTime();
-          }
           return new Date(cliente.dataHoraAlterado).getTime();
         };
 

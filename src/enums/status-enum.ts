@@ -2,7 +2,6 @@
 export enum StatusEnum {
   Aguardando = 1,
   Chamado = 2,
-  Atendido = 3,
   Desistente = 4,
   Removido = 5,
   Ausente = 6,
@@ -11,7 +10,6 @@ export enum StatusEnum {
 export const StatusLabel: Record<StatusEnum, string> = {
   [StatusEnum.Aguardando]: "Aguardando",
   [StatusEnum.Chamado]: "Chamado",
-  [StatusEnum.Atendido]: "Atendido",
   [StatusEnum.Desistente]: "Desistente",
   [StatusEnum.Removido]: "Removido",
   [StatusEnum.Ausente]: "Não Compareceu",
@@ -28,10 +26,6 @@ export const StatusMap: Record<
   [StatusEnum.Chamado]: {
     label: "Chamado",
     className: "bg-green-100 text-green-600 border border-green-300",
-  },
-  [StatusEnum.Atendido]: {
-    label: "Atendido",
-    className: "bg-sky-100 text-sky-600 border border-sky-300",
   },
   [StatusEnum.Desistente]: {
     label: "Desistente",

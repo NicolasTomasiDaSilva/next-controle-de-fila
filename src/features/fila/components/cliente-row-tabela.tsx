@@ -28,7 +28,6 @@ export default function ClienteRowTable({
     handleAusentarCliente,
     handleMoverCimaCliente,
     handleMoverBaixoCliente,
-    handleAtenderCliente,
     handleVoltarCliente,
   } = useAcoesCliente();
 
@@ -108,7 +107,6 @@ export default function ClienteRowTable({
             <BotoesAcoesDireita
               handleChamarCliente={handleChamarCliente}
               handleAusentarCliente={handleAusentarCliente}
-              handleAtenderCliente={handleAtenderCliente}
               handleVoltarCliente={handleVoltarCliente}
               isSubmitting={isSubmitting}
               cliente={cliente}

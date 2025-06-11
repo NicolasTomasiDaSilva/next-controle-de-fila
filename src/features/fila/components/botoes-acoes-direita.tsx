@@ -9,7 +9,6 @@ interface BotoesAcoesDireitaProps {
   cliente: Cliente;
   isSubmitting: boolean;
   handleChamarCliente: (cliente: Cliente) => Promise<void>;
-  handleAtenderCliente: (cliente: Cliente) => Promise<void>;
   handleVoltarCliente: (cliente: Cliente) => Promise<void>;
   handleAusentarCliente: (cliente: Cliente) => Promise<void>;
 }
@@ -17,7 +16,6 @@ export default function BotoesAcoesDireita({
   cliente,
   isSubmitting,
   handleChamarCliente,
-  handleAtenderCliente,
   handleVoltarCliente,
   handleAusentarCliente,
 }: BotoesAcoesDireitaProps) {
@@ -40,14 +38,6 @@ export default function BotoesAcoesDireita({
   if (cliente.status === StatusEnum.Chamado)
     return (
       <>
-        <Button
-          disabled={isSubmitting}
-          onClick={async () => handleAtenderCliente(cliente)}
-          variant="ghost"
-          className="!h-auto !p-2 text-green-600 hover:bg-green-100 hover:text-green-600 text-green-600"
-        >
-          <Check className="!w-5 !h-5" />
-        </Button>
         <Button
           disabled={isSubmitting}
           onClick={async () => handleVoltarCliente(cliente)}

@@ -43,22 +43,6 @@ export function useAcoesCliente() {
     }
   }
 
-  async function handleAtenderCliente(cliente: Cliente) {
-    try {
-      setIsSubmitting(true);
-      const filaAtualizada: Fila = await filaService.atualizarStatusCliente(
-        cliente.id,
-        AcoesAdminEnum.AtenderClientes
-      );
-      setFila(filaAtualizada);
-      toast.success("Cliente atendido.", { icon: "✅" });
-    } catch (error: any) {
-      toast.error("Erro ao atender cliente.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
-
   async function handleVoltarCliente(cliente: Cliente) {
     try {
       setIsSubmitting(true);
@@ -128,7 +112,6 @@ export function useAcoesCliente() {
     handleAusentarCliente,
     handleMoverCimaCliente,
     handleMoverBaixoCliente,
-    handleAtenderCliente,
     handleVoltarCliente,
   };
 }
