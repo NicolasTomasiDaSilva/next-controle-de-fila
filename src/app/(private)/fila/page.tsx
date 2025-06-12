@@ -1,7 +1,7 @@
 import { Section } from "@/features/shared/components/section";
 import { filaService } from "@/features/fila/services/fila-service";
 import { FilaProvider } from "@/contexts/fila-context";
-import { Fila } from "@/features/fila/models/fila";
+import { Fila } from "@/features/shared/models/fila";
 import { empresaService } from "@/features/shared/services/empresa-service";
 import { Empresa } from "@/features/shared/models/empresa";
 import { EmpresaProvider } from "@/contexts/empresa-context";

@@ -1,6 +1,6 @@
 "use client";
 
-import { Cliente } from "@/features/fila/models/cliente";
+import { Cliente } from "@/features/shared/models/cliente";
 
 import { Clock } from "lucide-react";
 import { StatusEnum, StatusMap } from "@/enums/status-enum";

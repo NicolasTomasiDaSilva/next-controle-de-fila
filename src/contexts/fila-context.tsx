@@ -1,6 +1,6 @@
 "use client";
 
-import { Fila } from "@/features/fila/models/fila";
+import { Fila } from "@/features/shared/models/fila";
 import { createContext, useState, ReactNode } from "react";
 
 type FilaContextType = {

@@ -2,22 +2,19 @@ import { entidadeSchema } from "@/features/shared/models/entidade";
 import { StatusEnum } from "../../../enums/status-enum";
 
 import { z } from "zod";
+import { texto } from "./values";
 
 export const statusEnumSchema = z.nativeEnum(StatusEnum);
 
 export const clienteSchema = entidadeSchema.extend({
-  filaId: z.string().uuid("ID da fila inválido"),
-  nome: z
-    .string()
-    .trim()
-    .min(1, "Nome é obrigatório")
-    .max(50, "Nome deve ter no máximo 50 caracteres"),
-  observacao: z
-    .string()
-    .trim()
-    .max(30, "Observação deve ter no máximo 30 caracteres")
-    .transform((val) => (val === "" ? null : val))
-    .nullable(),
+  filaId: z.string().uuid(),
+  nome: texto({ campo: "Nome do Cliente", min: 1, max: 50 }),
+  observacao: texto({
+    campo: "Observação",
+    min: 1,
+    max: 30,
+    transformarEmNull: true,
+  }),
   telefone: z
     .string()
     .trim()

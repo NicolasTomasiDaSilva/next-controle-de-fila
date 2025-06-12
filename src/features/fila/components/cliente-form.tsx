@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 
 import { Input } from "@/components/ui/input";
-import { Cliente } from "@/features/fila/models/cliente";
+import { Cliente } from "@/features/shared/models/cliente";
 import { TelefoneInput } from "@/features/shared/components/inputs/TelefoneInput";
 
 interface ClienteFormProps {

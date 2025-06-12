@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { Edit, Save } from "lucide-react";
-import { Cliente } from "@/features/fila/models/cliente";
+import { Cliente } from "@/features/shared/models/cliente";
 import { ClienteFormDTO } from "@/dtos/cliente";
 import { ClienteForm } from "./cliente-form";
 import useEditarCliente from "@/features/fila/hooks/use-editar-cliente";

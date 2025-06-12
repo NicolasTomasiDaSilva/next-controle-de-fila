@@ -1,4 +1,4 @@
-import { clienteSchema } from "@/features/fila/models/cliente";
+import { clienteSchema } from "@/features/shared/models/cliente";
 import { z } from "zod";
 
 export const adicionarClienteSchema = clienteSchema.pick({

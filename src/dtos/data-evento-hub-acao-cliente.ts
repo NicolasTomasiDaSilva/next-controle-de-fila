@@ -1,5 +1,5 @@
-import { clienteSchema } from "@/features/fila/models/cliente";
-import { filaSchema } from "@/features/fila/models/fila";
+import { clienteSchema } from "@/features/shared/models/cliente";
+import { filaSchema } from "@/features/shared/models/fila";
 import z from "zod";
 
 export const dataEventoHubAcaoClienteSchema = z.object({

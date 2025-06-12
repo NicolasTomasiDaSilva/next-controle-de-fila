@@ -1,6 +1,6 @@
 import { api } from "@/lib/api/api";
 import { criarVinculacaoDTO } from "@/features/vinculacao-monitor/models/criar-vinculacao-dto";
-import { Fila, filaSchema } from "@/features/fila/models/fila";
+import { Fila, filaSchema } from "@/features/shared/models/fila";
 
 export const vinculacaoService = {
   async vincularMonitor(dados: criarVinculacaoDTO): Promise<void> {

@@ -1,9 +1,9 @@
-import { Fila } from "@/features/fila/models/fila";
+import { Fila } from "@/features/shared/models/fila";
 import { filaService } from "@/features/fila/services/fila-service";
 
 import { toast } from "sonner";
 import { useFila } from "./use-fila";
-import { Cliente } from "@/features/fila/models/cliente";
+import { Cliente } from "@/features/shared/models/cliente";
 import { AcoesAdminEnum } from "@/enums/acoes-admin-enum";
 
 export default function useRemoverCliente() {
