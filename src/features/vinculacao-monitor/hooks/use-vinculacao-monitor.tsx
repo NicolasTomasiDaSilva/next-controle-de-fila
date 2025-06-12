@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useEmpresa } from "../../shared/hooks/use-empresa";
-import { codigoVinculacaoSchema } from "../models/values";
+
 import z from "zod";
 
 export const useVinculacaoMonitor = () => {

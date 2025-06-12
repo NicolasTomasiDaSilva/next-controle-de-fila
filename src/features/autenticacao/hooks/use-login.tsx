@@ -9,23 +9,29 @@ import { useForm } from "react-hook-form";
 
 import z from "zod";
 import { useCooldown } from "@/features/shared/hooks/use-cooldown";
-import { codigoAcessoDTO, codigoAcessoSchema } from "../models/codigo-acesso";
+
 import { empresaSchema } from "@/features/shared/models/empresa";
 import { autenticacaoService } from "../services/autenticacao-service";
 import { delayBotao } from "@/utils/delay-botao";
+import { codigoAcessoSchema } from "@/features/shared/models/values";
 
 export const useLogin = () => {
   const emailSchema = empresaSchema.pick({
     email: true,
   });
-
-  const emailForm = useForm<z.infer<typeof emailSchema>>({
+  type EmailFormData = z.infer<typeof emailSchema>;
+  const emailForm = useForm<EmailFormData>({
     resolver: zodResolver(emailSchema),
     defaultValues: { email: "" },
   });
 
-  const codigoAcessoForm = useForm<codigoAcessoDTO>({
-    resolver: zodResolver(codigoAcessoSchema),
+  const codigoAcessoFormSchema = z.object({
+    codigo: codigoAcessoSchema,
+  });
+
+  type CodigoAcessoFormData = z.infer<typeof codigoAcessoFormSchema>;
+  const codigoAcessoForm = useForm<CodigoAcessoFormData>({
+    resolver: zodResolver(codigoAcessoFormSchema),
     defaultValues: { codigo: "" },
   });
 
@@ -49,7 +55,7 @@ export const useLogin = () => {
     }
   }
 
-  const handleEnviarCodigo = async (data: z.infer<typeof emailSchema>) => {
+  const handleEnviarCodigo = async (data: EmailFormData) => {
     try {
       setIsSubmitting(true);
       await autenticacaoService.enviarCodigoAcesso(data.email);
@@ -85,7 +91,7 @@ export const useLogin = () => {
     }
   };
 
-  const handleVerificarCodigo = async (data: codigoAcessoDTO) => {
+  const handleVerificarCodigo = async (data: CodigoAcessoFormData) => {
     try {
       setIsSubmitting(true);
       await login({ email, codigo: data.codigo });

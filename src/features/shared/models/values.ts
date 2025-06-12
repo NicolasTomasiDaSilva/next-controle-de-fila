@@ -58,3 +58,11 @@ export const telefoneSchema = z
     message: "Telefone inválido",
   })
   .nullable();
+
+export const codigoVinculacaoSchema = z
+  .string()
+  .regex(/^[a-zA-Z0-9]{4}$/, { message: "Código inválido" });
+
+export const codigoAcessoSchema = z.string().regex(/^\d{6}$/, {
+  message: "Código inválido",
+});
