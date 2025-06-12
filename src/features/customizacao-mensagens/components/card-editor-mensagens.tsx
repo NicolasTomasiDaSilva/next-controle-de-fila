@@ -82,7 +82,7 @@ export default function CardEditorMensagens({
               )}
             </TabsTrigger>
             <TabsTrigger value="mensagemRemovido">
-              Removido
+              Remoção
               {errors.mensagemRemovido && (
                 <AlertCircle className="w-4 h-4 text-red-500" />
               )}

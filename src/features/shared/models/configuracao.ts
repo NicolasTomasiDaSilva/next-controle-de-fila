@@ -42,7 +42,7 @@ export const configuracaoSchema = entidadeSchema.extend({
     transformarEmNull: true,
   }),
   mensagemRemovido: texto({
-    campo: "Mensagem de Removido",
+    campo: "Mensagem de Remoção",
     min: 1,
     max: 500,
     transformarEmNull: true,
