@@ -6,10 +6,8 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useEmpresa } from "../../shared/hooks/use-empresa";
-import {
-  codigoVinculacaoDTO,
-  codigoVinculacaoSchema,
-} from "../models/codigo-vinculacao";
+import { codigoVinculacaoSchema } from "../models/values";
+import z from "zod";
 
 export const useVinculacaoMonitor = () => {
   const [openDialogSucesso, setOpenDialogSucesso] = useState(false);
@@ -22,18 +20,22 @@ export const useVinculacaoMonitor = () => {
   const [qrScannerOpen, setQrScannerOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const codigoVinculacaoForm = useForm<codigoVinculacaoDTO>({
-    resolver: zodResolver(codigoVinculacaoSchema),
+  const formSchema = z.object({
+    codigo: codigoVinculacaoSchema,
+  });
+  type FormData = z.infer<typeof formSchema>;
+  const form = useForm<FormData>({
+    resolver: zodResolver(formSchema),
     defaultValues: { codigo: "" },
   });
 
   function handleQrScan(code: string) {
     setQrScannerOpen(false);
-    codigoVinculacaoForm.setValue("codigo", code);
+    form.setValue("codigo", code);
     formRef.current?.requestSubmit();
   }
 
-  async function handleVerificarCodigo(data: codigoVinculacaoDTO) {
+  async function handleVerificarCodigo(data: FormData) {
     try {
       setIsSubmitting(true);
       const filaId = empresa.filas[0].id;
@@ -42,12 +44,12 @@ export const useVinculacaoMonitor = () => {
         filaId: filaId,
         observacao: null,
       });
-      codigoVinculacaoForm.setValue("codigo", "");
+      form.setValue("codigo", "");
       setOpenDialogSucesso(true);
       setTimeout(() => setOpenDialogSucesso(false), 1500);
     } catch (error: any) {
       if (error.message === "Código não encontrado") {
-        codigoVinculacaoForm.setError("codigo", {
+        form.setError("codigo", {
           type: "manual",
           message: error.message,
         });
@@ -66,7 +68,7 @@ export const useVinculacaoMonitor = () => {
     setQrScannerOpen,
     handleQrScan,
     handleVerificarCodigo,
-    codigoVinculacaoForm,
+    form,
     isSubmitting,
     openDialogSucesso,
     setOpenDialogSucesso,

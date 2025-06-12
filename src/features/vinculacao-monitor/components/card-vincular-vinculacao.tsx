@@ -42,18 +42,15 @@ export default function CardVincularVinculacao() {
     setQrScannerOpen,
     handleQrScan,
     handleVerificarCodigo,
-    codigoVinculacaoForm,
+    form,
     isSubmitting,
     openDialogSucesso,
     setOpenDialogSucesso,
   } = useVinculacaoMonitor();
 
   return (
-    <Form {...codigoVinculacaoForm}>
-      <form
-        ref={formRef}
-        onSubmit={codigoVinculacaoForm.handleSubmit(handleVerificarCodigo)}
-      >
+    <Form {...form}>
+      <form ref={formRef} onSubmit={form.handleSubmit(handleVerificarCodigo)}>
         <Card className="w-full">
           <CardHeader>
             <CardTitle>
@@ -91,7 +88,7 @@ export default function CardVincularVinculacao() {
             </div>
             <div className="flex items-center justify-center my-5">
               <FormField
-                control={codigoVinculacaoForm.control}
+                control={form.control}
                 name="codigo"
                 render={({ field }) => (
                   <FormItem>
