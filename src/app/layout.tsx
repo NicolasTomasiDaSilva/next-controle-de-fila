@@ -23,6 +23,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Controle de Fila",
   description: "Controle de Fila",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

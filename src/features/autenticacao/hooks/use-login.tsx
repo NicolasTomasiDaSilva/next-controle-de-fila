@@ -42,17 +42,9 @@ export const useLogin = () => {
 
   const router = useRouter();
   async function login({ email, codigo }: { email: string; codigo: string }) {
-    try {
-      setIsSubmitting(true);
-      await autenticacaoService.verificarCodigoAcesso(email, codigo);
-      router.push("/fila");
-      toast.success("Logado com sucesso.", { icon: "🔓" });
-    } catch (error) {
-      toast.error("Erro ao fazer login.");
-    } finally {
-      await delayBotao(1000);
-      setIsSubmitting(false);
-    }
+    await autenticacaoService.verificarCodigoAcesso(email, codigo);
+    router.push("/fila");
+    toast.success("Logado com sucesso.", { icon: "🔓" });
   }
 
   const handleEnviarCodigo = async (data: EmailFormData) => {
@@ -72,7 +64,6 @@ export const useLogin = () => {
         toast.error("Erro ao enviar código de acesso");
       }
     } finally {
-      await delayBotao(1000);
       setIsSubmitting(false);
     }
   };
@@ -86,7 +77,6 @@ export const useLogin = () => {
     } catch (error: any) {
       toast.error("Erro ao enviar código de acesso");
     } finally {
-      await delayBotao(1000);
       setIsSubmitting(false);
     }
   };
@@ -104,8 +94,6 @@ export const useLogin = () => {
       } else {
         toast.error("Erro ao verificar código de acesso.");
       }
-    } finally {
-      await delayBotao(1000);
       setIsSubmitting(false);
     }
   };
