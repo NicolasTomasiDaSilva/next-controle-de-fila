@@ -1,11 +1,15 @@
-import IMask from "imask";
+export function formatarTelefone(value: string): string {
+  const digitos = value.replace(/\D/g, "").slice(0, 11); // remove não-dígitos e limita a 11 dígitos
 
-export function formatarTelefone(value: string) {
-  const numero = value.replace(/\D/g, "");
-  const mask = numero.length > 10 ? "(00) 00000-0000" : "(00) 0000-0000";
+  if (digitos.length <= 10) {
+    // fixo: (XX) XXXX-XXXX
+    return digitos
+      .replace(/^(\d{2})(\d)/, "($1) $2")
+      .replace(/(\d{4})(\d)/, "$1-$2");
+  }
 
-  const masked = IMask.createMask({ mask });
-  masked.resolve(value);
-
-  return masked.value;
+  // celular: (XX) 9XXXX-XXXX
+  return digitos
+    .replace(/^(\d{2})(\d)/, "($1) $2")
+    .replace(/(\d{5})(\d)/, "$1-$2");
 }

@@ -29,7 +29,20 @@ export const texto = ({
   max?: number;
   transformarEmNull?: boolean;
 }) => {
-  const baseSchema = z
+  if (transformarEmNull) {
+    return z
+      .string()
+      .transform((val) => (val.trim() === "" ? null : val.trim()))
+      .nullable()
+      .refine((val) => val === null || val.length >= min, {
+        message: `${campo} deve ter no mínimo ${min} caracteres`,
+      })
+      .refine((val) => val === null || val.length <= max, {
+        message: `${campo} deve ter no máximo ${max} caracteres`,
+      });
+  }
+
+  return z
     .string()
     .trim()
     .refine((val) => val.length > 0, {
@@ -41,22 +54,26 @@ export const texto = ({
     .refine((val) => val.length <= max, {
       message: `${campo} deve ter no máximo ${max} caracteres`,
     });
-
-  if (transformarEmNull) {
-    return baseSchema.transform((val) => (val === "" ? null : val)).nullable();
-  }
-
-  return baseSchema;
 };
 
 export const telefoneSchema = z
   .string()
   .trim()
   .transform((val) => (val === "" ? null : val))
+  .refine(
+    (val) => {
+      if (val === null) return true;
+
+      const apenasDigitos = val.replace(/\D/g, "");
+      const regexTelefone = /^(\d{2})(\d{8,9})$/;
+
+      return regexTelefone.test(apenasDigitos);
+    },
+    {
+      message: "Telefone inválido",
+    }
+  )
   .transform((val) => (val ? val.replace(/\D/g, "") : null))
-  .refine((val) => val === null || isPhone(val), {
-    message: "Telefone inválido",
-  })
   .nullable();
 
 export const codigoVinculacaoSchema = z

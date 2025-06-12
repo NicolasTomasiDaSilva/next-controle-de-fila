@@ -15,7 +15,8 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Cliente } from "@/features/shared/models/cliente";
-import { TelefoneInput } from "@/features/shared/components/inputs/TelefoneInput";
+import { useState } from "react";
+import { formatarTelefone } from "@/utils/formatar-telefone";
 
 interface ClienteFormProps {
   botao?: () => React.ReactNode;
@@ -36,6 +37,13 @@ export function ClienteForm({ cliente, botao, onSubmit }: ClienteFormProps) {
   async function handleSubmit(values: ClienteFormDTO) {
     await onSubmit(values);
   }
+  const [inputMask, setInputMask] = useState<string>("");
+  const handleMaskedChange = (value: string) => {
+    const raw = value.replace(/\D/g, "");
+    const masked = formatarTelefone(raw);
+    setInputMask(masked);
+    form.setValue("telefone", raw);
+  };
 
   return (
     <Form {...form}>
@@ -66,7 +74,7 @@ export function ClienteForm({ cliente, botao, onSubmit }: ClienteFormProps) {
               <FormControl>
                 <Input
                   {...field}
-                  placeholder="Adicione uma observação (opcional)"
+                  placeholder="Adicione uma observação"
                   value={field.value ?? ""}
                 />
               </FormControl>
@@ -81,12 +89,19 @@ export function ClienteForm({ cliente, botao, onSubmit }: ClienteFormProps) {
             <FormItem>
               <FormLabel>Telefone</FormLabel>
               <FormControl>
-                <TelefoneInput {...field} value={field.value ?? ""} />
+                <Input
+                  maxLength={15}
+                  {...field}
+                  value={inputMask}
+                  onChange={(e) => handleMaskedChange(e.target.value)}
+                  placeholder="(xx) xxxxx-xxxx"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+
         {botao && botao()}
       </form>
     </Form>
