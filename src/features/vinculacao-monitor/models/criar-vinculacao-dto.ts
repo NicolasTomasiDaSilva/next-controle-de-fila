@@ -1,9 +1,9 @@
-import { codigoVinculacaoSchema } from "@/features/vinculacao-monitor/models/codigo-vinculacao";
-import { vinculacaoSchema } from "@/features/vinculacao-monitor/models/vinculacao";
+import { vinculacaoSchema } from "@/features/shared/models/vinculacao";
 import z from "zod";
+import { codigoVinculacaoSchema } from "./values";
 
 export const criarVinculacaoSchema = z.object({
   ...vinculacaoSchema.pick({ filaId: true, observacao: true }).shape,
-  ...codigoVinculacaoSchema.shape,
+  codigo: codigoVinculacaoSchema,
 });
 export type criarVinculacaoDTO = z.infer<typeof criarVinculacaoSchema>;

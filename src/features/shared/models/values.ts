@@ -1,4 +1,4 @@
-import { isCNPJ, isCPF } from "brazilian-values";
+import { isCNPJ, isCPF, isPhone } from "brazilian-values";
 import z from "zod";
 
 export const cpfCnpjSchema = z
@@ -48,3 +48,13 @@ export const texto = ({
 
   return baseSchema;
 };
+
+export const telefoneSchema = z
+  .string()
+  .trim()
+  .transform((val) => (val === "" ? null : val))
+  .transform((val) => (val ? val.replace(/\D/g, "") : null))
+  .refine((val) => val === null || isPhone(val), {
+    message: "Telefone inválido",
+  })
+  .nullable();

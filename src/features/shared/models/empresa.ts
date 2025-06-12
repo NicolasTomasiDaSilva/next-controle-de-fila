@@ -2,7 +2,7 @@ import { z } from "zod";
 import { configuracaoSchema } from "./configuracao";
 import { entidadeSchema } from "./entidade";
 import { filaSchema } from "@/features/shared/models/fila";
-import { vinculacaoSchema } from "@/features/vinculacao-monitor/models/vinculacao";
+import { vinculacaoSchema } from "@/features/shared/models/vinculacao";
 import { cpfCnpjSchema, texto } from "./values";
 
 export const empresaSchema = entidadeSchema.extend({

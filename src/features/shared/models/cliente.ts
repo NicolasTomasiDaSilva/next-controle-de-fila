@@ -2,7 +2,7 @@ import { entidadeSchema } from "@/features/shared/models/entidade";
 import { StatusEnum } from "../../../enums/status-enum";
 
 import { z } from "zod";
-import { texto } from "./values";
+import { telefoneSchema, texto } from "./values";
 
 export const statusEnumSchema = z.nativeEnum(StatusEnum);
 
@@ -15,14 +15,7 @@ export const clienteSchema = entidadeSchema.extend({
     max: 30,
     transformarEmNull: true,
   }),
-  telefone: z
-    .string()
-    .trim()
-    .transform((val) => (val === "" ? null : val))
-    .refine((val) => val === null || (val.length >= 10 && val.length <= 11), {
-      message: "Telefone deve ter entre 10 e 11 caracteres",
-    })
-    .nullable(),
+  telefone: telefoneSchema,
   hash: z.string().min(1),
   posicao: z.number().nullable(),
   status: statusEnumSchema,
