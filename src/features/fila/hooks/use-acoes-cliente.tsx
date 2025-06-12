@@ -7,6 +7,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { useFila } from "./use-fila";
+import { DataEventoClienteDesistirDTO } from "@/dtos/data-evento-hub-acao-cliente";
 
 export function useAcoesCliente() {
   const { fila, setFila, isSubmitting, setIsSubmitting } = useFila();
@@ -97,6 +98,21 @@ export function useAcoesCliente() {
     }
   }
 
+  async function handleEventoClienteDesistiu(
+    data: DataEventoClienteDesistirDTO
+  ) {
+    try {
+      const { fila: filaAtualizada, cliente } = data;
+      toast.warning(`Cliente ${cliente.nome} desistiu.`, {
+        duration: 5000,
+        icon: "😞",
+      });
+      setFila(filaAtualizada);
+    } catch (error: any) {
+      toast.error("Erro ao atualizar fila.");
+    }
+  }
+
   function isPosicaoValida(novaPosicao: number): boolean {
     const isValida = fila.clientes.some(
       (cliente) =>
@@ -113,5 +129,6 @@ export function useAcoesCliente() {
     handleMoverCimaCliente,
     handleMoverBaixoCliente,
     handleVoltarCliente,
+    handleEventoClienteDesistiu,
   };
 }

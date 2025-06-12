@@ -1,63 +1,61 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HubConnection } from "@microsoft/signalr";
 import { connectToHub } from "@/lib/signalr/token/client";
-import useClienteDesistiu from "./use-cliente-desistiu";
-import { dataEventoHubAcaoClienteSchema } from "@/dtos/data-evento-hub-acao-cliente";
+
 import { eventosHub } from "@/constantes/eventos-hub";
 import { toast } from "sonner";
+import {
+  DataEventoClienteDesistirDTO,
+  dataEventoClienteDesistirSchema,
+} from "@/dtos/data-evento-hub-acao-cliente";
+import { useAcoesCliente } from "./use-acoes-cliente";
 
 export function useSignalrFila() {
-  const [connection, setConnection] = useState<HubConnection | null>(null);
-  const { handleClienteDesistiu } = useClienteDesistiu();
+  const { handleEventoClienteDesistiu } = useAcoesCliente();
+  const connectionRef = useRef<HubConnection | null>(null);
 
   useEffect(() => {
-    let isMounted = true;
-    let currentConnection: HubConnection | null = null;
+    let connection: HubConnection;
 
-    connectToHub()
-      .then((conn) => {
-        if (!isMounted) return;
+    async function startConnection() {
+      try {
+        if (connectionRef.current) {
+          await connectionRef.current.stop();
+        }
 
-        setConnection(conn);
-        currentConnection = conn;
-      })
-      .catch(console.error);
+        connection = await connectToHub();
+
+        connection.onclose(() => {
+          toast.error("Erro de conexão.");
+        });
+        connection.onreconnecting(() => {
+          toast.warning("Tentando se reconectar...");
+        });
+        connection.onreconnected(() => {
+          toast.success("Reconectado com sucesso!");
+        });
+
+        connection.on(eventosHub.clienteDesistiu, async (data: any) => {
+          const resultado = dataEventoClienteDesistirSchema.safeParse(data);
+          if (!resultado.success) {
+            throw new Error("Evento recebido inválido.");
+          }
+          await handleEventoClienteDesistiu(resultado.data);
+        });
+
+        await connection.start();
+        console.log("Conexão iniciada com sucesso!");
+      } catch (error) {
+        toast.error("Erro ao iniciar conexão.");
+      }
+    }
+
+    startConnection();
 
     return () => {
-      isMounted = false;
-
-      if (currentConnection) {
-        currentConnection.stop().then(() => {
-          console.log("SignalR desconectado");
-        });
+      if (connectionRef.current) {
+        connectionRef.current.stop();
       }
     };
   }, []);
-
-  useEffect(() => {
-    if (!connection) {
-      return;
-    }
-
-    console.log("Conectado ao SignalR");
-
-    connection.on(eventosHub.clienteDesistiu, (data) => {
-      console.log("evento recebido");
-      console.log(data);
-      const result = dataEventoHubAcaoClienteSchema.safeParse(data);
-      console.log(data);
-      if (!result.success) {
-        toast.error("Erro ao atualizar fila.");
-        return;
-      }
-      const parsed = result.data;
-      handleClienteDesistiu(parsed);
-    });
-
-    return () => {
-      connection.off(eventosHub.clienteDesistiu);
-    };
-  }, [connection]);
-
-  return { connection };
 }
