@@ -45,7 +45,7 @@ export function ClienteForm({ cliente, botao, onSubmit }: ClienteFormProps) {
           name="nome"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nome *</FormLabel>
+              <FormLabel>Nome do Cliente*</FormLabel>
               <FormControl>
                 <Input
                   {...field}

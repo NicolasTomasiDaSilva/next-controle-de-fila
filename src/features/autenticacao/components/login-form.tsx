@@ -2,7 +2,6 @@
 
 import React from "react";
 
-import LogoCervantes from "@/assets/images/logo-cervantes.jpg";
 import Image from "next/image";
 
 import {
@@ -27,6 +26,8 @@ import {
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useLogin } from "../hooks/use-login";
 
+import logoCervantes from "@/assets/images/logo-cervantes.jpg";
+
 export default function LoginForm() {
   const {
     handleEnviarCodigo,
@@ -42,7 +43,7 @@ export default function LoginForm() {
   return (
     <div className="w-full">
       <Image
-        src={LogoCervantes}
+        src={logoCervantes}
         alt="Logo"
         className="size-15 rounded-md mx-auto"
         width={60}

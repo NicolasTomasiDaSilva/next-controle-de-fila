@@ -14,6 +14,21 @@ export const configuracaoSchema = entidadeSchema.extend({
     max: 50,
     transformarEmNull: true,
   }),
+  logoUrl: z
+    .string()
+    .transform((val) => (val === "" ? null : val))
+    .nullable()
+    .superRefine((val, ctx) => {
+      if (val !== null) {
+        const result = z.string().url().safeParse(val);
+        if (!result.success) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "URL inválida",
+          });
+        }
+      }
+    }),
   mensagemEntrada: texto({
     campo: "Mensagem de Entrada",
     min: 1,

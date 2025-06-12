@@ -1,4 +1,4 @@
-import { criarVinculacaoDTO } from "@/features/vinculacao-monitor/models/criar-vinculacao-dto";
+import { CriarVinculacaoDTO } from "@/features/vinculacao-monitor/dto/criar-vinculacao-dto";
 
 import { vinculacaoService } from "@/features/vinculacao-monitor/services/vinculacao-service";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,7 +13,7 @@ import { codigoVinculacaoSchema } from "@/features/shared/models/values";
 export const useVinculacaoMonitor = () => {
   const [openDialogSucesso, setOpenDialogSucesso] = useState(false);
   const { empresa } = useEmpresa();
-  async function vincularMonitor(dto: criarVinculacaoDTO) {
+  async function vincularMonitor(dto: CriarVinculacaoDTO) {
     await vinculacaoService.vincularMonitor(dto);
   }
   const formRef = useRef<HTMLFormElement>(null);

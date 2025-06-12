@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "@/assets/images/logoTeste.png";
+import logoSistema from "@/assets/images/logo-sistema.png";
 import Menu from "./menu";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
@@ -12,7 +12,7 @@ export default function Header() {
           <div className="flex items-center gap-2 cursor-pointer">
             <Image
               className="p-2 bg-white border-1 border-gray-400 rounded-md size-9"
-              src={logo}
+              src={logoSistema}
               alt="Logo"
             />
             <span className="text-base sm:text-lg font-semibold">

@@ -21,6 +21,7 @@ import {
 import { ChangeEvent, Dispatch, RefObject, SetStateAction } from "react";
 import { ControllerRenderProps, UseFormReturn } from "react-hook-form";
 import { Palette, RotateCcw, Upload } from "lucide-react";
+import semLogo from "@/assets/images/sem-logo.png";
 
 import { HexColorPicker } from "react-colorful";
 import { ColorPickerField } from "./color-picker";
@@ -103,7 +104,7 @@ export function ConfiguracaoVisual({
               </FormItem>
               <div className="flex flex-col items-center sm:mx-auto ">
                 <Image
-                  src={preview || field.value || "/images/sem-logo.png"}
+                  src={preview || field.value || semLogo}
                   alt="Preview logo"
                   width={128}
                   height={128}
@@ -124,7 +125,7 @@ export function ConfiguracaoVisual({
                 <div className="flex flex-row gap-2">
                   <FormControl>
                     <ColorPickerField
-                      value={field.value}
+                      value={field.value ?? ""}
                       onChange={field.onChange}
                     />
                   </FormControl>
@@ -143,7 +144,7 @@ export function ConfiguracaoVisual({
                 <div className="flex flex-row gap-2">
                   <FormControl>
                     <ColorPickerField
-                      value={field.value}
+                      value={field.value ?? ""}
                       onChange={field.onChange}
                     />
                   </FormControl>

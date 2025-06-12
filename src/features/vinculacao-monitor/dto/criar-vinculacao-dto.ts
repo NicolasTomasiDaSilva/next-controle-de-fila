@@ -6,4 +6,4 @@ export const criarVinculacaoSchema = z.object({
   ...vinculacaoSchema.pick({ filaId: true, observacao: true }).shape,
   codigo: codigoVinculacaoSchema,
 });
-export type criarVinculacaoDTO = z.infer<typeof criarVinculacaoSchema>;
+export type CriarVinculacaoDTO = z.infer<typeof criarVinculacaoSchema>;
