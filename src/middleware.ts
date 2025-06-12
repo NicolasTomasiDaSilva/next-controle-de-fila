@@ -11,7 +11,6 @@ import { AuthTokens } from "./features/autenticacao/models/auth-tokens";
 const publicRoutes = [
   { path: "/login", whenAuthenticated: "redirect" },
   { path: "/register", whenAuthenticated: "redirect" },
-  { path: "/*", whenAuthenticated: "ignore" },
 ] as const;
 const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/login";
 const REDIRECT_WHEN_AUTHENTICATED_ROUTE = "/fila";
