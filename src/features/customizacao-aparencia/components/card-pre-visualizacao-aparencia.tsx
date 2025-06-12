@@ -1,6 +1,6 @@
 "use client";
 
-import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
 import { UseFormReturn } from "react-hook-form";
 
 import {
@@ -22,7 +22,7 @@ import { Eye } from "lucide-react";
 import { usePreVisualizacaoAparencia } from "@/features/customizacao-aparencia/hooks/use-pre-visualizacao-aparencia";
 
 interface CardPreVisualizacaoAparenciaProps {
-  form: UseFormReturn<configuracaoFormDTO>;
+  form: UseFormReturn<ConfiguracaoFormDTO>;
 }
 
 export function CardPreVisualizacaoAparencia({

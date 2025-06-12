@@ -3,9 +3,9 @@
 import { CircleCheck, ArrowRight } from "lucide-react";
 
 import { TituloCard } from "./titulo-do-card";
-import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
 interface CardUltimosChamadosProps {
-  valores: configuracaoFormDTO;
+  valores: ConfiguracaoFormDTO;
 }
 
 const CardUltimosChamados = ({ valores }: CardUltimosChamadosProps) => {

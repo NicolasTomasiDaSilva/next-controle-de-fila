@@ -6,14 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { mensagensFormDTO } from "@/dtos/configuracao";
+import { MensagensFormDTO } from "@/dtos/configuracao";
 
 import { Eye, MessageCircle } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 import usePreVisualizacaoMensagens from "../hooks/use-pre-visualizacao-mensagens";
 
 interface CardPreVisualizacaoMensagensProps {
-  form: UseFormReturn<mensagensFormDTO>;
+  form: UseFormReturn<MensagensFormDTO>;
 }
 export default function CardPreVisualizacaoMensagens({
   form,

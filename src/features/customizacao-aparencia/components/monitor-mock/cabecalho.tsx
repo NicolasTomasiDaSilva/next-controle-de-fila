@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
 import DataHora from "./data-hora";
 
 interface CabecalhoProps {
-  valores: configuracaoFormDTO;
+  valores: ConfiguracaoFormDTO;
 }
 
 const Cabecalho = ({ valores }: CabecalhoProps) => {

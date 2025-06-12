@@ -1,9 +1,9 @@
 import { Clock, Timer } from "lucide-react";
 import { CardTempo } from "./card-tempo";
-import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
 
 interface CardPosicaoProps {
-  valores: configuracaoFormDTO;
+  valores: ConfiguracaoFormDTO;
 }
 
 export const CardPosicao = ({ valores }: CardPosicaoProps) => {

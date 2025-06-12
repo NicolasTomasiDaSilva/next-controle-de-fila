@@ -1,4 +1,4 @@
-import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
 
 import { UseFormReturn } from "react-hook-form";
 import Cabecalho from "./cabecalho";
@@ -6,7 +6,7 @@ import CardSenhaAtual from "./card-senha-atual";
 import CardUltimosChamados from "./card-ultimos-chamados";
 
 interface MonitorProps {
-  valores: configuracaoFormDTO;
+  valores: ConfiguracaoFormDTO;
 }
 
 export const Monitor = ({ valores }: MonitorProps) => {

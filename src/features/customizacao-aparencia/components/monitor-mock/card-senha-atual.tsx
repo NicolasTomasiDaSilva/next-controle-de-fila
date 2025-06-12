@@ -1,10 +1,10 @@
 "use client";
 import { Ticket } from "lucide-react";
-import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
 import { TituloCard } from "./titulo-do-card";
 
 interface CardSenhaAtualProps {
-  valores: configuracaoFormDTO;
+  valores: ConfiguracaoFormDTO;
 }
 
 const CardSenhaAtual = ({ valores }: CardSenhaAtualProps) => {

@@ -1,11 +1,11 @@
-import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
 
 import { MapPin } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
 interface CabecalhoProps {
-  valores: configuracaoFormDTO;
+  valores: ConfiguracaoFormDTO;
 }
 
 const Cabecalho = ({ valores }: CabecalhoProps) => {

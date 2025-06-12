@@ -17,11 +17,11 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { UseFormReturn } from "react-hook-form";
-import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
 import { Building2 } from "lucide-react";
 
 interface ConfiguracaoDadosProps {
-  form: UseFormReturn<configuracaoFormDTO>;
+  form: UseFormReturn<ConfiguracaoFormDTO>;
 }
 export function ConfiguracaoDados({ form }: ConfiguracaoDadosProps) {
   return (

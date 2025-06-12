@@ -1,8 +1,8 @@
 import { api } from "@/lib/api/api";
 import {
-  qrcodeResponseDTO,
+  QrcodeResponseDTO,
   qrcodeResponseSchema,
-  sessaoWhatsappDTO,
+  SessaoWhatsappDTO,
   sessaoWhatsappSchema,
 } from "@/dtos/whatsapp";
 
@@ -21,15 +21,15 @@ export const whatsappService = {
     }
   },
 
-  async verificarStatusSessao(): Promise<sessaoWhatsappDTO> {
+  async verificarStatusSessao(): Promise<SessaoWhatsappDTO> {
     try {
-      return (await api.get<sessaoWhatsappDTO>(
+      return (await api.get<SessaoWhatsappDTO>(
         "/whatsapp/session/status",
         undefined,
         {
           schema: sessaoWhatsappSchema,
         }
-      )) as sessaoWhatsappDTO;
+      )) as SessaoWhatsappDTO;
     } catch (error: any) {
       if (
         error.response?.status === 401 &&
@@ -56,11 +56,11 @@ export const whatsappService = {
     }
   },
 
-  async pegarQrCode(): Promise<qrcodeResponseDTO> {
+  async pegarQrCode(): Promise<QrcodeResponseDTO> {
     try {
-      return (await api.get<qrcodeResponseDTO>("/whatsapp/qrcode", undefined, {
+      return (await api.get<QrcodeResponseDTO>("/whatsapp/qrcode", undefined, {
         schema: qrcodeResponseSchema,
-      })) as qrcodeResponseDTO;
+      })) as QrcodeResponseDTO;
     } catch (error: any) {
       if (
         error.response?.status === 500 &&

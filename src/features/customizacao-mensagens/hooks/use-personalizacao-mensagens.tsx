@@ -1,4 +1,4 @@
-import { mensagensFormDTO } from "@/dtos/configuracao";
+import { MensagensFormDTO } from "@/dtos/configuracao";
 import { useEmpresa } from "../../shared/hooks/use-empresa";
 import { toast } from "sonner";
 import { empresaService } from "@/features/shared/services/empresa-service";
@@ -9,7 +9,7 @@ export function usePersonalizacaoMensagens() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleAtualizarMensagens(
-    mensagensAtualizadas: mensagensFormDTO
+    mensagensAtualizadas: MensagensFormDTO
   ) {
     try {
       setIsSubmitting(true);

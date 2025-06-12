@@ -1,4 +1,4 @@
-import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
 import Cabecalho from "./cabecalho";
 import { CardPosicao } from "./card-posicao";
 import { CardDescricao } from "./card-descricao";
@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 
 interface AppUsuarioPropos {
-  valores: configuracaoFormDTO;
+  valores: ConfiguracaoFormDTO;
 }
 
 export const AppUsuario = ({ valores }: AppUsuarioPropos) => {

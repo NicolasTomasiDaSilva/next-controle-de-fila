@@ -9,7 +9,7 @@ export const configuracaoFormSchema = configuracaoSchema.pick({
   corSobreposicao: true,
 });
 
-export type configuracaoFormDTO = z.infer<typeof configuracaoFormSchema>;
+export type ConfiguracaoFormDTO = z.infer<typeof configuracaoFormSchema>;
 
 export const mensagensFormSchema = configuracaoSchema.pick({
   mensagemEntrada: true,
@@ -17,4 +17,4 @@ export const mensagensFormSchema = configuracaoSchema.pick({
   mensagemRemovido: true,
 });
 
-export type mensagensFormDTO = z.infer<typeof mensagensFormSchema>;
+export type MensagensFormDTO = z.infer<typeof mensagensFormSchema>;

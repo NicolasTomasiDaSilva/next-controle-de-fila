@@ -7,6 +7,6 @@ export const dataEventoHubAcaoClienteSchema = z.object({
   cliente: clienteSchema,
 });
 
-export type dataEventoHubAcaoClienteDTO = z.infer<
+export type DataEventoHubAcaoClienteDTO = z.infer<
   typeof dataEventoHubAcaoClienteSchema
 >;

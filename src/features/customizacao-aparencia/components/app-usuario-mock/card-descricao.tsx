@@ -1,8 +1,8 @@
-import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
 import { Dot } from "lucide-react";
 
 interface CardDescricaoProps {
-  valores: configuracaoFormDTO;
+  valores: ConfiguracaoFormDTO;
 }
 
 const descricao = [

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { mensagensFormDTO, mensagensFormSchema } from "@/dtos/configuracao";
+import { MensagensFormDTO, mensagensFormSchema } from "@/dtos/configuracao";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -23,7 +23,7 @@ export default function MensagensContent() {
   const { handleAtualizarMensagens, configuracao, isSubmitting } =
     usePersonalizacaoMensagens();
 
-  const form = useForm<mensagensFormDTO>({
+  const form = useForm<MensagensFormDTO>({
     resolver: zodResolver(mensagensFormSchema),
     defaultValues: {
       mensagemEntrada: configuracao.mensagemEntrada ?? "",

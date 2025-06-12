@@ -10,7 +10,7 @@ export const sessaoWhatsappSchema = z.object({
   success: z.boolean(),
 });
 
-export type sessaoWhatsappDTO = z.infer<typeof sessaoWhatsappSchema>;
+export type SessaoWhatsappDTO = z.infer<typeof sessaoWhatsappSchema>;
 
 export const qrcodeResponseSchema = z.object({
   code: z.number(),
@@ -20,4 +20,4 @@ export const qrcodeResponseSchema = z.object({
   success: z.boolean(),
 });
 
-export type qrcodeResponseDTO = z.infer<typeof qrcodeResponseSchema>;
+export type QrcodeResponseDTO = z.infer<typeof qrcodeResponseSchema>;

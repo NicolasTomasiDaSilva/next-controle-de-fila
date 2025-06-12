@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { empresaService } from "@/features/shared/services/empresa-service";
 import { whatsappService } from "@/features/vinculacao-whatsapp/services/whatsapp-service";
-import { sessaoWhatsappDTO } from "@/dtos/whatsapp";
+import { SessaoWhatsappDTO } from "@/dtos/whatsapp";
 
 import { useEmpresa } from "../../shared/hooks/use-empresa";
 
@@ -109,7 +109,7 @@ export function useVinculacaoWhatsapp() {
     let isMounted = true;
     async function verificarStatusSessao() {
       try {
-        const sessao: sessaoWhatsappDTO =
+        const sessao: SessaoWhatsappDTO =
           await whatsappService.verificarStatusSessao();
         if (sessao.data.loggedIn) {
           setIsConectado(true);

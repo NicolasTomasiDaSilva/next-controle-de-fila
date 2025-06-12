@@ -1,5 +1,5 @@
 import {
-  configuracaoFormDTO,
+  ConfiguracaoFormDTO,
   configuracaoFormSchema,
 } from "@/dtos/configuracao";
 
@@ -18,7 +18,7 @@ export const useCustomizarAparencia = () => {
   const { empresa } = useEmpresa();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const form = useForm<configuracaoFormDTO>({
+  const form = useForm<ConfiguracaoFormDTO>({
     resolver: zodResolver(configuracaoFormSchema),
     defaultValues: {
       logoUrl: empresa.configuracao.logoUrl ?? "",
@@ -51,7 +51,7 @@ export const useCustomizarAparencia = () => {
 
   async function handleUploadImagem(
     e: ChangeEvent<HTMLInputElement>,
-    field: ControllerRenderProps<configuracaoFormDTO, "logoUrl">
+    field: ControllerRenderProps<ConfiguracaoFormDTO, "logoUrl">
   ) {
     const file = e.target.files?.[0];
     try {

@@ -1,9 +1,9 @@
-import { mensagensFormDTO } from "@/dtos/configuracao";
+import { MensagensFormDTO } from "@/dtos/configuracao";
 import { whatsappToHtml } from "@/utils/token-transform";
 import { UseFormReturn } from "react-hook-form";
 
 export default function usePreVisualizacaoMensagens(
-  form: UseFormReturn<mensagensFormDTO>
+  form: UseFormReturn<MensagensFormDTO>
 ) {
   let mensagemEntrada = form.watch("mensagemEntrada") ?? "";
   let mensagemChamada = form.watch("mensagemChamada") ?? "";

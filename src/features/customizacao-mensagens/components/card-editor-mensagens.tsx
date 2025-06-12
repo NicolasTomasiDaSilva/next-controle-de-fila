@@ -19,7 +19,7 @@ import { mensagensPadraoWhatsapp } from "@/constantes/mensagens-padrao-whatsapp"
 import { PenLine, AlertCircle, RotateCcw } from "lucide-react";
 import RichTextEditor from "./rich-text-editor";
 import { UseFormReturn } from "react-hook-form";
-import { mensagensFormDTO } from "@/dtos/configuracao";
+import { MensagensFormDTO } from "@/dtos/configuracao";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
@@ -30,7 +30,7 @@ interface CardEditorMensagensProps {
       "mensagemEntrada" | "mensagemChamada" | "mensagemRemovido"
     >
   >;
-  form: UseFormReturn<mensagensFormDTO>;
+  form: UseFormReturn<MensagensFormDTO>;
   resetCount: number;
   setResetCount: React.Dispatch<React.SetStateAction<number>>;
 }

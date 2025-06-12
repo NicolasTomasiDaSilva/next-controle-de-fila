@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { UseFormReturn, useWatch } from "react-hook-form";
-import { configuracaoFormDTO } from "@/dtos/configuracao";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
 
 interface usePreVisualizacaoAparenciaProps {
-  form: UseFormReturn<configuracaoFormDTO>;
+  form: UseFormReturn<ConfiguracaoFormDTO>;
 }
 export const usePreVisualizacaoAparencia = ({
   form,
