@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useEmpresa } from "../../shared/hooks/use-empresa";
 
 import z from "zod";
+import { codigoVinculacaoSchema } from "@/features/shared/models/values";
 
 export const useVinculacaoMonitor = () => {
   const [openDialogSucesso, setOpenDialogSucesso] = useState(false);
