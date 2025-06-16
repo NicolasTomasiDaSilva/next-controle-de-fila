@@ -26,8 +26,10 @@ export function useSignalrFila() {
         connection = await connectToHub();
         connectionRef.current = connection;
 
-        connection.onclose(() => {
-          toast.error("Erro de conexão.");
+        connection.onclose((error) => {
+          if (error) {
+            toast.error("Erro de conexão.");
+          }
         });
         connection.onreconnecting(() => {
           toast.warning("Tentando se reconectar...");
