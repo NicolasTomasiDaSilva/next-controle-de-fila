@@ -14,20 +14,14 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
+    <main className="flex flex-col items-center justify-center min-h-screen p-6">
       <h1 className="text-9xl font-extrabold text-blue-500">😞</h1>
       <h2 className="mt-4 text-3xl font-semibold text-gray-700">
-        Ocorreu um erro
+        Algo deu errado.
       </h2>
       <p className="mt-2 text-gray-500 max-w-md text-center">
-        Algo deu errado ao carregar esta página. Tente novamente.
+        Algo deu errado ao carregar esta página. Por favor, tente novamente.
       </p>
-      <button
-        onClick={() => reset()}
-        className="mt-6 rounded bg-blue-500 px-6 py-3 text-white font-semibold hover:bg-blue-600 transition"
-      >
-        Tentar novamente
-      </button>
     </main>
   );
 }
