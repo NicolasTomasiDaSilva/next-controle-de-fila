@@ -24,6 +24,7 @@ export function useSignalrFila() {
         }
 
         connection = await connectToHub();
+        connectionRef.current = connection;
 
         connection.onclose(() => {
           toast.error("Erro de conexão.");
@@ -54,6 +55,7 @@ export function useSignalrFila() {
 
     return () => {
       if (connectionRef.current) {
+        connectionRef.current.off(eventosHub.clienteDesistiu);
         connectionRef.current.stop();
       }
     };
