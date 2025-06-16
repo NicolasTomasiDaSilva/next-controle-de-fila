@@ -18,9 +18,9 @@ export function usePersonalizacaoMensagens() {
         ...mensagensAtualizadas,
       };
       await empresaService.atualizarConfiguracao(configuracaoAtualizada);
-      toast.success("Mensagens salvas com sucesso.", { icon: "💾" });
+      toast.success("Configurações salvas com sucesso.");
     } catch (error: any) {
-      toast.error("Erro ao salvar mensagens.");
+      toast.error("Erro ao salvar configuraçôes.");
     } finally {
       setIsSubmitting(false);
     }

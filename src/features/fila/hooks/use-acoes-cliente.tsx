@@ -20,7 +20,6 @@ export function useAcoesCliente() {
         AcoesAdminEnum.ChamarClientes
       );
       setFila(filaAtualizada);
-      toast.success("Cliente chamado.", { icon: "📢" });
     } catch (error: any) {
       toast.error("Erro ao chamar cliente.");
     } finally {
@@ -36,7 +35,6 @@ export function useAcoesCliente() {
         AcoesAdminEnum.AusentarClientes
       );
       setFila(filaAtualizada);
-      toast.success("Cliente marcado como ausente.", { icon: "⏱️" });
     } catch (error: any) {
       toast.error("Erro ao marcar cliente como ausente.");
     } finally {
@@ -52,7 +50,6 @@ export function useAcoesCliente() {
         AcoesAdminEnum.VoltarParaFilaClientes
       );
       setFila(filaAtualizada);
-      toast.success("Cliente voltou para a fila.", { icon: "↩️" });
     } catch (error: any) {
       toast.error("Erro ao devolver cliente para a fila.");
     } finally {
@@ -71,7 +68,6 @@ export function useAcoesCliente() {
         novaPosicao
       );
       setFila(filaAtualizada);
-      toast.success("Cliente movido para cima.", { icon: "⬆️" });
     } catch (error: any) {
       toast.error("Erro ao mover cliente para cima.");
     } finally {
@@ -90,7 +86,6 @@ export function useAcoesCliente() {
         novaPosicao
       );
       setFila(filaAtualizada);
-      toast.success("Cliente movido para baixo.", { icon: "⬇️" });
     } catch (error: any) {
       toast.error("Erro ao mover cliente para baixo.");
     } finally {

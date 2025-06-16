@@ -16,7 +16,6 @@ export default function useRemoverCliente() {
         AcoesAdminEnum.RemoverClientes
       );
       setFila(filaAtualizada);
-      toast.success("Cliente removido da fila.", { icon: "🗑️" });
     } catch (error: any) {
       toast.error("Erro ao remover cliente.");
     }

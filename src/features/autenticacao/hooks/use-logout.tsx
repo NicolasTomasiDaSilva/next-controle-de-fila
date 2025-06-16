@@ -13,11 +13,8 @@ export const useLogout = () => {
       setIsSubmitting(true);
       await autenticacaoService.logout();
       router.push("/login");
-      toast.success("Deslogado com sucesso.", { icon: "🔓" });
     } catch (error) {
       toast.error("Erro ao deslogar.");
-    } finally {
-      await delayBotao(1000);
       setIsSubmitting(false);
     }
   }

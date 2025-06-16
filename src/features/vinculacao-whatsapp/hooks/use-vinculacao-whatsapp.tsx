@@ -36,8 +36,6 @@ export function useVinculacaoWhatsapp() {
       } catch (error) {}
       setIsConectado(false);
       setIsChecked(false);
-
-      toast.success("Desconectado com sucesso.");
     } catch (error: any) {
       toast.error("Erro ao desconectar.");
     } finally {
@@ -153,12 +151,6 @@ export function useVinculacaoWhatsapp() {
       await empresaService.atualizarConfiguracao(configuracao);
 
       setIsChecked(checked);
-      toast.success(
-        `Notificações por WhatsApp ${
-          checked ? "ativadas" : "desativadas"
-        } com sucesso.`,
-        { icon: "✅" }
-      );
     } catch (err) {
       toast.error("Erro ao atualizar configuração.");
       setIsChecked(!checked);

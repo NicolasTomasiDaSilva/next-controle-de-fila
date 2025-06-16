@@ -38,9 +38,9 @@ export const useCustomizarAparencia = () => {
       };
 
       await empresaService.atualizarConfiguracao(configuracao);
-      toast.success("Configuração atualizada com sucesso.", { icon: "💾" });
+      toast.success("Configurações salvas com sucesso.");
     } catch (error) {
-      toast.error("Erro ao atualizadar configuração.");
+      toast.error("Erro ao salvar configuraçôes.");
     } finally {
       setIsSubmitting(false);
     }

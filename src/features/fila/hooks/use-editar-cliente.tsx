@@ -14,7 +14,6 @@ export default function useEditarCliente() {
         cliente
       );
       setFila(filaAtualizada);
-      toast.success("Cliente editado com sucesso.", { icon: "✏️" });
     } catch (error: any) {
       toast.error("Erro ao editar cliente.");
     }

@@ -44,7 +44,6 @@ export const useLogin = () => {
   async function login({ email, codigo }: { email: string; codigo: string }) {
     await autenticacaoService.verificarCodigoAcesso(email, codigo);
     router.push("/fila");
-    toast.success("Logado com sucesso.", { icon: "🔓" });
   }
 
   const handleEnviarCodigo = async (data: EmailFormData) => {
