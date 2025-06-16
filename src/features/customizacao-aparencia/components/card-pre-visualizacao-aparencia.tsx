@@ -20,6 +20,9 @@ import {
 } from "@/components/ui/card";
 import { Eye } from "lucide-react";
 import { usePreVisualizacaoAparencia } from "@/features/customizacao-aparencia/hooks/use-pre-visualizacao-aparencia";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import MonitorPreview from "./monitor-preview/monitor-content";
+import AppClientePreview from "./app-cliente-preview/app-cliente-content";
 
 interface CardPreVisualizacaoAparenciaProps {
   form: UseFormReturn<ConfiguracaoFormDTO>;
@@ -28,15 +31,7 @@ interface CardPreVisualizacaoAparenciaProps {
 export function CardPreVisualizacaoAparencia({
   form,
 }: CardPreVisualizacaoAparenciaProps) {
-  const {
-    params,
-    containerRef,
-    maxPreviewHeight,
-    scaleMonitor,
-    scaleCelular,
-    monitorSize,
-    celularSize,
-  } = usePreVisualizacaoAparencia({ form });
+  const { valores } = usePreVisualizacaoAparencia({ form });
 
   return (
     <Card className="w-full">
@@ -47,35 +42,53 @@ export function CardPreVisualizacaoAparencia({
         </CardTitle>
         <CardDescription>Veja como ficará sua configuração</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div ref={containerRef} className="w-full mx-auto sm:w-[80%]	">
-          <Carousel className="relative w-full max-w-full overflow-hidden">
-            <CarouselContent>
-              <CarouselItem className="flex justify-center">
-                <Simulador
-                  url={`/preview/monitor?${params.toString()}`}
-                  width={monitorSize.width}
-                  height={monitorSize.height}
-                  scale={scaleMonitor}
-                  maxPreviewHeight={maxPreviewHeight}
-                ></Simulador>
+      <CardContent className="relative space-y-4">
+        {/* Container principal com proporção 16:9 */}
+        <AspectRatio
+          ratio={16 / 9}
+          className="w-full rounded-md bg-gray-100 overflow-hidden border border-gray-300 relative"
+        >
+          {/* Carousel ocupa todo o espaço */}
+          <Carousel className="w-full h-full">
+            <CarouselContent className="w-full h-full">
+              {/* Preview monitor (16:9) */}
+              <CarouselItem className="w-full h-full flex items-center justify-center p-4">
+                <AspectRatio
+                  ratio={16 / 9}
+                  className="w-full h-full bg-white rounded-md shadow-md flex items-center justify-center"
+                >
+                  {/* Aqui vai seu preview monitor */}
+                  <span className="text-gray-500 text-xl font-semibold">
+                    Preview do Monitor 16:9
+                  </span>
+                </AspectRatio>
               </CarouselItem>
 
-              <CarouselItem className="flex justify-center">
-                <Simulador
-                  url={`/preview/app-usuario?${params.toString()}`}
-                  width={celularSize.width}
-                  height={celularSize.height}
-                  scale={scaleCelular}
-                  maxPreviewHeight={maxPreviewHeight}
-                ></Simulador>
+              {/* Preview celular (9:16) */}
+              <CarouselItem className="w-full h-full flex items-center justify-center p-4">
+                {/* Aqui o truque: manter altura 100% do container e ajustar largura proporcional */}
+                <AspectRatio
+                  ratio={9 / 16}
+                  className="h-full rounded-md bg-white shadow-md border border-green-400 flex items-center justify-center overflow-hidden"
+                >
+                  {/* Aqui seu preview celular */}
+                  {/* <AppClientePreview configuracao={valores} /> */}
+                  <span className="text-gray-500 text-xl font-semibold">
+                    Preview do Celular 9:16
+                  </span>
+                </AspectRatio>
               </CarouselItem>
             </CarouselContent>
 
-            <CarouselPrevious className="left-0 ml-2 cursor-pointer sm:ml-0" />
-            <CarouselNext className="right-0 mr-2 cursor-pointer sm:mr-0" />
+            {/* Botões de navegação */}
+            <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-20 cursor-pointer p-2 rounded-full bg-white shadow hover:bg-gray-100">
+              ‹
+            </CarouselPrevious>
+            <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-20 cursor-pointer p-2 rounded-full bg-white shadow hover:bg-gray-100">
+              ›
+            </CarouselNext>
           </Carousel>
-        </div>
+        </AspectRatio>
       </CardContent>
     </Card>
   );

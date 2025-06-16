@@ -1,0 +1,166 @@
+"use client";
+import { Card } from "@/components/ui/card";
+
+import { Clock, LogOut, MapPin } from "lucide-react";
+import Image from "next/image";
+
+import { Button } from "@/components/ui/button";
+import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
+import { useEffect, useRef, useState } from "react";
+
+interface AppClientePreviewProps {
+  configuracao: ConfiguracaoFormDTO;
+}
+
+export default function AppClientePreview({
+  configuracao,
+}: AppClientePreviewProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      const { width, height } = entry.contentRect;
+      setContainerSize({ width, height });
+    });
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const fontSize =
+    containerSize.width === 0 || containerSize.height === 0
+      ? 16
+      : Math.min(containerSize.width * 0.02, containerSize.height * 0.009);
+
+  return (
+    <div
+      className=" flex-1 flex h-full flex-col justify-start items-center gap-[2em] py-[3em]  border-red-500 border-2"
+      style={{
+        fontSize: `${fontSize}px`, // equivalente a "min(2cw, 0.9ch)"
+        backgroundImage: "none",
+        background: `linear-gradient(to bottom, ${configuracao.corPrimaria} 0%, white 100%)`,
+      }}
+      ref={containerRef}
+    >
+      <Card className="px-[2em] w-[48em]">
+        <div className="flex flex-col items-center gap-[1em]">
+          <p className="text-[3em]  font-extrabold leading-none">
+            {configuracao.nomeDisplay}
+          </p>
+          {configuracao.logoUrl && (
+            <Image
+              src={configuracao.logoUrl}
+              width={100}
+              height={100}
+              alt="Logo"
+              className="rounded-md object-cover w-[10em] h-[10em]"
+              priority
+            />
+          )}
+
+          <div className="flex flex-row items-center justify-center gap-[0.5em]">
+            <MapPin className="!h-[2em] !w-[2em]" />
+            <p className="text-[2em]  leading-none">
+              {configuracao.enderecoDisplay}
+            </p>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[2.5em] h-[25em] justify-between ">
+          <p className="text-[2em] text-center font-bold">
+            Sua posição na fila
+          </p>
+
+          <div
+            className={`font-(family-name:--font-geist-sans) text-[15em] text-center font-extrabold leading-none`}
+            style={{
+              color: configuracao.corPrimaria,
+            }}
+          >
+            7
+          </div>
+
+          <p className="text-[1.5em] text-center text-muted-foreground">
+            Atualizado em tempo real
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-[2em]">
+          <Card className="bg-gray-100 border-none px-[1em] flex flex-row items-center gap-[1em] py-[1em] rounded-[1em]">
+            <Card className="w-[4em] h-[4em] flex items-center justify-center bg-white  p-0 rounded-[1em]">
+              <Clock
+                className="!h-[2.5em] !w-[2.5em]"
+                style={{
+                  color: configuracao.corPrimaria,
+                }}
+              />
+            </Card>
+            <div className="flex flex-col">
+              <p className="text-[2em] font-semibold">Tempo já aguardado</p>
+              <p className="text-[1.5em] text-muted-foreground">
+                Desde sua entrada na fila
+              </p>
+            </div>
+            <p className="text-[2em]  ml-auto font-bold whitespace-nowrap">
+              3 min
+            </p>
+          </Card>
+          <Card className="bg-gray-100 border-none px-[1em] flex flex-row items-center gap-[1em] py-[1em] rounded-[1em]">
+            <Card className="w-[4em] h-[4em] flex items-center justify-center bg-white  p-0 rounded-[1em] ">
+              <Clock
+                className="!h-[2.5em] !w-[2.5em]"
+                style={{
+                  color: configuracao.corPrimaria,
+                }}
+              />
+            </Card>
+            <div className="flex flex-col">
+              <p className="text-[2em] font-semibold">Tempo médio de espera</p>
+              <p className="text-[1.5em] text-muted-foreground">
+                Baseado no fluxo da fila
+              </p>
+            </div>
+            <p className="text-[2em] ml-auto font-bold whitespace-nowrap">
+              8 min
+            </p>
+          </Card>
+        </div>
+      </Card>
+      <Card className="px-[2em] w-[48em]">
+        <p className="text-[2em] font-bold">Enquanto você espera</p>
+        <div className="flex flex-row items-center gap-[1em]">
+          <div
+            className="w-[0.6em] h-[0.6em] rounded-full "
+            style={{
+              backgroundColor: configuracao.corPrimaria,
+            }}
+          />
+          <p className="text-[1.5em]">
+            Você receberá uma mensagem no seu WhatsApp quando chegar sua vez
+          </p>
+        </div>
+        <div className="flex flex-row items-center gap-[1em]">
+          <div
+            className="w-[0.6em] h-[0.6em] rounded-full "
+            style={{
+              backgroundColor: configuracao.corPrimaria,
+            }}
+          />
+          <p className="text-[1.5em]">Você pode desistir da fila se precisar</p>
+        </div>
+      </Card>
+
+      <Button
+        variant="ghost"
+        className="!text-[2em] text-accent-foreground hover:text-red-500 mt-[0.5em]"
+      >
+        <LogOut className="!h-[1em] !w-[1em] text-accent-foreground hover:text-red-500 text-inherit" />
+        Desistir da fila
+      </Button>
+    </div>
+  );
+}
