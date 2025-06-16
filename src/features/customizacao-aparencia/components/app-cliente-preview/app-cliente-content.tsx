@@ -15,37 +15,14 @@ interface AppClientePreviewProps {
 export default function AppClientePreview({
   configuracao,
 }: AppClientePreviewProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const observer = new ResizeObserver((entries) => {
-      const entry = entries[0];
-      const { width, height } = entry.contentRect;
-      setContainerSize({ width, height });
-    });
-
-    observer.observe(containerRef.current);
-
-    return () => observer.disconnect();
-  }, []);
-
-  const fontSize =
-    containerSize.width === 0 || containerSize.height === 0
-      ? 16
-      : Math.min(containerSize.width * 0.02, containerSize.height * 0.009);
-
   return (
     <div
-      className=" flex-1 flex h-full flex-col justify-start items-center gap-[2em] py-[3em]  border-red-500 border-2"
+      className=" flex-1 flex h-full flex-col justify-start items-center gap-[2em] py-[3em] px-[2em] "
       style={{
-        fontSize: `${fontSize}px`, // equivalente a "min(2cw, 0.9ch)"
+        fontSize: "min(2vw, 0.9vh)",
         backgroundImage: "none",
         background: `linear-gradient(to bottom, ${configuracao.corPrimaria} 0%, white 100%)`,
       }}
-      ref={containerRef}
     >
       <Card className="px-[2em] w-[48em]">
         <div className="flex flex-col items-center gap-[1em]">

@@ -12,10 +12,7 @@ interface MonitorPreviewProps {
 
 export default function MonitorPreview({ configuracao }: MonitorPreviewProps) {
   return (
-    <div
-      className="w-full h-full"
-      style={{ fontSize: "min(1vw, 1vh)" }} // Escala proporcional ao tamanho da tela
-    >
+    <div className="w-full h-full" style={{ fontSize: "min(2vw, 2vh)" }}>
       <div
         className="flex flex-col h-full"
         style={{
