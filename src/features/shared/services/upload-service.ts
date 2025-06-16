@@ -1,9 +1,14 @@
+import { api } from "@/lib/api/api";
+
 export const uploadService = {
-  async uploadImagem(formData: FormData): Promise<{
-    url: string;
-  }> {
-    return {
-      url: "https://avatars.githubusercontent.com/u/198528008?s=400&u=42dc338b18eeb77486dbe5a3c816808528c7d736&v=4",
-    };
+  async uploadImagem(file: File): Promise<string> {
+    const formData = new FormData();
+    formData.append("imagem", file);
+    const { url } = (await api.post("/upload/imagem", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })) as { url: string };
+    return url;
   },
 };

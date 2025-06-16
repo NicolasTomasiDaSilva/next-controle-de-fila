@@ -73,10 +73,7 @@ export const useCustomizarAparencia = () => {
         return;
       }
 
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const { url } = await uploadService.uploadImagem(formData);
+      const url = await uploadService.uploadImagem(file);
 
       field.onChange(url);
       setPreview(url);
