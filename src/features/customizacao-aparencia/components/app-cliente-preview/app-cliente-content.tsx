@@ -17,14 +17,14 @@ export default function AppClientePreview({
 }: AppClientePreviewProps) {
   return (
     <div
-      className="flex-1 flex flex-col items-center justify-center"
+      className="flex-1 flex flex-col items-center justify-center overflow-y-hidden"
       style={{
         fontSize: "min(1vh, 2vw)",
         backgroundImage: "none",
         background: `linear-gradient(to bottom, ${configuracao.corPrimaria} 0%, white 100%)`,
       }}
     >
-      <div className="flex  flex-col justify-center items-center gap-[1.5em]  p-[2em] max-w-[75em] ">
+      <div className="flex  flex-col justify-center items-center gap-[1.5em]  p-[2em] max-w-[75em]">
         <Card className="px-[2em] w-full">
           <div className="flex flex-col items-center gap-[1em]">
             <p className="text-[3em]  font-extrabold leading-none">

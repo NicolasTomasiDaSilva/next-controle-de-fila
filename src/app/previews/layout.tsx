@@ -5,5 +5,5 @@ export default function PreviewLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className="min-h-screen h-auto flex flex-col">{children}</div>;
+  return <div className="min-h-screen h-auto flex flex-col ">{children}</div>;
 }

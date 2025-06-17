@@ -1,15 +1,23 @@
-import AppClientePreview from "@/features/customizacao-aparencia/components/app-cliente-preview/app-cliente-content";
+"use client";
 
-export default async function AppClientePreviewPage() {
-  return (
-    <AppClientePreview
-      configuracao={{
-        corPrimaria: "#000000",
-        corSobreposicao: "#ffffff",
-        nomeDisplay: "Nome Fantasia",
-        enderecoDisplay: "Endereço",
-        logoUrl: null,
-      }}
-    ></AppClientePreview>
-  );
+import AppClientePreview from "@/features/customizacao-aparencia/components/app-cliente-preview/app-cliente-content";
+import { useSearchParams } from "next/navigation";
+
+export default function AppClientePreviewPage() {
+  const params = useSearchParams();
+  const corPrimaria = params.get("corPrimaria") || "";
+  const corSobreposicao = params.get("corSobreposicao") || "";
+  const logoUrl = params.get("logoUrl");
+  const nomeDisplay = params.get("nomeDisplay") || "";
+  const enderecoDisplay = params.get("enderecoDisplay");
+
+  const configuracao = {
+    corPrimaria: corPrimaria,
+    corSobreposicao: corSobreposicao,
+    logoUrl: logoUrl,
+    nomeDisplay: nomeDisplay,
+    enderecoDisplay: enderecoDisplay,
+  };
+
+  return <AppClientePreview configuracao={configuracao}></AppClientePreview>;
 }
