@@ -6,7 +6,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="bg-gradient-to-t from-blue-100/50 to-transparent">
+    <div className="flex-1 bg-gradient-to-t from-blue-100/50 to-transparent">
       {children}
       <Toaster
         visibleToasts={2}

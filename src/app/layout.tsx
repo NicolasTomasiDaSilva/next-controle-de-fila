@@ -38,7 +38,10 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${inter.variable} ${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="antialiased " suppressHydrationWarning={true}>
+      <body
+        className="antialiased min-h-screen h-auto flex flex-col "
+        suppressHydrationWarning={true}
+      >
         {children}
       </body>
     </html>

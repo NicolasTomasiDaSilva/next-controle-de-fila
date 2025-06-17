@@ -20,7 +20,7 @@ export function Section({ title, children, cor, linkRetorno }: SectionProps) {
 
   return (
     <section>
-      <div className="mb-10 flex items-center gap-2 md:gap-5">
+      <div className=" mb-10 flex items-center gap-2 md:gap-5">
         {linkRetorno && (
           <Link href={linkRetorno} passHref>
             <Button
