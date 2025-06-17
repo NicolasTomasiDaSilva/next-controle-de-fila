@@ -8,12 +8,14 @@ import {
 } from "@/components/ui/card";
 import { MensagensFormDTO } from "@/dtos/configuracao";
 
-import { Eye, MessageCircle } from "lucide-react";
+import { Car, Eye, MessageCircle } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 import usePreVisualizacaoMensagens from "../hooks/use-pre-visualizacao-mensagens";
+import { Badge } from "@/components/ui/badge";
 
 interface CardPreVisualizacaoMensagensProps {
   form: UseFormReturn<MensagensFormDTO>;
+  tabSelecionada: "mensagemEntrada" | "mensagemChamada" | "mensagemRemovido";
 }
 export default function CardPreVisualizacaoMensagens({
   form,
@@ -29,7 +31,7 @@ export default function CardPreVisualizacaoMensagens({
         </CardTitle>
         <CardDescription>Veja como ficará sua configuração</CardDescription>
       </CardHeader>
-      <CardContent className="h-full">
+      <CardContent className="h-full space-y-4">
         <div className="w-full mx-auto  rounded-b-md shadow-sm bg-white h-full">
           <div className="bg-green-600 py-3 px-3 font-semibold text-white">
             WhatsApp
@@ -44,35 +46,53 @@ export default function CardPreVisualizacaoMensagens({
                 <p className="text-xs text-muted-foreground">Hoje, 14:30</p>
               </div>
             </div>
-            <div>
-              <p className="font-semibold">Entrada:</p>
-              <div className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none min-h-20 ">
-                <div
-                  className="whitespace-pre-wrap break-words min-w-0 max-w-full"
-                  dangerouslySetInnerHTML={{ __html: htmlMensagemEntrada }}
-                ></div>
-              </div>
-            </div>
-            <div>
-              <p className="font-semibold">Chamada:</p>
-              <div className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none min-h-20 ">
-                <div
-                  className="whitespace-pre-wrap break-words min-w-0 max-w-full"
-                  dangerouslySetInnerHTML={{ __html: htmlMensagemChamada }}
-                ></div>
-              </div>
-            </div>
-            <div>
-              <p className="font-semibold">Removido:</p>
-              <div className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none min-h-20 ">
-                <div
-                  className="whitespace-pre-wrap break-words min-w-0 max-w-full"
-                  dangerouslySetInnerHTML={{ __html: htmlMensagemRemovido }}
-                ></div>
-              </div>
+            <div className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none min-h-30 ">
+              <div
+                className="whitespace-pre-wrap break-words min-w-0 max-w-full"
+                dangerouslySetInnerHTML={{ __html: htmlMensagemEntrada }}
+              ></div>
             </div>
           </div>
         </div>
+        <Card className="gap-4 bg-gray-50 ">
+          <CardHeader className="leading-none gap-0">
+            <CardTitle className="whitespace-nowrap text-xl  ">
+              Dicas de Formatação
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="">
+              Use{" "}
+              <Badge
+                className="font-semibold bg-white border border-gray-300 text-sm"
+                variant={"outline"}
+              >
+                *texto*
+              </Badge>{" "}
+              para texto em <b>negrito</b>
+            </p>
+            <p className="">
+              Use{" "}
+              <Badge
+                className="font-semibold bg-white border border-gray-300 text-sm"
+                variant={"outline"}
+              >
+                _texto_
+              </Badge>{" "}
+              para texto em <i>itálico</i>
+            </p>
+            <p className="">
+              Use{" "}
+              <Badge
+                className="font-semibold bg-white border border-gray-300 text-sm"
+                variant={"outline"}
+              >
+                ~texto~
+              </Badge>{" "}
+              para texto <s>riscado</s>
+            </p>
+          </CardContent>
+        </Card>
       </CardContent>
     </Card>
   );

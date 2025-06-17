@@ -46,7 +46,10 @@ export default function MensagensContent() {
             />
           </div>
           <div className="flex-1 basis-0 min-w-0">
-            <CardPreVisualizacaoMensagens form={form} />
+            <CardPreVisualizacaoMensagens
+              form={form}
+              tabSelecionada={tabSelecionada}
+            />
           </div>
         </div>
         <BotaoSalvarAlteracoes
