@@ -69,6 +69,16 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     }
     throw new Error("Sem sessão");
   } catch (error: any) {
+    console.log("ERRO SEM SESSAO");
+    console.log("ERRO SEM SESSAO");
+    console.log("ERRO SEM SESSAO");
+    console.log("ERRO SEM SESSAO");
+    console.log(error);
+    console.log("ERRO SEM SESSAO");
+    console.log("ERRO SEM SESSAO");
+    console.log("ERRO SEM SESSAO");
+    console.log("ERRO SEM SESSAO");
+
     const redirectUrl: NextURL = req.nextUrl.clone();
     redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
     const response = NextResponse.redirect(redirectUrl);

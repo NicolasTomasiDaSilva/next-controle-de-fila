@@ -22,6 +22,7 @@ import { UseFormReturn } from "react-hook-form";
 import { MensagensFormDTO } from "@/dtos/configuracao";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { whatsappToHtml } from "@/utils/token-transform";
 
 interface CardEditorMensagensProps {
   tabSelecionada: "mensagemEntrada" | "mensagemChamada" | "mensagemRemovido";
@@ -98,7 +99,7 @@ export default function CardEditorMensagens({
                     <RichTextEditor
                       key={resetCount}
                       limiteCaracteres={500}
-                      value={field.value ?? ""}
+                      value={whatsappToHtml(field.value ?? "")}
                       onChange={field.onChange}
                     />
                   </FormControl>
@@ -117,7 +118,7 @@ export default function CardEditorMensagens({
                     <RichTextEditor
                       key={resetCount}
                       limiteCaracteres={500}
-                      value={field.value ?? ""}
+                      value={whatsappToHtml(field.value ?? "")}
                       onChange={field.onChange}
                     />
                   </FormControl>
@@ -136,7 +137,7 @@ export default function CardEditorMensagens({
                     <RichTextEditor
                       key={resetCount}
                       limiteCaracteres={500}
-                      value={field.value ?? ""}
+                      value={whatsappToHtml(field.value ?? "")}
                       onChange={field.onChange}
                     />
                   </FormControl>
