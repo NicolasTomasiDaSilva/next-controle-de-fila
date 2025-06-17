@@ -47,7 +47,7 @@ export const usePreVisualizacaoAparencia = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [maxPreviewHeight, setMaxPreviewHeight] = useState(300);
 
-  const MAX_HEIGHT = 600;
+  const MAX_HEIGHT = 800;
   const monitorSize = { width: 1920, height: 1080 };
   const celularSize = { width: 1080, height: 1920 };
 

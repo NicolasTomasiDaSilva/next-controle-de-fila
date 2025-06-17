@@ -14,30 +14,32 @@ export default function Simulador({
   maxPreviewHeight,
 }: SimuladorProps) {
   return (
-    <div
-      className=" overflow-hidden border rounded-md"
-      style={{
-        width: width * scale,
-        height: maxPreviewHeight,
-        position: "relative",
-      }}
-    >
-      <iframe
-        src={url}
-        width={width}
-        height={height}
+    <div className="border border-gray-200 border-4 rounded-md">
+      <div
+        className=" overflow-hidden rounded"
         style={{
-          transform: `scale(${scale})`,
-          transformOrigin: "top left",
-          width: width,
-          height: height,
-          position: "absolute",
-          top: 0,
-          left: 0,
-          pointerEvents: "none",
-          border: "none",
+          width: width * scale,
+          height: maxPreviewHeight,
+          position: "relative",
         }}
-      />
+      >
+        <iframe
+          src={url}
+          width={width}
+          height={height}
+          style={{
+            transform: `scale(${scale})`,
+            transformOrigin: "top left",
+            width: width,
+            height: height,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            pointerEvents: "none",
+            border: "none",
+          }}
+        />
+      </div>
     </div>
   );
 }
