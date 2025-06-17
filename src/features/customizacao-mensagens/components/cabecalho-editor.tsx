@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import { toWhatsAppMarkdown } from "@/utils/token-transform";
 
@@ -16,28 +17,31 @@ export default function CabecalhoEditor({
   return (
     <div className="flex flex-row items-center gap-2 justify-between bg-gray-50 p-2 border-b ">
       <div className="flex gap-2">
-        <Toggle
-          pressed={editor.isActive("bold")}
-          onPressedChange={() => {
-            editor.chain().focus().toggleBold().run();
+        <Button
+          variant="ghost"
+          type="button"
+          onClick={() => {
+            editor.chain().focus().toggleWhatsAppBold().run();
           }}
         >
           <Bold className="h-4 w-4" />
-        </Toggle>
-        <Toggle
-          pressed={editor.isActive("italic")}
-          onPressedChange={() => {
-            editor.chain().focus().toggleItalic().run();
+        </Button>
+        <Button
+          variant="ghost"
+          type="button"
+          onClick={() => {
+            editor.chain().focus().toggleWhatsAppItalic().run();
           }}
         >
           <Italic className="h-4 w-4" />
-        </Toggle>
-        <Toggle
-          pressed={editor.isActive("strike")}
-          onPressedChange={() => editor.chain().focus().toggleStrike().run()}
+        </Button>
+        <Button
+          variant="ghost"
+          type="button"
+          onClick={() => editor.chain().focus().toggleWhatsAppStrike().run()}
         >
           <Slash className="h-4 w-4" />
-        </Toggle>
+        </Button>
         <div className="w-0.5 self-stretch bg-gray-200" />
       </div>
       {

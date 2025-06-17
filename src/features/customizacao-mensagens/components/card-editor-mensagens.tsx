@@ -99,7 +99,7 @@ export default function CardEditorMensagens({
                     <RichTextEditor
                       key={resetCount}
                       limiteCaracteres={500}
-                      value={whatsappToHtml(field.value ?? "")}
+                      value={field.value ?? ""}
                       onChange={field.onChange}
                     />
                   </FormControl>
@@ -118,7 +118,7 @@ export default function CardEditorMensagens({
                     <RichTextEditor
                       key={resetCount}
                       limiteCaracteres={500}
-                      value={whatsappToHtml(field.value ?? "")}
+                      value={field.value ?? ""}
                       onChange={field.onChange}
                     />
                   </FormControl>
@@ -137,7 +137,7 @@ export default function CardEditorMensagens({
                     <RichTextEditor
                       key={resetCount}
                       limiteCaracteres={500}
-                      value={whatsappToHtml(field.value ?? "")}
+                      value={field.value ?? ""}
                       onChange={field.onChange}
                     />
                   </FormControl>

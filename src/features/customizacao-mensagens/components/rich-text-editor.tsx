@@ -12,6 +12,9 @@ import { TokenText } from "../extensions/Token";
 import { toWhatsAppMarkdown } from "@/utils/token-transform";
 import Strike from "@tiptap/extension-strike";
 import FooterEditor from "./footer-editor";
+import { WhatsAppBold } from "../extensions/whatsapp-bold";
+import { WhatsAppItalic } from "../extensions/whatsapp-italic";
+import { WhatsAppStrike } from "../extensions/whatsapp-strike";
 
 const BoldWithoutInputRules = Bold.extend({
   addInputRules() {
@@ -48,10 +51,10 @@ export default function RichTextEditor({
         italic: false,
         strike: false,
       }),
-      BoldWithoutInputRules,
-      ItalicWithoutInputRules,
-      StrikeWithoutInputRules,
       TokenText,
+      WhatsAppBold,
+      WhatsAppItalic,
+      WhatsAppStrike,
     ],
     content: value,
     editorProps: {
