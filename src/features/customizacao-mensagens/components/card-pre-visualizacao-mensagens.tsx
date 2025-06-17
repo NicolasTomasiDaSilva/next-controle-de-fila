@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { MensagensFormDTO } from "@/dtos/configuracao";
-
+import { format } from "@flasd/whatsapp-formatting";
 import { Car, Eye, MessageCircle } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 import usePreVisualizacaoMensagens from "../hooks/use-pre-visualizacao-mensagens";
@@ -19,9 +19,18 @@ interface CardPreVisualizacaoMensagensProps {
 }
 export default function CardPreVisualizacaoMensagens({
   form,
+  tabSelecionada,
 }: CardPreVisualizacaoMensagensProps) {
-  const { htmlMensagemEntrada, htmlMensagemChamada, htmlMensagemRemovido } =
+  const { mensagemEntrada, mensagemChamada, mensagemRemovido } =
     usePreVisualizacaoMensagens(form);
+
+  const mensagem =
+    tabSelecionada === "mensagemEntrada"
+      ? mensagemEntrada
+      : tabSelecionada === "mensagemChamada"
+      ? mensagemChamada
+      : mensagemRemovido;
+
   return (
     <Card className="w-full">
       <CardHeader>
@@ -49,7 +58,7 @@ export default function CardPreVisualizacaoMensagens({
             <div className="bg-green-100 py-3 px-3 rounded-md rounded-tl-none min-h-30 ">
               <div
                 className="whitespace-pre-wrap break-words min-w-0 max-w-full"
-                dangerouslySetInnerHTML={{ __html: htmlMensagemEntrada }}
+                dangerouslySetInnerHTML={{ __html: format(mensagem) }}
               ></div>
             </div>
           </div>
