@@ -34,32 +34,44 @@ export function AdicionarClienteDialog() {
   };
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <Button variant="azul" className="w-full sm:w-40 block ml-auto">
+    <>
+      <Dialog open={open} onOpenChange={handleOpenChange}>
+        <Button
+          onClick={() => setOpen(true)}
+          variant="azul"
+          className="w-full sm:w-40 block ml-auto"
+        >
           <Plus className="mr-2 inline"></Plus>
           Adicionar
         </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Adicionar Cliente à Fila</DialogTitle>
-        </DialogHeader>
-        <ClienteForm
-          botao={() => (
-            <Button
-              variant={"azul"}
-              className="w-full sm:w-40 block ml-auto"
-              type="submit"
-              disabled={isSubmitting}
-            >
-              <Plus className="inline mr-2" />
-              {isSubmitting ? "Adicionando..." : "Adicionar"}
-            </Button>
-          )}
-          onSubmit={handleAdicionar}
-        ></ClienteForm>
-      </DialogContent>
-    </Dialog>
+
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Adicionar Cliente à Fila</DialogTitle>
+          </DialogHeader>
+          <ClienteForm
+            botao={() => (
+              <Button
+                variant={"azul"}
+                className="w-full sm:w-40 block ml-auto"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                <Plus className="inline mr-2" />
+                {isSubmitting ? "Adicionando..." : "Adicionar"}
+              </Button>
+            )}
+            onSubmit={handleAdicionar}
+          ></ClienteForm>
+        </DialogContent>
+      </Dialog>
+      <Button
+        variant="azul"
+        onClick={() => setOpen(true)}
+        className="fixed bottom-6 right-6 z-50 h-12 w-12"
+      >
+        <Plus className="w-6 h-6" />
+      </Button>
+    </>
   );
 }
