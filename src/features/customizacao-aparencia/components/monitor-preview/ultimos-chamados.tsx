@@ -34,7 +34,7 @@ export default function UltimosChamados({
       >
         <div className="w-full flex-1 flex flex-col items-center justify-center border-b-1 border-white/30 last:border-0">
           <div className="w-full flex flex-row items-center  gap-[1em] px-[2em]  py-[2em)]">
-            <p className="font-bold text-[2.5em] text-shadow ">16:03</p>
+            <p className="font-bold text-[2.5em] text-shadow ">16:09</p>
             <ArrowRight
               className="h-[1.5em] w-[1.5em] icon-shadow"
               style={{ color: configuracao.corSobreposicao }}
@@ -46,7 +46,7 @@ export default function UltimosChamados({
         </div>
         <div className="w-full flex-1 flex flex-col items-center justify-center border-b-1 border-white/30 last:border-0">
           <div className="w-full flex flex-row items-center  gap-[1em] px-[2em]  py-[2em)]">
-            <p className="font-bold text-[2.5em] text-shadow ">16:03</p>
+            <p className="font-bold text-[2.5em] text-shadow ">16:06</p>
             <ArrowRight
               className="h-[1.5em] w-[1.5em] icon-shadow"
               style={{ color: configuracao.corSobreposicao }}
@@ -58,7 +58,7 @@ export default function UltimosChamados({
         </div>
         <div className="w-full flex-1 flex flex-col items-center justify-center border-b-1 border-white/30 last:border-0">
           <div className="w-full flex flex-row items-center  gap-[1em] px-[2em]  py-[2em)]">
-            <p className="font-bold text-[2.5em] text-shadow ">16:03</p>
+            <p className="font-bold text-[2.5em] text-shadow ">16:05</p>
             <ArrowRight
               className="h-[1.5em] w-[1.5em] icon-shadow"
               style={{ color: configuracao.corSobreposicao }}

@@ -36,7 +36,7 @@ export default function Header({ configuracao }: HeaderProps) {
       <div className="h-[2em] rounded-full bg-black/5 flex flex-row items-center gap-2 !py-[1.5em] !px-[1em] ml-auto ">
         <Clock className="!h-[2em] !w-[2em] icon-shadow" />
         <p className="text-[2em] text-shadow whitespace-nowrap">
-          SEG. 16/06 15:58
+          SEG. 16/06 16:11
         </p>
       </div>
     </div>
