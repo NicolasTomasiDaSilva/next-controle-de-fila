@@ -36,15 +36,12 @@ export function AdicionarClienteDialog() {
   return (
     <>
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <Button
-          onClick={() => setOpen(true)}
-          variant="azul"
-          className="w-full sm:w-40 block ml-auto"
-        >
-          <Plus className="mr-2 inline"></Plus>
-          Adicionar
-        </Button>
-
+        <DialogTrigger asChild>
+          <Button variant="azul" className="w-full sm:w-40 block ml-auto">
+            <Plus className="mr-2 inline"></Plus>
+            Adicionar
+          </Button>
+        </DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Adicionar Cliente à Fila</DialogTitle>

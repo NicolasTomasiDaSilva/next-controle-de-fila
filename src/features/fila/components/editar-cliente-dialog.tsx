@@ -16,6 +16,12 @@ import { ClienteFormDTO } from "@/dtos/cliente";
 import { ClienteForm } from "./cliente-form";
 import useEditarCliente from "@/features/fila/hooks/use-editar-cliente";
 import { useFila } from "../hooks/use-fila";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface EditarClienteDialogProps {
   cliente: Cliente;
@@ -44,15 +50,24 @@ export function EditarClienteDialog({ cliente }: EditarClienteDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <Button
-          variant="ghost"
-          className="!h-auto !p-2"
-          disabled={isSubmitting}
-        >
-          <Edit className="!w-5 !h-5 text-gray-500" />
-        </Button>
-      </DialogTrigger>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DialogTrigger asChild>
+              <Button
+                variant="ghost"
+                className="!h-auto !p-2"
+                disabled={isSubmitting}
+              >
+                <Edit className="!w-5 !h-5 text-gray-500" />
+              </Button>
+            </DialogTrigger>
+          </TooltipTrigger>
+          <TooltipContent side="top">
+            <p>Editar</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Editar Cliente</DialogTitle>

@@ -14,6 +14,12 @@ import { useAcoesCliente } from "@/features/fila/hooks/use-acoes-cliente";
 
 import { TempoDecorrido } from "@/features/shared/components/tempo-decorrido";
 import { formatarTelefone } from "@/utils/formatar-telefone";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import formatarData from "@/utils/formatar-data";
 
 interface RowClientePersonalizadaProps {
   cliente: Cliente;
@@ -66,18 +72,31 @@ export default function ClienteRowTable({
           </p>
         </div>
         <div className="flex flex-col items-center md:gap-5 justify-center md:flex-row">
-          <p className="text-sm text-muted-foreground flex flex-row  gap-1 items-center">
-            <Clock className="w-3 h-3" />
-            <span className="whitespace-nowrap">
-              <TempoDecorrido
-                data={
+          <Tooltip>
+            <TooltipTrigger>
+              <p className="text-sm text-muted-foreground flex flex-row  gap-1 items-center">
+                <Clock className="w-3 h-3" />
+                <span className="whitespace-nowrap">
+                  <TempoDecorrido
+                    data={
+                      cliente.status === StatusEnum.Aguardando
+                        ? cliente.dataHoraCriado
+                        : cliente.dataHoraAlterado
+                    }
+                  />
+                </span>
+              </p>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>
+                {formatarData(
                   cliente.status === StatusEnum.Aguardando
                     ? cliente.dataHoraCriado
                     : cliente.dataHoraAlterado
-                }
-              />
-            </span>
-          </p>
+                )}
+              </p>
+            </TooltipContent>
+          </Tooltip>
         </div>
       </div>
 

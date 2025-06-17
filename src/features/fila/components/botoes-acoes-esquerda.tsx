@@ -6,6 +6,12 @@ import { EditarClienteDialog } from "./editar-cliente-dialog";
 import { StatusEnum, StatusMap } from "@/enums/status-enum";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface BotoesAcoesEsquerdaProps {
   cliente: Cliente;
@@ -35,22 +41,41 @@ export default function BotoesAcoesEsquerda({
   if (cliente.status === StatusEnum.Aguardando) {
     return (
       <>
-        <Button
-          disabled={isSubmitting}
-          onClick={async () => handleMoverCimaCliente(cliente)}
-          variant="ghost"
-          className="!h-auto !p-2"
-        >
-          <ChevronUp className="!w-5 !h-5" />
-        </Button>
-        <Button
-          disabled={isSubmitting}
-          onClick={async () => handleMoverBaixoCliente(cliente)}
-          variant="ghost"
-          className="!h-auto !p-2"
-        >
-          <ChevronDown className="!w-5 !h-5" />
-        </Button>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                disabled={isSubmitting}
+                onClick={async () => handleMoverCimaCliente(cliente)}
+                variant="ghost"
+                className="!h-auto !p-2"
+              >
+                <ChevronUp className="!w-5 !h-5" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="top">
+              <p>Mover Cima</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                disabled={isSubmitting}
+                onClick={async () => handleMoverBaixoCliente(cliente)}
+                variant="ghost"
+                className="!h-auto !p-2"
+              >
+                <ChevronDown className="!w-5 !h-5" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="top">
+              <p>Mover Baixo</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
         <EditarClienteDialog cliente={cliente} />
       </>
     );
