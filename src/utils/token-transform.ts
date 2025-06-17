@@ -1,60 +1,12 @@
-export function toWhatsAppMarkdown(node: any): string {
-  if (!node) return "";
+export function formatarComoWhatsApp(texto: string): string {
+  // Negrito: *texto*
+  texto = texto.replace(/\*(\S(.*?\S)?)\*/g, "<strong>$1</strong>");
 
-  if (node.type === "text") {
-    let text = node.text;
+  // Itálico: _texto_
+  texto = texto.replace(/_(\S(.*?\S)?)_/g, "<em>$1</em>");
 
-    if (node.marks) {
-      node.marks.forEach((mark: any) => {
-        switch (mark.type) {
-          case "bold":
-            text = `*${text}*`;
-            break;
-          case "italic":
-            text = `_${text}_`;
-            break;
-          case "strike":
-            text = `~${text}~`;
-            break;
-          default:
-            break;
-        }
-      });
-    }
-    return text;
-  }
+  // Tachado: ~texto~
+  texto = texto.replace(/~(\S(.*?\S)?)~/g, "<s>$1</s>");
 
-  if (node.content && Array.isArray(node.content)) {
-    return node.content.map(toWhatsAppMarkdown).join("");
-  }
-
-  return "";
-}
-
-export function whatsappToHtml(text: string) {
-  if (!text) return "";
-
-  // Escape básico para evitar problemas de segurança/HTML malformado
-  text = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-  // Substitui combinações de negrito+itálico primeiro
-  text = text.replace(/(\*|_)(\*|_)(.*?)\2\1/g, (_, p1, p2, inner) => {
-    // Aqui a ordem importa, se for *_texto_*, ou _*texto*_
-    return `<strong><em>${inner}</em></strong>`;
-  });
-
-  // Depois negrito
-  text = text.replace(/\*(.*?)\*/g, "<strong>$1</strong>");
-
-  // Depois itálico
-  text = text.replace(/_(.*?)_/g, "<em>$1</em>");
-
-  // Riscado ~texto~
-  text = text.replace(/~(.*?)~/g, "<s>$1</s>");
-
-  // Nova linha
-  text = text.replace(/\n/g, "<br>");
-
-  // Envolve tudo em <p>
-  return text;
+  return texto;
 }

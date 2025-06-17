@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
-import { toWhatsAppMarkdown } from "@/utils/token-transform";
 
 import { Editor } from "@tiptap/react";
 import { Slash } from "lucide-react";
@@ -47,12 +46,12 @@ export default function CabecalhoEditor({
       {
         <span
           className={`text-sm  px-2 py-1 rounded ${
-            toWhatsAppMarkdown(editor.getJSON()).length > limiteCaracteres
+            editor.getText().length > limiteCaracteres
               ? "bg-red-100 text-red-800"
               : "bg-muted text-muted-foreground"
           }`}
         >
-          {toWhatsAppMarkdown(editor.getJSON()).length}/{limiteCaracteres}
+          {editor.getText().length}/{limiteCaracteres}
         </span>
       }
     </div>

@@ -9,7 +9,7 @@ import { Italic } from "@tiptap/extension-italic";
 import CabecalhoEditor from "./cabecalho-editor";
 
 import { TokenText } from "../extensions/Token";
-import { toWhatsAppMarkdown } from "@/utils/token-transform";
+
 import Strike from "@tiptap/extension-strike";
 import FooterEditor from "./footer-editor";
 import { WhatsAppBold } from "../extensions/whatsapp-bold";

@@ -1,4 +1,3 @@
-import { toWhatsAppMarkdown } from "@/utils/token-transform";
 import { Entidade, entidadeSchema } from "./entidade";
 import { z } from "zod";
 import { texto } from "./values";
