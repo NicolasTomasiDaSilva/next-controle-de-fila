@@ -12,9 +12,12 @@ interface MonitorPreviewProps {
 
 export default function MonitorPreview({ configuracao }: MonitorPreviewProps) {
   return (
-    <div className="w-full h-full" style={{ fontSize: "min(2vw, 2vh)" }}>
+    <div
+      className="flex-1 flex flex-col  justify-center "
+      style={{ fontSize: "min(2vh, 1vw)" }}
+    >
       <div
-        className="flex flex-col h-full"
+        className="flex-1 flex flex-col h-full"
         style={{
           backgroundColor: configuracao.corPrimaria,
           color: configuracao.corSobreposicao,

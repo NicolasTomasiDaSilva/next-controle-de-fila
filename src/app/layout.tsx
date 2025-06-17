@@ -38,26 +38,8 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${inter.variable} ${geistSans.variable} ${geistMono.variable}`}
     >
-      <body
-        className="antialiased bg-gradient-to-t from-blue-100/50 to-transparent"
-        suppressHydrationWarning={true}
-      >
+      <body className="antialiased " suppressHydrationWarning={true}>
         {children}
-        <Toaster
-          visibleToasts={2}
-          position="top-right"
-          duration={1000}
-          richColors // cores automáticas para success/error/etc
-          expand={true} // abre toasts com descrição mais largos
-          closeButton // adiciona botão de fechar
-          toastOptions={{
-            classNames: {
-              toast: "rounded-xl shadow-lg border",
-              title: "text-base font-semibold",
-              description: "text-sm opacity-90",
-            },
-          }}
-        />
       </body>
     </html>
   );
