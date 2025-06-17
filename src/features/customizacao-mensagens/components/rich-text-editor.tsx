@@ -64,17 +64,9 @@ export default function RichTextEditor({
       },
     },
     onUpdate({ editor }) {
-      const markdownWhatsApp = toWhatsAppMarkdown(editor.getJSON());
-      onChange(markdownWhatsApp);
+      onChange(editor.getText());
     },
   });
-
-  // Atualiza conteúdo quando `value` muda externamente
-  // useEffect(() => {
-  //   if (editor && value !== editor.getText()) {
-  //     editor.commands.setContent(value);
-  //   }
-  // }, [value, editor]);
 
   if (!editor) return null;
 
