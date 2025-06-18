@@ -12,13 +12,13 @@ import BotoesAcoesEsquerda from "./botoes-acoes-esquerda";
 import BotoesAcoesDireita from "./botoes-acoes-direita";
 import { useAcoesCliente } from "@/features/fila/hooks/use-acoes-cliente";
 
-import { formatarTelefone } from "@/utils/formatar-telefone";
+import { formatarTelefone } from "@/utils/dados-utils";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import formatarData from "@/utils/formatar-data";
+import formatarData from "@/utils/data-hora-utils";
 import { useTempoDecorrido } from "@/features/shared/hooks/use-tempo-decorrido";
 
 interface RowClientePersonalizadaProps {

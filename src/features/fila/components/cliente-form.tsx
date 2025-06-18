@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Cliente } from "@/features/shared/models/cliente";
 import { useState } from "react";
-import { formatarTelefone } from "@/utils/formatar-telefone";
+import { formatarTelefone } from "@/utils/dados-utils";
 
 interface ClienteFormProps {
   botao?: () => React.ReactNode;

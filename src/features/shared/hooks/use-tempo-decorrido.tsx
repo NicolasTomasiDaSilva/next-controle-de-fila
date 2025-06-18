@@ -1,4 +1,4 @@
-import { calcularTempoDecorridoEmMinutos } from "@/utils/formatar-data";
+import { calcularTempoDecorridoEmMinutos } from "@/utils/data-hora-utils";
 import { useState, useEffect } from "react";
 
 export function useTempoDecorrido(dataInicio: Date) {

@@ -1,9 +1,9 @@
 import { NextURL } from "next/dist/server/web/next-url";
 import { MiddlewareConfig, NextResponse } from "next/server";
 import { NextRequest } from "next/server";
-import { tokensCookiesParams } from "@/utils/tokens-cookies-params";
+
 import { cookies } from "next/headers";
-import { jwtIsValid } from "./utils/jwt";
+import { jwtIsValid, tokensCookiesParams } from "./utils/jwt-utils";
 import { refreshToken } from "./lib/api/api";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { AuthTokens } from "./features/autenticacao/models/auth-tokens";
@@ -69,16 +69,6 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     }
     throw new Error("Sem sessão");
   } catch (error: any) {
-    console.log("ERRO SEM SESSAO");
-    console.log("ERRO SEM SESSAO");
-    console.log("ERRO SEM SESSAO");
-    console.log("ERRO SEM SESSAO");
-    console.log(error);
-    console.log("ERRO SEM SESSAO");
-    console.log("ERRO SEM SESSAO");
-    console.log("ERRO SEM SESSAO");
-    console.log("ERRO SEM SESSAO");
-
     const redirectUrl: NextURL = req.nextUrl.clone();
     redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
     const response = NextResponse.redirect(redirectUrl);
