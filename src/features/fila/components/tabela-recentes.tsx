@@ -42,7 +42,7 @@ export default function TabelaRecentes() {
         </div>
       ) : (
         <div ref={parent}>
-          {clientesFiltrados.map((cliente) => (
+          {clientesFiltrados.slice(0, 5).map((cliente) => (
             <div key={cliente.id}>
               <ClienteRowTable cliente={cliente} />
               <Separator />
