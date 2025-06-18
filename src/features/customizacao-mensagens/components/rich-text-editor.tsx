@@ -8,7 +8,7 @@ import { Italic } from "@tiptap/extension-italic";
 
 import CabecalhoEditor from "./cabecalho-editor";
 
-import { TokenText } from "../extensions/Token";
+import { TokenText } from "../extensions/token";
 
 import Strike from "@tiptap/extension-strike";
 import FooterEditor from "./footer-editor";
