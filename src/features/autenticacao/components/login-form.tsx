@@ -119,6 +119,14 @@ export default function LoginForm() {
                         maxLength={6}
                         {...field}
                         pattern={REGEXP_ONLY_DIGITS}
+                        onPaste={(event) => {
+                          event.preventDefault();
+                          const pasted = event.clipboardData.getData("text");
+                          const clean = pasted.replace(/\D/g, "");
+                          if (clean.length <= 6) {
+                            field.onChange(clean); //
+                          }
+                        }}
                       >
                         <InputOTPGroup className="gap-2">
                           <InputOTPSlot
