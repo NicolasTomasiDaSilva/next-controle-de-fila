@@ -11,6 +11,7 @@ export default async function FilaPage() {
   const empresa: Empresa = await empresaService.obterEmpresa();
   const filaId = empresa.filas[0].id;
   const fila: Fila = await filaService.obterFilaPorId(filaId);
+  console.log("RENDERIZANDO FILA");
 
   return (
     <EmpresaProvider empresaInicial={empresa}>

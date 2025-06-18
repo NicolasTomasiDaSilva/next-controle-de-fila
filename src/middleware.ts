@@ -20,6 +20,8 @@ const REDIRECT_WHEN_AUTHENTICATED_ROUTE = "/fila";
 
 export async function middleware(req: NextRequest): Promise<NextResponse> {
   try {
+    console.log("11111111111111-----------------------------");
+
     const { pathname } = req.nextUrl;
     const publicRoute = publicRoutes.find((route) => route.path === pathname);
     const cookieStore = await cookies();
@@ -71,9 +73,6 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     throw new Error("Sem sessão");
   } catch (error: any) {
     if (error instanceof UnauthenticatedError) {
-      console.log("ERRO MIDDLEWARE UNAUTHENTICATED");
-      console.log(error);
-      console.log("ERRO MIDDLEWARE UNAUTHENTICATED");
       const redirectUrl: NextURL = req.nextUrl.clone();
       redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
       const response = NextResponse.redirect(redirectUrl);
@@ -89,6 +88,6 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
 export const config: MiddlewareConfig = {
   //TODO: remover |__nextjs_original-stack-frames
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!api/|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };
