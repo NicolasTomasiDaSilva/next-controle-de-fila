@@ -1,6 +1,6 @@
-import getTokensAction from "@/actions/cookies/get-tokens-action";
+import getTokensAction from "@/features/autenticacao/actions/cookies/get-tokens-action";
 import axiosRetry from "axios-retry";
-import isServer from "@/utils/is-server";
+import isServer from "@/lib/utils/is-server";
 
 import axios, {
   AxiosError,
@@ -11,12 +11,12 @@ import axios, {
 
 import { ZodSchema } from "zod";
 import { th } from "date-fns/locale";
-import saveTokensAction from "@/actions/cookies/save-tokens-action";
+import saveTokensAction from "@/features/autenticacao/actions/cookies/save-tokens-action";
 import {
   AuthTokens,
   authTokensSchema,
 } from "@/features/autenticacao/models/auth-tokens";
-import { UnauthenticatedError } from "@/errors/errors";
+import { UnauthenticatedError } from "@/lib/errors/errors";
 
 export const api = {
   get: get,

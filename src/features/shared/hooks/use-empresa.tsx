@@ -1,4 +1,4 @@
-import { EmpresaContext } from "@/contexts/empresa-context";
+import { EmpresaContext } from "@/features/shared/contexts/empresa-context";
 import { useContext } from "react";
 
 export function useEmpresa() {

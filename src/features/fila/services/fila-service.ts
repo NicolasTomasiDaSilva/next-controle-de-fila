@@ -1,8 +1,9 @@
-import { api } from "@/lib/api/api";
-import { AdicionarClienteDTO } from "@/dtos/cliente";
-import { AcoesAdminEnum } from "@/enums/acoes-admin-enum";
+import { api } from "@/lib/axios/axios";
+
+import { AcoesAdminEnum } from "@/lib/enums/acoes-admin-enum";
 import { Cliente } from "@/features/shared/models/cliente";
 import { Fila, filaSchema } from "@/features/shared/models/fila";
+import { AdicionarClienteDTO } from "../models/adicionar-cliente-dto";
 
 export const filaService = {
   async obterFilaPorId(id: string): Promise<Fila> {

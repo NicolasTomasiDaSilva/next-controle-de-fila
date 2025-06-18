@@ -10,11 +10,11 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-import { ClienteFormDTO } from "@/dtos/cliente";
 import { Plus } from "lucide-react";
 import useAdicionarCliente from "@/features/fila/hooks/use-adicionar-cliente";
 import { ClienteForm } from "./cliente-form";
 import { useFila } from "../hooks/use-fila";
+import { ClienteFormDTO } from "../models/cliente-form-dto";
 
 export function AdicionarClienteDialog() {
   const [open, setOpen] = useState(false);

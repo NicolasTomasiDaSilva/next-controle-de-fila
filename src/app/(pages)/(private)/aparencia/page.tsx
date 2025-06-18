@@ -1,5 +1,5 @@
 import { Section } from "@/features/shared/components/section";
-import { EmpresaProvider } from "@/contexts/empresa-context";
+import { EmpresaProvider } from "@/features/shared/contexts/empresa-context";
 
 import { empresaService } from "@/features/shared/services/empresa-service";
 import { AparenciaContent } from "@/features/customizacao-aparencia/components/aparencia-content";

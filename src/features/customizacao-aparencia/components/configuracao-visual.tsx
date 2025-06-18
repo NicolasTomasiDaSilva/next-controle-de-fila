@@ -25,17 +25,17 @@ import semLogo from "@/assets/images/sem-logo.png";
 
 import { HexColorPicker } from "react-colorful";
 import { ColorPickerField } from "./color-picker";
-import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
-import { coresPadrao } from "@/constantes/cores-padrao";
+import { AparenciaFormDTO } from "@/dtos/configuracao";
+import { coresPadrao } from "@/lib/constants/cores-padrao";
 
 interface ConfiguracaoVisualProps {
-  form: UseFormReturn<ConfiguracaoFormDTO>;
+  form: UseFormReturn<AparenciaFormDTO>;
   preview: string | null;
   setPreview: Dispatch<SetStateAction<string | null>>;
   inputFileRef: RefObject<HTMLInputElement | null>;
   handleUploadImagem: (
     e: ChangeEvent<HTMLInputElement>,
-    field: ControllerRenderProps<ConfiguracaoFormDTO, "logoUrl">
+    field: ControllerRenderProps<AparenciaFormDTO, "logoUrl">
   ) => void;
 }
 export function ConfiguracaoVisual({

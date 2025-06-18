@@ -1,6 +1,6 @@
 "use client";
 
-import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
+import { AparenciaFormDTO } from "@/dtos/configuracao";
 import { UseFormReturn } from "react-hook-form";
 
 import {
@@ -26,7 +26,7 @@ import AppClientePreview from "./app-cliente-preview/app-cliente-content";
 import React from "react";
 
 interface CardPreVisualizacaoAparenciaProps {
-  form: UseFormReturn<ConfiguracaoFormDTO>;
+  form: UseFormReturn<AparenciaFormDTO>;
 }
 
 export function CardPreVisualizacaoAparencia({

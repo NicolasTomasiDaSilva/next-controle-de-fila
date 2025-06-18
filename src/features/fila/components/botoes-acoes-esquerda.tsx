@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Cliente } from "@/features/shared/models/cliente";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { EditarClienteDialog } from "./editar-cliente-dialog";
-import { StatusEnum, StatusMap } from "@/enums/status-enum";
+import { StatusEnum, StatusMap } from "@/lib/enums/status-enum";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import {

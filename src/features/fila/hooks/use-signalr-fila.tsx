@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { HubConnection } from "@microsoft/signalr";
-import { connectToHub } from "@/lib/signalr/token/client";
+import { connectToHub } from "@/lib/signalr/signalr";
 
-import { eventosHub } from "@/constantes/eventos-hub";
+import { eventosHub } from "@/lib/constants/eventos-hub";
 import { toast } from "sonner";
 import {
   DataEventoClienteDesistirDTO,
   dataEventoClienteDesistirSchema,
-} from "@/dtos/data-evento-hub-acao-cliente";
+} from "@/features/fila/models/data-evento-hub-acao-cliente-dto";
 import { useAcoesCliente } from "./use-acoes-cliente";
 
 export function useSignalrFila() {

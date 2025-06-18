@@ -2,7 +2,7 @@ import Image from "next/image";
 import logoSistema from "@/assets/images/logo-sistema.png";
 import Menu from "./menu";
 import Link from "next/link";
-import { Badge } from "./ui/badge";
+import { Badge } from "@/components/ui/badge";
 
 export default function Header() {
   return (

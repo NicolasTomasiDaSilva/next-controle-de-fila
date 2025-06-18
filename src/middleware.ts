@@ -3,11 +3,11 @@ import { MiddlewareConfig, NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
 import { cookies } from "next/headers";
-import { jwtIsValid, tokensCookiesParams } from "./utils/jwt-utils";
-import { refreshToken } from "./lib/api/api";
+import { jwtIsValid, tokensCookiesParams } from "./lib/utils/jwt-utils";
+import { refreshToken } from "./lib/axios/axios";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { AuthTokens } from "./features/autenticacao/models/auth-tokens";
-import { UnauthenticatedError } from "./errors/errors";
+import { UnauthenticatedError } from "./lib/errors/errors";
 
 const publicRoutes = [
   { path: "/login", whenAuthenticated: "redirect" },

@@ -1,4 +1,4 @@
-import Header from "@/components/header";
+import Header from "@/features/shared/components/header";
 
 export default function PrivateLayout({
   children,

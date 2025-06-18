@@ -1,12 +1,12 @@
 "use client";
 
-import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
+import { AparenciaFormDTO } from "@/dtos/configuracao";
 import { Clock } from "lucide-react";
 
 import Image from "next/image";
 
 interface HeaderProps {
-  configuracao: ConfiguracaoFormDTO;
+  configuracao: AparenciaFormDTO;
 }
 
 export default function Header({ configuracao }: HeaderProps) {

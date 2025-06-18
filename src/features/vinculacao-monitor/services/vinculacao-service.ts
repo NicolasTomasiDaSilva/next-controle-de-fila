@@ -1,4 +1,4 @@
-import { api } from "@/lib/api/api";
+import { api } from "@/lib/axios/axios";
 import { CriarVinculacaoDTO } from "@/features/vinculacao-monitor/dto/criar-vinculacao-dto";
 import { Fila, filaSchema } from "@/features/shared/models/fila";
 

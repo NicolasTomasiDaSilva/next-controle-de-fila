@@ -1,7 +1,7 @@
 import { Section } from "@/features/shared/components/section";
 import { empresaService } from "@/features/shared/services/empresa-service";
 
-import { EmpresaProvider } from "@/contexts/empresa-context";
+import { EmpresaProvider } from "@/features/shared/contexts/empresa-context";
 import WhatsAppContent from "@/features/vinculacao-whatsapp/components/whatsapp-content";
 import { Empresa } from "@/features/shared/models/empresa";
 

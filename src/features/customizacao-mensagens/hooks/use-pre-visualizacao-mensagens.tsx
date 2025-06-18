@@ -1,6 +1,5 @@
-import { MensagensFormDTO } from "@/dtos/configuracao";
-
 import { UseFormReturn } from "react-hook-form";
+import { MensagensFormDTO } from "../models/mensagens-form-dto";
 
 export default function usePreVisualizacaoMensagens(
   form: UseFormReturn<MensagensFormDTO>

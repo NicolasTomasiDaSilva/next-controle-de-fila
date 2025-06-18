@@ -1,10 +1,12 @@
-import { api } from "@/lib/api/api";
+import { api } from "@/lib/axios/axios";
+import {
+  SessaoWhatsappDTO,
+  sessaoWhatsappSchema,
+} from "@/features/vinculacao-whatsapp/models/sessao-whatsapp-dto";
 import {
   QrcodeResponseDTO,
   qrcodeResponseSchema,
-  SessaoWhatsappDTO,
-  sessaoWhatsappSchema,
-} from "@/dtos/whatsapp";
+} from "../models/qrcode-response-dto";
 
 export const whatsappService = {
   async cadastrarWhatsapp(): Promise<void> {

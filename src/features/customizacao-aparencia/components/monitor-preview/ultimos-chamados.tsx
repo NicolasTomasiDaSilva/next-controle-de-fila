@@ -3,11 +3,11 @@ import { Card } from "@/components/ui/card";
 
 import { ArrowRight, CircleCheck, Ticket } from "lucide-react";
 import React, { useMemo, useState } from "react";
-import { lightenColor } from "@/utils/color-utils";
-import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
+import { lightenColor } from "@/lib/utils/color-utils";
+import { AparenciaFormDTO } from "@/dtos/configuracao";
 
 interface UltimosChamadosProps {
-  configuracao: ConfiguracaoFormDTO;
+  configuracao: AparenciaFormDTO;
 }
 
 export default function UltimosChamados({

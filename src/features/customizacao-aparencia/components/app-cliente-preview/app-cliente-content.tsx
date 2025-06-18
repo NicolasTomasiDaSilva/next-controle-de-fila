@@ -5,11 +5,11 @@ import { Clock, LogOut, MapPin } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
+import { AparenciaFormDTO } from "@/dtos/configuracao";
 import { useEffect, useRef, useState } from "react";
 
 interface AppClientePreviewProps {
-  configuracao: ConfiguracaoFormDTO;
+  configuracao: AparenciaFormDTO;
 }
 
 export default function AppClientePreview({

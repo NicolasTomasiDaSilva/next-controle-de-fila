@@ -1,5 +1,5 @@
 import { entidadeSchema } from "@/features/shared/models/entidade";
-import { StatusEnum } from "../../../enums/status-enum";
+import { StatusEnum } from "../../../lib/enums/status-enum";
 
 import { z } from "zod";
 import { telefoneSchema, texto } from "./values";

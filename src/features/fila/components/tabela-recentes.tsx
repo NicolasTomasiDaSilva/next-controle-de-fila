@@ -1,6 +1,6 @@
 "use client";
 
-import { StatusEnum } from "@/enums/status-enum";
+import { StatusEnum } from "@/lib/enums/status-enum";
 import ClienteRowTable from "./cliente-row-tabela";
 
 import React, { useMemo } from "react";

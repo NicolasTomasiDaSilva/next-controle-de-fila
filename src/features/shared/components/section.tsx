@@ -5,7 +5,7 @@ import { SectionTitle } from "./section-tittle";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "../../../components/ui/button";
-import { sectionCores } from "@/constantes/section-cores";
+import { sectionCores } from "@/lib/constants/section-cores";
 
 interface SectionProps {
   title?: string;

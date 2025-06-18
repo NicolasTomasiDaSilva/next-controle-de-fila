@@ -3,7 +3,7 @@ import {
   configuracaoSchema,
 } from "@/features/shared/models/configuracao";
 import { Empresa, empresaSchema } from "@/features/shared/models/empresa";
-import { api, axiosInstance } from "@/lib/api/api";
+import { api, axiosInstance } from "@/lib/axios/axios";
 
 import axios from "axios";
 

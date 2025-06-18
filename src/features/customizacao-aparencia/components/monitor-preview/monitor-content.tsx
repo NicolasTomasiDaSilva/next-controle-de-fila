@@ -1,13 +1,13 @@
 "use client";
 
-import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
+import { AparenciaFormDTO } from "@/dtos/configuracao";
 import ChamadoAtual from "./chamado-atual";
 
 import Header from "./header";
 import UltimosChamados from "./ultimos-chamados";
 
 interface MonitorPreviewProps {
-  configuracao: ConfiguracaoFormDTO;
+  configuracao: AparenciaFormDTO;
 }
 
 export default function MonitorPreview({ configuracao }: MonitorPreviewProps) {

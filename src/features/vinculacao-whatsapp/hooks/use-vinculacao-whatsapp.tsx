@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { empresaService } from "@/features/shared/services/empresa-service";
 import { whatsappService } from "@/features/vinculacao-whatsapp/services/whatsapp-service";
-import { SessaoWhatsappDTO } from "@/dtos/whatsapp";
+import { SessaoWhatsappDTO } from "@/features/vinculacao-whatsapp/models/sessao-whatsapp-dto";
 
 import { useEmpresa } from "../../shared/hooks/use-empresa";
 

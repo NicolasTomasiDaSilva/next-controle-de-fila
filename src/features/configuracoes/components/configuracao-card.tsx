@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { sectionCores } from "@/constantes/section-cores";
+import { sectionCores } from "@/lib/constants/section-cores";
 import { cn } from "@/lib/utils";
 import { ChevronRight, Palette } from "lucide-react";
 import Link from "next/link";

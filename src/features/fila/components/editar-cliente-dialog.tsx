@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 import { Edit, Save } from "lucide-react";
 import { Cliente } from "@/features/shared/models/cliente";
-import { ClienteFormDTO } from "@/dtos/cliente";
+
 import { ClienteForm } from "./cliente-form";
 import useEditarCliente from "@/features/fila/hooks/use-editar-cliente";
 import { useFila } from "../hooks/use-fila";
@@ -22,6 +22,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ClienteFormDTO } from "../models/cliente-form-dto";
 
 interface EditarClienteDialogProps {
   cliente: Cliente;

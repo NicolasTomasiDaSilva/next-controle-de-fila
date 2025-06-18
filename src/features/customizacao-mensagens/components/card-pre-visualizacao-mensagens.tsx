@@ -6,12 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { MensagensFormDTO } from "@/dtos/configuracao";
+
 import { format } from "@flasd/whatsapp-formatting";
 import { Car, Eye, MessageCircle } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
 import usePreVisualizacaoMensagens from "../hooks/use-pre-visualizacao-mensagens";
 import { Badge } from "@/components/ui/badge";
+import { MensagensFormDTO } from "../models/mensagens-form-dto";
 
 interface CardPreVisualizacaoMensagensProps {
   form: UseFormReturn<MensagensFormDTO>;

@@ -3,7 +3,7 @@
 import { Cliente } from "@/features/shared/models/cliente";
 
 import { Clock } from "lucide-react";
-import { StatusEnum, StatusMap } from "@/enums/status-enum";
+import { StatusEnum, StatusMap } from "@/lib/enums/status-enum";
 
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -12,13 +12,13 @@ import BotoesAcoesEsquerda from "./botoes-acoes-esquerda";
 import BotoesAcoesDireita from "./botoes-acoes-direita";
 import { useAcoesCliente } from "@/features/fila/hooks/use-acoes-cliente";
 
-import { formatarTelefone } from "@/utils/dados-utils";
+import { formatarTelefone } from "@/lib/utils/dados-utils";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import formatarData from "@/utils/data-hora-utils";
+import formatarData from "@/lib/utils/data-hora-utils";
 import { useTempoDecorrido } from "@/features/shared/hooks/use-tempo-decorrido";
 
 interface RowClientePersonalizadaProps {

@@ -1,9 +1,9 @@
 "use client";
-import { StatusEnum } from "@/enums/status-enum";
+import { StatusEnum } from "@/lib/enums/status-enum";
 import ClienteRowTable from "./cliente-row-tabela";
 import React, { useMemo, useRef, useState } from "react";
 
-import { normalizeString } from "@/utils/normalize-string";
+import { normalizeString } from "@/lib/utils/normalize-string";
 
 import { Users } from "lucide-react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";

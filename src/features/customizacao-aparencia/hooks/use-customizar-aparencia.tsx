@@ -1,8 +1,3 @@
-import {
-  ConfiguracaoFormDTO,
-  configuracaoFormSchema,
-} from "@/dtos/configuracao";
-
 import { empresaService } from "@/features/shared/services/empresa-service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChangeEvent, useRef, useState } from "react";
@@ -13,13 +8,17 @@ import z from "zod";
 import { uploadService } from "@/features/shared/services/upload-service";
 import { useEmpresa } from "../../shared/hooks/use-empresa";
 import { Configuracao } from "@/features/shared/models/configuracao";
+import {
+  AparenciaFormDTO,
+  aparenciaFormSchema,
+} from "../models/aparencia-form-dto";
 
 export const useCustomizarAparencia = () => {
   const { empresa } = useEmpresa();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const form = useForm<ConfiguracaoFormDTO>({
-    resolver: zodResolver(configuracaoFormSchema),
+  const form = useForm<AparenciaFormDTO>({
+    resolver: zodResolver(aparenciaFormSchema),
     defaultValues: {
       logoUrl: empresa.configuracao.logoUrl ?? "",
       nomeDisplay: empresa.configuracao.nomeDisplay,
@@ -29,7 +28,7 @@ export const useCustomizarAparencia = () => {
     },
   });
 
-  async function handleSubmit(data: z.infer<typeof configuracaoFormSchema>) {
+  async function handleSubmit(data: z.infer<typeof aparenciaFormSchema>) {
     try {
       setIsSubmitting(true);
       const configuracao: Configuracao = {
@@ -51,7 +50,7 @@ export const useCustomizarAparencia = () => {
 
   async function handleUploadImagem(
     e: ChangeEvent<HTMLInputElement>,
-    field: ControllerRenderProps<ConfiguracaoFormDTO, "logoUrl">
+    field: ControllerRenderProps<AparenciaFormDTO, "logoUrl">
   ) {
     const file = e.target.files?.[0];
     try {

@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { ClienteFormDTO, clienteFormSchema } from "@/dtos/cliente";
 import {
   Form,
   FormControl,
@@ -16,7 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Cliente } from "@/features/shared/models/cliente";
 import { useState } from "react";
-import { formatarTelefone } from "@/utils/dados-utils";
+import { formatarTelefone } from "@/lib/utils/dados-utils";
+import { ClienteFormDTO, clienteFormSchema } from "../models/cliente-form-dto";
 
 interface ClienteFormProps {
   botao?: () => React.ReactNode;

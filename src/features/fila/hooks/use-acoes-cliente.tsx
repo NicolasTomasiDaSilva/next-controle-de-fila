@@ -1,5 +1,5 @@
-import { AcoesAdminEnum } from "@/enums/acoes-admin-enum";
-import { StatusEnum } from "@/enums/status-enum";
+import { AcoesAdminEnum } from "@/lib/enums/acoes-admin-enum";
+import { StatusEnum } from "@/lib/enums/status-enum";
 import { Cliente } from "@/features/shared/models/cliente";
 import { Fila } from "@/features/shared/models/fila";
 import { filaService } from "@/features/fila/services/fila-service";
@@ -7,7 +7,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { useFila } from "./use-fila";
-import { DataEventoClienteDesistirDTO } from "@/dtos/data-evento-hub-acao-cliente";
+import { DataEventoClienteDesistirDTO } from "@/features/fila/models/data-evento-hub-acao-cliente-dto";
 
 export function useAcoesCliente() {
   const { fila, setFila, isSubmitting, setIsSubmitting } = useFila();

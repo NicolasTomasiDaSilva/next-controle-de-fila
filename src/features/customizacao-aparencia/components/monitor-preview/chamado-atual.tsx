@@ -1,10 +1,10 @@
 "use client";
 import { Card } from "@/components/ui/card";
-import { ConfiguracaoFormDTO } from "@/dtos/configuracao";
+import { AparenciaFormDTO } from "@/dtos/configuracao";
 import { Ticket } from "lucide-react";
 
 interface ChamadoAtualProps {
-  configuracao: ConfiguracaoFormDTO;
+  configuracao: AparenciaFormDTO;
 }
 export default function ChamadoAtual({ configuracao }: ChamadoAtualProps) {
   return (

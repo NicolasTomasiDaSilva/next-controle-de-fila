@@ -14,14 +14,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { mensagensPadraoWhatsapp } from "@/constantes/mensagens-padrao-whatsapp";
+import { mensagensPadraoWhatsapp } from "@/lib/constants/mensagens-padrao-whatsapp";
 
 import { PenLine, AlertCircle, RotateCcw } from "lucide-react";
 import RichTextEditor from "./rich-text-editor";
 import { UseFormReturn } from "react-hook-form";
-import { MensagensFormDTO } from "@/dtos/configuracao";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { MensagensFormDTO } from "../models/mensagens-form-dto";
 
 interface CardEditorMensagensProps {
   tabSelecionada: "mensagemEntrada" | "mensagemChamada" | "mensagemRemovido";

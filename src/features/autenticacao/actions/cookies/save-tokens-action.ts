@@ -1,6 +1,6 @@
 "use server";
 
-import { tokensCookiesParams } from "@/utils/jwt-utils";
+import { tokensCookiesParams } from "@/lib/utils/jwt-utils";
 import { cookies } from "next/headers";
 
 export default async function saveTokensAction({

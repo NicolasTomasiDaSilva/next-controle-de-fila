@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MensagensFormDTO, mensagensFormSchema } from "@/dtos/configuracao";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -12,6 +12,10 @@ import CardPreVisualizacaoMensagens from "./card-pre-visualizacao-mensagens";
 
 import CardEditorMensagens from "./card-editor-mensagens";
 import { usePersonalizacaoMensagens } from "@/features/customizacao-mensagens/hooks/use-personalizacao-mensagens";
+import {
+  MensagensFormDTO,
+  mensagensFormSchema,
+} from "../models/mensagens-form-dto";
 
 export default function MensagensContent() {
   const [resetCount, setResetCount] = useState(0);

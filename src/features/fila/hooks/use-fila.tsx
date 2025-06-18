@@ -1,4 +1,4 @@
-import { FilaContext } from "@/contexts/fila-context";
+import { FilaContext } from "@/features/fila/contexts/fila-context";
 
 import { useContext } from "react";
 

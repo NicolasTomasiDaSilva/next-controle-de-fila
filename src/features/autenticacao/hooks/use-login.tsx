@@ -12,7 +12,7 @@ import { useCooldown } from "@/features/shared/hooks/use-cooldown";
 
 import { empresaSchema } from "@/features/shared/models/empresa";
 import { autenticacaoService } from "../services/autenticacao-service";
-import { delayBotao } from "@/utils/delay-botao";
+import { delayBotao } from "@/lib/utils/delay-botao";
 import { codigoAcessoSchema } from "@/features/shared/models/values";
 
 export const useLogin = () => {
