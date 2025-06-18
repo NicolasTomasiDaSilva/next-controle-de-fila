@@ -1,5 +1,5 @@
 export default function formatarData(date: Date): string {
-  const dias = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SÁB"];
+  const dias = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
   const diaSemana = dias[date.getDay()];
   const dia = String(date.getDate()).padStart(2, "0");
@@ -7,5 +7,13 @@ export default function formatarData(date: Date): string {
   const hora = String(date.getHours()).padStart(2, "0");
   const minuto = String(date.getMinutes()).padStart(2, "0");
 
-  return `${diaSemana}. ${dia}/${mes} ${hora}:${minuto}`;
+  return `${diaSemana}, ${dia}/${mes} ${hora}:${minuto}`;
+}
+
+export function calcularTempoDecorridoEmMinutos(dataInicio: Date): string {
+  const agora = new Date();
+  const diferencaMs = agora.getTime() - dataInicio.getTime();
+  const minutos = Math.floor(diferencaMs / 1000 / 60);
+
+  return minutos.toFixed(0);
 }

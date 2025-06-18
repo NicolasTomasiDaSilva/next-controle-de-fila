@@ -12,7 +12,6 @@ import BotoesAcoesEsquerda from "./botoes-acoes-esquerda";
 import BotoesAcoesDireita from "./botoes-acoes-direita";
 import { useAcoesCliente } from "@/features/fila/hooks/use-acoes-cliente";
 
-import { TempoDecorrido } from "@/features/shared/components/tempo-decorrido";
 import { formatarTelefone } from "@/utils/formatar-telefone";
 import {
   Tooltip,
@@ -20,6 +19,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import formatarData from "@/utils/formatar-data";
+import { useTempoDecorrido } from "@/features/shared/hooks/use-tempo-decorrido";
 
 interface RowClientePersonalizadaProps {
   cliente: Cliente;
@@ -36,6 +36,11 @@ export default function ClienteRowTable({
     handleMoverBaixoCliente,
     handleVoltarCliente,
   } = useAcoesCliente();
+  const minutos = useTempoDecorrido(
+    cliente.status === StatusEnum.Aguardando
+      ? cliente.dataHoraCriado
+      : cliente.dataHoraAlterado
+  );
 
   return (
     <div className="w-full min-h-25 px-4  py-6 flex flex-col md:justify-between md:flex-row md:items-center md:pr-15 md:pl-0 gap-2 ">
@@ -76,15 +81,7 @@ export default function ClienteRowTable({
             <TooltipTrigger>
               <p className="text-sm text-muted-foreground flex flex-row  gap-1 items-center">
                 <Clock className="w-3 h-3" />
-                <span className="whitespace-nowrap">
-                  <TempoDecorrido
-                    data={
-                      cliente.status === StatusEnum.Aguardando
-                        ? cliente.dataHoraCriado
-                        : cliente.dataHoraAlterado
-                    }
-                  />
-                </span>
+                <span className="whitespace-nowrap">{minutos} min</span>
               </p>
             </TooltipTrigger>
             <TooltipContent>
