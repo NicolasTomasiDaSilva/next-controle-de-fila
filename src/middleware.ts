@@ -71,6 +71,9 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     throw new Error("Sem sessão");
   } catch (error: any) {
     if (error instanceof UnauthenticatedError) {
+      console.log("ERRO MIDDLEWARE UNAUTHENTICATED");
+      console.log(error);
+      console.log("ERRO MIDDLEWARE UNAUTHENTICATED");
       const redirectUrl: NextURL = req.nextUrl.clone();
       redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
       const response = NextResponse.redirect(redirectUrl);
