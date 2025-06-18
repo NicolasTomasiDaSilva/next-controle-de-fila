@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode";
-
+import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 type JWTPayload = {
   exp?: number;
   [key: string]: any;
@@ -19,8 +19,6 @@ export function jwtIsValid(token?: string): boolean {
     return false;
   }
 }
-
-import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export const tokensCookiesParams: Partial<ResponseCookie> = {
   httpOnly: true, // Impede acesso via JavaScript (protege contra XSS)
