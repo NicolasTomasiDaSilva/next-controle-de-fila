@@ -1,7 +1,8 @@
 "use client";
 import { Card } from "@/components/ui/card";
-import { AparenciaFormDTO } from "@/dtos/configuracao";
+
 import { Ticket } from "lucide-react";
+import { AparenciaFormDTO } from "../../models/aparencia-form-dto";
 
 interface ChamadoAtualProps {
   configuracao: AparenciaFormDTO;

@@ -1,6 +1,6 @@
 "use client";
 
-import { AparenciaFormDTO } from "@/dtos/configuracao";
+import { AparenciaFormDTO } from "../../models/aparencia-form-dto";
 import ChamadoAtual from "./chamado-atual";
 
 import Header from "./header";

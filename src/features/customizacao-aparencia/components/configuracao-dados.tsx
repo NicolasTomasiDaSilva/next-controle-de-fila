@@ -17,8 +17,9 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { UseFormReturn } from "react-hook-form";
-import { AparenciaFormDTO } from "@/dtos/configuracao";
+
 import { Building2 } from "lucide-react";
+import { AparenciaFormDTO } from "../models/aparencia-form-dto";
 
 interface ConfiguracaoDadosProps {
   form: UseFormReturn<AparenciaFormDTO>;

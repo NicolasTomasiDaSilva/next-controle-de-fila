@@ -1,9 +1,9 @@
 "use client";
 
-import { AparenciaFormDTO } from "@/dtos/configuracao";
 import { Clock } from "lucide-react";
 
 import Image from "next/image";
+import { AparenciaFormDTO } from "../../models/aparencia-form-dto";
 
 interface HeaderProps {
   configuracao: AparenciaFormDTO;

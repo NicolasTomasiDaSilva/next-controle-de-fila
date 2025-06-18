@@ -1,6 +1,5 @@
 "use client";
 
-import { AparenciaFormDTO } from "@/dtos/configuracao";
 import { UseFormReturn } from "react-hook-form";
 
 import {
@@ -24,6 +23,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import MonitorPreview from "./monitor-preview/monitor-content";
 import AppClientePreview from "./app-cliente-preview/app-cliente-content";
 import React from "react";
+import { AparenciaFormDTO } from "../models/aparencia-form-dto";
 
 interface CardPreVisualizacaoAparenciaProps {
   form: UseFormReturn<AparenciaFormDTO>;

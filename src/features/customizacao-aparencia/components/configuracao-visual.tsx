@@ -25,8 +25,9 @@ import semLogo from "@/assets/images/sem-logo.png";
 
 import { HexColorPicker } from "react-colorful";
 import { ColorPickerField } from "./color-picker";
-import { AparenciaFormDTO } from "@/dtos/configuracao";
+
 import { coresPadrao } from "@/lib/constants/cores-padrao";
+import { AparenciaFormDTO } from "../models/aparencia-form-dto";
 
 interface ConfiguracaoVisualProps {
   form: UseFormReturn<AparenciaFormDTO>;

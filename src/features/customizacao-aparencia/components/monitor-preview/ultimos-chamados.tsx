@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { ArrowRight, CircleCheck, Ticket } from "lucide-react";
 import React, { useMemo, useState } from "react";
 import { lightenColor } from "@/lib/utils/color-utils";
-import { AparenciaFormDTO } from "@/dtos/configuracao";
+import { AparenciaFormDTO } from "../../models/aparencia-form-dto";
 
 interface UltimosChamadosProps {
   configuracao: AparenciaFormDTO;

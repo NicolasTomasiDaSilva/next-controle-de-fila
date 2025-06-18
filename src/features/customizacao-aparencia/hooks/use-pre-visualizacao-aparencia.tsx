@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { UseFormReturn, useWatch } from "react-hook-form";
-import { AparenciaFormDTO } from "@/dtos/configuracao";
+import { AparenciaFormDTO } from "../models/aparencia-form-dto";
 
 interface usePreVisualizacaoAparenciaProps {
   form: UseFormReturn<AparenciaFormDTO>;

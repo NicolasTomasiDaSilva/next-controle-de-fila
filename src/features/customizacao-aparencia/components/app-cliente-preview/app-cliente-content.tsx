@@ -5,8 +5,9 @@ import { Clock, LogOut, MapPin } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import { AparenciaFormDTO } from "@/dtos/configuracao";
+
 import { useEffect, useRef, useState } from "react";
+import { AparenciaFormDTO } from "../../models/aparencia-form-dto";
 
 interface AppClientePreviewProps {
   configuracao: AparenciaFormDTO;
