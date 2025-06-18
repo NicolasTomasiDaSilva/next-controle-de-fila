@@ -4,6 +4,7 @@ import { authTokensSchema } from "@/features/autenticacao/models/auth-tokens";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { tokensCookiesParams } from "@/utils/jwt-utils";
 
 export async function POST(request: Request) {
   const body = await request.json();
