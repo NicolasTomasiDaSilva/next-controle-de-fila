@@ -31,7 +31,7 @@ export const filaService = {
     return (await api.post<Fila>(
       `/clientes/atualizar-status`,
       {
-        ids: [id],
+        id: id,
         acao: acao,
       },
       {
