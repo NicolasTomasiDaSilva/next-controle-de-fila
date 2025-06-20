@@ -28,7 +28,7 @@ export function ConfiguracaoCard({
     <Card
       asChild
       className={cn(
-        "cursor-pointer transition-transform duration-300  hover:scale-101 group",
+        "cursor-pointer transition-transform duration-300  hover:scale-101 group min-h-40",
         estilos.border,
         className
       )}
@@ -42,7 +42,7 @@ export function ConfiguracaoCard({
                 estilos.bg
               )}
             >
-              {icone(estilos.icon)}
+              {icone(estilos.text)}
             </div>
             <CardTitle>{titulo}</CardTitle>
           </div>

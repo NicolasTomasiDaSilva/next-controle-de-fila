@@ -3,7 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Cliente } from "@/features/shared/models/cliente";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { EditarClienteDialog } from "./editar-cliente-dialog";
-import { StatusEnum, StatusMap } from "@/lib/enums/status-enum";
+import {
+  pegarCorPorStatus,
+  pegarLabelPorStatus,
+  StatusEnum,
+} from "@/lib/enums/status-enum";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -26,13 +30,15 @@ export default function BotoesAcoesEsquerda({
   isSubmitting,
 }: BotoesAcoesEsquerdaProps) {
   if (cliente.status !== StatusEnum.Aguardando) {
+    const cor = pegarCorPorStatus(cliente.status);
+    const label = pegarLabelPorStatus(cliente.status);
     return (
       <div className=" flex flex-row items-center justify-center">
         <Badge
           variant="secondary"
-          className={cn(StatusMap[cliente.status].className)}
+          className={cn("border", cor.border, cor.bg, cor.text)}
         >
-          {StatusMap[cliente.status].label}
+          {label}
         </Badge>
       </div>
     );

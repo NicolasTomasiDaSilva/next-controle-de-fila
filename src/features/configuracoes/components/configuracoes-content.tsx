@@ -1,4 +1,10 @@
-import { MessageCircle, MessageSquare, Monitor, Palette } from "lucide-react";
+import {
+  ChartLine,
+  MessageCircle,
+  MessageSquare,
+  Monitor,
+  Palette,
+} from "lucide-react";
 import { ConfiguracaoCard } from "./configuracao-card";
 
 export default function ConfiguracoesContent() {
@@ -43,6 +49,16 @@ export default function ConfiguracoesContent() {
         className="col-span-2 sm:col-span-1"
         cor="cyan"
         link="/vinculacao"
+      />
+      <ConfiguracaoCard
+        icone={(cor: string) => {
+          return <ChartLine className={`${cor}`} />;
+        }}
+        titulo="Estatísticas"
+        texto="Visualize estatísticas da sua fila nas últimas 24 horas"
+        className="col-span-2 sm:col-span-1"
+        cor="indigo"
+        link="/estatisticas"
       />
     </div>
   );

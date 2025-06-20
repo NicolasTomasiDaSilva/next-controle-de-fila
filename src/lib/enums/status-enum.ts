@@ -1,3 +1,5 @@
+import { Cor, sectionCores } from "../constants/section-cores";
+
 // types/statusEnum.ts
 export enum StatusEnum {
   Aguardando = 1,
@@ -7,36 +9,31 @@ export enum StatusEnum {
   Ausente = 6,
 }
 
-export const StatusLabel: Record<StatusEnum, string> = {
-  [StatusEnum.Aguardando]: "Aguardando",
-  [StatusEnum.Chamado]: "Chamado",
-  [StatusEnum.Desistente]: "Desistente",
-  [StatusEnum.Removido]: "Removido",
-  [StatusEnum.Ausente]: "Não Compareceu",
-};
-
-export const StatusMap: Record<
-  StatusEnum,
-  { label: string; className: string }
-> = {
-  [StatusEnum.Aguardando]: {
-    label: "Aguardando",
-    className: "bg-blue-100 text-blue-600 border border-blue-300",
-  },
-  [StatusEnum.Chamado]: {
-    label: "Chamado",
-    className: "bg-green-100 text-green-600 border border-green-300",
-  },
-  [StatusEnum.Desistente]: {
-    label: "Desistente",
-    className: "bg-yellow-100 text-yellow-600 border border-yellow-300",
-  },
-  [StatusEnum.Removido]: {
-    label: "Removido",
-    className: "bg-red-100 text-red-600 border border-red-300",
-  },
-  [StatusEnum.Ausente]: {
-    label: "Não Compareceu",
-    className: "bg-orange-100 text-orange-600 border border-orange-300",
-  },
-};
+export function pegarCorPorStatus(status: StatusEnum): Cor {
+  switch (status) {
+    case StatusEnum.Chamado:
+      return sectionCores.green;
+    case StatusEnum.Desistente:
+      return sectionCores.yellow;
+    case StatusEnum.Removido:
+      return sectionCores.red;
+    case StatusEnum.Ausente:
+      return sectionCores.orange;
+    default:
+      throw new Error("Cor status inválida");
+  }
+}
+export function pegarLabelPorStatus(status: StatusEnum): string {
+  switch (status) {
+    case StatusEnum.Chamado:
+      return "Chamado";
+    case StatusEnum.Desistente:
+      return "Desistente";
+    case StatusEnum.Removido:
+      return "Removido";
+    case StatusEnum.Ausente:
+      return "Não Compareceu";
+    default:
+      throw new Error("Label status inválida");
+  }
+}
