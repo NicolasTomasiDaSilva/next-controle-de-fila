@@ -19,9 +19,13 @@ const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/login";
 const REDIRECT_WHEN_AUTHENTICATED_ROUTE = "/fila";
 
 export async function middleware(req: NextRequest): Promise<NextResponse> {
-  try {
-    console.log("11111111111111-----------------------------");
+  // 🚫 Ignora requisições internas do Next (server actions / RSC updates)
+  const accept = req.headers.get("accept");
+  if (req.method === "POST" && accept && accept.includes("text/x-component")) {
+    return NextResponse.next();
+  }
 
+  try {
     const { pathname } = req.nextUrl;
     const publicRoute = publicRoutes.find((route) => route.path === pathname);
     const cookieStore = await cookies();
@@ -88,6 +92,6 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
 export const config: MiddlewareConfig = {
   //TODO: remover |__nextjs_original-stack-frames
   matcher: [
-    "/((?!api/|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!api|_next/static|_next/image|/favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };
