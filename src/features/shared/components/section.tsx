@@ -33,7 +33,7 @@ export function Section({ title, children, cor, linkRetorno }: SectionProps) {
             </Button>
           </Link>
         )}
-        {title && <SectionTitle title={title} cor={corSection.traco} />}
+        {title && <SectionTitle title={title} cor={corSection.bg500} />}
       </div>
       {children}
     </section>

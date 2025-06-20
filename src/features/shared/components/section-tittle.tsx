@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, intensificarCor } from "@/lib/utils";
 
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";

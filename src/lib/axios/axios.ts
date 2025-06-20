@@ -178,6 +178,7 @@ async function request<TResponse = any, TData = any>({
 
     if (schema) {
       const resultado = schema.safeParse(response.data);
+
       if (!resultado.success) {
         throw new Error("Resposta da API inválida.");
       }

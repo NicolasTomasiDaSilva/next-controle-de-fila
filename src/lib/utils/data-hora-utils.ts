@@ -10,6 +10,18 @@ export default function formatarData(date: Date): string {
   return `${diaSemana}, ${dia}/${mes} ${hora}:${minuto}`;
 }
 
+export function formatarIntervaloTempoEmMinutos(tempo: string): string {
+  const [horasStr, minutosStr, segundosStr] = tempo.split(":");
+
+  const horas = Number(horasStr);
+  const minutos = Number(minutosStr);
+  const segundos = Number(segundosStr);
+
+  const totalMinutos = horas * 60 + minutos + segundos / 60;
+
+  return totalMinutos.toFixed(0);
+}
+
 export function calcularTempoDecorridoEmMinutos(dataInicio: Date): string {
   const agora = new Date();
   const diferencaMs = agora.getTime() - dataInicio.getTime();

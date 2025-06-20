@@ -46,7 +46,12 @@ export function ConfiguracaoCard({
             </div>
             <CardTitle>{titulo}</CardTitle>
           </div>
-          <ChevronRight className={"w-5 h-5 text-gray-400 transition-colors"} />
+          <ChevronRight
+            className={cn(
+              "w-5 h-5 text-gray-400 transition-colors",
+              estilos.text
+            )}
+          />
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">{texto}</p>
