@@ -12,52 +12,46 @@ import { UnauthenticatedError } from "./lib/errors/errors";
 const publicRoutes = [
   { path: "/login", whenAuthenticated: "redirect" },
   { path: "/register", whenAuthenticated: "redirect" },
-  { path: "/previews/app-cliente", whenAuthenticated: "ignore" },
-  { path: "/previews/monitor", whenAuthenticated: "ignore" },
 ] as const;
 const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/login";
 const REDIRECT_WHEN_AUTHENTICATED_ROUTE = "/fila";
 
 export async function middleware(req: NextRequest): Promise<NextResponse> {
-  console.log("inicio middleware");
-  // 🚫 Ignora requisições internas do Next (server actions / RSC updates)
-  const accept = req.headers.get("accept");
-  if (req.method === "POST" && accept && accept.includes("text/x-component")) {
-    return NextResponse.next();
+  const { pathname } = req.nextUrl;
+  const publicRoute = isPublicRoute(pathname);
+  const cookieStore = await cookies();
+  const accessTokenStored = cookieStore.get("accessToken")?.value;
+  const refreshTokenStored = cookieStore.get("refreshToken")?.value;
+
+  console.log("executou o middleware");
+
+  if (!refreshTokenStored && !publicRoute) {
+    const redirectUrl: NextURL = req.nextUrl.clone();
+    redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
+    return NextResponse.redirect(redirectUrl);
   }
 
+  if (
+    refreshTokenStored &&
+    publicRoute &&
+    publicRoute?.whenAuthenticated === "redirect"
+  ) {
+    const redirectUrl: NextURL = req.nextUrl.clone();
+    redirectUrl.pathname = REDIRECT_WHEN_AUTHENTICATED_ROUTE;
+    return NextResponse.redirect(redirectUrl);
+  }
+
+  if (
+    accessTokenStored &&
+    refreshTokenStored &&
+    jwtIsValid(accessTokenStored) &&
+    jwtIsValid(refreshTokenStored) &&
+    !publicRoute
+  ) {
+    return NextResponse.next();
+  }
   try {
-    const { pathname } = req.nextUrl;
-    const publicRoute = publicRoutes.find((route) => route.path === pathname);
-    const cookieStore = await cookies();
-    const accessTokenStored = cookieStore.get("accessToken")?.value;
-    const refreshTokenStored = cookieStore.get("refreshToken")?.value;
-
-    if (!refreshTokenStored && !publicRoute) {
-      const redirectUrl: NextURL = req.nextUrl.clone();
-      redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
-      return NextResponse.redirect(redirectUrl);
-    }
-
-    if (
-      refreshTokenStored &&
-      publicRoute &&
-      publicRoute?.whenAuthenticated === "redirect"
-    ) {
-      const redirectUrl: NextURL = req.nextUrl.clone();
-      redirectUrl.pathname = REDIRECT_WHEN_AUTHENTICATED_ROUTE;
-      return NextResponse.redirect(redirectUrl);
-    }
-
-    if (publicRoute) {
-      return NextResponse.next();
-    }
-
-    if (jwtIsValid(accessTokenStored) && jwtIsValid(refreshTokenStored)) {
-      return NextResponse.next();
-    }
-
-    if (jwtIsValid(refreshTokenStored) && refreshTokenStored) {
+    if (refreshTokenStored && jwtIsValid(refreshTokenStored) && !publicRoute) {
       const response = NextResponse.next();
 
       const tokens: AuthTokens = (await refreshToken(
@@ -75,7 +69,7 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
       );
       return response;
     }
-    throw new Error("Sem sessão");
+    return NextResponse.next();
   } catch (error: any) {
     if (error instanceof UnauthenticatedError) {
       const redirectUrl: NextURL = req.nextUrl.clone();
@@ -93,6 +87,28 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
 export const config: MiddlewareConfig = {
   //TODO: remover |__nextjs_original-stack-frames
   matcher: [
-    "/((?!api|_next/static|_next/image|/favicon.ico|sitemap.xml|robots.txt).*)",
+    "/aparencia/:path*",
+    "/configuracoes/:path*",
+    "/estatisticas/:path*",
+    "/fila/:path*",
+    "/mensagens/:path*",
+    "/vinculacao/:path*",
+    "/whatsapp/:path*",
+    "/login/:path*",
+    "/register/:path*",
   ],
 };
+
+function isPublicRoute(
+  pathname: string
+): (typeof publicRoutes)[number] | undefined {
+  return publicRoutes.find((route) => {
+    if (route.path.includes(":")) {
+      const regexPath = new RegExp(
+        "^" + route.path.replace(/:[^\/]+/g, "[^/]+") + "$"
+      );
+      return regexPath.test(pathname);
+    }
+    return route.path === pathname;
+  });
+}
