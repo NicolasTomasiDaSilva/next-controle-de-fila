@@ -12,7 +12,6 @@ export default async function EstatisticasPage() {
   const estatisticasFila: EstatisticasFilaDTO =
     await estatisticasService.obterEstatisticasFilaPorId(filaId);
 
-  console.log(estatisticasFila);
   return (
     <Section title="Estatísticas" linkRetorno={"/configuracoes"} cor="indigo">
       <EstatisticasContent estatisticasFila={estatisticasFila} />

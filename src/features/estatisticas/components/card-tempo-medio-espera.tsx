@@ -27,21 +27,21 @@ export default function CardTempoMedioEspera({
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="flex flex-row justify-between items-center">
+          <p className="font-semibold ">Tempo Mínimo:</p>
+          <p className="text-lg font-bold whitespace-nowrap text-green-500">
+            {formatarIntervaloTempoEmMinutos(estatisticas.tempoMinimoEspera)}{" "}
+            min
+          </p>
+        </div>
+        <div className="flex flex-row justify-between items-center">
           <p className="font-semibold">Tempo Médio:</p>
           <p className="text-lg font-bold whitespace-nowrap">
             {formatarIntervaloTempoEmMinutos(estatisticas.tempoMedioEspera)} min
           </p>
         </div>
         <div className="flex flex-row justify-between items-center">
-          <p className="font-semibold">Tempo Mínimo:</p>
-          <p className="text-lg font-bold whitespace-nowrap">
-            {formatarIntervaloTempoEmMinutos(estatisticas.tempoMinimoEspera)}{" "}
-            min
-          </p>
-        </div>
-        <div className="flex flex-row justify-between items-center">
-          <p className="font-semibold">Tempo Máximo:</p>
-          <p className="text-lg font-bold whitespace-nowrap">
+          <p className="font-semibold  ">Tempo Máximo:</p>
+          <p className="text-lg font-bold whitespace-nowrap text-red-500">
             {formatarIntervaloTempoEmMinutos(estatisticas.tempoMaximoEspera)}{" "}
             min
           </p>

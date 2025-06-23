@@ -1,6 +1,7 @@
 import { StatusEnum } from "@/lib/enums/status-enum";
 import CardNumeroClientes from "./card-numero-clientes";
 import {
+  Clock,
   UserCheck,
   UserRoundCheck,
   UserRoundMinus,
@@ -47,7 +48,12 @@ export default function EstatisticasContent({
       : 0;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="space-y-4">
+      <div className="flex justify-end flex-row items-center gap-1 text-muted-foreground">
+        <Clock className="h-4 w-4" />
+        <p className="text-right text-muted-foreground">Últimas 24 h</p>
+      </div>
+
       <div className="flex flex-col gap-4  md:grid md:grid-cols-2 xl:grid-cols-4 ">
         <CardNumeroClientes
           icone={(className) => (
@@ -84,6 +90,7 @@ export default function EstatisticasContent({
           status={StatusEnum.Removido}
         />
       </div>
+
       <div className="flex flex-col gap-4 md:flex-row items-start">
         <CardDistribuicaoStatus estatisticasFila={estatisticasFila} />
         <CardTempoMedioEspera estatisticas={estatisticasFila} />

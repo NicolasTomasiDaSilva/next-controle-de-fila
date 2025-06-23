@@ -19,12 +19,13 @@ const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/login";
 const REDIRECT_WHEN_AUTHENTICATED_ROUTE = "/fila";
 
 export async function middleware(req: NextRequest): Promise<NextResponse> {
+  console.log("inicio middleware");
   // 🚫 Ignora requisições internas do Next (server actions / RSC updates)
   const accept = req.headers.get("accept");
   if (req.method === "POST" && accept && accept.includes("text/x-component")) {
     return NextResponse.next();
   }
-
+  console.log("executou middleware");
   try {
     const { pathname } = req.nextUrl;
     const publicRoute = publicRoutes.find((route) => route.path === pathname);
@@ -77,6 +78,15 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
     throw new Error("Sem sessão");
   } catch (error: any) {
     if (error instanceof UnauthenticatedError) {
+      console.log("🚫 UnauthenticatedError Middleware");
+      console.log("🚫 UnauthenticatedError Middleware");
+      console.log("🚫 UnauthenticatedError Middleware");
+      console.log("🚫 UnauthenticatedError Middleware");
+      console.log(error);
+      console.log("🚫 UnauthenticatedError Middleware");
+      console.log("🚫 UnauthenticatedError Middleware");
+      console.log("🚫 UnauthenticatedError Middleware");
+      console.log("🚫 UnauthenticatedError Middleware");
       const redirectUrl: NextURL = req.nextUrl.clone();
       redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
       const response = NextResponse.redirect(redirectUrl);
