@@ -33,7 +33,7 @@ export default function BotoesAcoesEsquerda({
     const cor = pegarCorPorStatus(cliente.status);
     const label = pegarLabelPorStatus(cliente.status);
     return (
-      <div className=" flex flex-row items-center justify-center">
+      <div className=" flex flex-row items-center justify-center md:w-30">
         <Badge
           variant="secondary"
           className={cn("border", cor.border, cor.bg, cor.text)}

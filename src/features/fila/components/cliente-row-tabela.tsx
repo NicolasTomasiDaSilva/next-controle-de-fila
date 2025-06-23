@@ -3,7 +3,7 @@
 import { Cliente } from "@/features/shared/models/cliente";
 
 import { Clock } from "lucide-react";
-import { StatusEnum, StatusMap } from "@/lib/enums/status-enum";
+import { StatusEnum } from "@/lib/enums/status-enum";
 
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -43,7 +43,7 @@ export default function ClienteRowTable({
   );
 
   return (
-    <div className="w-full min-h-25 px-4  py-6 flex flex-col md:justify-between md:flex-row md:items-center md:pr-15 md:pl-0 gap-2 ">
+    <div className="w-full min-h-25 px-4  py-6 flex flex-col md:justify-between md:flex-row md:items-center md:pr-15 md:pl-0 gap-4 ">
       <div className="hidden md:flex w-15 shrink-0 items-center justify-center">
         <span className="text-xl font-bold text-blue-600">
           {cliente.posicao}
@@ -97,7 +97,15 @@ export default function ClienteRowTable({
         </div>
       </div>
 
-      <div className=" flex flex-row  items-center justify-between gap-2">
+      <div
+        className={`flex flex-row items-center justify-between gap-2 
+    ${
+      cliente.status !== StatusEnum.Aguardando
+        ? "md:flex-col md:items-center md:gap-1"
+        : ""
+    }
+  `}
+      >
         <div className="flex flex-row items-center">
           <BotoesAcoesEsquerda
             handleMoverCimaCliente={handleMoverCimaCliente}
