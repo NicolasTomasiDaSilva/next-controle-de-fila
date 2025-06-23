@@ -29,7 +29,9 @@ export function useSignalrFila() {
 
         connection.onclose((error) => {
           if (isReconnecting.current) {
-            toast.error("Conexão perdida. Não foi possível reconectar.");
+            toast.error("Conexão perdida. Não foi possível reconectar.", {
+              duration: Infinity,
+            });
           }
         });
 
