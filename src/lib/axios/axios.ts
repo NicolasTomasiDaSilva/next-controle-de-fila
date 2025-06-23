@@ -66,11 +66,7 @@ export function axiosInstance({
     (response) => response, // sucesso
     async (error) => {
       const originalRequest = error.config;
-      if (
-        error.response?.status === 401 &&
-        !originalRequest._retry &&
-        !isServer()
-      ) {
+      if (error.response?.status === 401 && !originalRequest._retry) {
         if (isRefreshing) {
           return new Promise((resolve, reject) => {
             failedQueue.push({
@@ -189,7 +185,7 @@ async function request<TResponse = any, TData = any>({
     }
 
     return rawResponse ? response : response.data;
-  } catch (error) {
+  } catch (error: any) {
     if (isAxiosError(error)) {
       throw error;
     }
@@ -272,10 +268,9 @@ export async function refreshToken(refreshToken: string): Promise<AuthTokens> {
       { refreshToken },
       { schema: authTokensSchema, withoutRetry: true }
     )) as AuthTokens;
-
     return tokens;
   } catch (error: any) {
-    if (error.response?.status === 401) {
+    if (error.response.status === 401) {
       throw new UnauthenticatedError();
     }
     throw error;
