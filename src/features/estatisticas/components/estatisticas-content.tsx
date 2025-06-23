@@ -26,15 +26,25 @@ export default function EstatisticasContent({
     estatisticasFila.quantidadeClientesRemovidos;
 
   const porcentagemChamados =
-    (estatisticasFila.quantidadeClientesChamados * 100) / totalClientesRecentes;
+    totalClientesRecentes > 0
+      ? (estatisticasFila.quantidadeClientesChamados * 100) /
+        totalClientesRecentes
+      : 0;
   const porcentagemDesistentes =
-    (estatisticasFila.quantidadeClientesDesistentes * 100) /
-    totalClientesRecentes;
+    totalClientesRecentes > 0
+      ? (estatisticasFila.quantidadeClientesDesistentes * 100) /
+        totalClientesRecentes
+      : 0;
   const porcentagemAusentes =
-    (estatisticasFila.quantidadeClientesAusentes * 100) / totalClientesRecentes;
+    totalClientesRecentes > 0
+      ? (estatisticasFila.quantidadeClientesAusentes * 100) /
+        totalClientesRecentes
+      : 0;
   const porcentagemRemovidos =
-    (estatisticasFila.quantidadeClientesRemovidos * 100) /
-    totalClientesRecentes;
+    totalClientesRecentes > 0
+      ? (estatisticasFila.quantidadeClientesRemovidos * 100) /
+        totalClientesRecentes
+      : 0;
 
   return (
     <div className="flex flex-col gap-4">
