@@ -49,7 +49,7 @@ export const usePreVisualizacaoAparencia = ({
 
   const MAX_HEIGHT = 800;
   const monitorSize = { width: 1920, height: 1080 };
-  const celularSize = { width: 1080, height: 1920 };
+  const celularSize = { width: 1080 / 2, height: 1920 / 2 };
 
   useEffect(() => {
     function updateSize() {
