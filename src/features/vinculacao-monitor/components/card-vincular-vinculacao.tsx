@@ -73,7 +73,7 @@ export default function CardVincularVinculacao() {
               <QrCode className="!w-20 !h-20 text-gray-500" />
             </Button>
             {qrScannerOpen && (
-              <QrScanner3
+              <QrScanner2
                 onScan={handleQrScan}
                 onClose={() => setQrScannerOpen(false)}
               />
