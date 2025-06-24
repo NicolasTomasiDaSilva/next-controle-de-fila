@@ -113,9 +113,9 @@ export function ConfiguracaoVisual({
                   <Image
                     src={preview || field.value || semLogo}
                     alt="Preview logo"
-                    width={128}
-                    height={128}
-                    className="rounded-md border object-cover"
+                    width={100}
+                    height={100}
+                    className="rounded-md border object-cover h-30 w-30 object-cover"
                     priority
                   />
                 )}
