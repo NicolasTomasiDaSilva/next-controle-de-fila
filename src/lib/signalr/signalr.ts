@@ -1,8 +1,9 @@
+import getTokensAction from "@/features/autenticacao/actions/cookies/get-tokens-action";
 import { HubConnectionBuilder, HubConnection } from "@microsoft/signalr";
 
 export async function connectToHub(): Promise<HubConnection> {
-  const res = await fetch("/api/signalr");
-  const { url } = await res.json();
+  const { accessToken } = await getTokensAction();
+  const url: string = `${process.env.NEXT_PUBLIC_SIGNALR_BASE_URL}/controledefilahub?access_token=${accessToken}`;
 
   const connection = new HubConnectionBuilder()
     .withUrl(url)
