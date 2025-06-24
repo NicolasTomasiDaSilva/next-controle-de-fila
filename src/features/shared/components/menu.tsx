@@ -8,29 +8,28 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ChevronDown, ListOrdered, LogOut, Settings, User } from "lucide-react";
+import {
+  ChevronDown,
+  ListOrdered,
+  LogOut,
+  MenuIcon,
+  MoreVertical,
+  Settings,
+  User,
+} from "lucide-react";
 import Link from "next/link";
 import { useLogout } from "@/features/autenticacao/hooks/use-logout";
+import { Button } from "@/components/ui/button";
 
 export default function Menu() {
   const { logout, isSubmitting } = useLogout();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button
-          className="flex items-center gap-2 rounded-md p-2 
-                     focus:outline-none focus-visible:ring-0 cursor-pointer"
-        >
-          <Avatar className="w-10 h-10">
-            <AvatarImage />
-            <AvatarFallback>AP</AvatarFallback>
-          </Avatar>
-          <div className="text-left hidden sm:block">
-            <p className="text-sm font-medium text-gray-900">Administrativo</p>
-            <p className="text-xs text-gray-500">Administrador</p>
-          </div>
-          <ChevronDown className="w-4 h-4 text-gray-500" />
-        </button>
+        <Button variant="ghost" size="sm" className="gap-2 h-9">
+          <ChevronDown className="!h-5 !w-5" />
+          <User className="!h-5 !w-5" />
+        </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
