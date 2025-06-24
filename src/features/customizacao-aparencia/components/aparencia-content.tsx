@@ -16,6 +16,7 @@ export function AparenciaContent() {
     setPreview,
     inputFileRef,
     handleUploadImagem,
+    isUploading,
   } = useCustomizarAparencia();
 
   return (
@@ -29,6 +30,7 @@ export function AparenciaContent() {
               setPreview={setPreview}
               form={form}
               inputFileRef={inputFileRef}
+              isUploading={isUploading}
               handleUploadImagem={handleUploadImagem}
             ></ConfiguracaoVisual>
           </div>

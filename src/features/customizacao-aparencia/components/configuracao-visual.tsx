@@ -28,12 +28,14 @@ import { ColorPickerField } from "./color-picker";
 
 import { coresPadrao } from "@/lib/constants/cores-padrao";
 import { AparenciaFormDTO } from "../models/aparencia-form-dto";
+import { Spinner } from "@/components/ui/spinner";
 
 interface ConfiguracaoVisualProps {
   form: UseFormReturn<AparenciaFormDTO>;
   preview: string | null;
   setPreview: Dispatch<SetStateAction<string | null>>;
   inputFileRef: RefObject<HTMLInputElement | null>;
+  isUploading: boolean;
   handleUploadImagem: (
     e: ChangeEvent<HTMLInputElement>,
     field: ControllerRenderProps<AparenciaFormDTO, "logoUrl">
@@ -45,6 +47,7 @@ export function ConfiguracaoVisual({
   setPreview,
   inputFileRef,
   handleUploadImagem,
+  isUploading,
 }: ConfiguracaoVisualProps) {
   return (
     <Card className="w-full">
@@ -104,14 +107,18 @@ export function ConfiguracaoVisual({
                 <FormMessage />
               </FormItem>
               <div className="flex flex-col items-center sm:mx-auto ">
-                <Image
-                  src={preview || field.value || semLogo}
-                  alt="Preview logo"
-                  width={128}
-                  height={128}
-                  className="rounded-md border object-cover"
-                  priority
-                />
+                {isUploading ? (
+                  <Spinner className=" h-15 w-15"></Spinner>
+                ) : (
+                  <Image
+                    src={preview || field.value || semLogo}
+                    alt="Preview logo"
+                    width={128}
+                    height={128}
+                    className="rounded-md border object-cover"
+                    priority
+                  />
+                )}
               </div>
             </div>
           )}

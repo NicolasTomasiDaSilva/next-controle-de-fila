@@ -16,6 +16,7 @@ import {
 export const useCustomizarAparencia = () => {
   const { empresa } = useEmpresa();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   const form = useForm<AparenciaFormDTO>({
     resolver: zodResolver(aparenciaFormSchema),
@@ -58,7 +59,7 @@ export const useCustomizarAparencia = () => {
         return;
       }
 
-      setIsSubmitting(true);
+      setIsUploading(true);
 
       if (!["image/png", "image/jpeg"].includes(file.type)) {
         toast.error("Apenas arquivos PNG ou JPG são permitidos.");
@@ -79,7 +80,7 @@ export const useCustomizarAparencia = () => {
     } catch (error) {
       toast.error("Erro ao fazer upload da imagem.");
     } finally {
-      setIsSubmitting(false);
+      setIsUploading(false);
     }
   }
 
@@ -91,5 +92,6 @@ export const useCustomizarAparencia = () => {
     inputFileRef,
     handleUploadImagem,
     setPreview,
+    isUploading,
   };
 };
