@@ -34,6 +34,7 @@ import {
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { DialogSucesso } from "@/features/shared/components/dialog-sucesso";
 import { QrScanner } from "./qrscanner";
+import QrScanner3 from "./qr-scanner-3";
 
 export default function CardVincularVinculacao() {
   const {
@@ -72,7 +73,7 @@ export default function CardVincularVinculacao() {
               <QrCode className="!w-20 !h-20 text-gray-500" />
             </Button>
             {qrScannerOpen && (
-              <QrScanner2
+              <QrScanner3
                 onScan={handleQrScan}
                 onClose={() => setQrScannerOpen(false)}
               />
@@ -103,7 +104,7 @@ export default function CardVincularVinculacao() {
                         {...field}
                         pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
                       >
-                        <InputOTPGroup className="gap-2 bg-white">
+                        <InputOTPGroup className="gap-2 bg-white uppercase">
                           <InputOTPSlot
                             index={0}
                             className="w-12 h-12 text-2xl rounded-md border border-input"
