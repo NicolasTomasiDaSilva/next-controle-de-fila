@@ -81,7 +81,7 @@ export default function ClienteRowTable({
             <TooltipTrigger>
               <p className="text-sm text-muted-foreground flex flex-row  gap-1 items-center">
                 <Clock className="w-3 h-3" />
-                <span className="whitespace-nowrap">{minutos} min</span>
+                <span className="whitespace-nowrap">{minutos}</span>
               </p>
             </TooltipTrigger>
             <TooltipContent>
