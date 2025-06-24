@@ -20,7 +20,7 @@ export default function AppClientePreview({
     <div
       className="flex-1 flex flex-col items-center justify-center overflow-y-hidden"
       style={{
-        fontSize: "min(1vh, 2vw)",
+        fontSize: "min(0.85vh, 1.5vw)",
         backgroundImage: "none",
         background: `linear-gradient(to bottom, ${configuracao.corPrimaria} 0%, white 100%)`,
       }}
